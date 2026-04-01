@@ -100,7 +100,6 @@ if (contactSubmit) {
 // Order page — package selector
 const pkgs = document.querySelectorAll('.order-pkg');
 if (pkgs.length) {
-  // Pre-select from URL param
   const params = new URLSearchParams(window.location.search);
   const pre = params.get('package');
   pkgs.forEach(pkg => {
@@ -114,7 +113,7 @@ if (pkgs.length) {
       if (nameEl) nameEl.value = pkg.dataset.pkg;
     });
   });
-  if (!pre) pkgs[1].classList.add('selected'); // default to Corporate
+  if (!pre) pkgs[1].classList.add('selected');
 
   // Pay button
   const payBtn = document.getElementById('payBtn');
@@ -132,19 +131,18 @@ if (pkgs.length) {
       payBtn.textContent = 'Processing...';
       payBtn.disabled = true;
       try {
-        const res = await fetch('http://localhost:4000/api/orders', {
+        const res = await fetch('https://agi-backend-8cdh.onrender.com/api/orders', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ name, email, company, package: pkg })
         });
         const data = await res.json();
         if (data.url) {
-          window.location.href = data.url; // redirect to Stripe checkout
+          window.location.href = data.url;
         } else {
           if (successOverlay) successOverlay.classList.add('show');
         }
       } catch (err) {
-        // Backend not yet connected — show success screen for now
         if (successOverlay) successOverlay.classList.add('show');
       }
       payBtn.textContent = 'Proceed to Payment →';
