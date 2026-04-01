@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Place an Order — AGI Brand Division</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="../css/style.css"/>
+</head>
+<body>
+
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+
+<!-- NAV -->
+<nav id="navbar">
+  <a href="../index.html" class="logo">AGI<span>.</span></a>
+  <ul class="nav-links">
+    <li><a href="../index.html#services">Services</a></li>
+    <li><a href="../index.html#portfolio">Work</a></li>
+    <li><a href="../index.html#pricing">Pricing</a></li>
+    <li><a href="../index.html#about">About</a></li>
+    <li><a href="../index.html#contact">Contact</a></li>
+    <li><a href="order.html" class="nav-cta">Order Now</a></li>
+  </ul>
+  <button class="hamburger" id="hamburger"><span></span><span></span><span></span></button>
+</nav>
+
+<div class="mobile-overlay" id="mobileOverlay">
+  <button class="mobile-close" id="mobileClose">✕</button>
+  <ul>
+    <li><a href="../index.html#services" class="mobile-link">Services</a></li>
+    <li><a href="../index.html#portfolio" class="mobile-link">Work</a></li>
+    <li><a href="../index.html#pricing" class="mobile-link">Pricing</a></li>
+    <li><a href="../index.html#about" class="mobile-link">About</a></li>
+    <li><a href="order.html" class="mobile-cta">Order Now →</a></li>
+  </ul>
+</div>
+
+<!-- HERO -->
+<div class="order-hero">
+  <div class="order-hero-content">
+    <div class="section-label" style="margin-bottom:1.5rem;">Place Your Order</div>
+    <h1><span style="color:var(--text)">Start Your</span><br/><span style="background:linear-gradient(90deg,var(--neon),var(--neon2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">Brand Journey.</span></h1>
+    <p>Select your package, fill in your details, and our team will be in touch within 24 hours to kick off your brand transformation.</p>
+  </div>
+</div>
+
+<!-- ORDER BODY -->
+<div class="order-body">
+
+  <!-- PACKAGE SELECTOR -->
+  <div style="margin-bottom:2rem;">
+    <div class="section-label">Step 1 — Choose Your Package</div>
+  </div>
+  <div class="order-package-selector">
+    <div class="order-pkg" data-pkg="starter" data-price="$2,500">
+      <h3>Starter</h3>
+      <div class="pkg-price">$2,500</div>
+      <p>Logo, brand palette, typography system & brand guidelines. Perfect for growing businesses.</p>
+    </div>
+    <div class="order-pkg selected" data-pkg="corporate" data-price="$7,500">
+      <h3>Corporate <span style="font-size:.7rem;background:var(--neon);color:var(--navy);padding:2px 8px;border-radius:2px;letter-spacing:1px;font-family:'DM Sans',sans-serif;">POPULAR</span></h3>
+      <div class="pkg-price">$7,500</div>
+      <p>Full brand system, digital kit, packaging design & strategy session for established enterprises.</p>
+    </div>
+    <div class="order-pkg" data-pkg="enterprise" data-price="$18,000">
+      <h3>Enterprise</h3>
+      <div class="pkg-price">$18,000</div>
+      <p>Full-spectrum brand transformation with rebranding management, merchandise & dedicated manager.</p>
+    </div>
+  </div>
+
+  <!-- ORDER FORM -->
+  <div style="margin-bottom:2rem;margin-top:3rem;">
+    <div class="section-label">Step 2 — Your Details</div>
+  </div>
+
+  <div class="order-form">
+    <input type="hidden" id="selectedPackage" value="corporate"/>
+
+    <div class="form-row">
+      <div class="form-group">
+        <label>Full Name *</label>
+        <input type="text" id="clientName" placeholder="James Okafor" required/>
+      </div>
+      <div class="form-group">
+        <label>Work Email *</label>
+        <input type="email" id="clientEmail" placeholder="james@yourcompany.com" required/>
+      </div>
+    </div>
+
+    <div class="form-row">
+      <div class="form-group">
+        <label>Company Name *</label>
+        <input type="text" id="clientCompany" placeholder="Acme Corporation" required/>
+      </div>
+      <div class="form-group">
+        <label>Phone Number</label>
+        <input type="tel" id="clientPhone" placeholder="+254 700 000 000"/>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label>Industry</label>
+      <select id="clientIndustry">
+        <option value="">Select your industry</option>
+        <option>Finance & Banking</option>
+        <option>Technology</option>
+        <option>Healthcare & Pharma</option>
+        <option>Real Estate</option>
+        <option>Manufacturing</option>
+        <option>Retail & Consumer Goods</option>
+        <option>Energy & Utilities</option>
+        <option>Education</option>
+        <option>Other</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label>Project Brief</label>
+      <textarea id="clientBrief" placeholder="Tell us about your brand, current challenges, goals, and timeline. The more detail the better — it helps us hit the ground running." style="min-height:140px;"></textarea>
+    </div>
+
+    <div style="border:1px solid var(--border);border-radius:4px;padding:1.5rem;background:var(--navy3);">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:1rem;">
+        <span style="font-family:'Syne',sans-serif;font-weight:700;font-size:1rem;">Order Summary</span>
+        <span style="font-family:'Bebas Neue',sans-serif;font-size:2rem;color:var(--neon);" id="selectedPrice">$7,500</span>
+      </div>
+      <div style="font-size:.82rem;color:var(--muted);line-height:1.8;">
+        ✦ Dedicated brand strategist assigned within 24hrs<br/>
+        ✦ Project kickoff call scheduled within 48hrs<br/>
+        ✦ Full asset delivery upon project completion<br/>
+        ✦ Secure payment via Stripe — card or M-Pesa
+      </div>
+    </div>
+
+    <button class="pay-btn" id="payBtn">Proceed to Payment →</button>
+    <div class="secure-note">🔒 Secured by Stripe · 256-bit SSL encryption · Cancel anytime before kickoff</div>
+  </div>
+</div>
+
+<!-- SUCCESS OVERLAY -->
+<div class="success-overlay" id="successOverlay">
+  <div class="success-icon">✦</div>
+  <h2>Order Received!</h2>
+  <p>Thank you for choosing AGI. Your dedicated brand strategist will contact you at your email address within 24 hours to schedule your project kickoff call.</p>
+  <p style="color:var(--neon);font-family:'Syne',sans-serif;font-weight:700;">Welcome to the AGI family.</p>
+  <a href="../index.html" class="btn-primary" style="margin-top:1rem;">Back to Home</a>
+</div>
+
+<!-- FOOTER -->
+<footer style="margin-top:4rem;">
+  <div class="footer-bottom" style="border-top:1px solid var(--border);padding-top:1.5rem;">
+    <p>© 2025 Arend Gesin Investment. All rights reserved.</p>
+    <a href="../index.html" style="color:var(--muted);font-size:.85rem;text-decoration:none;">← Back to main site</a>
+  </div>
+</footer>
+
+<script src="../js/main.js"></script>
+</body>
+</html>
