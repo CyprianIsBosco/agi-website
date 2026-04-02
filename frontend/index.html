@@ -3,18 +3,35 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>AGI — Arend Gesin Investment | Brand Division</title>
+<title>AGI — Arend Gesin Investment | Home Of Branding</title>
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
 <link rel="stylesheet" href="css/style.css"/>
+<style>
+.logo-svg{display:flex;align-items:center;gap:12px;text-decoration:none;}
+.logo-text-wrap{display:flex;flex-direction:column;line-height:1;}
+.logo-main{font-family:'Bebas Neue',sans-serif;font-size:1.4rem;letter-spacing:4px;color:#e8eaf0;}
+.logo-sub{font-family:'DM Sans',sans-serif;font-size:0.55rem;letter-spacing:3px;color:#00f5c8;text-transform:uppercase;margin-top:3px;}
+.hero-hex-deco{position:absolute;right:-40px;top:50%;transform:translateY(-50%);opacity:.06;pointer-events:none;}
+@media(max-width:900px){.hero-hex-deco{display:none;}}
+</style>
 </head>
 <body>
-
 <div class="cursor" id="cursor"></div>
 <div class="cursor-ring" id="cursorRing"></div>
 
 <!-- NAV -->
 <nav id="navbar">
-  <a href="index.html" class="logo">AGI<span>.</span></a>
+  <a href="index.html" class="logo-svg">
+    <svg width="36" height="42" viewBox="0 0 38 44">
+      <polygon points="19,2 36,11 36,33 19,42 2,33 2,11" fill="none" stroke="#00f5c8" stroke-width="1.5"/>
+      <polygon points="19,8 30,14 30,30 19,36 8,30 8,14" fill="rgba(0,245,200,0.07)" stroke="rgba(0,245,200,0.35)" stroke-width="0.8"/>
+      <text x="19" y="26" text-anchor="middle" font-family="'Bebas Neue',sans-serif" font-size="11" fill="#00f5c8" letter-spacing="2">AGI</text>
+    </svg>
+    <div class="logo-text-wrap">
+      <span class="logo-main">AREND GESIN</span>
+      <span class="logo-sub">Home Of Branding</span>
+    </div>
+  </a>
   <ul class="nav-links" id="navLinks">
     <li><a href="#services">Services</a></li>
     <li><a href="#portfolio">Work</a></li>
@@ -28,9 +45,20 @@
   </button>
 </nav>
 
-<!-- MOBILE MENU OVERLAY -->
+<!-- MOBILE OVERLAY -->
 <div class="mobile-overlay" id="mobileOverlay">
   <button class="mobile-close" id="mobileClose">✕</button>
+  <a href="index.html" class="logo-svg" style="margin-bottom:2rem;">
+    <svg width="44" height="50" viewBox="0 0 38 44">
+      <polygon points="19,2 36,11 36,33 19,42 2,33 2,11" fill="none" stroke="#00f5c8" stroke-width="1.5"/>
+      <polygon points="19,8 30,14 30,30 19,36 8,30 8,14" fill="rgba(0,245,200,0.07)" stroke="rgba(0,245,200,0.35)" stroke-width="0.8"/>
+      <text x="19" y="26" text-anchor="middle" font-family="'Bebas Neue',sans-serif" font-size="11" fill="#00f5c8" letter-spacing="2">AGI</text>
+    </svg>
+    <div class="logo-text-wrap">
+      <span class="logo-main" style="font-size:1.6rem;">AREND GESIN</span>
+      <span class="logo-sub">Home Of Branding</span>
+    </div>
+  </a>
   <ul>
     <li><a href="#services" class="mobile-link">Services</a></li>
     <li><a href="#portfolio" class="mobile-link">Work</a></li>
@@ -46,9 +74,17 @@
   <div class="hero-grid"></div>
   <div class="hero-glow"></div>
   <div class="hero-glow2"></div>
+  <div class="hero-hex-deco">
+    <svg width="500" height="580" viewBox="0 0 500 580">
+      <polygon points="250,10 480,130 480,450 250,570 20,450 20,130" fill="none" stroke="#00f5c8" stroke-width="2"/>
+      <polygon points="250,50 440,160 440,420 250,530 60,420 60,160" fill="none" stroke="#00f5c8" stroke-width="1"/>
+      <polygon points="250,100 390,195 390,385 250,480 110,385 110,195" fill="none" stroke="#00f5c8" stroke-width="0.5"/>
+      <text x="250" y="310" text-anchor="middle" font-family="'Bebas Neue',sans-serif" font-size="120" fill="#00f5c8" letter-spacing="16">AGI</text>
+    </svg>
+  </div>
   <div class="hero-content">
     <div class="hero-tag">Arend Gesin Investment · Brand Division</div>
-    <h1><span class="line1">We Build</span><span class="line2">Iconic Brands.</span></h1>
+    <h1><span class="line1">Home Of</span><span class="line2">Branding.</span></h1>
     <p class="hero-sub">AGI transforms corporate identities into market forces. Strategy, design, and branded experience — engineered for enterprises that demand distinction.</p>
     <div class="hero-btns">
       <a href="#portfolio" class="btn-primary">View Our Work</a>
@@ -68,11 +104,11 @@
     <span class="ticker-item">Brand Identity</span><span class="ticker-item">Corporate Rebranding</span>
     <span class="ticker-item">Digital Branding</span><span class="ticker-item">Brand Strategy</span>
     <span class="ticker-item">Packaging Design</span><span class="ticker-item">Branded Merchandise</span>
-    <span class="ticker-item">Visual Systems</span><span class="ticker-item">Executive Branding</span>
+    <span class="ticker-item">Visual Systems</span><span class="ticker-item">Home Of Branding</span>
     <span class="ticker-item">Brand Identity</span><span class="ticker-item">Corporate Rebranding</span>
     <span class="ticker-item">Digital Branding</span><span class="ticker-item">Brand Strategy</span>
     <span class="ticker-item">Packaging Design</span><span class="ticker-item">Branded Merchandise</span>
-    <span class="ticker-item">Visual Systems</span><span class="ticker-item">Executive Branding</span>
+    <span class="ticker-item">Visual Systems</span><span class="ticker-item">Home Of Branding</span>
   </div>
 </div>
 
@@ -237,7 +273,7 @@
       <div class="testi-card"><div class="testi-stars">★★★★★</div><blockquote>"AGI didn't just rebrand us — they repositioned us as the dominant force in our sector. The strategic depth they bring is unmatched."</blockquote><div class="testi-author"><div class="testi-avatar">MK</div><div><div class="testi-name">Marcus Kimani</div><div class="testi-role">CEO, Nexara Capital Group</div></div></div></div>
       <div class="testi-card"><div class="testi-stars">★★★★★</div><blockquote>"Our brand went from forgettable to iconic. AGI understood our vision on day one and translated it into something clients feel every time."</blockquote><div class="testi-author"><div class="testi-avatar">AT</div><div><div class="testi-name">Adaeze Thabo</div><div class="testi-role">CMO, Veltris Technologies</div></div></div></div>
       <div class="testi-card"><div class="testi-stars">★★★★★</div><blockquote>"The branded merchandise suite AGI created transformed our corporate culture. Every executive now walks in representing our brand powerfully."</blockquote><div class="testi-author"><div class="testi-avatar">JO</div><div><div class="testi-name">James Osei</div><div class="testi-role">COO, Kaelo Corporation</div></div></div></div>
-      <div class="testi-card"><div class="testi-stars">★★★★★</div><blockquote>"AGI navigated our complex brand architecture across 9 subsidiaries flawlessly. The result is a cohesive visual empire speaking with one powerful voice."</blockquote><div class="testi-author"><div class="testi-avatar">SR</div><div><div class="testi-name">Sophia Ruto</div><div class="testi-role">Director, Meridian Holdings</div></div></div></div>
+      <div class="testi-card"><div class="testi-stars">★★★★★</div><blockquote>"AGI navigated our brand architecture across 9 subsidiaries flawlessly. The result is a cohesive visual empire speaking with one powerful voice."</blockquote><div class="testi-author"><div class="testi-avatar">SR</div><div><div class="testi-name">Sophia Ruto</div><div class="testi-role">Director, Meridian Holdings</div></div></div></div>
       <div class="testi-card"><div class="testi-stars">★★★★★</div><blockquote>"Their packaging strategy alone drove a 40% uplift in shelf presence. The strategic and creative alignment was extraordinary."</blockquote><div class="testi-author"><div class="testi-avatar">LN</div><div><div class="testi-name">Lena Nakamura</div><div class="testi-role">VP Marketing, Solara Pharma</div></div></div></div>
       <div class="testi-card"><div class="testi-stars">★★★★★</div><blockquote>"AGI didn't just rebrand us — they repositioned us as the dominant force in our sector. The strategic depth they bring is unmatched."</blockquote><div class="testi-author"><div class="testi-avatar">MK</div><div><div class="testi-name">Marcus Kimani</div><div class="testi-role">CEO, Nexara Capital Group</div></div></div></div>
       <div class="testi-card"><div class="testi-stars">★★★★★</div><blockquote>"Our brand went from forgettable to iconic. AGI understood our vision on day one and translated it into something clients feel every time."</blockquote><div class="testi-author"><div class="testi-avatar">AT</div><div><div class="testi-name">Adaeze Thabo</div><div class="testi-role">CMO, Veltris Technologies</div></div></div></div>
@@ -286,7 +322,17 @@
 <footer>
   <div class="footer-top">
     <div class="footer-brand">
-      <a href="index.html" class="logo">AGI<span>.</span></a>
+      <a href="index.html" class="logo-svg" style="margin-bottom:1rem;">
+        <svg width="30" height="35" viewBox="0 0 38 44">
+          <polygon points="19,2 36,11 36,33 19,42 2,33 2,11" fill="none" stroke="#00f5c8" stroke-width="1.5"/>
+          <polygon points="19,8 30,14 30,30 19,36 8,30 8,14" fill="rgba(0,245,200,0.07)" stroke="rgba(0,245,200,0.35)" stroke-width="0.8"/>
+          <text x="19" y="26" text-anchor="middle" font-family="'Bebas Neue',sans-serif" font-size="11" fill="#00f5c8" letter-spacing="2">AGI</text>
+        </svg>
+        <div class="logo-text-wrap">
+          <span class="logo-main" style="font-size:1.1rem;">AREND GESIN</span>
+          <span class="logo-sub">Home Of Branding</span>
+        </div>
+      </a>
       <p>Arend Gesin Investment's Brand Division — building iconic identities for the world's most ambitious enterprises.</p>
     </div>
     <div class="footer-col"><h4>Services</h4><ul><li><a href="#services">Brand Identity</a></li><li><a href="#services">Brand Strategy</a></li><li><a href="#services">Digital Branding</a></li><li><a href="#services">Rebranding</a></li><li><a href="#services">Packaging</a></li><li><a href="#services">Merchandise</a></li></ul></div>
@@ -294,7 +340,7 @@
     <div class="footer-col"><h4>Offices</h4><ul><li><a href="#">Nairobi, Kenya</a></li><li><a href="#">Johannesburg, SA</a></li><li><a href="#">Dubai, UAE</a></li><li><a href="#">London, UK</a></li></ul></div>
   </div>
   <div class="footer-bottom">
-    <p>© 2025 Arend Gesin Investment. All rights reserved.</p>
+    <p>© 2025 Arend Gesin Investment · Home Of Branding. All rights reserved.</p>
     <div class="footer-socials">
       <a href="#" class="social-link">Li</a>
       <a href="#" class="social-link">Tw</a>
