@@ -7,45 +7,74 @@
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
 <link rel="stylesheet" href="../css/style.css"/>
 <style>
-.admin-body { padding: 8rem 5% 4rem; min-height: 100vh; }
-.admin-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 3rem; flex-wrap: wrap; gap: 1rem; }
-.admin-header h1 { font-family: 'Syne', sans-serif; font-size: 2rem; font-weight: 800; }
-.stats-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 1rem; margin-bottom: 3rem; }
-.stat-card { background: var(--navy2); border: 1px solid var(--border); border-radius: 4px; padding: 1.5rem; }
-.stat-card .s-label { font-size: .72rem; letter-spacing: 2px; text-transform: uppercase; color: var(--muted); margin-bottom: .5rem; }
-.stat-card .s-val { font-family: 'Bebas Neue', sans-serif; font-size: 2.5rem; color: var(--neon); line-height: 1; }
-.login-box { max-width: 400px; margin: 4rem auto; background: var(--navy2); border: 1px solid var(--border); border-radius: 8px; padding: 2.5rem; }
-.login-box h2 { font-family: 'Syne', sans-serif; font-weight: 800; margin-bottom: 1.5rem; }
-.orders-table { width: 100%; border-collapse: collapse; }
-.orders-table th { font-size: .72rem; letter-spacing: 2px; text-transform: uppercase; color: var(--muted); padding: .8rem 1rem; text-align: left; border-bottom: 1px solid var(--border); }
-.orders-table td { padding: 1rem; border-bottom: 1px solid rgba(0,245,200,.06); font-size: .88rem; vertical-align: middle; }
-.orders-table tr:hover td { background: var(--navy3); }
-.status-badge { display: inline-block; font-size: .68rem; letter-spacing: 1.5px; text-transform: uppercase; padding: 3px 10px; border-radius: 2px; }
-.status-pending  { background: rgba(186,117,23,.15); color: #EF9F27; }
-.status-paid     { background: rgba(29,158,117,.15); color: #00f5c8; }
-.status-in_progress { background: rgba(123,95,255,.15); color: #7b5fff; }
-.status-completed { background: rgba(0,245,200,.15); color: #00f5c8; }
-.pkg-badge { font-size: .7rem; letter-spacing: 1px; text-transform: uppercase; padding: 2px 8px; border-radius: 2px; background: rgba(0,245,200,.08); color: var(--neon); }
-.empty-state { text-align: center; padding: 4rem; color: var(--muted); }
-.refresh-btn { background: transparent; border: 1px solid var(--border); color: var(--muted); padding: .5rem 1.2rem; border-radius: 2px; font-family: 'Syne', sans-serif; font-size: .8rem; letter-spacing: 1px; cursor: pointer; transition: border-color .3s, color .3s; }
-.refresh-btn:hover { border-color: var(--neon); color: var(--neon); }
-.table-wrap { overflow-x: auto; }
+.admin-body{padding:8rem 5% 4rem;min-height:100vh;}
+.admin-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:3rem;flex-wrap:wrap;gap:1rem;}
+.admin-header h1{font-family:'Syne',sans-serif;font-size:2rem;font-weight:800;}
+.stats-row{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:1rem;margin-bottom:3rem;}
+.stat-card{background:var(--navy2);border:1px solid var(--border);border-radius:4px;padding:1.5rem;}
+.stat-card .s-label{font-size:.72rem;letter-spacing:2px;text-transform:uppercase;color:var(--muted);margin-bottom:.5rem;}
+.stat-card .s-val{font-family:'Bebas Neue',sans-serif;font-size:2.5rem;color:var(--neon);line-height:1;}
+.login-box{max-width:400px;margin:4rem auto;background:var(--navy2);border:1px solid var(--border);border-radius:8px;padding:2.5rem;}
+.login-box h2{font-family:'Syne',sans-serif;font-weight:800;margin-bottom:1.5rem;}
+.orders-table{width:100%;border-collapse:collapse;}
+.orders-table th{font-size:.72rem;letter-spacing:2px;text-transform:uppercase;color:var(--muted);padding:.8rem 1rem;text-align:left;border-bottom:1px solid var(--border);}
+.orders-table td{padding:.8rem 1rem;border-bottom:1px solid rgba(0,245,200,.06);font-size:.85rem;vertical-align:middle;}
+.orders-table tr:hover td{background:var(--navy3);}
+.status-badge{display:inline-block;font-size:.65rem;letter-spacing:1.5px;text-transform:uppercase;padding:3px 10px;border-radius:2px;white-space:nowrap;}
+.status-pending{background:rgba(186,117,23,.15);color:#EF9F27;}
+.status-paid{background:rgba(29,158,117,.15);color:#00f5c8;}
+.status-in_progress{background:rgba(123,95,255,.15);color:#7b5fff;}
+.status-completed{background:rgba(0,245,200,.15);color:#00f5c8;}
+.status-delivered{background:rgba(99,153,34,.2);color:#97C459;}
+.pkg-badge{font-size:.68rem;letter-spacing:1px;text-transform:uppercase;padding:2px 8px;border-radius:2px;background:rgba(0,245,200,.08);color:var(--neon);}
+.empty-state{text-align:center;padding:4rem;color:var(--muted);}
+.refresh-btn{background:transparent;border:1px solid var(--border);color:var(--muted);padding:.5rem 1.2rem;border-radius:2px;font-family:'Syne',sans-serif;font-size:.8rem;letter-spacing:1px;cursor:pointer;transition:border-color .3s,color .3s;}
+.refresh-btn:hover{border-color:var(--neon);color:var(--neon);}
+.table-wrap{overflow-x:auto;}
+.status-select{background:var(--navy3);border:1px solid var(--border);color:var(--text);padding:4px 8px;border-radius:2px;font-size:.75rem;cursor:pointer;outline:none;font-family:'DM Sans',sans-serif;transition:border-color .3s;}
+.status-select:hover{border-color:var(--neon);}
+.status-select:focus{border-color:var(--neon);}
+.order-modal{display:none;position:fixed;inset:0;background:rgba(5,13,31,.95);z-index:200;align-items:center;justify-content:center;padding:2rem;}
+.order-modal.show{display:flex;}
+.modal-box{background:var(--navy2);border:1px solid var(--border);border-radius:8px;padding:2.5rem;max-width:600px;width:100%;max-height:80vh;overflow-y:auto;position:relative;}
+.modal-close{position:absolute;top:1rem;right:1rem;background:none;border:none;color:var(--muted);font-size:1.2rem;cursor:pointer;transition:color .3s;}
+.modal-close:hover{color:var(--neon);}
+.modal-field{display:flex;flex-direction:column;gap:4px;margin-bottom:1.2rem;}
+.modal-label{font-size:.7rem;letter-spacing:2px;text-transform:uppercase;color:var(--muted);}
+.modal-value{font-size:.95rem;color:var(--text);}
+.modal-grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem;}
+.action-btns{display:flex;gap:.5rem;flex-wrap:wrap;}
+.action-btn{font-size:.72rem;letter-spacing:1px;text-transform:uppercase;padding:4px 10px;border-radius:2px;border:1px solid;cursor:pointer;font-family:'Syne',sans-serif;font-weight:700;transition:all .2s;background:transparent;}
+.btn-paid{border-color:#00f5c8;color:#00f5c8;}
+.btn-paid:hover{background:#00f5c8;color:var(--navy);}
+.btn-progress{border-color:#7b5fff;color:#7b5fff;}
+.btn-progress:hover{background:#7b5fff;color:#fff;}
+.btn-delivered{border-color:#97C459;color:#97C459;}
+.btn-delivered:hover{background:#97C459;color:var(--navy);}
+.btn-pending{border-color:#EF9F27;color:#EF9F27;}
+.btn-pending:hover{background:#EF9F27;color:var(--navy);}
+.saving{opacity:.5;pointer-events:none;}
+.toast{position:fixed;bottom:2rem;right:2rem;background:var(--navy3);border:1px solid var(--neon);border-radius:4px;padding:.8rem 1.5rem;font-size:.85rem;color:var(--neon);z-index:300;transform:translateY(100px);opacity:0;transition:all .3s;}
+.toast.show{transform:translateY(0);opacity:1;}
 </style>
 </head>
 <body>
-
 <div class="cursor" id="cursor"></div>
 <div class="cursor-ring" id="cursorRing"></div>
 
 <nav id="navbar">
-  <a href="../index.html" class="logo">AGI<span>.</span></a>
-  <ul class="nav-links">
-    <li><a href="../index.html">← Main Site</a></li>
-  </ul>
+  <a href="../index.html" class="logo-svg" style="display:flex;align-items:center;gap:10px;text-decoration:none;">
+    <svg width="30" height="35" viewBox="0 0 38 44">
+      <polygon points="19,2 36,11 36,33 19,42 2,33 2,11" fill="none" stroke="#00f5c8" stroke-width="1.5"/>
+      <polygon points="19,8 30,14 30,30 19,36 8,30 8,14" fill="rgba(0,245,200,0.07)" stroke="rgba(0,245,200,0.35)" stroke-width="0.8"/>
+      <text x="19" y="26" text-anchor="middle" font-family="'Bebas Neue',sans-serif" font-size="11" fill="#00f5c8" letter-spacing="2">AGI</text>
+    </svg>
+    <span style="font-family:'Bebas Neue',sans-serif;font-size:1.2rem;letter-spacing:3px;color:#e8eaf0;">ADMIN</span>
+  </a>
+  <ul class="nav-links"><li><a href="../index.html">← Main Site</a></li></ul>
 </nav>
 
 <div class="admin-body">
-
   <!-- LOGIN -->
   <div id="loginView">
     <div class="login-box">
@@ -56,7 +85,7 @@
         <input type="password" id="adminKeyInput" placeholder="Enter your admin key"/>
       </div>
       <button class="submit-btn" id="loginBtn" style="width:100%;text-align:center;">Access Dashboard</button>
-      <p style="color:var(--muted);font-size:.8rem;margin-top:1rem;text-align:center;">Your admin key is in the backend .env file</p>
+      <p style="color:var(--muted);font-size:.8rem;margin-top:1rem;text-align:center;">Key: agi-admin-2025</p>
     </div>
   </div>
 
@@ -64,16 +93,17 @@
   <div id="dashView" style="display:none;">
     <div class="admin-header">
       <div>
-        <div class="section-label">Admin Panel</div>
+        <div class="section-label">AGI · Admin Panel</div>
         <h1>Orders Dashboard</h1>
       </div>
       <button class="refresh-btn" id="refreshBtn">↻ Refresh</button>
     </div>
 
-    <div class="stats-row" id="statsRow">
+    <div class="stats-row">
       <div class="stat-card"><div class="s-label">Total Orders</div><div class="s-val" id="statTotal">—</div></div>
-      <div class="stat-card"><div class="s-label">Paid</div><div class="s-val" id="statPaid">—</div></div>
       <div class="stat-card"><div class="s-label">Pending</div><div class="s-val" id="statPending">—</div></div>
+      <div class="stat-card"><div class="s-label">In Progress</div><div class="s-val" id="statProgress">—</div></div>
+      <div class="stat-card"><div class="s-label">Delivered</div><div class="s-val" id="statDelivered">—</div></div>
       <div class="stat-card"><div class="s-label">Revenue</div><div class="s-val" id="statRevenue">—</div></div>
     </div>
 
@@ -87,21 +117,52 @@
             <th>Package</th>
             <th>Amount</th>
             <th>Status</th>
-            <th>Email</th>
+            <th>Update Status</th>
+            <th>Details</th>
           </tr>
         </thead>
         <tbody id="ordersBody">
-          <tr><td colspan="7" class="empty-state">Loading orders...</td></tr>
+          <tr><td colspan="8" class="empty-state">Loading orders...</td></tr>
         </tbody>
       </table>
     </div>
   </div>
-
 </div>
+
+<!-- ORDER DETAIL MODAL -->
+<div class="order-modal" id="orderModal">
+  <div class="modal-box">
+    <button class="modal-close" id="modalClose">✕</button>
+    <div class="section-label">Order Details</div>
+    <h2 style="font-family:'Syne',sans-serif;font-weight:800;margin-bottom:1.5rem;" id="modalTitle">—</h2>
+    <div class="modal-grid">
+      <div class="modal-field"><div class="modal-label">Client Name</div><div class="modal-value" id="mName">—</div></div>
+      <div class="modal-field"><div class="modal-label">Email</div><div class="modal-value" id="mEmail">—</div></div>
+      <div class="modal-field"><div class="modal-label">Company</div><div class="modal-value" id="mCompany">—</div></div>
+      <div class="modal-field"><div class="modal-label">Phone</div><div class="modal-value" id="mPhone">—</div></div>
+      <div class="modal-field"><div class="modal-label">Package</div><div class="modal-value" id="mPackage">—</div></div>
+      <div class="modal-field"><div class="modal-label">Amount</div><div class="modal-value" id="mAmount">—</div></div>
+      <div class="modal-field"><div class="modal-label">Order Date</div><div class="modal-value" id="mDate">—</div></div>
+      <div class="modal-field"><div class="modal-label">Current Status</div><div class="modal-value" id="mStatus">—</div></div>
+    </div>
+    <div class="modal-field" style="margin-top:.5rem;">
+      <div class="modal-label">Project Brief</div>
+      <div class="modal-value" id="mBrief" style="color:var(--muted);font-size:.88rem;line-height:1.7;">—</div>
+    </div>
+    <div style="margin-top:1.5rem;padding-top:1.5rem;border-top:1px solid var(--border);">
+      <div class="modal-label" style="margin-bottom:.8rem;">Update Order Status</div>
+      <div class="action-btns" id="modalActions"></div>
+    </div>
+  </div>
+</div>
+
+<!-- TOAST -->
+<div class="toast" id="toast"></div>
 
 <script src="../js/main.js"></script>
 <script>
 let adminKey = '';
+let allOrders = [];
 const API = 'https://agi-backend-8cdh.onrender.com';
 
 document.getElementById('loginBtn').addEventListener('click', () => {
@@ -113,6 +174,9 @@ document.getElementById('adminKeyInput').addEventListener('keydown', e => {
   if (e.key === 'Enter') document.getElementById('loginBtn').click();
 });
 document.getElementById('refreshBtn').addEventListener('click', loadOrders);
+document.getElementById('modalClose').addEventListener('click', () => {
+  document.getElementById('orderModal').classList.remove('show');
+});
 
 async function loadOrders() {
   try {
@@ -120,42 +184,124 @@ async function loadOrders() {
       headers: { 'x-admin-key': adminKey }
     });
     if (res.status === 401) { alert('Invalid admin key'); return; }
-    const orders = await res.json();
+    allOrders = await res.json();
     document.getElementById('loginView').style.display = 'none';
     document.getElementById('dashView').style.display = 'block';
-    renderStats(orders);
-    renderTable(orders);
+    renderStats(allOrders);
+    renderTable(allOrders);
   } catch {
-    alert('Cannot connect to backend. Please try again in a moment.');
+    alert('Cannot connect to backend. Make sure the server is running.');
   }
 }
 
 function renderStats(orders) {
-  const paid = orders.filter(o => o.status === 'paid' || o.status === 'completed');
-  const revenue = paid.reduce((sum, o) => sum + (o.amount || 0), 0);
   document.getElementById('statTotal').textContent = orders.length;
-  document.getElementById('statPaid').textContent = paid.length;
   document.getElementById('statPending').textContent = orders.filter(o => o.status === 'pending').length;
-  document.getElementById('statRevenue').textContent = '$' + revenue.toLocaleString();
+  document.getElementById('statProgress').textContent = orders.filter(o => o.status === 'in_progress').length;
+  document.getElementById('statDelivered').textContent = orders.filter(o => o.status === 'delivered' || o.status === 'completed').length;
+  const revenue = orders.filter(o => o.status !== 'pending').reduce((s, o) => s + (o.amount || 0), 0);
+  document.getElementById('statRevenue').textContent = 'Ksh ' + (revenue * 130).toLocaleString();
 }
 
 function renderTable(orders) {
   const tbody = document.getElementById('ordersBody');
   if (!orders.length) {
-    tbody.innerHTML = '<tr><td colspan="7" class="empty-state">No orders yet. Share your site to get your first client!</td></tr>';
+    tbody.innerHTML = '<tr><td colspan="8" class="empty-state">No orders yet. Share your site to get your first client!</td></tr>';
     return;
   }
   tbody.innerHTML = orders.map(o => `
     <tr>
-      <td style="color:var(--muted);font-size:.8rem;">${new Date(o.createdAt).toLocaleDateString('en-GB', { day:'2-digit', month:'short', year:'numeric' })}</td>
+      <td style="color:var(--muted);font-size:.78rem;">${new Date(o.createdAt).toLocaleDateString('en-GB',{day:'2-digit',month:'short',year:'numeric'})}</td>
       <td style="font-weight:500;">${o.name}</td>
-      <td style="color:var(--muted);">${o.company}</td>
+      <td style="color:var(--muted);font-size:.82rem;">${o.company || '—'}</td>
       <td><span class="pkg-badge">${o.package}</span></td>
-      <td style="font-family:'Bebas Neue',sans-serif;font-size:1.2rem;color:var(--neon);">$${(o.amount||0).toLocaleString()}</td>
+      <td style="font-family:'Bebas Neue',sans-serif;font-size:1.1rem;color:var(--neon);">$${(o.amount||0).toLocaleString()}</td>
       <td><span class="status-badge status-${o.status}">${o.status.replace('_',' ')}</span></td>
-      <td style="color:var(--muted);font-size:.82rem;">${o.email}</td>
+      <td>
+        <select class="status-select" data-id="${o._id}" onchange="updateStatus('${o._id}', this.value, this)">
+          <option value="pending"    ${o.status==='pending'    ?'selected':''}>Pending</option>
+          <option value="paid"       ${o.status==='paid'       ?'selected':''}>Payment Received</option>
+          <option value="in_progress"${o.status==='in_progress'?'selected':''}>In Progress</option>
+          <option value="delivered"  ${o.status==='delivered'  ?'selected':''}>Delivered</option>
+          <option value="completed"  ${o.status==='completed'  ?'selected':''}>Completed</option>
+        </select>
+      </td>
+      <td><button class="action-btn btn-progress" onclick="openModal('${o._id}')">View</button></td>
     </tr>
   `).join('');
+}
+
+async function updateStatus(id, newStatus, selectEl) {
+  selectEl.classList.add('saving');
+  try {
+    const res = await fetch(`${API}/api/admin/orders/${id}/status`, {
+      method: 'PATCH',
+      headers: {
+        'Content-Type': 'application/json',
+        'x-admin-key': adminKey
+      },
+      body: JSON.stringify({ status: newStatus })
+    });
+    if (res.ok) {
+      const idx = allOrders.findIndex(o => o._id === id);
+      if (idx > -1) allOrders[idx].status = newStatus;
+      renderStats(allOrders);
+      showToast('Status updated to: ' + newStatus.replace('_', ' '));
+      const row = selectEl.closest('tr');
+      const badge = row.querySelector('.status-badge');
+      badge.className = 'status-badge status-' + newStatus;
+      badge.textContent = newStatus.replace('_', ' ');
+    } else {
+      showToast('Failed to update — check backend');
+    }
+  } catch {
+    showToast('Cannot reach backend');
+  }
+  selectEl.classList.remove('saving');
+}
+
+function openModal(id) {
+  const o = allOrders.find(o => o._id === id);
+  if (!o) return;
+  document.getElementById('modalTitle').textContent = o.name + ' — ' + o.package;
+  document.getElementById('mName').textContent = o.name;
+  document.getElementById('mEmail').textContent = o.email;
+  document.getElementById('mCompany').textContent = o.company || '—';
+  document.getElementById('mPhone').textContent = o.phone || '—';
+  document.getElementById('mPackage').textContent = o.package;
+  document.getElementById('mAmount').textContent = '$' + (o.amount||0).toLocaleString() + ' / Ksh ' + ((o.amount||0)*130).toLocaleString();
+  document.getElementById('mDate').textContent = new Date(o.createdAt).toLocaleDateString('en-GB',{day:'2-digit',month:'long',year:'numeric'});
+  document.getElementById('mStatus').innerHTML = `<span class="status-badge status-${o.status}">${o.status.replace('_',' ')}</span>`;
+  document.getElementById('mBrief').textContent = o.brief || 'No brief provided';
+  const actions = document.getElementById('modalActions');
+  const statuses = [
+    {val:'pending',    label:'Mark Pending',    cls:'btn-pending'},
+    {val:'paid',       label:'Payment Received', cls:'btn-paid'},
+    {val:'in_progress',label:'In Progress',      cls:'btn-progress'},
+    {val:'delivered',  label:'Delivered',         cls:'btn-delivered'},
+  ];
+  actions.innerHTML = statuses.map(s => `
+    <button class="action-btn ${s.cls} ${o.status===s.val?'saving':''}" onclick="updateStatusFromModal('${id}','${s.val}',this)">${s.label}</button>
+  `).join('');
+  document.getElementById('orderModal').classList.add('show');
+}
+
+async function updateStatusFromModal(id, newStatus, btn) {
+  const select = document.querySelector(`select[data-id="${id}"]`);
+  if (select) await updateStatus(id, newStatus, select);
+  const o = allOrders.find(o => o._id === id);
+  if (o) {
+    document.getElementById('mStatus').innerHTML = `<span class="status-badge status-${newStatus}">${newStatus.replace('_',' ')}</span>`;
+    document.querySelectorAll('#modalActions .action-btn').forEach(b => b.classList.remove('saving'));
+    btn.classList.add('saving');
+  }
+}
+
+function showToast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 3000);
 }
 </script>
 </body>
