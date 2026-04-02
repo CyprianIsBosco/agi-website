@@ -11,13 +11,13 @@ if (cursor && ring) {
     requestAnimationFrame(animCursor);
   }
   animCursor();
-  document.querySelectorAll('a, button, .service-card, .portfolio-item, input, textarea, select, .order-pkg, .pricing-btn').forEach(el => {
-    el.addEventListener('mouseenter', () => { cursor.style.width='20px'; cursor.style.height='20px'; ring.style.width='60px'; ring.style.height='60px'; });
-    el.addEventListener('mouseleave', () => { cursor.style.width='12px'; cursor.style.height='12px'; ring.style.width='36px'; ring.style.height='36px'; });
+  document.querySelectorAll('a,button,.service-card,.portfolio-item,.service-option,.order-pkg,.pricing-btn,input,textarea,select').forEach(el => {
+    el.addEventListener('mouseenter', () => { cursor.style.width='20px'; cursor.style.height='20px'; ring.style.width='60px'; ring.style.height='60px'; ring.style.borderColor='rgba(239,159,39,0.6)'; });
+    el.addEventListener('mouseleave', () => { cursor.style.width='12px'; cursor.style.height='12px'; ring.style.width='36px'; ring.style.height='36px'; ring.style.borderColor='rgba(0,245,200,0.5)'; });
   });
 }
 
-// Hamburger menu
+// Hamburger
 const hamburger = document.getElementById('hamburger');
 const mobileOverlay = document.getElementById('mobileOverlay');
 const mobileClose = document.getElementById('mobileClose');
@@ -32,7 +32,7 @@ if (hamburger && mobileOverlay) {
     mobileOverlay.classList.remove('open');
     document.body.style.overflow = '';
   });
-  document.querySelectorAll('.mobile-link, .mobile-cta').forEach(link => {
+  document.querySelectorAll('.mobile-link,.mobile-cta').forEach(link => {
     link.addEventListener('click', () => {
       hamburger.classList.remove('open');
       mobileOverlay.classList.remove('open');
@@ -46,7 +46,7 @@ const observer = new IntersectionObserver(entries => {
   entries.forEach((e, i) => {
     if (e.isIntersecting) setTimeout(() => e.target.classList.add('visible'), i * 80);
   });
-}, { threshold: 0.12 });
+}, { threshold: 0.1 });
 document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 
 // Counter animation
@@ -66,7 +66,7 @@ if (heroStats) {
       if (e.isIntersecting) {
         document.querySelectorAll('.stat-num').forEach(el => {
           const t = parseInt(el.dataset.target);
-          const suf = el.dataset.target == '98' ? '%' : el.dataset.target == '200' ? '+' : '';
+          const suf = el.dataset.target == '98' ? '%' : el.dataset.target == '500' ? '+' : '';
           animCount(el, t, suf);
         });
         statObs.disconnect();
@@ -76,77 +76,23 @@ if (heroStats) {
   statObs.observe(heroStats);
 }
 
-// Nav shrink on scroll
+// Nav shrink
 window.addEventListener('scroll', () => {
   const nav = document.getElementById('navbar');
-  if (nav) nav.style.padding = window.scrollY > 50 ? '.9rem 5%' : '1.4rem 5%';
+  if (nav) nav.style.padding = window.scrollY > 50 ? '.85rem 5%' : '1.4rem 5%';
 });
 
-// Contact form submit
+// Contact form
 const contactSubmit = document.getElementById('contactSubmit');
 if (contactSubmit) {
   contactSubmit.addEventListener('click', function () {
     this.textContent = 'Message Sent ✓';
-    this.style.background = 'var(--neon)';
+    this.style.background = 'var(--gold)';
     this.style.color = 'var(--navy)';
     setTimeout(() => {
-      this.textContent = 'Send Brief →';
+      this.textContent = 'Send Message →';
       this.style.background = '';
       this.style.color = '';
     }, 3000);
   });
-}
-
-// Order page — package selector
-const pkgs = document.querySelectorAll('.order-pkg');
-if (pkgs.length) {
-  const params = new URLSearchParams(window.location.search);
-  const pre = params.get('package');
-  pkgs.forEach(pkg => {
-    if (pre && pkg.dataset.pkg === pre) pkg.classList.add('selected');
-    pkg.addEventListener('click', () => {
-      pkgs.forEach(p => p.classList.remove('selected'));
-      pkg.classList.add('selected');
-      const priceEl = document.getElementById('selectedPrice');
-      const nameEl = document.getElementById('selectedPackage');
-      if (priceEl) priceEl.textContent = pkg.dataset.price;
-      if (nameEl) nameEl.value = pkg.dataset.pkg;
-    });
-  });
-  if (!pre) pkgs[1].classList.add('selected');
-
-  // Pay button
-  const payBtn = document.getElementById('payBtn');
-  const successOverlay = document.getElementById('successOverlay');
-  if (payBtn) {
-    payBtn.addEventListener('click', async () => {
-      const name = document.getElementById('clientName')?.value;
-      const email = document.getElementById('clientEmail')?.value;
-      const company = document.getElementById('clientCompany')?.value;
-      const pkg = document.getElementById('selectedPackage')?.value;
-      if (!name || !email || !company) {
-        alert('Please fill in all required fields.');
-        return;
-      }
-      payBtn.textContent = 'Processing...';
-      payBtn.disabled = true;
-      try {
-        const res = await fetch('https://agi-backend-8cdh.onrender.com/api/orders', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ name, email, company, package: pkg })
-        });
-        const data = await res.json();
-        if (data.url) {
-          window.location.href = data.url;
-        } else {
-          if (successOverlay) successOverlay.classList.add('show');
-        }
-      } catch (err) {
-        if (successOverlay) successOverlay.classList.add('show');
-      }
-      payBtn.textContent = 'Proceed to Payment →';
-      payBtn.disabled = false;
-    });
-  }
 }

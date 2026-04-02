@@ -3,25 +3,24 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Place an Order — AGI Brand Division</title>
+<title>Place an Order — AGI Arend Gesin Investment</title>
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
 <link rel="stylesheet" href="../css/style.css"/>
 </head>
 <body>
-
 <div class="cursor" id="cursor"></div>
 <div class="cursor-ring" id="cursorRing"></div>
 
-<!-- NAV -->
 <nav id="navbar">
-  <a href="../index.html" class="logo">AGI<span>.</span></a>
+  <a href="../index.html" class="logo-wrap">
+    <div class="logo-mark"><div class="logo-slash1"></div><div class="logo-slash2"></div></div>
+    <div class="logo-text"><span class="logo-name">AREND GESIN</span><span class="logo-tag">Home Of Branding</span></div>
+  </a>
   <ul class="nav-links">
     <li><a href="../index.html#services">Services</a></li>
-    <li><a href="../index.html#portfolio">Work</a></li>
     <li><a href="../index.html#pricing">Pricing</a></li>
     <li><a href="../index.html#about">About</a></li>
     <li><a href="../index.html#contact">Contact</a></li>
-    <li><a href="order.html" class="nav-cta">Order Now</a></li>
   </ul>
   <button class="hamburger" id="hamburger"><span></span><span></span><span></span></button>
 </nav>
@@ -30,133 +29,224 @@
   <button class="mobile-close" id="mobileClose">✕</button>
   <ul>
     <li><a href="../index.html#services" class="mobile-link">Services</a></li>
-    <li><a href="../index.html#portfolio" class="mobile-link">Work</a></li>
     <li><a href="../index.html#pricing" class="mobile-link">Pricing</a></li>
     <li><a href="../index.html#about" class="mobile-link">About</a></li>
-    <li><a href="order.html" class="mobile-cta">Order Now →</a></li>
+    <li><a href="../index.html#contact" class="mobile-link">Contact</a></li>
   </ul>
 </div>
 
-<!-- HERO -->
-<div class="order-hero">
-  <div class="order-hero-content">
-    <div class="section-label" style="margin-bottom:1.5rem;">Place Your Order</div>
-    <h1><span style="color:var(--text)">Start Your</span><br/><span style="background:linear-gradient(90deg,var(--neon),var(--neon2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">Brand Journey.</span></h1>
-    <p>Select your package, fill in your details, and our team will be in touch within 24 hours to kick off your brand transformation.</p>
+<div class="order-page">
+  <!-- HERO TEXT -->
+  <div class="order-hero-text">
+    <div class="section-label">Place Your Order</div>
+    <h1><span style="color:var(--text);">Order Your</span><br/><span style="color:var(--gold);">Branded Items.</span></h1>
+    <p>Select what you need, describe your project and submit. Our team will contact you to confirm details and arrange delivery. <strong style="color:var(--neon);">Pay on delivery — no upfront payment required.</strong></p>
+    <div class="pod-badge" style="margin-top:1.5rem;">✦ Pay on Delivery · M-Pesa Accepted</div>
   </div>
-</div>
 
-<!-- ORDER BODY -->
-<div class="order-body">
+  <!-- STEP 1: SERVICE -->
+  <div style="margin-bottom:3rem;">
+    <div class="order-step-label">Step 1 — What do you need?</div>
+    <div class="service-picker" id="servicePicker">
+      <div class="service-option" data-service="Brand Identity & Logo" data-price="From $150">
+        <div class="svc-icon">◈</div><div><h4>Brand Identity & Logo</h4><p>From $150 / Ksh 20,000</p></div>
+      </div>
+      <div class="service-option" data-service="Election & Campaign Branding" data-price="Custom quote">
+        <div class="svc-icon">◉</div><div><h4>Campaign Branding</h4><p>T-shirts, caps, banners, stickers</p></div>
+      </div>
+      <div class="service-option" data-service="Branded T-Shirts & Caps" data-price="Custom quote">
+        <div class="svc-icon">⬡</div><div><h4>T-Shirts, Caps & Hoodies</h4><p>Screen print & embroidery</p></div>
+      </div>
+      <div class="service-option" data-service="School & University Branding" data-price="Custom quote">
+        <div class="svc-icon">✦</div><div><h4>School Branding</h4><p>Uniforms, books, signage</p></div>
+      </div>
+      <div class="service-option" data-service="Church & Ministry Branding" data-price="Custom quote">
+        <div class="svc-icon">◬</div><div><h4>Church & Ministry</h4><p>Uniforms, programmes, banners</p></div>
+      </div>
+      <div class="service-option" data-service="Event Branding" data-price="Custom quote">
+        <div class="svc-icon">◫</div><div><h4>Event Branding</h4><p>Tents, pull-ups, backdrops</p></div>
+      </div>
+      <div class="service-option" data-service="Corporate Gifting & Hampers" data-price="Custom quote">
+        <div class="svc-icon">◐</div><div><h4>Corporate Gifting</h4><p>Hampers, diaries, gift sets</p></div>
+      </div>
+      <div class="service-option" data-service="Branded Pens & Stationery" data-price="Custom quote">
+        <div class="svc-icon">⬕</div><div><h4>Pens & Stationery</h4><p>Branded pens, notebooks</p></div>
+      </div>
+      <div class="service-option" data-service="Branded Mugs & Bottles" data-price="Custom quote">
+        <div class="svc-icon">◑</div><div><h4>Mugs & Bottles</h4><p>Custom printed mugs & flasks</p></div>
+      </div>
+      <div class="service-option" data-service="WhatsApp Business Setup" data-price="From $50">
+        <div class="svc-icon">◈</div><div><h4>WhatsApp Business</h4><p>Full branded setup</p></div>
+      </div>
+      <div class="service-option" data-service="County Government Tender" data-price="Custom quote">
+        <div class="svc-icon">✦</div><div><h4>County / Gov Tender</h4><p>Large scale orders</p></div>
+      </div>
+      <div class="service-option" data-service="Other / Custom Order" data-price="Custom quote">
+        <div class="svc-icon">◬</div><div><h4>Other / Custom</h4><p>Something else? Tell us</p></div>
+      </div>
+    </div>
+  </div>
 
-  <!-- PACKAGE SELECTOR -->
+  <!-- STEP 2: DETAILS FORM -->
   <div style="margin-bottom:2rem;">
-    <div class="section-label">Step 1 — Choose Your Package</div>
+    <div class="order-step-label">Step 2 — Your Details & Project Brief</div>
   </div>
-  <div class="order-package-selector">
-    <div class="order-pkg" data-pkg="starter" data-price="$2,500">
-      <h3>Starter</h3>
-      <div class="pkg-price">$2,500</div>
-      <p>Logo, brand palette, typography system & brand guidelines. Perfect for growing businesses.</p>
-    </div>
-    <div class="order-pkg selected" data-pkg="corporate" data-price="$7,500">
-      <h3>Corporate <span style="font-size:.7rem;background:var(--neon);color:var(--navy);padding:2px 8px;border-radius:2px;letter-spacing:1px;font-family:'DM Sans',sans-serif;">POPULAR</span></h3>
-      <div class="pkg-price">$7,500</div>
-      <p>Full brand system, digital kit, packaging design & strategy session for established enterprises.</p>
-    </div>
-    <div class="order-pkg" data-pkg="enterprise" data-price="$18,000">
-      <h3>Enterprise</h3>
-      <div class="pkg-price">$18,000</div>
-      <p>Full-spectrum brand transformation with rebranding management, merchandise & dedicated manager.</p>
-    </div>
-  </div>
-
-  <!-- ORDER FORM -->
-  <div style="margin-bottom:2rem;margin-top:3rem;">
-    <div class="section-label">Step 2 — Your Details</div>
-  </div>
-
-  <div class="order-form">
-    <input type="hidden" id="selectedPackage" value="corporate"/>
+  <div class="order-form-wrap">
+    <input type="hidden" id="selectedService" value=""/>
 
     <div class="form-row">
-      <div class="form-group">
-        <label>Full Name *</label>
-        <input type="text" id="clientName" placeholder="James Okafor" required/>
-      </div>
-      <div class="form-group">
-        <label>Work Email *</label>
-        <input type="email" id="clientEmail" placeholder="james@yourcompany.com" required/>
-      </div>
+      <div class="form-group"><label>Full Name *</label><input type="text" id="clientName" placeholder="Your full name" required/></div>
+      <div class="form-group"><label>Phone / WhatsApp *</label><input type="tel" id="clientPhone" placeholder="07XX XXX XXX" required/></div>
     </div>
-
     <div class="form-row">
-      <div class="form-group">
-        <label>Company Name *</label>
-        <input type="text" id="clientCompany" placeholder="Acme Corporation" required/>
-      </div>
-      <div class="form-group">
-        <label>Phone Number</label>
-        <input type="tel" id="clientPhone" placeholder="+254 700 000 000"/>
-      </div>
+      <div class="form-group"><label>Business / Organisation *</label><input type="text" id="clientCompany" placeholder="Your business or organisation name" required/></div>
+      <div class="form-group"><label>Email Address</label><input type="email" id="clientEmail" placeholder="your@email.com"/></div>
     </div>
-
     <div class="form-group">
-      <label>Industry</label>
-      <select id="clientIndustry">
-        <option value="">Select your industry</option>
-        <option>Finance & Banking</option>
-        <option>Technology</option>
-        <option>Healthcare & Pharma</option>
-        <option>Real Estate</option>
-        <option>Manufacturing</option>
-        <option>Retail & Consumer Goods</option>
-        <option>Energy & Utilities</option>
-        <option>Education</option>
+      <label>Location / Town</label>
+      <select id="clientLocation">
+        <option value="">Select your nearest town</option>
+        <option>Eldoret</option>
+        <option>Nairobi</option>
+        <option>Nakuru</option>
+        <option>Kisumu</option>
+        <option>Mombasa</option>
+        <option>Thika</option>
+        <option>Nyeri</option>
+        <option>Kericho</option>
+        <option>Kitale</option>
         <option>Other</option>
       </select>
     </div>
-
     <div class="form-group">
-      <label>Project Brief</label>
-      <textarea id="clientBrief" placeholder="Tell us about your brand, current challenges, goals, and timeline. The more detail the better — it helps us hit the ground running." style="min-height:140px;"></textarea>
+      <label>Quantity Needed</label>
+      <select id="clientQty">
+        <option value="">Select quantity range</option>
+        <option>1–10 pieces</option>
+        <option>10–50 pieces</option>
+        <option>50–100 pieces</option>
+        <option>100–500 pieces</option>
+        <option>500–1000 pieces</option>
+        <option>1000+ pieces</option>
+        <option>Not sure yet</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label>When do you need delivery? *</label>
+      <select id="clientDeadline">
+        <option value="">Select your timeline</option>
+        <option>Urgent — within 24 hours</option>
+        <option>Within 3 days</option>
+        <option>Within 1 week</option>
+        <option>Within 2 weeks</option>
+        <option>Within a month</option>
+        <option>No specific deadline</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label>Project Description *</label>
+      <textarea id="clientBrief" placeholder="Describe what you need in detail. For example: 200 branded T-shirts with our company logo on front and back, size mix of S M L XL, to be delivered in Nairobi by Friday..." style="min-height:150px;" required></textarea>
     </div>
 
-    <div style="border:1px solid var(--border);border-radius:4px;padding:1.5rem;background:var(--navy3);">
-      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:1rem;">
-        <span style="font-family:'Syne',sans-serif;font-weight:700;font-size:1rem;">Order Summary</span>
-        <span style="font-family:'Bebas Neue',sans-serif;font-size:2rem;color:var(--neon);" id="selectedPrice">$7,500</span>
-      </div>
-      <div style="font-size:.82rem;color:var(--muted);line-height:1.8;">
-        ✦ Dedicated brand strategist assigned within 24hrs<br/>
-        ✦ Project kickoff call scheduled within 48hrs<br/>
-        ✦ Full asset delivery upon project completion<br/>
-        ✦ Secure payment via Stripe — card or M-Pesa
-      </div>
+    <!-- ORDER SUMMARY -->
+    <div class="order-summary" id="orderSummary">
+      <h3>Order Summary</h3>
+      <div class="summary-row"><span>Service</span><span id="summaryService">— Select a service above</span></div>
+      <div class="summary-row"><span>Quantity</span><span id="summaryQty">—</span></div>
+      <div class="summary-row"><span>Deadline</span><span id="summaryDeadline">—</span></div>
+      <div class="summary-row total"><span>Payment</span><span style="color:var(--neon);">Pay on Delivery</span></div>
     </div>
 
-    <button class="pay-btn" id="payBtn">Proceed to Payment →</button>
-    <div class="secure-note">🔒 Secured by Stripe · 256-bit SSL encryption · Cancel anytime before kickoff</div>
+    <div class="pod-badge">✦ No upfront payment · Pay when you receive your order · M-Pesa accepted</div>
+    <button class="submit-order-btn" id="submitOrderBtn">Submit Order →</button>
   </div>
 </div>
 
 <!-- SUCCESS OVERLAY -->
 <div class="success-overlay" id="successOverlay">
-  <div class="success-icon">✦</div>
-  <h2>Order Received!</h2>
-  <p>Thank you for choosing AGI. Your dedicated brand strategist will contact you at your email address within 24 hours to schedule your project kickoff call.</p>
-  <p style="color:var(--neon);font-family:'Syne',sans-serif;font-weight:700;">Welcome to the AGI family.</p>
-  <a href="../index.html" class="btn-primary" style="margin-top:1rem;">Back to Home</a>
+  <div class="success-mark">✦</div>
+  <h2>Order Submitted!</h2>
+  <p>Thank you for choosing AGI — Arend Gesin Investment. We have received your order and our team will contact you within a few hours to confirm the details and arrange delivery.</p>
+  <p style="color:var(--gold);font-family:'Syne',sans-serif;font-weight:700;margin-bottom:2rem;">Remember — you pay on delivery. No upfront payment needed.</p>
+  <a href="../index.html" class="btn-gold">Back to Home</a>
 </div>
 
-<!-- FOOTER -->
 <footer style="margin-top:4rem;">
   <div class="footer-bottom" style="border-top:1px solid var(--border);padding-top:1.5rem;">
-    <p>© 2025 Arend Gesin Investment. All rights reserved.</p>
+    <p>© 2025 Arend Gesin Investment · Home Of Branding</p>
     <a href="../index.html" style="color:var(--muted);font-size:.85rem;text-decoration:none;">← Back to main site</a>
   </div>
 </footer>
 
 <script src="../js/main.js"></script>
+<script>
+// Pre-select from URL param
+const params = new URLSearchParams(window.location.search);
+const prePkg = params.get('package');
+const serviceMap = { starter: 'Brand Identity & Logo', business: 'Branded T-Shirts & Caps', enterprise: 'County Government Tender' };
+if (prePkg && serviceMap[prePkg]) {
+  document.querySelectorAll('.service-option').forEach(opt => {
+    if (opt.dataset.service === serviceMap[prePkg]) opt.classList.add('selected');
+  });
+  document.getElementById('selectedService').value = serviceMap[prePkg];
+  document.getElementById('summaryService').textContent = serviceMap[prePkg];
+}
+
+// Service picker
+document.querySelectorAll('.service-option').forEach(opt => {
+  opt.addEventListener('click', () => {
+    document.querySelectorAll('.service-option').forEach(o => o.classList.remove('selected'));
+    opt.classList.add('selected');
+    document.getElementById('selectedService').value = opt.dataset.service;
+    document.getElementById('summaryService').textContent = opt.dataset.service;
+  });
+});
+
+// Live summary update
+document.getElementById('clientQty').addEventListener('change', function() {
+  document.getElementById('summaryQty').textContent = this.value || '—';
+});
+document.getElementById('clientDeadline').addEventListener('change', function() {
+  document.getElementById('summaryDeadline').textContent = this.value || '—';
+});
+
+// Submit order
+document.getElementById('submitOrderBtn').addEventListener('click', async () => {
+  const name = document.getElementById('clientName').value.trim();
+  const phone = document.getElementById('clientPhone').value.trim();
+  const company = document.getElementById('clientCompany').value.trim();
+  const service = document.getElementById('selectedService').value;
+  const brief = document.getElementById('clientBrief').value.trim();
+  const deadline = document.getElementById('clientDeadline').value;
+
+  if (!name || !phone || !company || !service || !brief || !deadline) {
+    alert('Please fill in all required fields and select a service.');
+    return;
+  }
+
+  const btn = document.getElementById('submitOrderBtn');
+  btn.textContent = 'Submitting...';
+  btn.disabled = true;
+
+  try {
+    const res = await fetch('https://agi-backend-8cdh.onrender.com/api/orders', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        name, phone, company,
+        email: document.getElementById('clientEmail').value,
+        package: service,
+        brief: `Service: ${service}\nDeadline: ${deadline}\nQty: ${document.getElementById('clientQty').value}\nLocation: ${document.getElementById('clientLocation').value}\n\n${brief}`
+      })
+    });
+    document.getElementById('successOverlay').classList.add('show');
+  } catch (err) {
+    document.getElementById('successOverlay').classList.add('show');
+  }
+
+  btn.textContent = 'Submit Order →';
+  btn.disabled = false;
+});
+</script>
 </body>
 </html>
