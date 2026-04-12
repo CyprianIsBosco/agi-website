@@ -3,9 +3,27 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Place an Order — AGI Arend Gesin Investment</title>
+<title>Place an Order — Arend Gesin Investment</title>
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
 <link rel="stylesheet" href="../css/style.css"/>
+<style>
+.payment-options{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:1.5rem;}
+.pay-opt{border:1px solid var(--border);border-radius:4px;padding:1.5rem;cursor:pointer;transition:all .3s;position:relative;}
+.pay-opt:hover{border-color:rgba(239,159,39,.4);background:var(--navy3);}
+.pay-opt.selected{border:2px solid var(--gold);background:var(--navy3);box-shadow:0 0 20px rgba(239,159,39,.1);}
+.pay-opt h4{font-family:'Syne',sans-serif;font-size:1rem;font-weight:700;margin-bottom:.4rem;display:flex;align-items:center;gap:8px;}
+.pay-opt p{font-size:.82rem;color:var(--muted);line-height:1.5;}
+.pay-icon{font-size:1.4rem;}
+.mpesa-logo{font-family:'Bebas Neue',sans-serif;font-size:1.1rem;color:var(--neon);letter-spacing:2px;}
+.pod-icon{color:var(--gold);}
+.pay-opt.selected .pay-opt-check{display:flex;}
+.pay-opt-check{display:none;position:absolute;top:.8rem;right:.8rem;width:20px;height:20px;background:var(--gold);border-radius:50%;align-items:center;justify-content:center;font-size:.7rem;color:var(--navy);font-weight:700;}
+.mpesa-fields{display:none;margin-top:1rem;}
+.mpesa-fields.show{display:block;}
+.mpesa-note{background:rgba(0,245,200,.06);border:1px solid rgba(0,245,200,.15);border-radius:4px;padding:1rem;font-size:.82rem;color:var(--muted);line-height:1.6;margin-top:.8rem;}
+.mpesa-note strong{color:var(--neon);}
+@media(max-width:600px){.payment-options{grid-template-columns:1fr;}}
+</style>
 </head>
 <body>
 <div class="cursor" id="cursor"></div>
@@ -13,168 +31,157 @@
 
 <nav id="navbar">
   <a href="../index.html" class="logo-wrap">
-    <div class="logo-mark"><div class="logo-slash1"></div><div class="logo-slash2"></div></div>
+    <svg class="logo-svg-mark" width="44" height="49" viewBox="0 0 200 220">
+      <polygon points="100,4 196,72 4,72" fill="none" stroke="#e8eaf0" stroke-width="10" stroke-linejoin="round"/>
+      <line x1="4" y1="72" x2="0" y2="64" stroke="#e8eaf0" stroke-width="8" stroke-linecap="round"/>
+      <line x1="196" y1="72" x2="200" y2="64" stroke="#e8eaf0" stroke-width="8" stroke-linecap="round"/>
+      <rect x="22" y="72" width="156" height="96" fill="none" stroke="#e8eaf0" stroke-width="8"/>
+      <text x="100" y="148" text-anchor="middle" font-family="Arial Black,sans-serif" font-size="46" font-weight="900" fill="#00f5c8" letter-spacing="4">AGI</text>
+      <path d="M 8,180 Q 100,198 192,178" fill="none" stroke="#e8eaf0" stroke-width="6" stroke-linecap="round"/>
+      <line x1="188" y1="172" x2="204" y2="166" stroke="#e8eaf0" stroke-width="5" stroke-linecap="round"/>
+      <line x1="190" y1="180" x2="208" y2="176" stroke="#e8eaf0" stroke-width="5" stroke-linecap="round"/>
+      <line x1="191" y1="188" x2="210" y2="186" stroke="#e8eaf0" stroke-width="5" stroke-linecap="round"/>
+    </svg>
     <div class="logo-text"><span class="logo-name">AREND GESIN</span><span class="logo-tag">Home Of Branding</span></div>
   </a>
   <ul class="nav-links">
     <li><a href="../index.html#services">Services</a></li>
     <li><a href="../index.html#pricing">Pricing</a></li>
-    <li><a href="../index.html#about">About</a></li>
     <li><a href="../index.html#contact">Contact</a></li>
   </ul>
   <button class="hamburger" id="hamburger"><span></span><span></span><span></span></button>
 </nav>
-
 <div class="mobile-overlay" id="mobileOverlay">
   <button class="mobile-close" id="mobileClose">✕</button>
   <ul>
     <li><a href="../index.html#services" class="mobile-link">Services</a></li>
     <li><a href="../index.html#pricing" class="mobile-link">Pricing</a></li>
-    <li><a href="../index.html#about" class="mobile-link">About</a></li>
     <li><a href="../index.html#contact" class="mobile-link">Contact</a></li>
   </ul>
 </div>
 
 <div class="order-page">
-  <!-- HERO TEXT -->
-  <div class="order-hero-text">
-    <div class="section-label">Place Your Order</div>
-    <h1><span style="color:var(--text);">Order Your</span><br/><span style="color:var(--gold);">Branded Items.</span></h1>
-    <p>Select what you need, describe your project and submit. Our team will contact you to confirm details and arrange delivery. <strong style="color:var(--neon);">Pay on delivery — no upfront payment required.</strong></p>
-    <div class="pod-badge" style="margin-top:1.5rem;">✦ Pay on Delivery · M-Pesa Accepted</div>
-  </div>
+  <div class="step-label">Place Your Order</div>
+  <h1>Order Your<br/><em>Branded Items.</em></h1>
+  <p>Select your service, fill in your details and choose how you'd like to pay. Our team will confirm your order and arrange delivery.</p>
 
   <!-- STEP 1: SERVICE -->
-  <div style="margin-bottom:3rem;">
-    <div class="order-step-label">Step 1 — What do you need?</div>
-    <div class="service-picker" id="servicePicker">
-      <div class="service-option" data-service="Brand Identity & Logo" data-price="From $150">
-        <div class="svc-icon">◈</div><div><h4>Brand Identity & Logo</h4><p>From $150 / Ksh 20,000</p></div>
-      </div>
-      <div class="service-option" data-service="Election & Campaign Branding" data-price="Custom quote">
-        <div class="svc-icon">◉</div><div><h4>Campaign Branding</h4><p>T-shirts, caps, banners, stickers</p></div>
-      </div>
-      <div class="service-option" data-service="Branded T-Shirts & Caps" data-price="Custom quote">
-        <div class="svc-icon">⬡</div><div><h4>T-Shirts, Caps & Hoodies</h4><p>Screen print & embroidery</p></div>
-      </div>
-      <div class="service-option" data-service="School & University Branding" data-price="Custom quote">
-        <div class="svc-icon">✦</div><div><h4>School Branding</h4><p>Uniforms, books, signage</p></div>
-      </div>
-      <div class="service-option" data-service="Church & Ministry Branding" data-price="Custom quote">
-        <div class="svc-icon">◬</div><div><h4>Church & Ministry</h4><p>Uniforms, programmes, banners</p></div>
-      </div>
-      <div class="service-option" data-service="Event Branding" data-price="Custom quote">
-        <div class="svc-icon">◫</div><div><h4>Event Branding</h4><p>Tents, pull-ups, backdrops</p></div>
-      </div>
-      <div class="service-option" data-service="Corporate Gifting & Hampers" data-price="Custom quote">
-        <div class="svc-icon">◐</div><div><h4>Corporate Gifting</h4><p>Hampers, diaries, gift sets</p></div>
-      </div>
-      <div class="service-option" data-service="Branded Pens & Stationery" data-price="Custom quote">
-        <div class="svc-icon">⬕</div><div><h4>Pens & Stationery</h4><p>Branded pens, notebooks</p></div>
-      </div>
-      <div class="service-option" data-service="Branded Mugs & Bottles" data-price="Custom quote">
-        <div class="svc-icon">◑</div><div><h4>Mugs & Bottles</h4><p>Custom printed mugs & flasks</p></div>
-      </div>
-      <div class="service-option" data-service="WhatsApp Business Setup" data-price="From $50">
-        <div class="svc-icon">◈</div><div><h4>WhatsApp Business</h4><p>Full branded setup</p></div>
-      </div>
-      <div class="service-option" data-service="County Government Tender" data-price="Custom quote">
-        <div class="svc-icon">✦</div><div><h4>County / Gov Tender</h4><p>Large scale orders</p></div>
-      </div>
-      <div class="service-option" data-service="Other / Custom Order" data-price="Custom quote">
-        <div class="svc-icon">◬</div><div><h4>Other / Custom</h4><p>Something else? Tell us</p></div>
-      </div>
-    </div>
+  <div class="step-label">Step 1 — Select a Service</div>
+  <div class="service-picker" id="servicePicker">
+    <div class="svc-opt" data-service="Printing, Branding & Imaging"><h4>Printing, Branding & Imaging</h4><p>Screen print, offset, digital, large format, ceramics, cloth branding</p></div>
+    <div class="svc-opt" data-service="Stationery Supplies"><h4>Stationery Supplies</h4><p>Branded & assorted stationery. Stay STATIONARY, Get STATIONERY.</p></div>
+    <div class="svc-opt" data-service="IT Installations & Client Management"><h4>IT Installations & Client Management</h4><p>Computers, accessories, software, maintenance</p></div>
+    <div class="svc-opt" data-service="Graphic Design & Advertisement"><h4>Graphic Design & Advertisement</h4><p>Brochures, flyers, business cards, social media ads</p></div>
   </div>
 
-  <!-- STEP 2: DETAILS FORM -->
-  <div style="margin-bottom:2rem;">
-    <div class="order-step-label">Step 2 — Your Details & Project Brief</div>
-  </div>
-  <div class="order-form-wrap">
+  <!-- STEP 2: DETAILS -->
+  <div class="step-label" style="margin-bottom:1.5rem;">Step 2 — Your Details</div>
+  <div class="order-form-box">
     <input type="hidden" id="selectedService" value=""/>
-
     <div class="form-row">
       <div class="form-group"><label>Full Name *</label><input type="text" id="clientName" placeholder="Your full name" required/></div>
       <div class="form-group"><label>Phone / WhatsApp *</label><input type="tel" id="clientPhone" placeholder="07XX XXX XXX" required/></div>
     </div>
     <div class="form-row">
-      <div class="form-group"><label>Business / Organisation *</label><input type="text" id="clientCompany" placeholder="Your business or organisation name" required/></div>
+      <div class="form-group"><label>Business / Organisation *</label><input type="text" id="clientCompany" placeholder="Your business name" required/></div>
       <div class="form-group"><label>Email Address</label><input type="email" id="clientEmail" placeholder="your@email.com"/></div>
     </div>
     <div class="form-group">
-      <label>Location / Town</label>
+      <label>Your County / Location</label>
       <select id="clientLocation">
-        <option value="">Select your nearest town</option>
-        <option>Eldoret</option>
-        <option>Nairobi</option>
-        <option>Nakuru</option>
-        <option>Kisumu</option>
-        <option>Mombasa</option>
-        <option>Thika</option>
-        <option>Nyeri</option>
-        <option>Kericho</option>
-        <option>Kitale</option>
-        <option>Other</option>
+        <option value="">Select your county</option>
+        <option>Nakuru</option><option>Uasin Gishu (Eldoret)</option>
+        <option>Bungoma</option><option>Trans Nzoia (Kitale)</option>
+        <option>Nairobi</option><option>Other</option>
       </select>
     </div>
-    <div class="form-group">
-      <label>Quantity Needed</label>
-      <select id="clientQty">
-        <option value="">Select quantity range</option>
-        <option>1–10 pieces</option>
-        <option>10–50 pieces</option>
-        <option>50–100 pieces</option>
-        <option>100–500 pieces</option>
-        <option>500–1000 pieces</option>
-        <option>1000+ pieces</option>
-        <option>Not sure yet</option>
-      </select>
-    </div>
-    <div class="form-group">
-      <label>When do you need delivery? *</label>
-      <select id="clientDeadline">
-        <option value="">Select your timeline</option>
-        <option>Urgent — within 24 hours</option>
-        <option>Within 3 days</option>
-        <option>Within 1 week</option>
-        <option>Within 2 weeks</option>
-        <option>Within a month</option>
-        <option>No specific deadline</option>
-      </select>
+    <div class="form-row">
+      <div class="form-group">
+        <label>Quantity Needed</label>
+        <select id="clientQty">
+          <option value="">Select quantity</option>
+          <option>1–10 pieces</option><option>10–50 pieces</option>
+          <option>50–100 pieces</option><option>100–500 pieces</option>
+          <option>500–1,000 pieces</option><option>1,000+ pieces</option>
+          <option>Not sure yet</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>When do you need it? *</label>
+        <select id="clientDeadline">
+          <option value="">Select timeline</option>
+          <option>Urgent — within 24 hours</option><option>Within 3 days</option>
+          <option>Within 1 week</option><option>Within 2 weeks</option>
+          <option>Within a month</option><option>No specific deadline</option>
+        </select>
+      </div>
     </div>
     <div class="form-group">
       <label>Project Description *</label>
-      <textarea id="clientBrief" placeholder="Describe what you need in detail. For example: 200 branded T-shirts with our company logo on front and back, size mix of S M L XL, to be delivered in Nairobi by Friday..." style="min-height:150px;" required></textarea>
+      <textarea id="clientBrief" style="min-height:150px;" placeholder="Describe exactly what you need. For example: 200 branded T-shirts with company logo front and back, sizes S M L XL, deliver to Nakuru by Friday..." required></textarea>
     </div>
+
+    <!-- STEP 3: PAYMENT -->
+    <div class="step-label" style="margin:0 0 1rem;">Step 3 — Choose Payment Method</div>
+    <div class="payment-options">
+      <div class="pay-opt" id="payMpesa" onclick="selectPayment('pay_now')">
+        <div class="pay-opt-check">✓</div>
+        <h4><span class="pay-icon mpesa-logo">M-PESA</span></h4>
+        <p>Pay via M-Pesa STK Push. You will receive a payment prompt on your phone after submitting. Fast, secure and instant.</p>
+        <p style="margin-top:.5rem;font-size:.75rem;color:var(--neon);">Coming soon — Daraja API integration</p>
+      </div>
+      <div class="pay-opt selected" id="payPod" onclick="selectPayment('pay_later')">
+        <div class="pay-opt-check" style="display:flex;">✓</div>
+        <h4><span class="pay-icon pod-icon">◎</span> Pay on Delivery</h4>
+        <p>Pay when you receive your order. Available for all locations we serve. M-Pesa or cash accepted on delivery.</p>
+        <p style="margin-top:.5rem;font-size:.75rem;color:var(--gold);">Available now · No upfront payment</p>
+      </div>
+    </div>
+
+    <!-- M-PESA PHONE FIELD (shows when M-Pesa selected) -->
+    <div class="mpesa-fields" id="mpesaFields">
+      <div class="form-group">
+        <label>M-Pesa Phone Number *</label>
+        <input type="tel" id="mpesaPhone" placeholder="07XX XXX XXX (the number to receive STK Push)"/>
+      </div>
+      <div class="mpesa-note">
+        <strong>How M-Pesa payment works:</strong><br/>
+        1. Submit your order<br/>
+        2. You will receive an M-Pesa STK Push prompt on your phone<br/>
+        3. Enter your M-Pesa PIN to confirm<br/>
+        4. Payment confirmed — we start your order immediately
+      </div>
+    </div>
+
+    <input type="hidden" id="selectedPayment" value="pay_later"/>
 
     <!-- ORDER SUMMARY -->
-    <div class="order-summary" id="orderSummary">
+    <div class="order-summary">
       <h3>Order Summary</h3>
-      <div class="summary-row"><span>Service</span><span id="summaryService">— Select a service above</span></div>
-      <div class="summary-row"><span>Quantity</span><span id="summaryQty">—</span></div>
-      <div class="summary-row"><span>Deadline</span><span id="summaryDeadline">—</span></div>
-      <div class="summary-row total"><span>Payment</span><span style="color:var(--neon);">Pay on Delivery</span></div>
+      <div class="sum-row"><span>Service</span><span id="summaryService">— Select a service above</span></div>
+      <div class="sum-row"><span>Quantity</span><span id="summaryQty">—</span></div>
+      <div class="sum-row"><span>Deadline</span><span id="summaryDeadline">—</span></div>
+      <div class="sum-row"><span>Payment</span><span id="summaryPayment" style="color:var(--gold);">Pay on Delivery</span></div>
+      <div class="sum-row total"><span>Upfront Cost</span><span style="color:var(--neon);">Ksh 0 — Pay on delivery</span></div>
     </div>
 
-    <div class="pod-badge">✦ No upfront payment · Pay when you receive your order · M-Pesa accepted</div>
+    <div class="pod-badge">✦ No Upfront Payment · Pay When You Receive Your Order · M-Pesa Accepted</div>
     <button class="submit-order-btn" id="submitOrderBtn">Submit Order →</button>
   </div>
 </div>
 
-<!-- SUCCESS OVERLAY -->
 <div class="success-overlay" id="successOverlay">
   <div class="success-mark">✦</div>
   <h2>Order Submitted!</h2>
-  <p>Thank you for choosing AGI — Arend Gesin Investment. We have received your order and our team will contact you within a few hours to confirm the details and arrange delivery.</p>
-  <p style="color:var(--gold);font-family:'Syne',sans-serif;font-weight:700;margin-bottom:2rem;">Remember — you pay on delivery. No upfront payment needed.</p>
+  <p>Thank you for choosing AGI — Arend Gesin Investment. We have received your order and our team will contact you within a few hours to confirm details and arrange delivery.</p>
+  <p id="paymentMsg" style="color:var(--gold);font-family:'Syne',sans-serif;font-weight:700;font-style:italic;margin-bottom:2rem;">"Strength of Family"</p>
   <a href="../index.html" class="btn-gold">Back to Home</a>
 </div>
 
-<footer style="margin-top:4rem;">
+<footer style="margin-top:0;">
   <div class="footer-bottom" style="border-top:1px solid var(--border);padding-top:1.5rem;">
-    <p>© 2025 Arend Gesin Investment · Home Of Branding</p>
-    <a href="../index.html" style="color:var(--muted);font-size:.85rem;text-decoration:none;">← Back to main site</a>
+    <p>© 2025 Arend Gesin Investment · info@arendgesin.co.ke · +254 735 518 090</p>
+    <a href="../index.html" style="color:var(--muted);font-size:.83rem;text-decoration:none;">← Back to main site</a>
   </div>
 </footer>
 
@@ -183,34 +190,45 @@
 // Pre-select from URL param
 const params = new URLSearchParams(window.location.search);
 const prePkg = params.get('package');
-const serviceMap = { starter: 'Brand Identity & Logo', business: 'Branded T-Shirts & Caps', enterprise: 'County Government Tender' };
-if (prePkg && serviceMap[prePkg]) {
-  document.querySelectorAll('.service-option').forEach(opt => {
-    if (opt.dataset.service === serviceMap[prePkg]) opt.classList.add('selected');
+const pkgMap = { starter: 'Printing, Branding & Imaging', business: 'Printing, Branding & Imaging', enterprise: 'IT Installations & Client Management' };
+if (prePkg && pkgMap[prePkg]) {
+  document.querySelectorAll('.svc-opt').forEach(opt => {
+    if (opt.dataset.service === pkgMap[prePkg]) {
+      opt.classList.add('selected');
+      document.getElementById('selectedService').value = opt.dataset.service;
+      document.getElementById('summaryService').textContent = opt.dataset.service;
+    }
   });
-  document.getElementById('selectedService').value = serviceMap[prePkg];
-  document.getElementById('summaryService').textContent = serviceMap[prePkg];
 }
 
 // Service picker
-document.querySelectorAll('.service-option').forEach(opt => {
+document.querySelectorAll('.svc-opt').forEach(opt => {
   opt.addEventListener('click', () => {
-    document.querySelectorAll('.service-option').forEach(o => o.classList.remove('selected'));
+    document.querySelectorAll('.svc-opt').forEach(o => o.classList.remove('selected'));
     opt.classList.add('selected');
     document.getElementById('selectedService').value = opt.dataset.service;
     document.getElementById('summaryService').textContent = opt.dataset.service;
   });
 });
 
-// Live summary update
-document.getElementById('clientQty').addEventListener('change', function() {
-  document.getElementById('summaryQty').textContent = this.value || '—';
-});
-document.getElementById('clientDeadline').addEventListener('change', function() {
-  document.getElementById('summaryDeadline').textContent = this.value || '—';
-});
+// Payment selection
+function selectPayment(type) {
+  document.getElementById('selectedPayment').value = type;
+  document.getElementById('payMpesa').classList.toggle('selected', type === 'pay_now');
+  document.getElementById('payPod').classList.toggle('selected', type === 'pay_later');
+  document.querySelector('#payMpesa .pay-opt-check').style.display = type === 'pay_now' ? 'flex' : 'none';
+  document.querySelector('#payPod .pay-opt-check').style.display = type === 'pay_later' ? 'flex' : 'none';
+  document.getElementById('mpesaFields').classList.toggle('show', type === 'pay_now');
+  document.getElementById('summaryPayment').textContent = type === 'pay_now' ? 'M-Pesa (Pay Now)' : 'Pay on Delivery';
+  const totalRow = document.querySelector('.sum-row.total span:last-child');
+  if (totalRow) totalRow.textContent = type === 'pay_now' ? 'M-Pesa STK Push' : 'Ksh 0 — Pay on delivery';
+}
 
-// Submit order
+// Live summary
+document.getElementById('clientQty').addEventListener('change', function() { document.getElementById('summaryQty').textContent = this.value || '—'; });
+document.getElementById('clientDeadline').addEventListener('change', function() { document.getElementById('summaryDeadline').textContent = this.value || '—'; });
+
+// Submit
 document.getElementById('submitOrderBtn').addEventListener('click', async () => {
   const name = document.getElementById('clientName').value.trim();
   const phone = document.getElementById('clientPhone').value.trim();
@@ -218,6 +236,7 @@ document.getElementById('submitOrderBtn').addEventListener('click', async () => 
   const service = document.getElementById('selectedService').value;
   const brief = document.getElementById('clientBrief').value.trim();
   const deadline = document.getElementById('clientDeadline').value;
+  const paymentOption = document.getElementById('selectedPayment').value;
 
   if (!name || !phone || !company || !service || !brief || !deadline) {
     alert('Please fill in all required fields and select a service.');
@@ -225,27 +244,32 @@ document.getElementById('submitOrderBtn').addEventListener('click', async () => 
   }
 
   const btn = document.getElementById('submitOrderBtn');
-  btn.textContent = 'Submitting...';
-  btn.disabled = true;
+  btn.textContent = 'Submitting...'; btn.disabled = true;
 
   try {
-    const res = await fetch('https://agi-backend-8cdh.onrender.com/api/orders', {
+    await fetch('https://agi-backend-8cdh.onrender.com/api/orders', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
         name, phone, company,
-        email: document.getElementById('clientEmail').value,
+        email: document.getElementById('clientEmail').value || '',
         package: service,
-        brief: `Service: ${service}\nDeadline: ${deadline}\nQty: ${document.getElementById('clientQty').value}\nLocation: ${document.getElementById('clientLocation').value}\n\n${brief}`
+        paymentOption,
+        mpesaPhone: document.getElementById('mpesaPhone')?.value || '',
+        brief: `Service: ${service}\nDeadline: ${deadline}\nQty: ${document.getElementById('clientQty').value||'N/A'}\nLocation: ${document.getElementById('clientLocation').value||'N/A'}\nPayment: ${paymentOption}\n\n${brief}`
       })
     });
-    document.getElementById('successOverlay').classList.add('show');
-  } catch (err) {
-    document.getElementById('successOverlay').classList.add('show');
+  } catch (e) {}
+
+  const payMsg = document.getElementById('paymentMsg');
+  if (paymentOption === 'pay_now') {
+    payMsg.textContent = 'M-Pesa payment integration coming soon. Our team will contact you with payment details.';
+  } else {
+    payMsg.textContent = 'You chose Pay on Delivery. No upfront payment needed. We will deliver and collect payment. "Strength of Family"';
   }
 
-  btn.textContent = 'Submit Order →';
-  btn.disabled = false;
+  document.getElementById('successOverlay').classList.add('show');
+  btn.textContent = 'Submit Order →'; btn.disabled = false;
 });
 </script>
 </body>

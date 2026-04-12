@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>AGI — Arend Gesin Investment | Home Of Branding</title>
+<title>Arend Gesin Investment — Home Of Branding</title>
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
 <link rel="stylesheet" href="css/style.css"/>
 </head>
@@ -14,13 +14,35 @@
 <!-- NAV -->
 <nav id="navbar">
   <a href="index.html" class="logo-wrap">
-    <div class="logo-mark"><div class="logo-slash1"></div><div class="logo-slash2"></div></div>
-    <div class="logo-text"><span class="logo-name">AREND GESIN</span><span class="logo-tag">Home Of Branding</span></div>
+    <svg class="logo-svg-mark" width="52" height="58" viewBox="0 0 200 220">
+      <!-- Roof -->
+      <polygon points="100,4 196,72 4,72" fill="none" stroke="#e8eaf0" stroke-width="10" stroke-linejoin="round"/>
+      <!-- Left overhang -->
+      <line x1="4" y1="72" x2="0" y2="64" stroke="#e8eaf0" stroke-width="8" stroke-linecap="round"/>
+      <!-- Right overhang -->
+      <line x1="196" y1="72" x2="200" y2="64" stroke="#e8eaf0" stroke-width="8" stroke-linecap="round"/>
+      <!-- Walls -->
+      <rect x="22" y="72" width="156" height="96" fill="none" stroke="#e8eaf0" stroke-width="8"/>
+      <!-- AGI text -->
+      <text x="100" y="148" text-anchor="middle" font-family="Arial Black,sans-serif" font-size="46" font-weight="900" fill="#00f5c8" letter-spacing="4">AGI</text>
+      <!-- Swoosh -->
+      <path d="M 8,180 Q 100,198 192,178" fill="none" stroke="#e8eaf0" stroke-width="6" stroke-linecap="round"/>
+      <!-- Speed marks -->
+      <line x1="188" y1="172" x2="204" y2="166" stroke="#e8eaf0" stroke-width="5" stroke-linecap="round"/>
+      <line x1="190" y1="180" x2="208" y2="176" stroke="#e8eaf0" stroke-width="5" stroke-linecap="round"/>
+      <line x1="191" y1="188" x2="210" y2="186" stroke="#e8eaf0" stroke-width="5" stroke-linecap="round"/>
+    </svg>
+    <div class="logo-text">
+      <span class="logo-name">AREND GESIN</span>
+      <span class="logo-tag">Home Of Branding</span>
+    </div>
   </a>
   <ul class="nav-links">
+    <li><a href="#who">Who We Are</a></li>
     <li><a href="#services">Services</a></li>
     <li><a href="#portfolio">Work</a></li>
     <li><a href="#pricing">Pricing</a></li>
+    <li><a href="#csr">CSR</a></li>
     <li><a href="#about">About</a></li>
     <li><a href="#contact">Contact</a></li>
     <li><a href="pages/order.html" class="nav-cta">Order Now</a></li>
@@ -33,15 +55,29 @@
   <button class="mobile-close" id="mobileClose">✕</button>
   <div class="mobile-logo">
     <a href="index.html" class="logo-wrap">
-      <div class="logo-mark"><div class="logo-slash1" style="height:44px;width:12px;"></div><div class="logo-slash2" style="height:44px;width:9px;"></div></div>
-      <div class="logo-text"><span class="logo-name" style="font-size:1.8rem;">AREND GESIN</span><span class="logo-tag">Home Of Branding</span></div>
+      <svg width="60" height="67" viewBox="0 0 200 220">
+        <polygon points="100,4 196,72 4,72" fill="none" stroke="#e8eaf0" stroke-width="10" stroke-linejoin="round"/>
+        <line x1="4" y1="72" x2="0" y2="64" stroke="#e8eaf0" stroke-width="8" stroke-linecap="round"/>
+        <line x1="196" y1="72" x2="200" y2="64" stroke="#e8eaf0" stroke-width="8" stroke-linecap="round"/>
+        <rect x="22" y="72" width="156" height="96" fill="none" stroke="#e8eaf0" stroke-width="8"/>
+        <text x="100" y="148" text-anchor="middle" font-family="Arial Black,sans-serif" font-size="46" font-weight="900" fill="#00f5c8" letter-spacing="4">AGI</text>
+        <path d="M 8,180 Q 100,198 192,178" fill="none" stroke="#e8eaf0" stroke-width="6" stroke-linecap="round"/>
+        <line x1="188" y1="172" x2="204" y2="166" stroke="#e8eaf0" stroke-width="5" stroke-linecap="round"/>
+        <line x1="190" y1="180" x2="208" y2="176" stroke="#e8eaf0" stroke-width="5" stroke-linecap="round"/>
+        <line x1="191" y1="188" x2="210" y2="186" stroke="#e8eaf0" stroke-width="5" stroke-linecap="round"/>
+      </svg>
+      <div class="logo-text">
+        <span class="logo-name" style="font-size:1.8rem;">AREND GESIN</span>
+        <span class="logo-tag">Home Of Branding</span>
+      </div>
     </a>
   </div>
   <ul>
+    <li><a href="#who" class="mobile-link">Who We Are</a></li>
     <li><a href="#services" class="mobile-link">Services</a></li>
     <li><a href="#portfolio" class="mobile-link">Work</a></li>
     <li><a href="#pricing" class="mobile-link">Pricing</a></li>
-    <li><a href="#about" class="mobile-link">About</a></li>
+    <li><a href="#csr" class="mobile-link">CSR</a></li>
     <li><a href="#contact" class="mobile-link">Contact</a></li>
     <li><a href="pages/order.html" class="mobile-cta">Order Now →</a></li>
   </ul>
@@ -53,62 +89,133 @@
   <div class="hero-glow"></div>
   <div class="hero-glow2"></div>
   <div class="hero-deco">
-    <svg width="100%" height="100%" viewBox="0 0 400 600">
-      <text x="200" y="420" text-anchor="middle" font-family="'Bebas Neue',sans-serif" font-size="200" fill="#EF9F27" letter-spacing="10" opacity="1">AGI</text>
+    <svg width="100%" height="100%" viewBox="0 0 400 500" opacity="1">
+      <polygon points="200,10 380,130 20,130" fill="none" stroke="#EF9F27" stroke-width="3" opacity="0.8"/>
+      <line x1="20" y1="130" x2="8" y2="118" stroke="#EF9F27" stroke-width="3" stroke-linecap="round" opacity="0.8"/>
+      <line x1="380" y1="130" x2="392" y2="118" stroke="#EF9F27" stroke-width="3" stroke-linecap="round" opacity="0.8"/>
+      <rect x="44" y="130" width="312" height="200" fill="none" stroke="#EF9F27" stroke-width="3" opacity="0.8"/>
+      <text x="200" y="258" text-anchor="middle" font-family="Arial Black,sans-serif" font-size="90" font-weight="900" fill="#EF9F27" letter-spacing="8" opacity="0.8">AGI</text>
+      <path d="M 16,345 Q 200,375 384,348" fill="none" stroke="#EF9F27" stroke-width="5" stroke-linecap="round" opacity="0.8"/>
+      <line x1="376" y1="336" x2="400" y2="326" stroke="#EF9F27" stroke-width="4" stroke-linecap="round" opacity="0.8"/>
+      <line x1="380" y1="348" x2="406" y2="342" stroke="#EF9F27" stroke-width="4" stroke-linecap="round" opacity="0.8"/>
+      <line x1="382" y1="360" x2="408" y2="357" stroke="#EF9F27" stroke-width="4" stroke-linecap="round" opacity="0.8"/>
+      <text x="200" y="410" text-anchor="middle" font-family="Georgia,serif" font-size="32" fill="#EF9F27" font-style="italic" opacity="0.8">Home Of Branding</text>
     </svg>
   </div>
   <div class="hero-content">
-    <div class="hero-tag">Arend Gesin Investment · Est. 2009</div>
+    <div class="hero-tag">Arend Gesin Investment · Est. 2020</div>
     <h1>
       <span class="line1">Home Of</span>
       <span class="line2">Branding.</span>
     </h1>
-    <p class="hero-sub">We craft powerful brand identities for businesses, campaigns, institutions and enterprises. From branded merchandise to full identity systems — AGI delivers.</p>
+    <p class="hero-sub">A family-based business focused on THAT Child and youth empowerment. We provide world-class branding, printing, stationery, IT and graphic design services — with a heart for community.</p>
+    <p class="hero-strength">"Strength of Family"</p>
     <div class="hero-btns">
       <a href="pages/order.html" class="btn-gold">Place an Order</a>
-      <a href="#portfolio" class="btn-outline">View Our Work</a>
+      <a href="#services" class="btn-outline">Our Services</a>
     </div>
     <div class="hero-stats">
-      <div class="stat"><div class="stat-num" data-target="500">0</div><div class="stat-label">Brands Created</div></div>
-      <div class="stat"><div class="stat-num" data-target="15">0</div><div class="stat-label">Years of Excellence</div></div>
-      <div class="stat"><div class="stat-num" data-target="4">0</div><div class="stat-label">City Offices</div></div>
+      <div class="stat"><div class="stat-num" data-target="500">0</div><div class="stat-label">Brands Delivered</div></div>
+      <div class="stat"><div class="stat-num" data-target="5">0</div><div class="stat-label">Counties Served</div></div>
+      <div class="stat"><div class="stat-num" data-target="4">0</div><div class="stat-label">Core Services</div></div>
     </div>
   </div>
 </section>
 
+<!-- CLIENTS STRIP -->
+<div class="clients-strip">
+  <div class="clients-inner">
+    <span class="clients-label">Happy Clients</span>
+    <div class="clients-divider"></div>
+    <div class="clients-list">
+      <span class="client-name">AYS East Africa</span>
+      <span class="client-name">Beacon Contractors</span>
+      <span class="client-name">Innosearch Limited</span>
+      <span class="client-name">Soita Siundu Advocates</span>
+      <span class="client-name">St. Erastus Preparatory School</span>
+      <span class="client-name">Trendy Scents</span>
+      <span class="client-name">Noni Enterprises</span>
+      <span class="client-name">Bralison Limited</span>
+    </div>
+  </div>
+</div>
+
 <!-- TICKER -->
 <div class="ticker">
   <div class="ticker-inner">
-    <span class="ticker-item">Branded Pens</span><span class="ticker-item gold">Election T-Shirts</span>
-    <span class="ticker-item">School Uniforms</span><span class="ticker-item gold">Campaign Banners</span>
-    <span class="ticker-item">Church Branding</span><span class="ticker-item gold">Corporate Hampers</span>
-    <span class="ticker-item">Event Tents</span><span class="ticker-item gold">Home Of Branding</span>
-    <span class="ticker-item">Branded Mugs</span><span class="ticker-item gold">Hoodies & Caps</span>
-    <span class="ticker-item">Branded Pens</span><span class="ticker-item gold">Election T-Shirts</span>
-    <span class="ticker-item">School Uniforms</span><span class="ticker-item gold">Campaign Banners</span>
-    <span class="ticker-item">Church Branding</span><span class="ticker-item gold">Corporate Hampers</span>
-    <span class="ticker-item">Event Tents</span><span class="ticker-item gold">Home Of Branding</span>
-    <span class="ticker-item">Branded Mugs</span><span class="ticker-item gold">Hoodies & Caps</span>
+    <span class="ticker-item">Printing & Branding</span><span class="ticker-item gold">Stationery Supplies</span>
+    <span class="ticker-item">IT Installations</span><span class="ticker-item gold">Graphic Design</span>
+    <span class="ticker-item">Campaign Branding</span><span class="ticker-item gold">Church Branding</span>
+    <span class="ticker-item">School Branding</span><span class="ticker-item gold">Home Of Branding</span>
+    <span class="ticker-item">Corporate Gifting</span><span class="ticker-item gold">Event Branding</span>
+    <span class="ticker-item">Printing & Branding</span><span class="ticker-item gold">Stationery Supplies</span>
+    <span class="ticker-item">IT Installations</span><span class="ticker-item gold">Graphic Design</span>
+    <span class="ticker-item">Campaign Branding</span><span class="ticker-item gold">Church Branding</span>
+    <span class="ticker-item">School Branding</span><span class="ticker-item gold">Home Of Branding</span>
+    <span class="ticker-item">Corporate Gifting</span><span class="ticker-item gold">Event Branding</span>
   </div>
 </div>
+
+<!-- WHO WE ARE -->
+<section id="who">
+  <div class="who-grid">
+    <div class="who-text reveal">
+      <div class="section-label">Who We Are</div>
+      <h2 class="section-title">A Family Business<br/>With a Purpose.</h2>
+      <p>AREND GESIN is a family based business that focuses on THAT Child and is youth friendly. Comprising of highly skilled human resource base with broad professional experience in IT and project management. The business commits to best practice solutions and provision of your needs in all areas of our operation.</p>
+      <p>AGI was established in 2020 and its core business is branding & imaging. Other products and services include; stationery supplies, IT installations and work safety equipment (PPEs). We mainly operate in: Nakuru, Uasin Gishu, Bungoma, Trans Nzoia and Nairobi counties.</p>
+      <p>We believe in data as the new oil. We take empowerment very seriously and consider knowledge and skills transfer as the key to an empowered individual and organization. As the world comes to terms with the pressures of the knowledge economy, we endeavor to fully equip the youth and women with the requisite skills and competencies in entrepreneurship, customer service, branding, and personal development.</p>
+      <div style="margin-top:2rem;"><a href="pages/order.html" class="btn-gold">Start a Project</a></div>
+    </div>
+    <div class="who-visual reveal">
+      <div class="mvg-grid">
+        <div class="mvg-item"><h4>Our Goal</h4><p>Empower youth and give THAT Child a chance.</p></div>
+        <div class="mvg-item"><h4>Our Mission</h4><p>To be a treadsetter in professionalism of services offered with an eye on CSR deliberately touching THAT Child within the communities we operate in.</p></div>
+        <div class="mvg-item"><h4>Our Vision</h4><p>Our Vision for THAT Child is a world better than today.</p></div>
+        <div class="mvg-item"><h4>AGI Business Model</h4><p>Predominantly direct sales and services with an adaptable design specific to target customers. We leverage on partners and clients in new innovations and trends to increase sales through data pools with youth.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
 
 <!-- SERVICES -->
 <section id="services">
   <div class="services-intro reveal">
-    <div class="section-label">What We Do</div>
-    <h2 class="section-title">Every Branding<br/>Need. One Company.</h2>
-    <p style="color:var(--muted);line-height:1.8;max-width:520px;">From a single branded pen to a full election campaign kit — AGI handles branding at every scale, for every industry.</p>
+    <div class="section-label">Our Services</div>
+    <h2 class="section-title">Four Core Services.<br/>One Trusted Partner.</h2>
+    <p style="color:var(--muted);line-height:1.8;max-width:520px;">At AGI, we offer a wide range of affordable and high quality services — delivered with professionalism, integrity and a commitment to exceeding your expectations.</p>
   </div>
   <div class="services-grid">
-    <div class="service-card reveal"><div class="service-num">01</div><div class="service-icon">◈</div><h3>Brand Identity & Logo</h3><p>Full logo design, brand colours, typography and identity systems for businesses, chamas, schools and institutions at every scale.</p></div>
-    <div class="service-card reveal"><div class="service-num">02</div><div class="service-icon">◉</div><h3>Election & Campaign Branding</h3><p>T-shirts with candidate face and name, branded caps, vehicle stickers, flex banners and posters for MCA, MP, Governor and all political campaigns.</p></div>
-    <div class="service-card reveal"><div class="service-num">03</div><div class="service-icon">⬡</div><h3>School & University Branding</h3><p>School uniforms, branded exercise books, graduation merchandise, diaries and full institution identity systems from primary to university level.</p></div>
-    <div class="service-card reveal"><div class="service-num">04</div><div class="service-icon">✦</div><h3>Church & Ministry Branding</h3><p>Church logos, branded choir uniforms, ministry T-shirts, event programmes, flex banners and full ministry identity packages for congregations of all sizes.</p></div>
-    <div class="service-card reveal"><div class="service-num">05</div><div class="service-icon">◬</div><h3>Event Branding</h3><p>Branded tents, pull-up banners, tablecloths, branded water bottles and backdrops for corporate events, fundraisers, weddings and public functions.</p></div>
-    <div class="service-card reveal"><div class="service-num">06</div><div class="service-icon">◫</div><h3>Corporate Gifting</h3><p>Branded pens, mugs, diaries, USB drives, power banks and fully assembled gift hampers for end-of-year corporate gifting and executive presents.</p></div>
-    <div class="service-card reveal"><div class="service-num">07</div><div class="service-icon">◐</div><h3>Branded T-Shirts, Caps & Hoodies</h3><p>High-quality screen printing and embroidery on T-shirts, hoodies, caps and bucket hats for businesses, schools, clubs and any group order.</p></div>
-    <div class="service-card reveal"><div class="service-num">08</div><div class="service-icon">⬕</div><h3>WhatsApp Business Branding</h3><p>Complete WhatsApp Business profile setup, branded catalogue, automated welcome messages and digital brand kit optimised for business growth.</p></div>
-    <div class="service-card reveal"><div class="service-num">09</div><div class="service-icon">◑</div><h3>County Government Tenders</h3><p>Large-scale branded merchandise for county governments, parastatals and government institutions. Fully compliant documentation and professional delivery.</p></div>
+    <div class="service-card reveal">
+      <div class="service-num">01</div>
+      <div class="service-icon">◈</div>
+      <h3>Printing, Branding & Imaging</h3>
+      <p>At AGI, we offer a wide range of affordable and high quality printing services. We do basic printing, offset printing, digital printing, large format printing, full colour printing, screen printing and pad printing.</p>
+      <p style="margin-top:.8rem;">We offer high quality and affordable branded merchandize for promotion and giveaways. We use latest technology in branding. Our products include; stationery branding, cloth branding, ceramics branding and hard plastic branding.</p>
+      <span class="service-tag">Core Service →</span>
+    </div>
+    <div class="service-card reveal">
+      <div class="service-num">02</div>
+      <div class="service-icon">◉</div>
+      <h3>Stationery Supplies</h3>
+      <p>AGI supplies the best market brands in stationery products and has after-sale services to our esteemed clients. We offer High quality products and assorted stationery.</p>
+      <p style="margin-top:.8rem;font-style:italic;color:var(--gold);font-weight:600;">Stay STATIONARY, Get STATIONERY.</p>
+      <span class="service-tag">Core Service →</span>
+    </div>
+    <div class="service-card reveal">
+      <div class="service-num">03</div>
+      <div class="service-icon">⬡</div>
+      <h3>IT Installations & Client Management</h3>
+      <p>AGI offers timely support to our clients in IT services. We provide quality computers, computer accessories and IT software installations. We maintain and service client systems and machines.</p>
+      <span class="service-tag">Core Service →</span>
+    </div>
+    <div class="service-card reveal">
+      <div class="service-num">04</div>
+      <div class="service-icon">◬</div>
+      <h3>Graphic Design & Advertisement</h3>
+      <p>We develop business profiles, design brochures & flyers, customize business cards and posters. We also offer customized clients' products and services advertisement at affordable prices on various social media platforms.</p>
+      <span class="service-tag">Core Service →</span>
+    </div>
   </div>
 </section>
 
@@ -117,65 +224,55 @@
   <div class="portfolio-header reveal">
     <div>
       <div class="section-label">Our Work</div>
-      <h2 class="section-title">Brands &amp; Products<br/>We've Delivered</h2>
+      <h2 class="section-title">Products We've<br/>Delivered.</h2>
     </div>
-    <a href="pages/order.html" class="btn-outline">Order Now →</a>
+    <a href="pages/order.html" class="btn-gold">Order Now →</a>
   </div>
   <div class="portfolio-grid">
     <div class="portfolio-item">
       <img src="https://images.unsplash.com/photo-1583744946564-b52ac1c389c8?w=800&q=80" alt="Branded T-Shirts" loading="lazy"/>
-      <div class="portfolio-always"><span class="portfolio-cat">T-Shirts & Caps</span></div>
-      <div class="portfolio-overlay"><h3>Custom Printed T-Shirts</h3><p>Screen printed T-shirts with full colour branding for bulk orders</p></div>
+      <div class="portfolio-always"><span class="p-cat">T-Shirts & Caps</span></div>
+      <div class="portfolio-overlay"><h3>Custom Printed T-Shirts</h3><p>Screen printed T-shirts for bulk orders</p></div>
     </div>
     <div class="portfolio-item">
       <img src="https://images.unsplash.com/photo-1589998059171-988d887df646?w=600&q=80" alt="Branded Pens" loading="lazy"/>
-      <div class="portfolio-always"><span class="portfolio-cat">Pens & Stationery</span></div>
-      <div class="portfolio-overlay"><h3>Branded Pens & Stationery</h3><p>Custom branded pens, notebooks and stationery sets</p></div>
+      <div class="portfolio-always"><span class="p-cat">Pens & Stationery</span></div>
+      <div class="portfolio-overlay"><h3>Branded Pens & Stationery</h3><p>Custom branded pens and stationery</p></div>
     </div>
     <div class="portfolio-item">
       <img src="https://images.unsplash.com/photo-1434030216411-0b793f4b6f52?w=600&q=80" alt="School Branding" loading="lazy"/>
-      <div class="portfolio-always"><span class="portfolio-cat">School Branding</span></div>
-      <div class="portfolio-overlay"><h3>School Uniforms & Books</h3><p>Full school branding from uniforms to branded exercise books</p></div>
+      <div class="portfolio-always"><span class="p-cat">School Branding</span></div>
+      <div class="portfolio-overlay"><h3>School Uniforms & Books</h3><p>Full school branding packages</p></div>
     </div>
     <div class="portfolio-item">
-      <img src="https://images.unsplash.com/photo-1562886877-f93fe7f36eda?w=600&q=80" alt="Election Banners" loading="lazy"/>
-      <div class="portfolio-always"><span class="portfolio-cat">Election Campaigns</span></div>
-      <div class="portfolio-overlay"><h3>Campaign Banners & Posters</h3><p>Full election campaign branding — banners, posters and vehicle stickers</p></div>
+      <img src="https://images.unsplash.com/photo-1562886877-f93fe7f36eda?w=600&q=80" alt="Campaign Banners" loading="lazy"/>
+      <div class="portfolio-always"><span class="p-cat">Campaign Branding</span></div>
+      <div class="portfolio-overlay"><h3>Campaign Banners & Posters</h3><p>Full election campaign branding</p></div>
     </div>
     <div class="portfolio-item">
       <img src="https://images.unsplash.com/photo-1531058020387-3be344556be6?w=600&q=80" alt="Event Branding" loading="lazy"/>
-      <div class="portfolio-always"><span class="portfolio-cat">Event Branding</span></div>
-      <div class="portfolio-overlay"><h3>Branded Tents & Banners</h3><p>Full event branding setup — tents, pull-ups and backdrops</p></div>
+      <div class="portfolio-always"><span class="p-cat">Event Branding</span></div>
+      <div class="portfolio-overlay"><h3>Branded Tents & Pull-ups</h3><p>Full event branding setup</p></div>
     </div>
     <div class="portfolio-item">
       <img src="https://images.unsplash.com/photo-1607082348824-0a96f2a4b9da?w=600&q=80" alt="Corporate Hampers" loading="lazy"/>
-      <div class="portfolio-always"><span class="portfolio-cat">Corporate Gifting</span></div>
-      <div class="portfolio-overlay"><h3>Corporate Gift Hampers</h3><p>Branded executive hampers and end-of-year corporate gifts</p></div>
+      <div class="portfolio-always"><span class="p-cat">Corporate Gifting</span></div>
+      <div class="portfolio-overlay"><h3>Corporate Gift Hampers</h3><p>Branded executive gift sets</p></div>
     </div>
     <div class="portfolio-item">
       <img src="https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=600&q=80" alt="Branded Mugs" loading="lazy"/>
-      <div class="portfolio-always"><span class="portfolio-cat">Mugs & Bottles</span></div>
-      <div class="portfolio-overlay"><h3>Branded Mugs & Bottles</h3><p>Custom printed mugs, flasks and water bottles for offices and events</p></div>
+      <div class="portfolio-always"><span class="p-cat">Mugs & Bottles</span></div>
+      <div class="portfolio-overlay"><h3>Branded Mugs & Bottles</h3><p>Custom printed mugs and flasks</p></div>
     </div>
     <div class="portfolio-item">
       <img src="https://images.unsplash.com/photo-1529374255404-311a2a4f1fd9?w=600&q=80" alt="Hoodies" loading="lazy"/>
-      <div class="portfolio-always"><span class="portfolio-cat">Hoodies & Caps</span></div>
-      <div class="portfolio-overlay"><h3>Custom Hoodies & Caps</h3><p>Embroidered and printed hoodies, caps and bucket hats for all groups</p></div>
+      <div class="portfolio-always"><span class="p-cat">Hoodies & Caps</span></div>
+      <div class="portfolio-overlay"><h3>Custom Hoodies & Caps</h3><p>Embroidered and printed hoodies</p></div>
     </div>
     <div class="portfolio-item">
       <img src="https://images.unsplash.com/photo-1505373877841-8d25f7d46678?w=600&q=80" alt="Church Branding" loading="lazy"/>
-      <div class="portfolio-always"><span class="portfolio-cat">Church Branding</span></div>
-      <div class="portfolio-overlay"><h3>Church & Ministry Kits</h3><p>Ministry logos, choir uniforms, branded programmes and banners</p></div>
-    </div>
-    <div class="portfolio-item">
-      <img src="https://images.unsplash.com/photo-1586985289688-ca3cf47d3e6e?w=600&q=80" alt="Branded Caps" loading="lazy"/>
-      <div class="portfolio-always"><span class="portfolio-cat">T-Shirts & Caps</span></div>
-      <div class="portfolio-overlay"><h3>Election Campaign Caps</h3><p>Branded caps and bucket hats for political campaigns</p></div>
-    </div>
-    <div class="portfolio-item">
-      <img src="https://images.unsplash.com/photo-1497633762265-9d179a990aa6?w=600&q=80" alt="Branded Books" loading="lazy"/>
-      <div class="portfolio-always"><span class="portfolio-cat">School Branding</span></div>
-      <div class="portfolio-overlay"><h3>School Branded Books</h3><p>Custom branded exercise books, diaries and stationery for schools</p></div>
+      <div class="portfolio-always"><span class="p-cat">Church Branding</span></div>
+      <div class="portfolio-overlay"><h3>Church & Ministry Kits</h3><p>Ministry logos, uniforms and banners</p></div>
     </div>
   </div>
 </section>
@@ -184,22 +281,18 @@
 <section id="pricing">
   <div class="pricing-header reveal">
     <div class="section-label">Investment</div>
-    <h2 class="section-title">Transparent Pricing<br/>No Hidden Costs</h2>
-    <p class="pricing-sub">All packages include consultation, design work, revisions and delivery. Pay on delivery — no upfront payment required.</p>
+    <h2 class="section-title">Affordable. Transparent.<br/>No Hidden Costs.</h2>
+    <p class="pricing-sub">All packages include consultation, design work and delivery coordination. Pay on delivery or via M-Pesa — your choice.</p>
   </div>
-
   <div class="currency-toggle reveal">
     <span id="usdLabel" class="active">USD $</span>
-    <div class="toggle-track" id="currencyToggle">
-      <div class="toggle-knob"></div>
-    </div>
+    <div class="toggle-track" id="currencyToggle"><div class="toggle-knob"></div></div>
     <span id="kesLabel">KES Ksh</span>
   </div>
-
   <div class="pricing-grid" id="pricingGrid">
     <div class="pricing-card reveal">
       <div class="pricing-tier">Starter</div>
-      <div class="pricing-price">$150<span> / project</span></div>
+      <div class="pricing-price">$150<span> /project</span></div>
       <div class="kes-price">Ksh 20,000</div>
       <div class="pricing-desc">For small businesses, chamas and startups building their brand from scratch.</div>
       <ul class="pricing-features">
@@ -217,152 +310,198 @@
     <div class="pricing-card featured reveal">
       <div class="pricing-badge">Most Popular</div>
       <div class="pricing-tier">Business</div>
-      <div class="pricing-price">$400<span> / project</span></div>
+      <div class="pricing-price">$400<span> /project</span></div>
       <div class="kes-price">Ksh 55,000</div>
-      <div class="pricing-desc">The complete package for growing businesses needing design and physical branded items.</div>
+      <div class="pricing-desc">Complete branding for growing businesses needing design and physical branded items.</div>
       <ul class="pricing-features">
         <li><span class="check">✦</span> Everything in Starter</li>
         <li><span class="check">✦</span> Full brand identity system</li>
-        <li><span class="check">✦</span> Social media kit (FB, IG, TikTok)</li>
+        <li><span class="check">✦</span> Social media kit</li>
         <li><span class="check">✦</span> 50 branded T-shirts</li>
         <li><span class="check">✦</span> 2 pull-up banners</li>
         <li><span class="check">✦</span> 100 branded pens</li>
-        <li><span class="check">✦</span> WhatsApp Business full setup</li>
+        <li><span class="check">✦</span> WhatsApp Business setup</li>
         <li><span class="check">✦</span> 4 revision rounds</li>
       </ul>
       <a href="pages/order.html?package=business" class="pricing-btn gold-btn">Order Business</a>
     </div>
     <div class="pricing-card reveal">
       <div class="pricing-tier">Enterprise</div>
-      <div class="pricing-price">$1,200<span> / project</span></div>
+      <div class="pricing-price">$1,200<span> /project</span></div>
       <div class="kes-price">Ksh 160,000</div>
-      <div class="pricing-desc">Full branding transformation for large institutions, campaigns and county government tenders.</div>
+      <div class="pricing-desc">Full branding for large institutions, campaigns and county government tenders.</div>
       <ul class="pricing-features">
         <li><span class="check">✦</span> Everything in Business</li>
         <li><span class="check">✦</span> Full merchandise production</li>
-        <li><span class="check">✦</span> Election/campaign full kit</li>
-        <li><span class="check">✦</span> Branded tents & event setup</li>
+        <li><span class="check">✦</span> Campaign full kit</li>
+        <li><span class="check">✦</span> Event branding setup</li>
         <li><span class="check">✦</span> Vehicle branding design</li>
-        <li><span class="check">✦</span> County tender ready package</li>
+        <li><span class="check">✦</span> County tender package</li>
         <li><span class="check">✦</span> 1-year brand support</li>
         <li><span class="check">✦</span> Unlimited revisions</li>
       </ul>
       <a href="pages/order.html?package=enterprise" class="pricing-btn">Order Enterprise</a>
     </div>
   </div>
-  <div class="pricing-note reveal">Need a custom quote for a bulk or special order? <a href="mailto:arendgesin@gmail.com">Email us directly.</a></div>
-  <div class="mpesa-note reveal"><div class="mpesa-dot"></div> M-Pesa accepted · Pay on delivery · No upfront payment required</div>
+  <div class="pricing-note reveal">Need a custom quote? <a href="mailto:info@arendgesin.co.ke">Email us directly.</a></div>
+  <div class="pod-row reveal"><div class="pod-dot"></div> M-Pesa accepted · Pay on delivery available · No hidden charges</div>
+</section>
+
+<!-- VALUES -->
+<section id="values">
+  <div class="reveal" style="max-width:600px;margin-bottom:1rem;">
+    <div class="section-label">Why Choose Us</div>
+    <h2 class="section-title">WHY CHOOSE US?<br/>(Values & Principles)</h2>
+    <p style="color:var(--muted);line-height:1.8;">In our commitment to excite and transcend our client's expectations, we strive to make THAT Child smile, we stand out from the rest.</p>
+  </div>
+  <div class="values-grid">
+    <div class="value-card reveal"><div class="value-icon">✝</div><h3>We believe in GOD</h3><p>We believe in God working through our hearts and minds in all our undertakings for THAT Child.</p></div>
+    <div class="value-card reveal"><div class="value-icon">◈</div><h3>We believe in TRANSPARENCY</h3><p>Our services are anchored on transparency and accountability. We deliver more when the competition is stiff. In fact, we become stronger.</p></div>
+    <div class="value-card reveal"><div class="value-icon">◉</div><h3>We believe in INTEGRITY</h3><p>We attribute this to making our clients our friends. We serve with an honest heart for tomorrow.</p></div>
+    <div class="value-card reveal"><div class="value-icon">◬</div><h3>We believe in INVOLVEMENT</h3><p>Our team believes in working together to tighten all the loose ends. We incorporate open forum discussions and individual meetings to iron out any hiccups.</p></div>
+    <div class="value-card reveal"><div class="value-icon">★</div><h3>We believe in CUSTOMER SATISFACTION</h3><p>A satisfied customer is the best form of advertisement. What a customer thinks about our products becomes our reality.</p></div>
+    <div class="value-card reveal"><div class="value-icon">◐</div><h3>Your Role</h3><p>Help THAT Child. Ask us how. Target clients: NGOs, CBOs, Corporates, INGOs, National & County Governments, State Corporations, Universities, Youth organisations and Private businesses.</p></div>
+  </div>
+</section>
+
+<!-- CSR -->
+<section id="csr">
+  <div class="csr-grid">
+    <div class="csr-visual reveal">
+      <div class="csr-logo-text">MIND MASTERS</div>
+      <div class="csr-logo-sub">by Arend Gesin Investment</div>
+      <div class="csr-desc">AGI's flagship youth empowerment programme — designed to inspire, motivate and coach THAT Child on the power of the human mind in shaping their destiny. Targeting youth in learning institutions.</div>
+    </div>
+    <div class="csr-text reveal">
+      <div class="section-label">Partnerships & CSR</div>
+      <h2 class="section-title">Help THAT Child.<br/>Ask Us How.</h2>
+      <p>AGI knows, THAT Child deserves the best. We work closely with other players and partners within the sector to facilitate CSR initiatives targeting the youth. We raise awareness through motivational speaking and personal development.</p>
+      <p>Through our <span class="that-child">MIND MASTERS</span> programme we aim to inspire (create confidence), motivate (create a feeling of 'wanting to') and coach (give skills) you on the power of the human mind in shaping their destiny.</p>
+      <p>It is designed for individuals, learning institutions and corporate. Its core agenda is to guide people to understand the power of the mind in living the lives of their dreams. In it you will learn how to set new goals and make decisions towards achieving them; carry out a sincere Personal Development Audit (PDA); and come up with a detailed Action Plan for your life.</p>
+      <div style="margin-top:2rem;"><a href="mailto:info@arendgesin.co.ke" class="btn-gold">Partner With Us</a></div>
+    </div>
+  </div>
 </section>
 
 <!-- ABOUT -->
-<section id="about" class="about-section">
-  <div class="about-visual reveal">
-    <div class="about-card main">
-      <div style="position:relative;z-index:1;">
-        <div class="section-label">Est. 2009</div>
-        <div style="font-family:'Syne',sans-serif;font-weight:800;font-size:1.5rem;line-height:1.2;">15 Years Delivering<br/>Outstanding Branding</div>
+<section id="about">
+  <div class="about-grid">
+    <div class="about-card-main reveal">
+      <div class="section-label" style="position:relative;z-index:2;">Est. 2020 · Nakuru</div>
+      <h3 class="section-title" style="font-size:1.8rem;position:relative;z-index:2;">Arend Gesin Investment.<br/>Strength of Family.</h3>
+      <div class="about-stats">
+        <div class="astat"><div class="astat-num">500+</div><div class="astat-label">Brands Delivered</div></div>
+        <div class="astat"><div class="astat-num">5</div><div class="astat-label">Counties Served</div></div>
+        <div class="astat"><div class="astat-num">4</div><div class="astat-label">Core Services</div></div>
+        <div class="astat"><div class="astat-num">8+</div><div class="astat-label">Happy Clients</div></div>
       </div>
     </div>
-    <div class="about-card float1">
-      <div class="big-num">500+</div>
-      <div class="big-label">Brands Delivered</div>
-    </div>
-  </div>
-  <div class="about-text reveal">
-    <div class="section-label">About AGI</div>
-    <h2 class="section-title">We Don't Just<br/>Brand — We Build<br/>Identities.</h2>
-    <p>Arend Gesin Investment was founded with one mission — to give businesses and institutions the world-class branding they deserve, at prices that actually make sense. From a single branded pen to a full county government tender, no job is too small or too large.</p>
-    <p>With offices in Eldoret, Nairobi, Nakuru and Kisumu, AGI has branded over 500 entities — from corner shops to campaign teams, from schools to parastatals. We are the home of branding.</p>
-    <div class="about-values">
-      <div class="value-item"><div class="value-dot"></div><div><h4>Quality You Can Touch</h4><p>Every product that leaves AGI is checked, finished and delivered to standard.</p></div></div>
-      <div class="value-item"><div class="value-dot"></div><div><h4>Pay On Delivery</h4><p>No upfront payment. You pay when you receive your order — that's our confidence in our work.</p></div></div>
-      <div class="value-item"><div class="value-dot"></div><div><h4>Fast Turnaround</h4><p>We understand deadlines. Campaign tomorrow? School opening on Friday? We deliver.</p></div></div>
+    <div class="about-text reveal">
+      <div class="section-label">About AGI</div>
+      <h2 class="section-title">A Business Built<br/>on Family Values.</h2>
+      <p>AREND GESIN INVESTMENT is a family based business that focuses on THAT Child and is youth friendly. Comprising of highly skilled human resource base with broad professional experience in IT and project management. The business commits to best practice solutions and provision of your needs in all areas of our operation.</p>
+      <p>AGI's network of partners and clients is critical to our long-term success. AGI business model is predominantly direct sales and services with an adaptable design specific to target customers. We endeavor to pull support for education and life in its fullness for THAT Child. Our model expands operations to youth as ambassadors creating an environment of self-reliance.</p>
+      <div class="founder-name">Brian Soita</div>
+      <div class="founder-title">Founder & Creative Director</div>
     </div>
   </div>
 </section>
 
-<!-- FOUNDER -->
-<section id="founder" class="founder-section">
-  <div class="founder-card reveal">
-    <div class="founder-initials">BS</div>
-    <div class="founder-name">Brian Soita</div>
-    <div class="founder-title">Founder & Creative Director — Arend Gesin Investment</div>
-    <p>Brian Soita founded AGI in 2009 with a vision — that every business, school, church and campaign deserves professional branding. Over 15 years, he has grown AGI into one of the most trusted branding companies in the region, with offices in Eldoret, Nairobi, Nakuru and Kisumu.</p>
-    <p style="margin-top:1rem;">Brian has personally overseen hundreds of branding projects — from small chama logos to large-scale election campaigns and county government tenders.</p>
+<!-- OUR CLIENT PORTFOLIO -->
+<section id="clients" style="background:var(--navy2);">
+  <div class="reveal" style="margin-bottom:3rem;">
+    <div class="section-label">Client Portfolio</div>
+    <h2 class="section-title">OUR CLIENT PORT FOLIO</h2>
   </div>
-  <div class="founder-text reveal">
-    <div class="section-label">Our Founder</div>
-    <h2 class="section-title">The Vision<br/>Behind AGI.</h2>
-    <div class="founder-quote">
-      <blockquote>"I started AGI because I believed every business — no matter how small — deserves a brand that makes people stop and pay attention. That belief has never changed."</blockquote>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:3rem;" class="reveal">
+    <div>
+      <h3 style="font-family:'Syne',sans-serif;font-size:1.2rem;font-weight:700;color:var(--gold);margin-bottom:1.5rem;">Target Clients</h3>
+      <ul style="list-style:none;display:flex;flex-direction:column;gap:.7rem;">
+        <li style="color:var(--muted);font-size:.9rem;display:flex;align-items:center;gap:8px;"><span style="color:var(--gold);">✦</span> NGOs</li>
+        <li style="color:var(--muted);font-size:.9rem;display:flex;align-items:center;gap:8px;"><span style="color:var(--gold);">✦</span> CBOs</li>
+        <li style="color:var(--muted);font-size:.9rem;display:flex;align-items:center;gap:8px;"><span style="color:var(--gold);">✦</span> Corporates</li>
+        <li style="color:var(--muted);font-size:.9rem;display:flex;align-items:center;gap:8px;"><span style="color:var(--gold);">✦</span> INGOs</li>
+        <li style="color:var(--muted);font-size:.9rem;display:flex;align-items:center;gap:8px;"><span style="color:var(--gold);">✦</span> National and County Governments</li>
+        <li style="color:var(--muted);font-size:.9rem;display:flex;align-items:center;gap:8px;"><span style="color:var(--gold);">✦</span> State Corporations</li>
+        <li style="color:var(--muted);font-size:.9rem;display:flex;align-items:center;gap:8px;"><span style="color:var(--gold);">✦</span> Institutions of higher education</li>
+        <li style="color:var(--muted);font-size:.9rem;display:flex;align-items:center;gap:8px;"><span style="color:var(--gold);">✦</span> Apex organizations</li>
+        <li style="color:var(--muted);font-size:.9rem;display:flex;align-items:center;gap:8px;"><span style="color:var(--gold);">✦</span> Youth led organizations</li>
+        <li style="color:var(--muted);font-size:.9rem;display:flex;align-items:center;gap:8px;"><span style="color:var(--gold);">✦</span> Private businesses</li>
+      </ul>
     </div>
-    <p>From the early days of hand-delivering branded merchandise across Eldoret to managing multi-county campaign branding operations, Brian has built AGI on the values of quality, speed and trust.</p>
-    <p>Today, AGI is the first call for businesses, institutions, campaigns and county governments that need branding done right — on time and within budget.</p>
-    <div style="display:flex;gap:1rem;margin-top:2rem;flex-wrap:wrap;">
-      <a href="pages/order.html" class="btn-gold">Start a Project</a>
-      <a href="mailto:arendgesin@gmail.com" class="btn-outline">Email Brian</a>
+    <div>
+      <h3 style="font-family:'Syne',sans-serif;font-size:1.2rem;font-weight:700;color:var(--gold);margin-bottom:1.5rem;">Our Happy Clients & Partners</h3>
+      <ul style="list-style:none;display:flex;flex-direction:column;gap:.7rem;">
+        <li style="color:var(--text);font-size:.9rem;display:flex;align-items:center;gap:8px;"><span style="color:var(--neon);">✦</span> AYS East Africa Limited</li>
+        <li style="color:var(--text);font-size:.9rem;display:flex;align-items:center;gap:8px;"><span style="color:var(--neon);">✦</span> Beacon Contractors</li>
+        <li style="color:var(--text);font-size:.9rem;display:flex;align-items:center;gap:8px;"><span style="color:var(--neon);">✦</span> Innosearch Limited</li>
+        <li style="color:var(--text);font-size:.9rem;display:flex;align-items:center;gap:8px;"><span style="color:var(--neon);">✦</span> Soita Siundu Advocates</li>
+        <li style="color:var(--text);font-size:.9rem;display:flex;align-items:center;gap:8px;"><span style="color:var(--neon);">✦</span> St. Erastus Preparatory School Kitale</li>
+        <li style="color:var(--text);font-size:.9rem;display:flex;align-items:center;gap:8px;"><span style="color:var(--neon);">✦</span> Trendy Scents</li>
+        <li style="color:var(--text);font-size:.9rem;display:flex;align-items:center;gap:8px;"><span style="color:var(--neon);">✦</span> Noni Enterprises</li>
+        <li style="color:var(--text);font-size:.9rem;display:flex;align-items:center;gap:8px;"><span style="color:var(--neon);">✦</span> Bralison Limited</li>
+      </ul>
     </div>
   </div>
 </section>
 
 <!-- TESTIMONIALS -->
 <section id="testimonials">
-  <div class="testimonials-header reveal">
+  <div class="reveal" style="margin-bottom:3rem;">
     <div class="section-label">Client Voices</div>
-    <h2 class="section-title">What Our Clients<br/>Say About AGI</h2>
+    <h2 class="section-title">What Our Clients<br/>Say About AGI.</h2>
   </div>
   <div style="overflow:hidden;">
-    <div class="testimonials-track">
-      <div class="testi-card"><div class="testi-stars">★★★★★</div><blockquote>"AGI did our entire campaign branding — T-shirts, caps, banners and vehicle stickers. Everything was delivered before the campaign launch. Absolutely professional."</blockquote><div class="testi-author"><div class="testi-avatar">JK</div><div><div class="testi-name">James Kipchoge</div><div class="testi-role">Political Candidate, Rift Valley</div></div></div></div>
-      <div class="testi-card"><div class="testi-stars">★★★★★</div><blockquote>"Our school has never looked this professional. From the logo to the uniforms to the branded exercise books — AGI transformed our whole institution."</blockquote><div class="testi-author"><div class="testi-avatar">GM</div><div><div class="testi-name">Grace Muthoni</div><div class="testi-role">Head Teacher, Nakuru</div></div></div></div>
-      <div class="testi-card"><div class="testi-stars">★★★★★</div><blockquote>"We ordered 500 branded pens, 200 mugs and gift hampers for our staff. AGI delivered in 4 days, quality was outstanding, and the pay-on-delivery policy gave us total confidence."</blockquote><div class="testi-author"><div class="testi-avatar">DO</div><div><div class="testi-name">David Omondi</div><div class="testi-role">HR Director, Nairobi</div></div></div></div>
-      <div class="testi-card"><div class="testi-stars">★★★★★</div><blockquote>"Our ministry now looks like an international organisation. Brian personally handled our church branding and the branded choir uniforms are absolutely beautiful."</blockquote><div class="testi-author"><div class="testi-avatar">PN</div><div><div class="testi-name">Pastor Njoroge</div><div class="testi-role">Senior Pastor, Eldoret</div></div></div></div>
-      <div class="testi-card"><div class="testi-stars">★★★★★</div><blockquote>"AGI won our county tender and delivered over 10,000 branded items on time. Brian was hands-on throughout and the quality met every specification we required."</blockquote><div class="testi-author"><div class="testi-avatar">AW</div><div><div class="testi-name">Agnes Wanjiku</div><div class="testi-role">Procurement, County Government</div></div></div></div>
-      <div class="testi-card"><div class="testi-stars">★★★★★</div><blockquote>"AGI did our entire campaign branding — T-shirts, caps, banners and vehicle stickers. Everything was delivered before the campaign launch. Absolutely professional."</blockquote><div class="testi-author"><div class="testi-avatar">JK</div><div><div class="testi-name">James Kipchoge</div><div class="testi-role">Political Candidate, Rift Valley</div></div></div></div>
-      <div class="testi-card"><div class="testi-stars">★★★★★</div><blockquote>"Our school has never looked this professional. From the logo to the uniforms to the branded exercise books — AGI transformed our whole institution."</blockquote><div class="testi-author"><div class="testi-avatar">GM</div><div><div class="testi-name">Grace Muthoni</div><div class="testi-role">Head Teacher, Nakuru</div></div></div></div>
+    <div class="testi-track">
+      <div class="testi-card"><div class="testi-stars">★★★★★</div><blockquote>"AGI branded our entire campaign — T-shirts, caps, banners and vehicle stickers. Delivered on time and looked absolutely professional."</blockquote><div class="testi-author"><div class="testi-avatar">JK</div><div><div class="testi-name">James Kipchoge</div><div class="testi-role">Campaign Client</div></div></div></div>
+      <div class="testi-card"><div class="testi-stars">★★★★★</div><blockquote>"Our school has never looked this professional. From the logo to the uniforms to the branded books — AGI transformed our whole institution."</blockquote><div class="testi-author"><div class="testi-avatar">GM</div><div><div class="testi-name">Grace Muthoni</div><div class="testi-role">Head Teacher, Nakuru</div></div></div></div>
+      <div class="testi-card"><div class="testi-stars">★★★★★</div><blockquote>"Quality branded merchandise delivered in 4 days. AGI is our permanent branding partner — professional, fast and affordable."</blockquote><div class="testi-author"><div class="testi-avatar">DO</div><div><div class="testi-name">David Omondi</div><div class="testi-role">HR Director, Nairobi</div></div></div></div>
+      <div class="testi-card"><div class="testi-stars">★★★★★</div><blockquote>"Our ministry now looks like an international organisation. The branded choir uniforms and programmes are beautiful."</blockquote><div class="testi-author"><div class="testi-avatar">PN</div><div><div class="testi-name">Pastor Njoroge</div><div class="testi-role">Senior Pastor, Eldoret</div></div></div></div>
+      <div class="testi-card"><div class="testi-stars">★★★★★</div><blockquote>"AGI delivered over 10,000 branded items for our county tender on time and to every specification. Highly professional."</blockquote><div class="testi-author"><div class="testi-avatar">AW</div><div><div class="testi-name">Agnes Wanjiku</div><div class="testi-role">Procurement, County Government</div></div></div></div>
+      <div class="testi-card"><div class="testi-stars">★★★★★</div><blockquote>"AGI branded our entire campaign — T-shirts, caps, banners and vehicle stickers. Delivered on time and looked absolutely professional."</blockquote><div class="testi-author"><div class="testi-avatar">JK</div><div><div class="testi-name">James Kipchoge</div><div class="testi-role">Campaign Client</div></div></div></div>
+      <div class="testi-card"><div class="testi-stars">★★★★★</div><blockquote>"Our school has never looked this professional. From the logo to the uniforms to the branded books — AGI transformed our whole institution."</blockquote><div class="testi-author"><div class="testi-avatar">GM</div><div><div class="testi-name">Grace Muthoni</div><div class="testi-role">Head Teacher, Nakuru</div></div></div></div>
     </div>
   </div>
 </section>
 
 <!-- CONTACT -->
-<section id="contact" class="contact-section">
-  <div class="contact-text reveal">
-    <div class="section-label">Get In Touch</div>
-    <h2 class="section-title">Let's Brand<br/>Your Story.</h2>
-    <p>Tell us what you need and we'll get back to you quickly — usually the same day. No complicated processes, just great branding delivered.</p>
-    <div class="contact-info">
-      <div class="info-item"><div class="info-icon">✉</div><span>arendgesin@gmail.com</span></div>
-      <div class="info-item"><div class="info-icon">◎</div><span>Eldoret (HQ) · Nairobi · Nakuru · Kisumu</span></div>
-      <div class="info-item"><div class="info-icon">◈</div><span>Pay on delivery · M-Pesa accepted</span></div>
+<section id="contact">
+  <div class="contact-grid">
+    <div class="contact-text reveal">
+      <div class="section-label">Get In Touch</div>
+      <h2 class="section-title">Let's Work<br/>Together.</h2>
+      <p>Ready to brand your business, institution or campaign? Our team responds quickly — usually the same day.</p>
+      <div class="contact-info">
+        <div class="info-item"><div class="info-icon">✉</div><div><strong>Email</strong>info@arendgesin.co.ke</div></div>
+        <div class="info-item"><div class="info-icon">☎</div><div><strong>Phone</strong>+254 735 518 090 · +254 718 260 115</div></div>
+        <div class="info-item"><div class="info-icon">◎</div><div><strong>Website</strong>www.arendgesin.co.ke</div></div>
+        <div class="info-item"><div class="info-icon">◈</div><div><strong>Address</strong>P.O. Box 20100–12236, Nakuru</div></div>
+        <div class="info-item"><div class="info-icon">⬡</div><div><strong>Counties</strong>Nakuru · Uasin Gishu · Bungoma · Trans Nzoia · Nairobi</div></div>
+        <div class="info-item"><div class="info-icon">◉</div><div><strong>Payment</strong>M-Pesa · Pay on delivery</div></div>
+      </div>
     </div>
-  </div>
-  <div class="contact-form reveal">
-    <div class="form-row">
-      <div class="form-group"><label>First Name</label><input type="text" placeholder="Wanjiku"/></div>
-      <div class="form-group"><label>Last Name</label><input type="text" placeholder="Kamau"/></div>
+    <div class="contact-form reveal">
+      <h3>Send Us a Message</h3>
+      <div class="form-row">
+        <div class="form-group"><label>First Name</label><input type="text" placeholder="Wanjiku"/></div>
+        <div class="form-group"><label>Last Name</label><input type="text" placeholder="Kamau"/></div>
+      </div>
+      <div class="form-group"><label>Business / Organisation</label><input type="text" placeholder="Your Business Name"/></div>
+      <div class="form-group"><label>Phone / WhatsApp</label><input type="tel" placeholder="07XX XXX XXX"/></div>
+      <div class="form-group">
+        <label>Service Needed</label>
+        <select>
+          <option value="">Select a service</option>
+          <option>Printing, Branding & Imaging</option>
+          <option>Stationery Supplies</option>
+          <option>IT Installations & Client Management</option>
+          <option>Graphic Design & Advertisement</option>
+          <option>Other</option>
+        </select>
+      </div>
+      <div class="form-group"><label>Message</label><textarea placeholder="Tell us what you need..."></textarea></div>
+      <button class="submit-btn" id="contactSubmit">Send Message</button>
     </div>
-    <div class="form-group"><label>Business or Organisation</label><input type="text" placeholder="Your Business Name"/></div>
-    <div class="form-group"><label>Phone / WhatsApp</label><input type="text" placeholder="07XX XXX XXX"/></div>
-    <div class="form-group">
-      <label>Service Needed</label>
-      <select>
-        <option value="">Select a service</option>
-        <option>Brand Identity & Logo</option>
-        <option>Election & Campaign Branding</option>
-        <option>School / University Branding</option>
-        <option>Church & Ministry Branding</option>
-        <option>Event Branding (Tents, Banners)</option>
-        <option>Corporate Gifting & Hampers</option>
-        <option>Branded T-Shirts, Caps & Hoodies</option>
-        <option>Branded Mugs & Bottles</option>
-        <option>Branded Pens & Stationery</option>
-        <option>WhatsApp Business Setup</option>
-        <option>County Government Tender</option>
-        <option>Other / Custom Order</option>
-      </select>
-    </div>
-    <div class="form-group"><label>Tell Us More</label><textarea placeholder="What do you need? How many pieces? When do you need delivery?"></textarea></div>
-    <button class="submit-btn" id="contactSubmit">Send Message →</button>
   </div>
 </section>
 
@@ -370,37 +509,53 @@
 <footer>
   <div class="footer-top">
     <div class="footer-brand">
-      <a href="index.html" class="logo-wrap">
-        <div class="logo-mark"><div class="logo-slash1" style="height:42px;width:11px;"></div><div class="logo-slash2" style="height:42px;width:8px;"></div></div>
+      <a href="index.html" class="logo-wrap" style="margin-bottom:1rem;">
+        <svg width="44" height="49" viewBox="0 0 200 220">
+          <polygon points="100,4 196,72 4,72" fill="none" stroke="#e8eaf0" stroke-width="10" stroke-linejoin="round"/>
+          <line x1="4" y1="72" x2="0" y2="64" stroke="#e8eaf0" stroke-width="8" stroke-linecap="round"/>
+          <line x1="196" y1="72" x2="200" y2="64" stroke="#e8eaf0" stroke-width="8" stroke-linecap="round"/>
+          <rect x="22" y="72" width="156" height="96" fill="none" stroke="#e8eaf0" stroke-width="8"/>
+          <text x="100" y="148" text-anchor="middle" font-family="Arial Black,sans-serif" font-size="46" font-weight="900" fill="#00f5c8" letter-spacing="4">AGI</text>
+          <path d="M 8,180 Q 100,198 192,178" fill="none" stroke="#e8eaf0" stroke-width="6" stroke-linecap="round"/>
+          <line x1="188" y1="172" x2="204" y2="166" stroke="#e8eaf0" stroke-width="5" stroke-linecap="round"/>
+          <line x1="190" y1="180" x2="208" y2="176" stroke="#e8eaf0" stroke-width="5" stroke-linecap="round"/>
+          <line x1="191" y1="188" x2="210" y2="186" stroke="#e8eaf0" stroke-width="5" stroke-linecap="round"/>
+        </svg>
         <div class="logo-text"><span class="logo-name" style="font-size:1.2rem;">AREND GESIN</span><span class="logo-tag">Home Of Branding</span></div>
       </a>
-      <p>The home of branding for businesses, campaigns, institutions and enterprises. Quality delivered, pay on delivery.</p>
-      <div class="footer-email">arendgesin@gmail.com</div>
+      <p>A family-based business focused on THAT Child. Branding, printing, stationery, IT and graphic design — delivered with integrity.</p>
+      <p style="font-style:italic;color:var(--gold);font-size:.85rem;margin-top:.5rem;">"Strength of Family"</p>
+      <div class="footer-contacts">
+        <a href="tel:+254735518090">+254 735 518 090</a>
+        <a href="tel:+254718260115">+254 718 260 115</a>
+        <a href="mailto:info@arendgesin.co.ke">info@arendgesin.co.ke</a>
+        <a href="http://www.arendgesin.co.ke">www.arendgesin.co.ke</a>
+      </div>
     </div>
-    <div class="footer-col"><h4>Services</h4><ul>
-      <li><a href="#services">Brand Identity & Logo</a></li>
-      <li><a href="#services">Campaign Branding</a></li>
-      <li><a href="#services">School Branding</a></li>
-      <li><a href="#services">Church Branding</a></li>
-      <li><a href="#services">Event Branding</a></li>
-      <li><a href="#services">Corporate Gifting</a></li>
+    <div class="footer-col"><h4>Our Services</h4><ul>
+      <li><a href="#services">Printing, Branding & Imaging</a></li>
+      <li><a href="#services">Stationery Supplies</a></li>
+      <li><a href="#services">IT Installations</a></li>
+      <li><a href="#services">Graphic Design</a></li>
     </ul></div>
     <div class="footer-col"><h4>Company</h4><ul>
-      <li><a href="#about">About AGI</a></li>
-      <li><a href="#portfolio">Our Work</a></li>
-      <li><a href="#pricing">Pricing</a></li>
-      <li><a href="#founder">Brian Soita</a></li>
+      <li><a href="#who">Who We Are</a></li>
+      <li><a href="#values">Our Values</a></li>
+      <li><a href="#csr">MIND MASTERS CSR</a></li>
+      <li><a href="#clients">Client Portfolio</a></li>
       <li><a href="pages/order.html">Place an Order</a></li>
+      <li><a href="pages/admin.html">Admin</a></li>
     </ul></div>
-    <div class="footer-col"><h4>Our Offices</h4><ul>
-      <li><a href="#">Eldoret — HQ</a></li>
+    <div class="footer-col"><h4>Counties We Serve</h4><ul>
+      <li><a href="#">Nakuru (HQ)</a></li>
+      <li><a href="#">Uasin Gishu</a></li>
+      <li><a href="#">Bungoma</a></li>
+      <li><a href="#">Trans Nzoia</a></li>
       <li><a href="#">Nairobi</a></li>
-      <li><a href="#">Nakuru</a></li>
-      <li><a href="#">Kisumu</a></li>
     </ul></div>
   </div>
   <div class="footer-bottom">
-    <p>© 2025 Arend Gesin Investment · Home Of Branding. All rights reserved.</p>
+    <p>© 2025 Arend Gesin Investment · Home Of Branding · P.O. Box 20100–12236, Nakuru · Strength of Family</p>
     <div class="footer-socials">
       <a href="#" class="social-link">FB</a>
       <a href="#" class="social-link">IG</a>
@@ -416,12 +571,14 @@ const toggle = document.getElementById('currencyToggle');
 const grid = document.getElementById('pricingGrid');
 const usdLabel = document.getElementById('usdLabel');
 const kesLabel = document.getElementById('kesLabel');
-toggle.addEventListener('click', () => {
-  toggle.classList.toggle('on');
-  grid.classList.toggle('show-kes');
-  usdLabel.classList.toggle('active');
-  kesLabel.classList.toggle('active');
-});
+if (toggle) {
+  toggle.addEventListener('click', () => {
+    toggle.classList.toggle('on');
+    grid.classList.toggle('show-kes');
+    usdLabel.classList.toggle('active');
+    kesLabel.classList.toggle('active');
+  });
+}
 </script>
 </body>
 </html>
