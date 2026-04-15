@@ -36,7 +36,7 @@
       <line x1="4" y1="72" x2="0" y2="64" stroke="#e8eaf0" stroke-width="8" stroke-linecap="round"/>
       <line x1="196" y1="72" x2="200" y2="64" stroke="#e8eaf0" stroke-width="8" stroke-linecap="round"/>
       <rect x="22" y="72" width="156" height="96" fill="none" stroke="#e8eaf0" stroke-width="8"/>
-      <text x="100" y="148" text-anchor="middle" font-family="Arial Black,sans-serif" font-size="46" font-weight="900" fill="#00f5c8" letter-spacing="4">AGI</text>
+      <text x="100" y="148" text-anchor="middle" font-family="Arial Black,sans-serif" font-size="46" font-weight="900" fill="#EF9F27" letter-spacing="4">AGI</text>
       <path d="M 8,180 Q 100,198 192,178" fill="none" stroke="#e8eaf0" stroke-width="6" stroke-linecap="round"/>
       <line x1="188" y1="172" x2="204" y2="166" stroke="#e8eaf0" stroke-width="5" stroke-linecap="round"/>
       <line x1="190" y1="180" x2="208" y2="176" stroke="#e8eaf0" stroke-width="5" stroke-linecap="round"/>
@@ -180,12 +180,12 @@
 
 <footer style="margin-top:0;">
   <div class="footer-bottom" style="border-top:1px solid var(--border);padding-top:1.5rem;">
-    <p>© 2025 Arend Gesin Investment · info@arendgesin.co.ke · +254 735 518 090</p>
+    <p>© 2025 Arend Gesin Investment · <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="5b32353d341b3a293e353f3c3e28323575383475303e">[email&#160;protected]</a> · +254 735 518 090</p>
     <a href="../index.html" style="color:var(--muted);font-size:.83rem;text-decoration:none;">← Back to main site</a>
   </div>
 </footer>
 
-<script src="../js/main.js"></script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script src="../js/main.js"></script>
 <script>
 // Pre-select from URL param
 const params = new URLSearchParams(window.location.search);
@@ -265,12 +265,4 @@ document.getElementById('submitOrderBtn').addEventListener('click', async () => 
   if (paymentOption === 'pay_now') {
     payMsg.textContent = 'M-Pesa payment integration coming soon. Our team will contact you with payment details.';
   } else {
-    payMsg.textContent = 'You chose Pay on Delivery. No upfront payment needed. We will deliver and collect payment. "Strength of Family"';
-  }
-
-  document.getElementById('successOverlay').classList.add('show');
-  btn.textContent = 'Submit Order →'; btn.disabled = false;
-});
-</script>
-</body>
-</html>
+    payMsg.textContent = 'You chose Pay on Delivery. No upfront payment 

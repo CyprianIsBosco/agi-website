@@ -1,3 +1,41 @@
+// Custom cursor
+const cursor = document.getElementById('cursor');
+const cursorRing = document.getElementById('cursorRing');
+if (cursor && cursorRing) {
+  let mouseX = 0, mouseY = 0, ringX = 0, ringY = 0;
+  document.addEventListener('mousemove', e => {
+    mouseX = e.clientX;
+    mouseY = e.clientY;
+    cursor.style.left = mouseX + 'px';
+    cursor.style.top = mouseY + 'px';
+  });
+  // Smooth ring follow
+  (function animateRing() {
+    ringX += (mouseX - ringX) * 0.12;
+    ringY += (mouseY - ringY) * 0.12;
+    cursorRing.style.left = ringX + 'px';
+    cursorRing.style.top = ringY + 'px';
+    requestAnimationFrame(animateRing);
+  })();
+  // Scale on hover over interactive elements
+  document.querySelectorAll('a,button,.svc-opt,.pricing-btn,.portfolio-item').forEach(el => {
+    el.addEventListener('mouseenter', () => {
+      cursor.style.width = '20px';
+      cursor.style.height = '20px';
+      cursorRing.style.width = '52px';
+      cursorRing.style.height = '52px';
+      cursorRing.style.borderColor = 'rgba(192,24,26,0.6)';
+    });
+    el.addEventListener('mouseleave', () => {
+      cursor.style.width = '';
+      cursor.style.height = '';
+      cursorRing.style.width = '';
+      cursorRing.style.height = '';
+      cursorRing.style.borderColor = '';
+    });
+  });
+}
+
 // Scroll reveal
 const observer = new IntersectionObserver(entries => {
   entries.forEach((e, i) => {

@@ -8,15 +8,15 @@
 <link rel="stylesheet" href="../css/style.css"/>
 <style>
 .success-page { min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 2rem; text-align: center; position: relative; overflow: hidden; }
-.success-page::before { content:''; position:absolute; inset:0; opacity:.04; background-image:linear-gradient(var(--neon) 1px,transparent 1px),linear-gradient(90deg,var(--neon) 1px,transparent 1px); background-size:60px 60px; }
-.success-glow { position:absolute; width:600px; height:600px; background:radial-gradient(circle,rgba(0,245,200,.12) 0%,transparent 70%); border-radius:50%; top:50%;left:50%;transform:translate(-50%,-50%); animation: pulse 6s ease-in-out infinite; }
+.success-page::before { content:''; position:absolute; inset:0; opacity:.04; background-image:linear-gradient(var(--gold) 1px,transparent 1px),linear-gradient(90deg,var(--gold) 1px,transparent 1px); background-size:60px 60px; }
+.success-glow { position:absolute; width:600px; height:600px; background:radial-gradient(circle,rgba(239,159,39,.12) 0%,transparent 70%); border-radius:50%; top:50%;left:50%;transform:translate(-50%,-50%); animation: pulse 6s ease-in-out infinite; }
 .success-content { position:relative;z-index:2;max-width:560px; }
-.success-icon-ring { width:100px;height:100px;border:2px solid var(--neon);border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 2rem;font-size:2.5rem;animation:fadeUp .8s ease .2s both;box-shadow:0 0 40px rgba(0,245,200,.2); }
+.success-icon-ring { width:100px;height:100px;border:2px solid var(--gold);border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 2rem;font-size:2.5rem;animation:fadeUp .8s ease .2s both;box-shadow:0 0 40px rgba(239,159,39,.2); }
 .success-content h1 { font-family:'Syne',sans-serif;font-size:clamp(2rem,5vw,3.5rem);font-weight:800;margin-bottom:1rem;animation:fadeUp .8s ease .4s both; }
 .success-content p { color:var(--muted);font-size:1rem;line-height:1.8;margin-bottom:1.5rem;animation:fadeUp .8s ease .6s both; }
 .success-steps { display:flex;flex-direction:column;gap:.8rem;margin:2rem 0;animation:fadeUp .8s ease .8s both; }
 .success-step { display:flex;align-items:center;gap:1rem;background:var(--navy2);border:1px solid var(--border);border-radius:4px;padding:1rem 1.2rem;text-align:left; }
-.step-dot { width:8px;height:8px;border-radius:50%;background:var(--neon);flex-shrink:0;box-shadow:0 0 10px rgba(0,245,200,.5); }
+.step-dot { width:8px;height:8px;border-radius:50%;background:var(--gold);flex-shrink:0;box-shadow:0 0 10px rgba(239,159,39,.5); }
 .step-text { font-size:.88rem;color:var(--text); }
 .step-text span { color:var(--muted);font-size:.82rem;display:block;margin-top:2px; }
 </style>
@@ -34,7 +34,7 @@
   <div class="success-glow"></div>
   <div class="success-content">
     <div class="success-icon-ring">✦</div>
-    <h1 style="color:var(--text);">Payment <span style="color:var(--neon);">Confirmed.</span></h1>
+    <h1 style="color:var(--text);">Payment <span style="color:var(--gold);">Confirmed.</span></h1>
     <p>Thank you for choosing Arend Gesin Investment. Your brand transformation begins now. Here's what happens next:</p>
 
     <div class="success-steps">
@@ -60,18 +60,12 @@
 
     <div style="display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;margin-top:2rem;animation:fadeUp .8s ease 1s both;">
       <a href="../index.html" class="btn-primary">Back to Home</a>
-      <a href="mailto:hello@arend-gesin.com" class="btn-outline">Contact Our Team</a>
+      <a href="/cdn-cgi/l/email-protection#4a222f2626250a2b382f242e672d2f39232464292527" class="btn-outline">Contact Our Team</a>
     </div>
   </div>
 </div>
 
-<script src="../js/main.js"></script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script src="../js/main.js"></script>
 <script>
 const params = new URLSearchParams(window.location.search);
-const orderId = params.get('order');
-if (orderId) {
-  document.getElementById('orderRef').textContent = `Order reference: ${orderId}`;
-}
-</script>
-</body>
-</html>
+const order

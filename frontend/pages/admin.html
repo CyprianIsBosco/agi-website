@@ -35,14 +35,14 @@
 .table-wrap{overflow-x:auto;background:var(--navy2);border:1px solid var(--border);border-radius:4px;}
 .orders-table{width:100%;border-collapse:collapse;}
 .orders-table th{font-size:.68rem;letter-spacing:2px;text-transform:uppercase;color:var(--muted);padding:.8rem 1rem;text-align:left;border-bottom:1px solid var(--border);background:var(--navy3);}
-.orders-table td{padding:.8rem 1rem;border-bottom:1px solid rgba(0,245,200,.05);font-size:.84rem;vertical-align:middle;}
+.orders-table td{padding:.8rem 1rem;border-bottom:1px solid rgba(239,159,39,.05);font-size:.84rem;vertical-align:middle;}
 .orders-table tr:hover td{background:rgba(255,255,255,.02);}
 .status-badge{display:inline-block;font-size:.62rem;letter-spacing:1.5px;text-transform:uppercase;padding:3px 9px;border-radius:2px;white-space:nowrap;}
 .status-pending{background:rgba(186,117,23,.15);color:#EF9F27;}
-.status-paid{background:rgba(0,245,200,.12);color:#00f5c8;}
+.status-paid{background:rgba(239,159,39,.12);color:#EF9F27;}
 .status-in_progress{background:rgba(123,95,255,.15);color:#7b5fff;}
 .status-delivered{background:rgba(99,153,34,.2);color:#97C459;}
-.status-completed{background:rgba(0,245,200,.12);color:#00f5c8;}
+.status-completed{background:rgba(239,159,39,.12);color:#EF9F27;}
 .status-failed{background:rgba(226,75,74,.15);color:#E24B4A;}
 .pkg-badge{font-size:.65rem;letter-spacing:1px;text-transform:uppercase;padding:2px 8px;border-radius:2px;background:rgba(239,159,39,.08);color:var(--gold);max-width:140px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;display:inline-block;}
 .empty-state{text-align:center;padding:4rem;color:var(--muted);}
@@ -79,7 +79,7 @@
 .recent-name{color:var(--text);font-weight:500;}
 .recent-meta{color:var(--muted);font-size:.75rem;}
 .pay-badge{font-size:.65rem;letter-spacing:1px;text-transform:uppercase;padding:2px 8px;border-radius:2px;}
-.pay-mpesa{background:rgba(0,245,200,.1);color:var(--neon);}
+.pay-mpesa{background:rgba(239,159,39,.1);color:var(--neon);}
 .pay-pod{background:rgba(239,159,39,.1);color:var(--gold);}
 @media(max-width:900px){.charts-grid{grid-template-columns:1fr;}.chart-card.wide{grid-column:span 1;}.modal-grid{grid-template-columns:1fr;}}
 </style>
@@ -95,7 +95,7 @@
       <line x1="4" y1="72" x2="0" y2="64" stroke="#e8eaf0" stroke-width="8" stroke-linecap="round"/>
       <line x1="196" y1="72" x2="200" y2="64" stroke="#e8eaf0" stroke-width="8" stroke-linecap="round"/>
       <rect x="22" y="72" width="156" height="96" fill="none" stroke="#e8eaf0" stroke-width="8"/>
-      <text x="100" y="148" text-anchor="middle" font-family="Arial Black,sans-serif" font-size="46" font-weight="900" fill="#00f5c8" letter-spacing="4">AGI</text>
+      <text x="100" y="148" text-anchor="middle" font-family="Arial Black,sans-serif" font-size="46" font-weight="900" fill="#EF9F27" letter-spacing="4">AGI</text>
       <path d="M 8,180 Q 100,198 192,178" fill="none" stroke="#e8eaf0" stroke-width="6" stroke-linecap="round"/>
     </svg>
     <div class="logo-text"><span class="logo-name">AREND GESIN</span><span class="logo-tag">Admin Panel</span></div>
@@ -356,7 +356,7 @@ const SERVICES_SHORT = {
   'Graphic Design & Advertisement': 'Graphic Design',
 };
 const SERVICE_KEYS = Object.keys(SERVICES_SHORT);
-const COLORS = { neon: '#00f5c8', gold: '#EF9F27', purple: '#7b5fff', red: '#E24B4A', green: '#97C459' };
+const COLORS = { neon: '#EF9F27', gold: '#EF9F27', purple: '#7b5fff', red: '#E24B4A', green: '#97C459' };
 
 function renderOverviewCharts() {
   // Service distribution
@@ -436,8 +436,8 @@ function renderChart(id, type, labels, data, colors, isLine = false) {
         tooltip: { backgroundColor: '#0a1630', titleColor: '#e8eaf0', bodyColor: '#7a8aaa', borderColor: '#EF9F27', borderWidth: 1 }
       },
       scales: isDoughnut ? {} : {
-        x: { ticks: { color: '#7a8aaa', font: { size: 10 } }, grid: { color: 'rgba(0,245,200,0.04)' } },
-        y: { ticks: { color: '#7a8aaa', font: { size: 10 } }, grid: { color: 'rgba(0,245,200,0.06)' }, beginAtZero: true }
+        x: { ticks: { color: '#7a8aaa', font: { size: 10 } }, grid: { color: 'rgba(239,159,39,0.04)' } },
+        y: { ticks: { color: '#7a8aaa', font: { size: 10 } }, grid: { color: 'rgba(239,159,39,0.06)' }, beginAtZero: true }
       }
     }
   });
@@ -563,7 +563,7 @@ function openModal(id) {
   document.getElementById('mStatus').innerHTML = `<span class="status-badge status-${o.status||'pending'}">${(o.status||'pending').replace('_',' ')}</span>`;
   document.getElementById('mBrief').textContent = o.brief || 'No brief provided';
   const btns = document.getElementById('modalStatusBtns');
-  const statuses = [{v:'pending',l:'Pending',c:'#EF9F27'},{v:'paid',l:'Paid',c:'#00f5c8'},{v:'in_progress',l:'In Progress',c:'#7b5fff'},{v:'delivered',l:'Delivered',c:'#97C459'},{v:'completed',l:'Completed',c:'#00f5c8'}];
+  const statuses = [{v:'pending',l:'Pending',c:'#EF9F27'},{v:'paid',l:'Paid',c:'#EF9F27'},{v:'in_progress',l:'In Progress',c:'#7b5fff'},{v:'delivered',l:'Delivered',c:'#97C459'},{v:'completed',l:'Completed',c:'#EF9F27'}];
   btns.innerHTML = statuses.map(s => `
     <button class="action-btn ${o.status===s.v?'saving':''}" style="border-color:${s.c};color:${s.c};" onclick="updateStatusFromModal('${id}','${s.v}',this)">${s.l}</button>
   `).join('');
