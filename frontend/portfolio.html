@@ -1,0 +1,836 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Portfolio — Arend Gesin Investment</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+<style>
+
+/* ── Page hero ── */
+.port-hero {
+  padding: calc(var(--nav-h) + 80px) 0 72px;
+  background: var(--ink);
+  position: relative;
+  overflow: hidden;
+}
+.port-hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(255,255,255,0.018) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.018) 1px, transparent 1px);
+  background-size: 64px 64px;
+}
+.port-hero::after {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(163,45,45,0.5), transparent);
+}
+.port-hero-inner {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 48px;
+  flex-wrap: wrap;
+}
+.port-hero-left { max-width: 620px; }
+.page-breadcrumb {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12px;
+  color: rgba(255,255,255,0.35);
+  margin-bottom: 28px;
+  letter-spacing: 0.04em;
+}
+.page-breadcrumb a { color: rgba(255,255,255,0.35); transition: color 0.2s; }
+.page-breadcrumb a:hover { color: rgba(255,255,255,0.7); }
+.page-breadcrumb span { color: rgba(255,255,255,0.55); }
+.port-hero-tag {
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--red);
+  margin-bottom: 16px;
+}
+.port-hero-title {
+  font-family: var(--font-head);
+  font-size: clamp(52px, 8vw, 108px);
+  line-height: 0.9;
+  color: #fff;
+  letter-spacing: 0.02em;
+  margin-bottom: 24px;
+}
+.port-hero-title em {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: clamp(22px, 3vw, 38px);
+  display: block;
+  color: rgba(255,255,255,0.40);
+  letter-spacing: 0;
+  margin-top: 10px;
+  line-height: 1.3;
+}
+.port-hero-body {
+  font-size: 15px;
+  color: rgba(255,255,255,0.48);
+  line-height: 1.8;
+  max-width: 500px;
+}
+.port-hero-right {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  align-items: flex-end;
+  flex-shrink: 0;
+}
+.port-count-label {
+  font-size: 10.5px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.28);
+}
+.port-count-num {
+  font-family: var(--font-head);
+  font-size: 72px;
+  line-height: 1;
+  color: rgba(255,255,255,0.06);
+  letter-spacing: 0.02em;
+  user-select: none;
+}
+
+/* ── Filter bar ── */
+.filter-bar {
+  background: var(--surface);
+  border-bottom: 0.5px solid var(--border);
+  position: sticky;
+  top: var(--nav-h);
+  z-index: 50;
+}
+.filter-bar-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 14px 24px;
+  max-width: var(--max-w);
+  margin: 0 auto;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+.filter-bar-inner::-webkit-scrollbar { display: none; }
+.filter-pills {
+  display: flex;
+  gap: 6px;
+  flex-shrink: 0;
+}
+.filter-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+  font-weight: 400;
+  padding: 7px 16px;
+  border-radius: 99px;
+  white-space: nowrap;
+  color: var(--ink-muted);
+  cursor: pointer;
+  border: 0.5px solid transparent;
+  background: none;
+  transition: background 0.18s, color 0.18s, border-color 0.18s;
+  font-family: var(--font-body);
+}
+.filter-pill:hover {
+  background: var(--off-white);
+  color: var(--ink);
+}
+.filter-pill.active {
+  background: var(--ink);
+  color: #fff;
+  border-color: var(--ink);
+  font-weight: 500;
+}
+.filter-pill .pill-count {
+  font-size: 10.5px;
+  background: rgba(255,255,255,0.15);
+  padding: 1px 6px;
+  border-radius: 99px;
+  color: rgba(255,255,255,0.6);
+}
+.filter-pill:not(.active) .pill-count {
+  background: var(--border);
+  color: var(--ink-faint);
+}
+.filter-result-count {
+  font-size: 12.5px;
+  color: var(--ink-faint);
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+.filter-result-count strong { color: var(--ink); }
+
+/* ── Portfolio grid ── */
+.portfolio-section {
+  padding: 64px 0 100px;
+  background: var(--off-white);
+}
+.portfolio-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+
+/* Project card */
+.project-card {
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  background: var(--surface);
+  border: 0.5px solid var(--border);
+  cursor: default;
+  transition: transform 0.3s cubic-bezier(0.25,0.46,0.45,0.94), box-shadow 0.3s;
+  position: relative;
+}
+.project-card:hover {
+  transform: translateY(-6px);
+  box-shadow: var(--shadow-lg);
+}
+
+/* Tall card spans 2 rows */
+.project-card.tall { grid-row: span 2; }
+
+/* Image */
+.project-img {
+  width: 100%;
+  aspect-ratio: 4/3;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.5s cubic-bezier(0.25,0.46,0.45,0.94);
+  background: #e0ddd8;
+}
+.project-card.tall .project-img {
+  aspect-ratio: unset;
+  height: 100%;
+  min-height: 340px;
+}
+.project-card:hover .project-img { transform: scale(1.05); }
+
+/* Overlay on hover */
+.project-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(10,10,10,0.80) 0%, rgba(10,10,10,0.10) 50%, transparent 100%);
+  opacity: 0;
+  transition: opacity 0.3s;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 24px;
+}
+.project-card:hover .project-overlay { opacity: 1; }
+.overlay-category {
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--amber);
+  margin-bottom: 6px;
+}
+.overlay-title {
+  font-family: var(--font-display);
+  font-size: 20px;
+  font-weight: 400;
+  color: #fff;
+  line-height: 1.25;
+}
+
+/* Card bottom meta */
+.project-meta {
+  padding: 18px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-top: 0.5px solid var(--border);
+}
+.project-meta-left {}
+.project-name {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--ink);
+  margin-bottom: 2px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 200px;
+}
+.project-category {
+  font-size: 11.5px;
+  color: var(--ink-faint);
+}
+.project-tag {
+  font-size: 11px;
+  font-weight: 500;
+  padding: 4px 10px;
+  border-radius: 99px;
+  flex-shrink: 0;
+}
+.tag-branding  { background: #EDE9FE; color: #5B21B6; }
+.tag-printing  { background: #DCFCE7; color: #15803D; }
+.tag-design    { background: #FEF9C3; color: #854D0E; }
+.tag-it        { background: #DBEAFE; color: #1D4ED8; }
+.tag-ppe       { background: var(--red-light); color: var(--red); }
+
+/* Hidden state for filtering */
+.project-card.hidden {
+  display: none;
+}
+
+/* Empty state */
+.portfolio-empty {
+  grid-column: 1 / -1;
+  text-align: center;
+  padding: 80px 24px;
+  display: none;
+}
+.portfolio-empty.visible { display: block; }
+.portfolio-empty p {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 22px;
+  color: var(--ink-faint);
+}
+
+/* ── CTA ── */
+.port-cta {
+  padding: 80px 0;
+  background: var(--ink);
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+.port-cta::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at 50% 0%, rgba(163,45,45,0.18), transparent 65%);
+  pointer-events: none;
+}
+.port-cta-inner { position: relative; z-index: 1; }
+.port-cta h2 {
+  font-family: var(--font-display);
+  font-size: clamp(30px, 5vw, 50px);
+  font-weight: 400;
+  color: #fff;
+  margin-bottom: 14px;
+}
+.port-cta p {
+  font-size: 15px;
+  color: rgba(255,255,255,0.48);
+  max-width: 460px;
+  margin: 0 auto 36px;
+  line-height: 1.75;
+}
+.port-cta-btns {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  flex-wrap: wrap;
+}
+
+/* ── Responsive ── */
+@media (max-width: 960px) {
+  .portfolio-grid { grid-template-columns: repeat(2, 1fr); }
+  .project-card.tall { grid-row: span 1; }
+  .project-card.tall .project-img { height: auto; min-height: unset; }
+}
+@media (max-width: 600px) {
+  .portfolio-grid { grid-template-columns: 1fr; }
+  .filter-bar-inner { flex-direction: column; align-items: flex-start; gap: 10px; }
+  .port-hero-right { display: none; }
+}
+</style>
+</head>
+<body>
+
+<!-- ══════════════════ NAVBAR ══════════════════ -->
+<nav class="navbar scrolled" id="navbar">
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo" aria-label="AGI home">
+      <svg class="logo-svg" viewBox="0 0 120 44" fill="none">
+        <g>
+          <polygon points="18,4 34,16 2,16" fill="currentColor"/>
+          <rect x="5" y="8" width="4" height="8" fill="currentColor"/>
+          <rect x="4" y="16" width="28" height="16" fill="currentColor" opacity="0.15"/>
+          <rect x="4" y="16" width="28" height="16" fill="none" stroke="currentColor" stroke-width="1.5"/>
+          <rect x="14" y="22" width="8" height="10" rx="1" fill="currentColor" opacity="0.8"/>
+          <path d="M0 35 Q17 40 36 33" stroke="#BA7517" stroke-width="2" fill="none" stroke-linecap="round"/>
+        </g>
+        <text x="40" y="23" font-family="'Bebas Neue', sans-serif" font-size="22" fill="currentColor" letter-spacing="1">AGI</text>
+        <text x="40" y="35" font-family="'DM Sans', sans-serif" font-size="7.5" fill="#BA7517" letter-spacing="1.5" font-style="italic">HOME OF BRANDING</text>
+      </svg>
+    </a>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="services.html">Services</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="portfolio.html" style="color:var(--red);font-weight:500;">Portfolio</a></li>
+      <li><a href="blog.html">Insights</a></li>
+      <li><a href="csr.html">THAT Child</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+    <div class="nav-right">
+      <a href="pages/order/index.html" class="btn-nav-cta">Order now</a>
+      <button class="hamburger" id="hamburger" aria-label="Toggle menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</nav>
+
+<!-- ══════════════════ HERO ══════════════════ -->
+<section class="port-hero">
+  <div class="container">
+    <div class="port-hero-inner">
+      <div class="port-hero-left">
+        <nav class="page-breadcrumb" aria-label="Breadcrumb">
+          <a href="index.html">Home</a>
+          <span>›</span>
+          <span>Portfolio</span>
+        </nav>
+        <p class="port-hero-tag">Our work</p>
+        <h1 class="port-hero-title">
+          PORTFOLIO
+          <em>Projects we're proud of.</em>
+        </h1>
+        <p class="port-hero-body">
+          A selection of branding, printing, design, IT and PPE projects delivered
+          across Kenya — for NGOs, corporates, schools and private businesses.
+        </p>
+      </div>
+      <div class="port-hero-right" aria-hidden="true">
+        <span class="port-count-label">Projects</span>
+        <span class="port-count-num">12</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════ FILTER BAR ══════════════════ -->
+<div class="filter-bar">
+  <div class="filter-bar-inner">
+    <div class="filter-pills" role="group" aria-label="Filter projects by category">
+      <button class="filter-pill active" data-filter="all">All work <span class="pill-count">12</span></button>
+      <button class="filter-pill" data-filter="branding">Branding <span class="pill-count">3</span></button>
+      <button class="filter-pill" data-filter="printing">Printing <span class="pill-count">3</span></button>
+      <button class="filter-pill" data-filter="design">Design <span class="pill-count">3</span></button>
+      <button class="filter-pill" data-filter="it">IT <span class="pill-count">2</span></button>
+      <button class="filter-pill" data-filter="ppe">PPE <span class="pill-count">1</span></button>
+    </div>
+    <p class="filter-result-count"><strong id="visibleCount">12</strong> projects</p>
+  </div>
+</div>
+
+<!-- ══════════════════ GRID ══════════════════ -->
+<section class="portfolio-section">
+  <div class="container">
+    <div class="portfolio-grid" id="portfolioGrid">
+
+      <!-- BRANDING 1 — tall featured -->
+      <article class="project-card tall reveal" data-category="branding">
+        <img
+          class="project-img"
+          src="https://images.unsplash.com/photo-1600880292089-90a7e086ee0c?w=700&auto=format&fit=crop&q=80"
+          alt="Brand identity design for a corporate client"
+          loading="lazy"
+        >
+        <div class="project-overlay">
+          <span class="overlay-category">Branding</span>
+          <p class="overlay-title">Corporate Brand Identity — AYS East Africa</p>
+        </div>
+        <div class="project-meta">
+          <div class="project-meta-left">
+            <p class="project-name">AYS East Africa</p>
+            <p class="project-category">Full brand identity</p>
+          </div>
+          <span class="project-tag tag-branding">Branding</span>
+        </div>
+      </article>
+
+      <!-- PRINTING 1 -->
+      <article class="project-card reveal" data-category="printing">
+        <img
+          class="project-img"
+          src="https://images.unsplash.com/photo-1626785774573-4b799315345d?w=700&auto=format&fit=crop&q=80"
+          alt="Large format printing project"
+          loading="lazy"
+        >
+        <div class="project-overlay">
+          <span class="overlay-category">Printing</span>
+          <p class="overlay-title">Large Format Banners — Beacon Contractors</p>
+        </div>
+        <div class="project-meta">
+          <div class="project-meta-left">
+            <p class="project-name">Beacon Contractors</p>
+            <p class="project-category">Large format printing</p>
+          </div>
+          <span class="project-tag tag-printing">Printing</span>
+        </div>
+      </article>
+
+      <!-- DESIGN 1 -->
+      <article class="project-card reveal" data-category="design">
+        <img
+          class="project-img"
+          src="https://images.unsplash.com/photo-1561070791-2526d30994b5?w=700&auto=format&fit=crop&q=80"
+          alt="Graphic design brochure layout"
+          loading="lazy"
+        >
+        <div class="project-overlay">
+          <span class="overlay-category">Design</span>
+          <p class="overlay-title">Business Profile Design — Innosearch Ltd</p>
+        </div>
+        <div class="project-meta">
+          <div class="project-meta-left">
+            <p class="project-name">Innosearch Limited</p>
+            <p class="project-category">Business profile &amp; brochure</p>
+          </div>
+          <span class="project-tag tag-design">Design</span>
+        </div>
+      </article>
+
+      <!-- IT 1 -->
+      <article class="project-card reveal" data-category="it">
+        <img
+          class="project-img"
+          src="https://images.unsplash.com/photo-1593642632559-0c6d3fc62b89?w=700&auto=format&fit=crop&q=80"
+          alt="IT installation and computer setup"
+          loading="lazy"
+        >
+        <div class="project-overlay">
+          <span class="overlay-category">IT</span>
+          <p class="overlay-title">Full Office IT Setup — Soita Siundu Advocates</p>
+        </div>
+        <div class="project-meta">
+          <div class="project-meta-left">
+            <p class="project-name">Soita Siundu Advocates</p>
+            <p class="project-category">IT installation &amp; setup</p>
+          </div>
+          <span class="project-tag tag-it">IT</span>
+        </div>
+      </article>
+
+      <!-- BRANDING 2 -->
+      <article class="project-card reveal" data-category="branding">
+        <img
+          class="project-img"
+          src="https://images.unsplash.com/photo-1634084462412-b54873c0a56d?w=700&auto=format&fit=crop&q=80"
+          alt="Branded merchandise mugs and stationery"
+          loading="lazy"
+        >
+        <div class="project-overlay">
+          <span class="overlay-category">Branding</span>
+          <p class="overlay-title">Branded Merchandise — Trendy Scents</p>
+        </div>
+        <div class="project-meta">
+          <div class="project-meta-left">
+            <p class="project-name">Trendy Scents</p>
+            <p class="project-category">Merchandise branding</p>
+          </div>
+          <span class="project-tag tag-branding">Branding</span>
+        </div>
+      </article>
+
+      <!-- PRINTING 2 -->
+      <article class="project-card reveal" data-category="printing">
+        <img
+          class="project-img"
+          src="https://images.unsplash.com/photo-1586339949916-3e9457bef6d3?w=700&auto=format&fit=crop&q=80"
+          alt="Business card and stationery printing"
+          loading="lazy"
+        >
+        <div class="project-overlay">
+          <span class="overlay-category">Printing</span>
+          <p class="overlay-title">Business Cards &amp; Stationery — Noni Enterprises</p>
+        </div>
+        <div class="project-meta">
+          <div class="project-meta-left">
+            <p class="project-name">Noni Enterprises</p>
+            <p class="project-category">Business card printing</p>
+          </div>
+          <span class="project-tag tag-printing">Printing</span>
+        </div>
+      </article>
+
+      <!-- DESIGN 2 -->
+      <article class="project-card reveal" data-category="design">
+        <img
+          class="project-img"
+          src="https://images.unsplash.com/photo-1611532736597-de2d4265fba3?w=700&auto=format&fit=crop&q=80"
+          alt="Social media design and advertising campaign"
+          loading="lazy"
+        >
+        <div class="project-overlay">
+          <span class="overlay-category">Design</span>
+          <p class="overlay-title">Social Media Campaign — Bralison Limited</p>
+        </div>
+        <div class="project-meta">
+          <div class="project-meta-left">
+            <p class="project-name">Bralison Limited</p>
+            <p class="project-category">Social media advertising</p>
+          </div>
+          <span class="project-tag tag-design">Design</span>
+        </div>
+      </article>
+
+      <!-- PPE -->
+      <article class="project-card reveal" data-category="ppe">
+        <img
+          class="project-img"
+          src="https://images.unsplash.com/photo-1504328345606-18bbc8c9d7d1?w=700&auto=format&fit=crop&q=80"
+          alt="Work safety PPE equipment supply"
+          loading="lazy"
+        >
+        <div class="project-overlay">
+          <span class="overlay-category">PPE</span>
+          <p class="overlay-title">Safety Equipment Supply — Beacon Contractors</p>
+        </div>
+        <div class="project-meta">
+          <div class="project-meta-left">
+            <p class="project-name">Beacon Contractors</p>
+            <p class="project-category">PPE supply &amp; branding</p>
+          </div>
+          <span class="project-tag tag-ppe">PPE</span>
+        </div>
+      </article>
+
+      <!-- BRANDING 3 -->
+      <article class="project-card reveal" data-category="branding">
+        <img
+          class="project-img"
+          src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=700&auto=format&fit=crop&q=80"
+          alt="Cloth branding and uniform printing"
+          loading="lazy"
+        >
+        <div class="project-overlay">
+          <span class="overlay-category">Branding</span>
+          <p class="overlay-title">Uniform &amp; Cloth Branding — St. Erastus School</p>
+        </div>
+        <div class="project-meta">
+          <div class="project-meta-left">
+            <p class="project-name">St. Erastus School</p>
+            <p class="project-category">Cloth &amp; uniform branding</p>
+          </div>
+          <span class="project-tag tag-branding">Branding</span>
+        </div>
+      </article>
+
+      <!-- IT 2 -->
+      <article class="project-card reveal" data-category="it">
+        <img
+          class="project-img"
+          src="https://images.unsplash.com/photo-1518770660439-4636190af475?w=700&auto=format&fit=crop&q=80"
+          alt="Computer network and system setup"
+          loading="lazy"
+        >
+        <div class="project-overlay">
+          <span class="overlay-category">IT</span>
+          <p class="overlay-title">Network &amp; System Setup — Innosearch Ltd</p>
+        </div>
+        <div class="project-meta">
+          <div class="project-meta-left">
+            <p class="project-name">Innosearch Limited</p>
+            <p class="project-category">Network &amp; software setup</p>
+          </div>
+          <span class="project-tag tag-it">IT</span>
+        </div>
+      </article>
+
+      <!-- PRINTING 3 -->
+      <article class="project-card reveal" data-category="printing">
+        <img
+          class="project-img"
+          src="https://images.unsplash.com/photo-1523474253046-8cd2748b5fd2?w=700&auto=format&fit=crop&q=80"
+          alt="Screen printing on fabric and merchandise"
+          loading="lazy"
+        >
+        <div class="project-overlay">
+          <span class="overlay-category">Printing</span>
+          <p class="overlay-title">Screen Printing — AYS East Africa</p>
+        </div>
+        <div class="project-meta">
+          <div class="project-meta-left">
+            <p class="project-name">AYS East Africa</p>
+            <p class="project-category">Screen &amp; pad printing</p>
+          </div>
+          <span class="project-tag tag-printing">Printing</span>
+        </div>
+      </article>
+
+      <!-- DESIGN 3 -->
+      <article class="project-card reveal" data-category="design">
+        <img
+          class="project-img"
+          src="https://images.unsplash.com/photo-1586717791821-3f44a563fa4c?w=700&auto=format&fit=crop&q=80"
+          alt="Poster and flyer design for event"
+          loading="lazy"
+        >
+        <div class="project-overlay">
+          <span class="overlay-category">Design</span>
+          <p class="overlay-title">Event Poster &amp; Flyers — Mind Masters Programme</p>
+        </div>
+        <div class="project-meta">
+          <div class="project-meta-left">
+            <p class="project-name">Mind Masters (AGI)</p>
+            <p class="project-category">Poster &amp; flyer design</p>
+          </div>
+          <span class="project-tag tag-design">Design</span>
+        </div>
+      </article>
+
+      <!-- Empty state -->
+      <div class="portfolio-empty" id="portfolioEmpty">
+        <p>No projects in this category yet — check back soon.</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════ CTA ══════════════════ -->
+<section class="port-cta">
+  <div class="container">
+    <div class="port-cta-inner">
+      <h2>Want to be in our portfolio?</h2>
+      <p>Let's collaborate on your next project — branding, printing, design or IT. We'd love to feature your business here.</p>
+      <div class="port-cta-btns">
+        <a href="pages/order/index.html" class="btn-primary">Start a project</a>
+        <a href="contact.html" class="btn-outline-light">Talk to us first</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════ FOOTER ══════════════════ -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <a href="index.html" class="nav-logo footer-logo">
+          <svg class="logo-svg" viewBox="0 0 120 44" fill="none">
+            <g><polygon points="18,4 34,16 2,16" fill="currentColor"/><rect x="5" y="8" width="4" height="8" fill="currentColor"/><rect x="4" y="16" width="28" height="16" fill="currentColor" opacity="0.15"/><rect x="4" y="16" width="28" height="16" fill="none" stroke="currentColor" stroke-width="1.5"/><rect x="14" y="22" width="8" height="10" rx="1" fill="currentColor" opacity="0.8"/><path d="M0 35 Q17 40 36 33" stroke="#BA7517" stroke-width="2" fill="none" stroke-linecap="round"/></g>
+            <text x="40" y="23" font-family="'Bebas Neue', sans-serif" font-size="22" fill="currentColor" letter-spacing="1">AGI</text>
+            <text x="40" y="35" font-family="'DM Sans', sans-serif" font-size="7.5" fill="#BA7517" letter-spacing="1.5" font-style="italic">HOME OF BRANDING</text>
+          </svg>
+        </a>
+        <p class="footer-tagline">Strength of Family.</p>
+        <p class="footer-desc">A family-based branding company empowering youth and giving THAT Child a chance.</p>
+        <div class="footer-contact-mini">
+          <a href="tel:+254735518090">+254 735 518 090</a>
+          <a href="mailto:info@arendgesin.co.ke">info@arendgesin.co.ke</a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h5 class="footer-col-title">Services</h5>
+        <ul>
+          <li><a href="services.html#printing">Printing &amp; Branding</a></li>
+          <li><a href="services.html#stationery">Stationery Supplies</a></li>
+          <li><a href="services.html#it">IT Installations</a></li>
+          <li><a href="services.html#design">Graphic Design</a></li>
+          <li><a href="services.html#ppe">Work Safety (PPEs)</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h5 class="footer-col-title">Company</h5>
+        <ul>
+          <li><a href="about.html">About AGI</a></li>
+          <li><a href="csr.html">THAT Child / CSR</a></li>
+          <li><a href="portfolio.html">Portfolio</a></li>
+          <li><a href="blog.html">Insights</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h5 class="footer-col-title">We operate in</h5>
+        <ul>
+          <li><span>Nakuru County</span></li>
+          <li><span>Nairobi County</span></li>
+          <li><span>Uasin Gishu</span></li>
+          <li><span>Trans Nzoia</span></li>
+          <li><span>Bungoma County</span></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p class="footer-copy">© 2025 Arend Gesin Investment. All rights reserved.</p>
+      <a href="http://www.arendgesin.co.ke" class="footer-web" target="_blank" rel="noopener">www.arendgesin.co.ke</a>
+    </div>
+  </div>
+</footer>
+
+<script src="js/main.js"></script>
+<script>
+(function () {
+
+  /* ── Filter logic ── */
+  const pills       = document.querySelectorAll('.filter-pill');
+  const cards       = document.querySelectorAll('.project-card');
+  const countEl     = document.getElementById('visibleCount');
+  const emptyEl     = document.getElementById('portfolioEmpty');
+
+  function filterGrid(category) {
+    let visible = 0;
+    cards.forEach(card => {
+      const match = category === 'all' || card.dataset.category === category;
+      card.classList.toggle('hidden', !match);
+      if (match) visible++;
+    });
+    countEl.textContent = visible;
+    emptyEl.classList.toggle('visible', visible === 0);
+  }
+
+  pills.forEach(pill => {
+    pill.addEventListener('click', () => {
+      pills.forEach(p => p.classList.remove('active'));
+      pill.classList.add('active');
+      filterGrid(pill.dataset.filter);
+    });
+  });
+
+  /* ── Hamburger ── */
+  const ham   = document.getElementById('hamburger');
+  const links = document.getElementById('navLinks');
+  if (ham && links) {
+    ham.addEventListener('click', () => {
+      const open = links.classList.toggle('open');
+      ham.setAttribute('aria-expanded', String(open));
+      ham.classList.toggle('active', open);
+    });
+  }
+
+  /* ── Scroll reveal ── */
+  const io = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        const siblings = Array.from(e.target.parentElement.children);
+        const idx = siblings.indexOf(e.target);
+        e.target.style.transitionDelay = (idx * 60) + 'ms';
+        e.target.classList.add('revealed');
+        io.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.08 });
+  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+})();
+</script>
+</body>
+</html>
