@@ -1,0 +1,1118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Blog & Insights — Arend Gesin Investment</title>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+  <style>
+    /* ── CSS Variables ── */
+    :root {
+      --red:        #C0251D;
+      --red-dark:   #8f1a14;
+      --red-glow:   rgba(192,37,29,0.18);
+      --gold:       #D4940A;
+      --gold-light: #F5C842;
+      --gold-bg:    rgba(212,148,10,0.12);
+      --dark:       #0f0f0f;
+      --dark-2:     #161616;
+      --dark-3:     #1e1e1e;
+      --dark-4:     #252525;
+      --mid:        #333;
+      --text:       #e8e8e8;
+      --text-muted: #888;
+      --text-light: #bbb;
+      --white:      #ffffff;
+      --border:     rgba(255,255,255,0.07);
+      --radius:     14px;
+      --radius-sm:  8px;
+      --shadow:     0 8px 32px rgba(0,0,0,0.35);
+      --shadow-card:0 4px 24px rgba(0,0,0,0.28);
+      --transition: all 0.3s cubic-bezier(0.4,0,0.2,1);
+    }
+
+    /* ── Reset ── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--dark);
+      color: var(--text);
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+    a { text-decoration: none; color: inherit; }
+    img { display: block; width: 100%; }
+
+    /* ── Navbar ── */
+    .navbar {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 5%;
+      height: 70px;
+      background: rgba(15,15,15,0.85);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-logo {
+      font-family: 'Syne', sans-serif;
+      font-weight: 800;
+      font-size: 1.2rem;
+      letter-spacing: -0.02em;
+    }
+    .nav-logo span { color: var(--red); }
+    .nav-links {
+      display: flex; align-items: center; gap: 2rem;
+      list-style: none;
+    }
+    .nav-links a {
+      font-size: 0.88rem;
+      font-weight: 500;
+      color: var(--text-muted);
+      transition: var(--transition);
+      letter-spacing: 0.02em;
+    }
+    .nav-links a:hover,
+    .nav-links a.active { color: var(--white); }
+    .nav-links a.active { color: var(--red); }
+    .nav-cta {
+      background: var(--red);
+      color: var(--white) !important;
+      padding: 0.5rem 1.2rem;
+      border-radius: 50px;
+      font-weight: 600 !important;
+      transition: var(--transition) !important;
+    }
+    .nav-cta:hover { background: var(--red-dark) !important; color: var(--white) !important; }
+    .hamburger {
+      display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 4px;
+    }
+    .hamburger span {
+      display: block; width: 24px; height: 2px;
+      background: var(--text); border-radius: 2px;
+      transition: var(--transition);
+    }
+
+    /* ── Page Header ── */
+    .page-header {
+      padding: 140px 5% 70px;
+      position: relative;
+      overflow: hidden;
+    }
+    .page-header::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: radial-gradient(ellipse 60% 70% at 80% 50%, rgba(192,37,29,0.12) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .page-header-inner {
+      max-width: 1200px; margin: 0 auto;
+      display: flex; align-items: flex-end; justify-content: space-between;
+      gap: 2rem; flex-wrap: wrap;
+    }
+    .page-header-label {
+      display: inline-flex; align-items: center; gap: 8px;
+      font-size: 0.75rem; font-weight: 600;
+      color: var(--gold);
+      letter-spacing: 0.14em; text-transform: uppercase;
+      margin-bottom: 1rem;
+    }
+    .page-header-label::before {
+      content: '';
+      display: block; width: 28px; height: 2px;
+      background: var(--gold);
+      border-radius: 2px;
+    }
+    .page-header h1 {
+      font-family: 'Syne', sans-serif;
+      font-size: clamp(2.4rem, 5vw, 4rem);
+      font-weight: 800;
+      line-height: 1.08;
+      letter-spacing: -0.03em;
+      color: var(--white);
+    }
+    .page-header h1 em {
+      font-style: normal;
+      color: var(--red);
+    }
+    .page-header-sub {
+      font-size: 1rem;
+      color: var(--text-muted);
+      max-width: 380px;
+      line-height: 1.65;
+      margin-top: 1rem;
+    }
+    .header-stats {
+      display: flex; gap: 2.5rem; flex-shrink: 0;
+    }
+    .stat-item { text-align: center; }
+    .stat-number {
+      font-family: 'Syne', sans-serif;
+      font-size: 2rem; font-weight: 800;
+      color: var(--white);
+      line-height: 1;
+    }
+    .stat-number span { color: var(--red); }
+    .stat-label {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      margin-top: 4px;
+      letter-spacing: 0.04em;
+    }
+
+    /* ── Filter Bar ── */
+    .filter-section {
+      padding: 0 5% 50px;
+    }
+    .filter-inner {
+      max-width: 1200px; margin: 0 auto;
+      display: flex; align-items: center; gap: 0.6rem;
+      flex-wrap: wrap;
+    }
+    .filter-label {
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: var(--text-muted);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-right: 0.4rem;
+    }
+    .filter-btn {
+      padding: 0.45rem 1.1rem;
+      border-radius: 50px;
+      border: 1.5px solid var(--border);
+      background: transparent;
+      color: var(--text-muted);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.82rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: var(--transition);
+      letter-spacing: 0.02em;
+    }
+    .filter-btn:hover {
+      border-color: rgba(255,255,255,0.2);
+      color: var(--white);
+    }
+    .filter-btn.active {
+      background: var(--red);
+      border-color: var(--red);
+      color: var(--white);
+    }
+
+    /* ── Main Layout ── */
+    .blog-section {
+      padding: 0 5% 100px;
+    }
+    .blog-inner {
+      max-width: 1200px; margin: 0 auto;
+    }
+
+    /* ── Featured Post ── */
+    .featured-post {
+      position: relative;
+      border-radius: 20px;
+      overflow: hidden;
+      margin-bottom: 60px;
+      min-height: 460px;
+      display: flex;
+      align-items: flex-end;
+      cursor: pointer;
+      background: var(--dark-3);
+    }
+    .featured-bg {
+      position: absolute; inset: 0;
+      background:
+        linear-gradient(to right, rgba(0,0,0,0.92) 0%, rgba(0,0,0,0.6) 50%, rgba(0,0,0,0.2) 100%),
+        linear-gradient(135deg, #1a0a09 0%, #2a1010 40%, #1e1a10 100%);
+    }
+    .featured-bg-pattern {
+      position: absolute; inset: 0; opacity: 0.06;
+      background-image:
+        repeating-linear-gradient(45deg, var(--red) 0, var(--red) 1px, transparent 0, transparent 50%);
+      background-size: 20px 20px;
+    }
+    .featured-accent {
+      position: absolute; top: 0; right: 0;
+      width: 45%; height: 100%;
+      background: radial-gradient(ellipse at right center, rgba(192,37,29,0.25) 0%, transparent 70%);
+    }
+    .featured-tag-top {
+      position: absolute; top: 2rem; left: 2.5rem;
+      display: inline-flex; align-items: center; gap: 6px;
+      background: rgba(192,37,29,0.15);
+      border: 1px solid rgba(192,37,29,0.3);
+      color: #ff6b65;
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 0.3rem 0.8rem;
+      border-radius: 50px;
+    }
+    .featured-tag-top i { font-size: 0.65rem; }
+    .featured-content {
+      position: relative; z-index: 2;
+      padding: 3rem 2.5rem;
+      max-width: 620px;
+    }
+    .featured-category {
+      display: inline-block;
+      background: var(--gold-bg);
+      border: 1px solid rgba(212,148,10,0.3);
+      color: var(--gold-light);
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 0.28rem 0.8rem;
+      border-radius: 50px;
+      margin-bottom: 1rem;
+    }
+    .featured-title {
+      font-family: 'Syne', sans-serif;
+      font-size: clamp(1.6rem, 3vw, 2.2rem);
+      font-weight: 800;
+      line-height: 1.15;
+      letter-spacing: -0.025em;
+      color: var(--white);
+      margin-bottom: 1rem;
+    }
+    .featured-excerpt {
+      font-size: 0.95rem;
+      color: var(--text-light);
+      line-height: 1.7;
+      margin-bottom: 1.6rem;
+    }
+    .featured-meta {
+      display: flex; align-items: center; gap: 1.2rem;
+      margin-bottom: 1.8rem;
+    }
+    .meta-author {
+      display: flex; align-items: center; gap: 8px;
+    }
+    .author-avatar {
+      width: 32px; height: 32px; border-radius: 50%;
+      background: linear-gradient(135deg, var(--red), var(--gold));
+      display: flex; align-items: center; justify-content: center;
+      font-family: 'Syne', sans-serif;
+      font-size: 0.72rem; font-weight: 800;
+      color: var(--white);
+      flex-shrink: 0;
+    }
+    .author-name {
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: var(--text);
+    }
+    .meta-divider {
+      width: 4px; height: 4px; border-radius: 50%;
+      background: var(--text-muted);
+    }
+    .meta-date, .meta-read {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+    }
+    .featured-btn {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: var(--red);
+      color: var(--white);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.88rem;
+      font-weight: 600;
+      padding: 0.75rem 1.6rem;
+      border-radius: 50px;
+      border: none;
+      cursor: pointer;
+      transition: var(--transition);
+      letter-spacing: 0.02em;
+      box-shadow: 0 0 24px rgba(192,37,29,0.35);
+    }
+    .featured-btn:hover {
+      background: var(--red-dark);
+      transform: translateX(4px);
+      box-shadow: 0 0 32px rgba(192,37,29,0.5);
+    }
+    .featured-btn i { transition: var(--transition); }
+    .featured-btn:hover i { transform: translateX(3px); }
+
+    /* ── Blog Grid ── */
+    .section-header {
+      display: flex; align-items: center; justify-content: space-between;
+      margin-bottom: 2rem; flex-wrap: wrap; gap: 1rem;
+    }
+    .section-title {
+      font-family: 'Syne', sans-serif;
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: var(--white);
+      letter-spacing: -0.02em;
+    }
+    .section-title span { color: var(--text-muted); font-weight: 400; font-size: 1rem; margin-left: 0.5rem; }
+    .view-all {
+      display: inline-flex; align-items: center; gap: 6px;
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: var(--red);
+      transition: var(--transition);
+      letter-spacing: 0.02em;
+    }
+    .view-all:hover { gap: 10px; }
+    .view-all i { font-size: 0.75rem; }
+
+    .blog-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.6rem;
+      margin-bottom: 60px;
+    }
+
+    /* ── Blog Card ── */
+    .blog-card {
+      background: var(--dark-2);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      overflow: hidden;
+      transition: var(--transition);
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+    }
+    .blog-card:hover {
+      transform: translateY(-6px);
+      border-color: rgba(192,37,29,0.25);
+      box-shadow: var(--shadow-card), 0 0 40px rgba(192,37,29,0.08);
+    }
+    .card-thumb {
+      height: 190px;
+      overflow: hidden;
+      position: relative;
+    }
+    .card-thumb-inner {
+      width: 100%; height: 100%;
+      transition: transform 0.5s cubic-bezier(0.4,0,0.2,1);
+    }
+    .blog-card:hover .card-thumb-inner { transform: scale(1.06); }
+    .thumb-overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(to top, rgba(0,0,0,0.6) 0%, transparent 60%);
+    }
+    /* Placeholder thumb backgrounds */
+    .thumb-1 { background: linear-gradient(135deg, #1a0808 0%, #3d1010 50%, #1a1208 100%); }
+    .thumb-2 { background: linear-gradient(135deg, #080d1a 0%, #101e3d 50%, #08121a 100%); }
+    .thumb-3 { background: linear-gradient(135deg, #080f10 0%, #0d2e30 50%, #08100e 100%); }
+    .thumb-4 { background: linear-gradient(135deg, #100808 0%, #2e0d0d 50%, #180f08 100%); }
+    .thumb-5 { background: linear-gradient(135deg, #0d0d0d 0%, #1e1a10 50%, #101008 100%); }
+    .thumb-6 { background: linear-gradient(135deg, #100815 0%, #200d30 50%, #0f0815 100%); }
+
+    .thumb-icon {
+      position: absolute; top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      font-size: 2.5rem;
+      opacity: 0.22;
+      color: var(--white);
+    }
+    .card-category-pill {
+      position: absolute; top: 1rem; left: 1rem;
+      padding: 0.25rem 0.7rem;
+      border-radius: 50px;
+      font-size: 0.68rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+    .pill-branding  { background: rgba(192,37,29,0.2); border: 1px solid rgba(192,37,29,0.35); color: #ff7a75; }
+    .pill-tech      { background: rgba(30,100,200,0.2); border: 1px solid rgba(30,100,200,0.35); color: #70a8ff; }
+    .pill-csr       { background: rgba(20,160,80,0.2); border: 1px solid rgba(20,160,80,0.35); color: #5dd48a; }
+    .pill-news      { background: rgba(212,148,10,0.15); border: 1px solid rgba(212,148,10,0.3); color: var(--gold-light); }
+    .pill-youth     { background: rgba(160,80,200,0.2); border: 1px solid rgba(160,80,200,0.35); color: #c07bff; }
+
+    .card-body {
+      padding: 1.4rem;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+    .card-title {
+      font-family: 'Syne', sans-serif;
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--white);
+      line-height: 1.35;
+      letter-spacing: -0.015em;
+      margin-bottom: 0.65rem;
+      transition: var(--transition);
+    }
+    .blog-card:hover .card-title { color: #ff9e9b; }
+    .card-excerpt {
+      font-size: 0.83rem;
+      color: var(--text-muted);
+      line-height: 1.65;
+      flex: 1;
+      margin-bottom: 1.2rem;
+    }
+    .card-footer {
+      display: flex; align-items: center; justify-content: space-between;
+      padding-top: 1rem;
+      border-top: 1px solid var(--border);
+    }
+    .card-meta {
+      display: flex; align-items: center; gap: 0.5rem;
+    }
+    .card-avatar {
+      width: 26px; height: 26px; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-family: 'Syne', sans-serif;
+      font-size: 0.62rem; font-weight: 800;
+      color: var(--white); flex-shrink: 0;
+    }
+    .av-red  { background: linear-gradient(135deg, var(--red), #e05050); }
+    .av-gold { background: linear-gradient(135deg, var(--gold), var(--gold-light)); }
+    .av-blue { background: linear-gradient(135deg, #1e64c8, #4a9af5); }
+    .av-green{ background: linear-gradient(135deg, #14a050, #40d080); }
+    .card-date {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+    }
+    .card-read-time {
+      display: flex; align-items: center; gap: 4px;
+      font-size: 0.75rem;
+      color: var(--text-muted);
+    }
+    .card-read-time i { font-size: 0.65rem; color: var(--red); }
+    .card-arrow {
+      display: inline-flex; align-items: center; justify-content: center;
+      width: 30px; height: 30px;
+      border-radius: 50%;
+      background: var(--dark-4);
+      color: var(--text-muted);
+      font-size: 0.75rem;
+      transition: var(--transition);
+      flex-shrink: 0;
+    }
+    .blog-card:hover .card-arrow {
+      background: var(--red);
+      color: var(--white);
+      transform: rotate(-45deg);
+    }
+
+    /* ── Newsletter Strip ── */
+    .newsletter-strip {
+      background: linear-gradient(135deg, var(--dark-3) 0%, rgba(30,10,10,1) 100%);
+      border: 1px solid rgba(192,37,29,0.2);
+      border-radius: 20px;
+      padding: 3rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 2rem;
+      margin-bottom: 60px;
+      position: relative;
+      overflow: hidden;
+    }
+    .newsletter-strip::before {
+      content: '';
+      position: absolute; top: 0; right: 0;
+      width: 300px; height: 100%;
+      background: radial-gradient(ellipse at right, rgba(192,37,29,0.15) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .newsletter-text { position: relative; }
+    .newsletter-eyebrow {
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--red);
+      margin-bottom: 0.5rem;
+    }
+    .newsletter-title {
+      font-family: 'Syne', sans-serif;
+      font-size: 1.5rem;
+      font-weight: 800;
+      color: var(--white);
+      letter-spacing: -0.02em;
+      line-height: 1.2;
+      margin-bottom: 0.4rem;
+    }
+    .newsletter-sub {
+      font-size: 0.88rem;
+      color: var(--text-muted);
+    }
+    .newsletter-form {
+      display: flex; gap: 0.8rem; flex-shrink: 0;
+      position: relative;
+    }
+    .newsletter-input {
+      padding: 0.75rem 1.2rem;
+      background: var(--dark-4);
+      border: 1.5px solid var(--border);
+      border-radius: 50px;
+      color: var(--white);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.88rem;
+      width: 240px;
+      outline: none;
+      transition: var(--transition);
+    }
+    .newsletter-input::placeholder { color: var(--text-muted); }
+    .newsletter-input:focus { border-color: rgba(192,37,29,0.5); }
+    .newsletter-submit {
+      padding: 0.75rem 1.5rem;
+      background: var(--red);
+      color: var(--white);
+      border: none;
+      border-radius: 50px;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.88rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: var(--transition);
+      white-space: nowrap;
+    }
+    .newsletter-submit:hover { background: var(--red-dark); }
+
+    /* ── Pagination ── */
+    .pagination {
+      display: flex; align-items: center; justify-content: center;
+      gap: 0.5rem;
+    }
+    .page-btn {
+      width: 38px; height: 38px;
+      display: flex; align-items: center; justify-content: center;
+      border-radius: 50%;
+      border: 1.5px solid var(--border);
+      background: transparent;
+      color: var(--text-muted);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.88rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: var(--transition);
+    }
+    .page-btn:hover { border-color: rgba(255,255,255,0.2); color: var(--white); }
+    .page-btn.active { background: var(--red); border-color: var(--red); color: var(--white); }
+    .page-btn.arrow { font-size: 0.75rem; }
+
+    /* ── Footer ── */
+    .footer {
+      background: var(--dark-2);
+      border-top: 1px solid var(--border);
+      padding: 60px 5% 30px;
+    }
+    .footer-inner {
+      max-width: 1200px; margin: 0 auto;
+    }
+    .footer-top {
+      display: grid;
+      grid-template-columns: 1.6fr 1fr 1fr 1.2fr;
+      gap: 3rem;
+      padding-bottom: 3rem;
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 2rem;
+    }
+    .footer-brand-name {
+      font-family: 'Syne', sans-serif;
+      font-size: 1.15rem; font-weight: 800;
+      margin-bottom: 0.8rem;
+      letter-spacing: -0.02em;
+    }
+    .footer-brand-name span { color: var(--red); }
+    .footer-tagline {
+      font-size: 0.82rem;
+      color: var(--text-muted);
+      line-height: 1.65;
+      margin-bottom: 1.4rem;
+      max-width: 240px;
+    }
+    .footer-social {
+      display: flex; gap: 0.6rem;
+    }
+    .social-icon {
+      width: 34px; height: 34px;
+      border-radius: 50%;
+      border: 1.5px solid var(--border);
+      display: flex; align-items: center; justify-content: center;
+      color: var(--text-muted);
+      font-size: 0.8rem;
+      transition: var(--transition);
+    }
+    .social-icon:hover { border-color: var(--red); color: var(--red); }
+    .footer-col-title {
+      font-family: 'Syne', sans-serif;
+      font-size: 0.88rem; font-weight: 700;
+      color: var(--white);
+      margin-bottom: 1.2rem;
+      letter-spacing: 0.02em;
+    }
+    .footer-links { list-style: none; display: flex; flex-direction: column; gap: 0.6rem; }
+    .footer-links a {
+      font-size: 0.82rem;
+      color: var(--text-muted);
+      transition: var(--transition);
+    }
+    .footer-links a:hover { color: var(--white); padding-left: 4px; }
+    .footer-contact-item {
+      display: flex; align-items: flex-start; gap: 8px;
+      margin-bottom: 0.7rem;
+    }
+    .footer-contact-item i {
+      color: var(--red);
+      font-size: 0.8rem;
+      margin-top: 3px;
+    }
+    .footer-contact-item span {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      line-height: 1.5;
+    }
+    .footer-bottom {
+      display: flex; align-items: center; justify-content: space-between;
+      flex-wrap: wrap; gap: 1rem;
+    }
+    .footer-copy {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+    }
+    .footer-copy span { color: var(--red); }
+    .footer-bottom-links {
+      display: flex; gap: 1.5rem;
+    }
+    .footer-bottom-links a {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      transition: var(--transition);
+    }
+    .footer-bottom-links a:hover { color: var(--white); }
+
+    /* ── Scroll Reveal ── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: none;
+    }
+
+    /* ── Responsive ── */
+    @media (max-width: 1024px) {
+      .blog-grid { grid-template-columns: repeat(2, 1fr); }
+      .footer-top { grid-template-columns: 1fr 1fr; }
+      .header-stats { display: none; }
+    }
+    @media (max-width: 768px) {
+      .nav-links { display: none; }
+      .hamburger { display: flex; }
+      .page-header { padding: 120px 5% 50px; }
+      .blog-grid { grid-template-columns: 1fr; }
+      .newsletter-strip { flex-direction: column; align-items: flex-start; }
+      .newsletter-form { flex-direction: column; width: 100%; }
+      .newsletter-input { width: 100%; }
+      .footer-top { grid-template-columns: 1fr; gap: 2rem; }
+      .featured-post { min-height: 380px; }
+      .featured-content { padding: 2rem 1.5rem; }
+    }
+    @media (max-width: 480px) {
+      .filter-inner { gap: 0.4rem; }
+      .filter-btn { font-size: 0.75rem; padding: 0.38rem 0.85rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ── Navbar ── -->
+  <nav class="navbar">
+    <a href="index.html" class="nav-logo">AREND <span>GESIN</span></a>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="services.html">Services</a></li>
+      <li><a href="portfolio.html">Portfolio</a></li>
+      <li><a href="blog.html" class="active">Blog</a></li>
+      <li><a href="csr.html">CSR</a></li>
+      <li><a href="contact.html" class="nav-cta">Get in Touch</a></li>
+    </ul>
+    <div class="hamburger" onclick="toggleMenu()">
+      <span></span><span></span><span></span>
+    </div>
+  </nav>
+
+  <!-- ── Page Header ── -->
+  <section class="page-header">
+    <div class="page-header-inner">
+      <div>
+        <div class="page-header-label">Insights & Stories</div>
+        <h1>Our <em>Blog</em> &<br>Latest Updates</h1>
+        <p class="page-header-sub">Branding tips, youth empowerment stories, industry insights, and company news — all in one place.</p>
+      </div>
+      <div class="header-stats">
+        <div class="stat-item">
+          <div class="stat-number">24<span>+</span></div>
+          <div class="stat-label">Articles</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-number">5<span>+</span></div>
+          <div class="stat-label">Categories</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-number">1K<span>+</span></div>
+          <div class="stat-label">Readers</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Filter Bar ── -->
+  <section class="filter-section">
+    <div class="filter-inner">
+      <span class="filter-label">Filter:</span>
+      <button class="filter-btn active" onclick="filterPosts('all', this)">All Posts</button>
+      <button class="filter-btn" onclick="filterPosts('branding', this)">Branding</button>
+      <button class="filter-btn" onclick="filterPosts('csr', this)">CSR & Youth</button>
+      <button class="filter-btn" onclick="filterPosts('tech', this)">Tech & IT</button>
+      <button class="filter-btn" onclick="filterPosts('news', this)">Company News</button>
+      <button class="filter-btn" onclick="filterPosts('youth', this)">Empowerment</button>
+    </div>
+  </section>
+
+  <!-- ── Blog Content ── -->
+  <section class="blog-section">
+    <div class="blog-inner">
+
+      <!-- Featured Post -->
+      <div class="featured-post reveal" onclick="window.location='#'">
+        <div class="featured-bg"></div>
+        <div class="featured-bg-pattern"></div>
+        <div class="featured-accent"></div>
+        <div class="featured-tag-top">
+          <i class="fas fa-star"></i> Featured Post
+        </div>
+        <div class="featured-content">
+          <span class="featured-category">Branding</span>
+          <h2 class="featured-title">Why Your Brand Identity Is the Most Valuable Asset Your Business Owns</h2>
+          <p class="featured-excerpt">In today's crowded marketplace, a strong brand isn't just a logo — it's the entire experience your clients carry with them. We explore how AGI helps businesses build identities that last, inspire, and convert.</p>
+          <div class="featured-meta">
+            <div class="meta-author">
+              <div class="author-avatar">AG</div>
+              <span class="author-name">AGI Editorial</span>
+            </div>
+            <div class="meta-divider"></div>
+            <span class="meta-date">May 8, 2026</span>
+            <div class="meta-divider"></div>
+            <span class="meta-read">6 min read</span>
+          </div>
+          <a href="#" class="featured-btn">
+            Read Full Article <i class="fas fa-arrow-right"></i>
+          </a>
+        </div>
+      </div>
+
+      <!-- Grid Header -->
+      <div class="section-header reveal">
+        <div class="section-title">Latest Articles <span>— 6 posts</span></div>
+        <a href="#" class="view-all">View All <i class="fas fa-arrow-right"></i></a>
+      </div>
+
+      <!-- Blog Grid -->
+      <div class="blog-grid" id="blogGrid">
+
+        <!-- Card 1 -->
+        <article class="blog-card reveal" data-category="branding" onclick="window.location='#'">
+          <div class="card-thumb">
+            <div class="card-thumb-inner thumb-1"></div>
+            <div class="thumb-overlay"></div>
+            <i class="fas fa-palette thumb-icon"></i>
+            <span class="card-category-pill pill-branding">Branding</span>
+          </div>
+          <div class="card-body">
+            <h3 class="card-title">5 Branding Mistakes Every Small Business Makes (And How to Fix Them)</h3>
+            <p class="card-excerpt">From inconsistent logos to unclear messaging, these common pitfalls can erode customer trust. Here's your practical fix-it guide.</p>
+            <div class="card-footer">
+              <div class="card-meta">
+                <div class="card-avatar av-red">KM</div>
+                <span class="card-date">Apr 28, 2026</span>
+              </div>
+              <div style="display:flex;align-items:center;gap:0.8rem;">
+                <span class="card-read-time"><i class="fas fa-clock"></i> 4 min</span>
+                <div class="card-arrow"><i class="fas fa-arrow-right"></i></div>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <!-- Card 2 -->
+        <article class="blog-card reveal" data-category="csr" onclick="window.location='#'">
+          <div class="card-thumb">
+            <div class="card-thumb-inner thumb-3"></div>
+            <div class="thumb-overlay"></div>
+            <i class="fas fa-hands-holding-child thumb-icon"></i>
+            <span class="card-category-pill pill-csr">CSR & Youth</span>
+          </div>
+          <div class="card-body">
+            <h3 class="card-title">THAT Child: How AGI's CSR Model Is Changing Young Lives in Kenya</h3>
+            <p class="card-excerpt">Through the MIND MASTERS programme, AGI is equipping youth with skills in entrepreneurship, personal development, and confidence to face the world.</p>
+            <div class="card-footer">
+              <div class="card-meta">
+                <div class="card-avatar av-green">JO</div>
+                <span class="card-date">Apr 20, 2026</span>
+              </div>
+              <div style="display:flex;align-items:center;gap:0.8rem;">
+                <span class="card-read-time"><i class="fas fa-clock"></i> 5 min</span>
+                <div class="card-arrow"><i class="fas fa-arrow-right"></i></div>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <!-- Card 3 -->
+        <article class="blog-card reveal" data-category="tech" onclick="window.location='#'">
+          <div class="card-thumb">
+            <div class="card-thumb-inner thumb-2"></div>
+            <div class="thumb-overlay"></div>
+            <i class="fas fa-network-wired thumb-icon"></i>
+            <span class="card-category-pill pill-tech">Tech & IT</span>
+          </div>
+          <div class="card-body">
+            <h3 class="card-title">Why Your Business Needs a Proper IT Setup Before You Scale</h3>
+            <p class="card-excerpt">Poor IT infrastructure is one of the silent killers of growing SMEs. AGI's IT installation service ensures your systems are ready for growth.</p>
+            <div class="card-footer">
+              <div class="card-meta">
+                <div class="card-avatar av-blue">TW</div>
+                <span class="card-date">Apr 10, 2026</span>
+              </div>
+              <div style="display:flex;align-items:center;gap:0.8rem;">
+                <span class="card-read-time"><i class="fas fa-clock"></i> 3 min</span>
+                <div class="card-arrow"><i class="fas fa-arrow-right"></i></div>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <!-- Card 4 -->
+        <article class="blog-card reveal" data-category="youth" onclick="window.location='#'">
+          <div class="card-thumb">
+            <div class="card-thumb-inner thumb-5"></div>
+            <div class="thumb-overlay"></div>
+            <i class="fas fa-lightbulb thumb-icon"></i>
+            <span class="card-category-pill pill-youth">Empowerment</span>
+          </div>
+          <div class="card-body">
+            <h3 class="card-title">Vision 2030 and You: Equipping Kenya's Youth for the Knowledge Economy</h3>
+            <p class="card-excerpt">Skills, entrepreneurship, and digital literacy are the pillars Kenya's youth need to thrive. AGI is building those pillars one community at a time.</p>
+            <div class="card-footer">
+              <div class="card-meta">
+                <div class="card-avatar av-gold">NW</div>
+                <span class="card-date">Mar 30, 2026</span>
+              </div>
+              <div style="display:flex;align-items:center;gap:0.8rem;">
+                <span class="card-read-time"><i class="fas fa-clock"></i> 6 min</span>
+                <div class="card-arrow"><i class="fas fa-arrow-right"></i></div>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <!-- Card 5 -->
+        <article class="blog-card reveal" data-category="branding" onclick="window.location='#'">
+          <div class="card-thumb">
+            <div class="card-thumb-inner thumb-4"></div>
+            <div class="thumb-overlay"></div>
+            <i class="fas fa-print thumb-icon"></i>
+            <span class="card-category-pill pill-branding">Branding</span>
+          </div>
+          <div class="card-body">
+            <h3 class="card-title">Digital vs. Offset Printing: What's Right for Your Next Campaign?</h3>
+            <p class="card-excerpt">Choosing the wrong print method can blow your budget. We break down digital, offset, and large-format printing so you choose smart.</p>
+            <div class="card-footer">
+              <div class="card-meta">
+                <div class="card-avatar av-red">AG</div>
+                <span class="card-date">Mar 18, 2026</span>
+              </div>
+              <div style="display:flex;align-items:center;gap:0.8rem;">
+                <span class="card-read-time"><i class="fas fa-clock"></i> 4 min</span>
+                <div class="card-arrow"><i class="fas fa-arrow-right"></i></div>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <!-- Card 6 -->
+        <article class="blog-card reveal" data-category="news" onclick="window.location='#'">
+          <div class="card-thumb">
+            <div class="card-thumb-inner thumb-6"></div>
+            <div class="thumb-overlay"></div>
+            <i class="fas fa-newspaper thumb-icon"></i>
+            <span class="card-category-pill pill-news">Company News</span>
+          </div>
+          <div class="card-body">
+            <h3 class="card-title">AGI Expands to Nairobi: Bringing Premium Branding Closer to You</h3>
+            <p class="card-excerpt">We're excited to announce expanded operations in Nairobi, making AGI's full suite of branding and IT services accessible to even more clients across Kenya.</p>
+            <div class="card-footer">
+              <div class="card-meta">
+                <div class="card-avatar av-gold">AG</div>
+                <span class="card-date">Mar 5, 2026</span>
+              </div>
+              <div style="display:flex;align-items:center;gap:0.8rem;">
+                <span class="card-read-time"><i class="fas fa-clock"></i> 2 min</span>
+                <div class="card-arrow"><i class="fas fa-arrow-right"></i></div>
+              </div>
+            </div>
+          </div>
+        </article>
+
+      </div><!-- /blog-grid -->
+
+      <!-- Newsletter Strip -->
+      <div class="newsletter-strip reveal">
+        <div class="newsletter-text">
+          <div class="newsletter-eyebrow">Stay in the Loop</div>
+          <div class="newsletter-title">Get fresh insights<br>delivered to you.</div>
+          <div class="newsletter-sub">No spam. Just branding tips, CSR stories & company news — monthly.</div>
+        </div>
+        <div class="newsletter-form">
+          <input type="email" class="newsletter-input" placeholder="Your email address" />
+          <button class="newsletter-submit">Subscribe <i class="fas fa-arrow-right" style="margin-left:6px;font-size:0.78rem;"></i></button>
+        </div>
+      </div>
+
+      <!-- Pagination -->
+      <div class="pagination reveal">
+        <button class="page-btn arrow"><i class="fas fa-chevron-left"></i></button>
+        <button class="page-btn active">1</button>
+        <button class="page-btn">2</button>
+        <button class="page-btn">3</button>
+        <button class="page-btn arrow"><i class="fas fa-chevron-right"></i></button>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ── Footer ── -->
+  <footer class="footer">
+    <div class="footer-inner">
+      <div class="footer-top">
+        <div>
+          <div class="footer-brand-name">AREND <span>GESIN</span></div>
+          <p class="footer-tagline">Home of Branding — empowering businesses and youth across Kenya since 2020.</p>
+          <div class="footer-social">
+            <a href="#" class="social-icon"><i class="fab fa-facebook-f"></i></a>
+            <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
+            <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
+            <a href="#" class="social-icon"><i class="fab fa-linkedin-in"></i></a>
+          </div>
+        </div>
+        <div>
+          <div class="footer-col-title">Quick Links</div>
+          <ul class="footer-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="about.html">About Us</a></li>
+            <li><a href="services.html">Services</a></li>
+            <li><a href="portfolio.html">Portfolio</a></li>
+            <li><a href="blog.html">Blog</a></li>
+          </ul>
+        </div>
+        <div>
+          <div class="footer-col-title">Services</div>
+          <ul class="footer-links">
+            <li><a href="services.html">Printing & Branding</a></li>
+            <li><a href="services.html">Stationery Supplies</a></li>
+            <li><a href="services.html">IT Installations</a></li>
+            <li><a href="services.html">Graphic Design</a></li>
+            <li><a href="csr.html">CSR & Mind Masters</a></li>
+          </ul>
+        </div>
+        <div>
+          <div class="footer-col-title">Contact Us</div>
+          <div class="footer-contact-item">
+            <i class="fas fa-map-marker-alt"></i>
+            <span>P.O. Box 20100–12236, Nakuru, Kenya</span>
+          </div>
+          <div class="footer-contact-item">
+            <i class="fas fa-phone"></i>
+            <span>+254 735 518 090<br>+254 718 260 115</span>
+          </div>
+          <div class="footer-contact-item">
+            <i class="fas fa-envelope"></i>
+            <span>info@arendgesin.co.ke</span>
+          </div>
+          <div class="footer-contact-item">
+            <i class="fas fa-globe"></i>
+            <span>www.arendgesin.co.ke</span>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <div class="footer-copy">© 2026 <span>Arend Gesin Investment</span>. All rights reserved.</div>
+        <div class="footer-bottom-links">
+          <a href="#">Privacy Policy</a>
+          <a href="#">Terms of Use</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    /* ── Scroll Reveal ── */
+    const revealEls = document.querySelectorAll('.reveal');
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach((entry, i) => {
+        if (entry.isIntersecting) {
+          setTimeout(() => entry.target.classList.add('visible'), i * 80);
+          revealObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.08 });
+    revealEls.forEach(el => revealObserver.observe(el));
+
+    /* ── Category Filter ── */
+    function filterPosts(cat, btn) {
+      document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+
+      const cards = document.querySelectorAll('.blog-card');
+      cards.forEach(card => {
+        const match = cat === 'all' || card.dataset.category === cat;
+        card.style.transition = 'opacity 0.3s ease, transform 0.3s ease';
+        if (match) {
+          card.style.opacity = '1';
+          card.style.transform = '';
+          card.style.display = 'flex';
+        } else {
+          card.style.opacity = '0';
+          card.style.transform = 'scale(0.96)';
+          setTimeout(() => {
+            if (card.style.opacity === '0') card.style.display = 'none';
+          }, 300);
+        }
+      });
+    }
+
+    /* ── Mobile Menu ── */
+    function toggleMenu() {
+      const links = document.querySelector('.nav-links');
+      if (links.style.display === 'flex') {
+        links.style.display = 'none';
+      } else {
+        links.style.cssText = `
+          display:flex; flex-direction:column; position:fixed;
+          top:70px; left:0; right:0; background:rgba(15,15,15,0.97);
+          backdrop-filter:blur(16px); padding:2rem 5%;
+          border-bottom:1px solid rgba(255,255,255,0.07);
+          gap:1.5rem; z-index:99;
+        `;
+      }
+    }
+
+    /* ── Pagination (visual only) ── */
+    document.querySelectorAll('.page-btn:not(.arrow)').forEach(btn => {
+      btn.addEventListener('click', function() {
+        document.querySelectorAll('.page-btn:not(.arrow)').forEach(b => b.classList.remove('active'));
+        this.classList.add('active');
+      });
+    });
+  </script>
+</body>
+</html>
