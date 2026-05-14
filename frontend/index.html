@@ -1,594 +1,471 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8"/>
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Arend Gesin Investment — Home Of Branding</title>
-<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
-<link rel="stylesheet" href="css/style.css"/>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Arend Gesin Investment — Home of Branding</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-<div class="cursor" id="cursor"></div>
-<div class="cursor-ring" id="cursorRing"></div>
 
-<!-- NAV -->
-<nav id="navbar">
-  <a href="index.html" class="logo-wrap">
-    <svg class="logo-svg-mark" width="52" height="58" viewBox="0 0 200 220">
-      <!-- Roof -->
-      <polygon points="100,4 196,72 4,72" fill="none" stroke="#e8eaf0" stroke-width="10" stroke-linejoin="round"/>
-      <!-- Left overhang -->
-      <line x1="4" y1="72" x2="0" y2="64" stroke="#e8eaf0" stroke-width="8" stroke-linecap="round"/>
-      <!-- Right overhang -->
-      <line x1="196" y1="72" x2="200" y2="64" stroke="#e8eaf0" stroke-width="8" stroke-linecap="round"/>
-      <!-- Walls -->
-      <rect x="22" y="72" width="156" height="96" fill="none" stroke="#e8eaf0" stroke-width="8"/>
-      <!-- AGI text -->
-      <text x="100" y="148" text-anchor="middle" font-family="Arial Black,sans-serif" font-size="46" font-weight="900" fill="#EF9F27" letter-spacing="4">AGI</text>
-      <!-- Swoosh -->
-      <path d="M 8,180 Q 100,198 192,178" fill="none" stroke="#e8eaf0" stroke-width="6" stroke-linecap="round"/>
-      <!-- Speed marks -->
-      <line x1="188" y1="172" x2="204" y2="166" stroke="#e8eaf0" stroke-width="5" stroke-linecap="round"/>
-      <line x1="190" y1="180" x2="208" y2="176" stroke="#e8eaf0" stroke-width="5" stroke-linecap="round"/>
-      <line x1="191" y1="188" x2="210" y2="186" stroke="#e8eaf0" stroke-width="5" stroke-linecap="round"/>
-    </svg>
-    <div class="logo-text">
-      <span class="logo-name">AREND GESIN</span>
-      <span class="logo-tag">Home Of Branding</span>
+<!-- ═══════════════════════════════════════════════
+     NAVBAR
+══════════════════════════════════════════════════ -->
+<nav class="navbar" id="navbar">
+  <div class="nav-inner">
+
+    <!-- Logo -->
+    <a href="index.html" class="nav-logo" aria-label="Arend Gesin Investment home">
+      <svg class="logo-svg" viewBox="0 0 120 44" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <!-- House icon -->
+        <g class="logo-icon">
+          <!-- Roof -->
+          <polygon points="18,4 34,16 2,16" fill="currentColor"/>
+          <!-- Left chimney -->
+          <rect x="5" y="8" width="4" height="8" fill="currentColor"/>
+          <!-- Wall -->
+          <rect x="4" y="16" width="28" height="16" fill="currentColor" opacity="0.15"/>
+          <rect x="4" y="16" width="28" height="16" fill="none" stroke="currentColor" stroke-width="1.5"/>
+          <!-- Door -->
+          <rect x="14" y="22" width="8" height="10" rx="1" fill="currentColor" opacity="0.8"/>
+          <!-- Swoosh underline -->
+          <path d="M0 35 Q17 40 36 33" stroke="#BA7517" stroke-width="2" fill="none" stroke-linecap="round"/>
+        </g>
+        <!-- AGI text -->
+        <text x="40" y="23" font-family="'Bebas Neue', sans-serif" font-size="22" fill="currentColor" letter-spacing="1">AGI</text>
+        <!-- Tagline -->
+        <text x="40" y="35" font-family="'DM Sans', sans-serif" font-size="7.5" fill="#BA7517" letter-spacing="1.5" font-style="italic">HOME OF BRANDING</text>
+      </svg>
+    </a>
+
+    <!-- Nav links -->
+    <ul class="nav-links" id="navLinks">
+      <li><a href="services.html">Services</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="portfolio.html">Portfolio</a></li>
+      <li><a href="blog.html">Insights</a></li>
+      <li><a href="csr.html">THAT Child</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+
+    <!-- CTA + hamburger -->
+    <div class="nav-right">
+      <a href="pages/order/index.html" class="btn-nav-cta">Order now</a>
+      <button class="hamburger" id="hamburger" aria-label="Toggle menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
     </div>
-  </a>
-  <ul class="nav-links">
-    <li><a href="#who">Who We Are</a></li>
-    <li><a href="#services">Services</a></li>
-    <li><a href="#portfolio">Work</a></li>
-    <li><a href="#pricing">Pricing</a></li>
-    <li><a href="#csr">CSR</a></li>
-    <li><a href="#about">About</a></li>
-    <li><a href="#contact">Contact</a></li>
-    <li><a href="pages/order.html" class="nav-cta">Order Now</a></li>
-  </ul>
-  <button class="hamburger" id="hamburger"><span></span><span></span><span></span></button>
+
+  </div>
 </nav>
 
-<!-- MOBILE OVERLAY -->
-<div class="mobile-overlay" id="mobileOverlay">
-  <button class="mobile-close" id="mobileClose">✕</button>
-  <div class="mobile-logo">
-    <a href="index.html" class="logo-wrap">
-      <svg width="60" height="67" viewBox="0 0 200 220">
-        <polygon points="100,4 196,72 4,72" fill="none" stroke="#e8eaf0" stroke-width="10" stroke-linejoin="round"/>
-        <line x1="4" y1="72" x2="0" y2="64" stroke="#e8eaf0" stroke-width="8" stroke-linecap="round"/>
-        <line x1="196" y1="72" x2="200" y2="64" stroke="#e8eaf0" stroke-width="8" stroke-linecap="round"/>
-        <rect x="22" y="72" width="156" height="96" fill="none" stroke="#e8eaf0" stroke-width="8"/>
-        <text x="100" y="148" text-anchor="middle" font-family="Arial Black,sans-serif" font-size="46" font-weight="900" fill="#EF9F27" letter-spacing="4">AGI</text>
-        <path d="M 8,180 Q 100,198 192,178" fill="none" stroke="#e8eaf0" stroke-width="6" stroke-linecap="round"/>
-        <line x1="188" y1="172" x2="204" y2="166" stroke="#e8eaf0" stroke-width="5" stroke-linecap="round"/>
-        <line x1="190" y1="180" x2="208" y2="176" stroke="#e8eaf0" stroke-width="5" stroke-linecap="round"/>
-        <line x1="191" y1="188" x2="210" y2="186" stroke="#e8eaf0" stroke-width="5" stroke-linecap="round"/>
+<!-- ═══════════════════════════════════════════════
+     HERO
+══════════════════════════════════════════════════ -->
+<section class="hero" id="hero">
+
+  <!-- Background: B&W room with plastic blue chair feel -->
+  <div class="hero-bg">
+    <div class="hero-bg-grid"></div>
+    <!-- Abstract chair silhouette (CSS + SVG inline) -->
+    <div class="hero-chair-wrap" aria-hidden="true">
+      <svg class="hero-chair-svg" viewBox="0 0 420 520" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <!-- Chair back -->
+        <rect x="60" y="40" width="300" height="200" rx="24" fill="#1A9BF0" opacity="0.92"/>
+        <!-- Back highlight gloss -->
+        <ellipse cx="150" cy="95" rx="60" ry="30" fill="white" opacity="0.12" transform="rotate(-15 150 95)"/>
+        <!-- Chair seat -->
+        <rect x="40" y="225" width="340" height="80" rx="18" fill="#1A9BF0" opacity="0.95"/>
+        <!-- Seat gloss -->
+        <ellipse cx="140" cy="248" rx="80" ry="18" fill="white" opacity="0.1"/>
+        <!-- Left back leg -->
+        <rect x="80" y="300" width="22" height="180" rx="8" fill="#0e7fd4"/>
+        <!-- Right back leg -->
+        <rect x="318" y="300" width="22" height="180" rx="8" fill="#0e7fd4"/>
+        <!-- Left front leg -->
+        <rect x="60" y="295" width="22" height="185" rx="8" fill="#1285db"/>
+        <!-- Right front leg -->
+        <rect x="338" y="295" width="22" height="185" rx="8" fill="#1285db"/>
+        <!-- Armrest left -->
+        <rect x="30" y="195" width="60" height="22" rx="10" fill="#0e7fd4"/>
+        <rect x="30" y="195" width="22" height="110" rx="10" fill="#0e7fd4"/>
+        <!-- Armrest right -->
+        <rect x="330" y="195" width="60" height="22" rx="10" fill="#0e7fd4"/>
+        <rect x="368" y="195" width="22" height="110" rx="10" fill="#0e7fd4"/>
+        <!-- Floor shadow -->
+        <ellipse cx="210" cy="490" rx="160" ry="16" fill="black" opacity="0.25"/>
       </svg>
-      <div class="logo-text">
-        <span class="logo-name" style="font-size:1.8rem;">AREND GESIN</span>
-        <span class="logo-tag">Home Of Branding</span>
-      </div>
-    </a>
+    </div>
+    <!-- Noise/grain overlay -->
+    <div class="hero-grain"></div>
+    <!-- Dark gradient overlay -->
+    <div class="hero-overlay"></div>
   </div>
-  <ul>
-    <li><a href="#who" class="mobile-link">Who We Are</a></li>
-    <li><a href="#services" class="mobile-link">Services</a></li>
-    <li><a href="#portfolio" class="mobile-link">Work</a></li>
-    <li><a href="#pricing" class="mobile-link">Pricing</a></li>
-    <li><a href="#csr" class="mobile-link">CSR</a></li>
-    <li><a href="#contact" class="mobile-link">Contact</a></li>
-    <li><a href="pages/order.html" class="mobile-cta">Order Now →</a></li>
-  </ul>
-</div>
 
-<!-- HERO -->
-<section id="hero" style="background-image:url('https://images.unsplash.com/photo-1486325212027-8081e485255e?w=1600&q=80');background-size:cover;background-position:center top;position:relative;">
-  <div style="position:absolute;inset:0;background:linear-gradient(120deg,rgba(0,0,0,0.75) 0%,rgba(192,24,26,0.4) 60%,rgba(0,0,0,0.55) 100%);z-index:1;"></div>
-  <div class="hero-deco" style="z-index:1;opacity:0.1;">
-    <svg width="100%" height="100%" viewBox="0 0 400 500">
-      <polygon points="200,10 380,130 20,130" fill="none" stroke="#EF9F27" stroke-width="3"/>
-      <rect x="44" y="130" width="312" height="200" fill="none" stroke="#EF9F27" stroke-width="3"/>
-      <text x="200" y="258" text-anchor="middle" font-family="Arial Black,sans-serif" font-size="90" font-weight="900" fill="#C0181A" letter-spacing="8">AGI</text>
-    </svg>
-  </div>
-  <div class="hero-content" style="position:relative;z-index:2;">
-    <div class="hero-tag">Arend Gesin Investment · Est. 2020</div>
-    <h1>
-      <span class="line1">Home Of</span>
-      <span class="line2">Branding.</span>
+  <!-- Hero content -->
+  <div class="hero-content">
+    <div class="hero-eyebrow">
+      <span class="eyebrow-dot"></span>
+      Nakuru · Kenya · Est. 2020
+    </div>
+
+    <h1 class="hero-headline">
+      <span class="headline-main">We Brand.</span>
+      <span class="headline-accent">We Build.</span>
+      <span class="headline-sub">We Empower.</span>
     </h1>
-    <p class="hero-sub">A family-based business focused on THAT Child and youth empowerment. We provide world-class branding, printing, stationery, IT and graphic design services — with a heart for community.</p>
-    <p class="hero-strength">"Strength of Family"</p>
-    <div class="hero-btns">
-      <a href="pages/order.html" class="btn-gold">Place an Order</a>
-      <a href="#services" class="btn-outline">Our Services</a>
+
+    <p class="hero-body">
+      Premium branding, printing &amp; imaging for organisations that want to stand out —<br class="br-desktop">
+      and give <strong>THAT Child</strong> a brighter tomorrow.
+    </p>
+
+    <div class="hero-actions">
+      <a href="pages/order/index.html" class="btn-primary">Get a quote</a>
+      <a href="portfolio.html" class="btn-ghost">See our work <span class="btn-arrow">→</span></a>
     </div>
+
+    <!-- Mini stats row inside hero -->
     <div class="hero-stats">
-      <div class="stat"><div class="stat-num" data-target="500">0</div><div class="stat-label">Brands Delivered</div></div>
-      <div class="stat"><div class="stat-num" data-target="5">0</div><div class="stat-label">Counties Served</div></div>
-      <div class="stat"><div class="stat-num" data-target="4">0</div><div class="stat-label">Core Services</div></div>
-    </div>
-  </div>
-</section>
-
-<!-- CLIENTS STRIP -->
-<div class="clients-strip">
-  <div class="clients-inner">
-    <span class="clients-label">Happy Clients</span>
-    <div class="clients-divider"></div>
-    <div class="clients-list">
-      <span class="client-name">AYS East Africa</span>
-      <span class="client-name">Beacon Contractors</span>
-      <span class="client-name">Innosearch Limited</span>
-      <span class="client-name">Soita Siundu Advocates</span>
-      <span class="client-name">St. Erastus Preparatory School</span>
-      <span class="client-name">Trendy Scents</span>
-      <span class="client-name">Noni Enterprises</span>
-      <span class="client-name">Bralison Limited</span>
-    </div>
-  </div>
-</div>
-
-<!-- TICKER -->
-<div class="ticker">
-  <div class="ticker-inner">
-    <span class="ticker-item">Printing & Branding</span><span class="ticker-item gold">Stationery Supplies</span>
-    <span class="ticker-item">IT Installations</span><span class="ticker-item gold">Graphic Design</span>
-    <span class="ticker-item">Campaign Branding</span><span class="ticker-item gold">Church Branding</span>
-    <span class="ticker-item">School Branding</span><span class="ticker-item gold">Home Of Branding</span>
-    <span class="ticker-item">Corporate Gifting</span><span class="ticker-item gold">Event Branding</span>
-    <span class="ticker-item">Printing & Branding</span><span class="ticker-item gold">Stationery Supplies</span>
-    <span class="ticker-item">IT Installations</span><span class="ticker-item gold">Graphic Design</span>
-    <span class="ticker-item">Campaign Branding</span><span class="ticker-item gold">Church Branding</span>
-    <span class="ticker-item">School Branding</span><span class="ticker-item gold">Home Of Branding</span>
-    <span class="ticker-item">Corporate Gifting</span><span class="ticker-item gold">Event Branding</span>
-  </div>
-</div>
-
-<!-- WHO WE ARE -->
-<section id="who" style="background:var(--navy2);">
-  <div class="who-grid">
-    <div class="who-text reveal">
-      <div class="section-label">Who We Are</div>
-      <h2 class="section-title">A Family Business<br/>With a Purpose.</h2>
-      <p>AREND GESIN is a family based business that focuses on THAT Child and is youth friendly. Comprising of highly skilled human resource base with broad professional experience in IT and project management. The business commits to best practice solutions and provision of your needs in all areas of our operation.</p>
-      <p>AGI was established in 2020 and its core business is branding & imaging. Other products and services include; stationery supplies, IT installations and work safety equipment (PPEs). We mainly operate in: Nakuru, Uasin Gishu, Bungoma, Trans Nzoia and Nairobi counties.</p>
-      <p>We believe in data as the new oil. We take empowerment very seriously and consider knowledge and skills transfer as the key to an empowered individual and organization. As the world comes to terms with the pressures of the knowledge economy, we endeavor to fully equip the youth and women with the requisite skills and competencies in entrepreneurship, customer service, branding, and personal development.</p>
-      <div style="margin-top:2rem;"><a href="pages/order.html" class="btn-gold">Start a Project</a></div>
-    </div>
-    <div class="who-visual reveal">
-      <div class="mvg-grid">
-        <div class="mvg-item"><h4>Our Goal</h4><p>Empower youth and give THAT Child a chance.</p></div>
-        <div class="mvg-item"><h4>Our Mission</h4><p>To be a treadsetter in professionalism of services offered with an eye on CSR deliberately touching THAT Child within the communities we operate in.</p></div>
-        <div class="mvg-item"><h4>Our Vision</h4><p>Our Vision for THAT Child is a world better than today.</p></div>
-        <div class="mvg-item"><h4>AGI Business Model</h4><p>Predominantly direct sales and services with an adaptable design specific to target customers. We leverage on partners and clients in new innovations and trends to increase sales through data pools with youth.</p></div>
+      <div class="hero-stat">
+        <span class="stat-num">5+</span>
+        <span class="stat-label">Counties served</span>
+      </div>
+      <div class="hero-stat-divider"></div>
+      <div class="hero-stat">
+        <span class="stat-num">4+</span>
+        <span class="stat-label">Years delivering</span>
+      </div>
+      <div class="hero-stat-divider"></div>
+      <div class="hero-stat">
+        <span class="stat-num">8+</span>
+        <span class="stat-label">Happy clients</span>
+      </div>
+      <div class="hero-stat-divider"></div>
+      <div class="hero-stat">
+        <span class="stat-num">100%</span>
+        <span class="stat-label">Family values</span>
       </div>
     </div>
   </div>
+
+  <!-- Scroll indicator -->
+  <div class="hero-scroll" aria-hidden="true">
+    <span>Scroll</span>
+    <div class="scroll-line"></div>
+  </div>
 </section>
 
-<!-- SERVICES -->
-<section id="services" style="padding:0;overflow:hidden;">
-  <div style="padding:5rem 5% 3rem;background:#fff;">
-    <div class="services-intro reveal">
-      <div class="section-label">Our Services</div>
-      <h2 class="section-title">What We Do.</h2>
-      <p style="color:var(--muted);line-height:1.8;max-width:520px;">At AGI, we offer a wide range of affordable and high quality services — delivered with professionalism, integrity and a commitment to exceeding your expectations.</p>
-    </div>
-  </div>
-
-  <!-- Service 1: Printing, Branding & Imaging — text left, photo right -->
-  <div style="display:grid;grid-template-columns:1fr 1fr;min-height:420px;">
-    <div style="padding:4rem 5%;display:flex;flex-direction:column;justify-content:center;background:#fff;" class="reveal">
-      <div class="section-label">01</div>
-      <h3 style="font-family:'Syne',sans-serif;font-size:1.6rem;font-weight:800;color:#C0181A;margin-bottom:1.2rem;line-height:1.2;">Printing, Branding &amp; Imaging</h3>
-      <p style="color:#444;line-height:1.85;margin-bottom:1rem;font-size:.95rem;">At AGI, we offer a wide range of affordable and high quality printing services. We do basic printing, offset printing, digital printing, large format printing, full colour printing, screen printing and pad printing.</p>
-      <p style="color:#444;line-height:1.85;font-size:.95rem;">We offer high quality and affordable branded merchandize for promotion and giveaways using latest technology. Our products include stationery branding, cloth branding, ceramics branding and hard plastic branding.</p>
-    </div>
-    <div style="background-image:url('https://images.unsplash.com/photo-1588072432836-e10032774350?w=800&q=80');background-size:cover;background-position:center;min-height:420px;"></div>
-  </div>
-
-  <!-- Service 2: Stationery Supplies — photo left, text right (matches PDF layout) -->
-  <div style="display:grid;grid-template-columns:1fr 1fr;min-height:420px;">
-    <div style="background-image:url('https://images.unsplash.com/photo-1583339793403-3d9b001b6008?w=800&q=80');background-size:cover;background-position:center;min-height:420px;"></div>
-    <div style="padding:4rem 5%;display:flex;flex-direction:column;justify-content:center;background:#f9f9f9;" class="reveal">
-      <div class="section-label">02</div>
-      <h3 style="font-family:'Syne',sans-serif;font-size:1.6rem;font-weight:800;color:#C0181A;margin-bottom:1.2rem;line-height:1.2;">Stationery Supplies</h3>
-      <p style="color:#444;line-height:1.85;margin-bottom:1rem;font-size:.95rem;">AGI supplies the best market brands in stationery products and has after-sale services to our esteemed clients. We offer high quality products and assorted stationery.</p>
-      <p style="color:#C0181A;font-weight:700;font-size:1rem;letter-spacing:1px;">Stay STATIONARY, Get STATIONERY.</p>
-    </div>
-  </div>
-
-  <!-- Full-width image divider — kids drawing, matching PDF page 5 bottom image -->
-  <div style="width:100%;height:340px;background-image:url('https://images.unsplash.com/photo-1503676260728-1c00da094a0b?w=1400&q=80');background-size:cover;background-position:center 30%;position:relative;">
-    <div style="position:absolute;inset:0;background:rgba(192,24,26,0.18);"></div>
-  </div>
-
-  <!-- Service 3: IT Installations — text left, photo right -->
-  <div style="display:grid;grid-template-columns:1fr 1fr;min-height:420px;">
-    <div style="padding:4rem 5%;display:flex;flex-direction:column;justify-content:center;background:#fff;" class="reveal">
-      <div class="section-label">03</div>
-      <h3 style="font-family:'Syne',sans-serif;font-size:1.6rem;font-weight:800;color:#C0181A;margin-bottom:1.2rem;line-height:1.2;">IT Installations &amp; Client Management</h3>
-      <p style="color:#444;line-height:1.85;font-size:.95rem;">AGI offers timely support to our clients in IT services. We provide quality computers, computer accessories and IT software installations. We maintain and service client systems and machines.</p>
-    </div>
-    <div style="background-image:url('https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=800&q=80');background-size:cover;background-position:center;min-height:420px;"></div>
-  </div>
-
-  <!-- Service 4: Graphic Design — photo left, text right -->
-  <div style="display:grid;grid-template-columns:1fr 1fr;min-height:420px;">
-    <div style="background-image:url('https://images.unsplash.com/photo-1561070791-2526d30994b5?w=800&q=80');background-size:cover;background-position:center;min-height:420px;"></div>
-    <div style="padding:4rem 5%;display:flex;flex-direction:column;justify-content:center;background:#f9f9f9;" class="reveal">
-      <div class="section-label">04</div>
-      <h3 style="font-family:'Syne',sans-serif;font-size:1.6rem;font-weight:800;color:#C0181A;margin-bottom:1.2rem;line-height:1.2;">Graphic Design &amp; Advertisement</h3>
-      <p style="color:#444;line-height:1.85;font-size:.95rem;">We develop business profiles, design brochures &amp; flyers, customize business cards and posters. We also offer customized clients' products and services advertisement at affordable prices on various social media platforms.</p>
+<!-- ═══════════════════════════════════════════════
+     TRUSTED BY
+══════════════════════════════════════════════════ -->
+<section class="trusted">
+  <div class="container">
+    <p class="trusted-label">Trusted by</p>
+    <div class="trusted-logos">
+      <span class="trusted-name">AYS East Africa</span>
+      <span class="trusted-name">Beacon Contractors</span>
+      <span class="trusted-name">Innosearch Limited</span>
+      <span class="trusted-name">Soita Siundu Advocates</span>
+      <span class="trusted-name">Bralison Limited</span>
+      <span class="trusted-name">Noni Enterprises</span>
     </div>
   </div>
 </section>
 
-<!-- PORTFOLIO -->
-<section id="portfolio">
-  <div class="portfolio-header reveal">
-    <div>
-      <div class="section-label">Our Work</div>
-      <h2 class="section-title">Products We've<br/>Delivered.</h2>
+<!-- ═══════════════════════════════════════════════
+     SERVICES
+══════════════════════════════════════════════════ -->
+<section class="services" id="services">
+  <div class="container">
+    <div class="section-header">
+      <p class="section-tag">What we do</p>
+      <h2 class="section-title">Everything your brand needs,<br><em>under one roof.</em></h2>
     </div>
-    <a href="pages/order.html" class="btn-gold">Order Now →</a>
-  </div>
-  <div class="portfolio-grid">
-    <div class="portfolio-item">
-      <img src="https://images.unsplash.com/photo-1596495577886-d920f1fb7238?w=800&q=80" alt="Branded T-Shirts" loading="lazy"/>
-      <div class="portfolio-always"><span class="p-cat">T-Shirts & Caps</span></div>
-      <div class="portfolio-overlay"><h3>Custom Printed T-Shirts</h3><p>Screen printed T-shirts for bulk orders</p></div>
-    </div>
-    <div class="portfolio-item">
-      <img src="https://images.unsplash.com/photo-1583339793403-3d9b001b6008?w=600&q=80" alt="Branded Pens" loading="lazy"/>
-      <div class="portfolio-always"><span class="p-cat">Pens & Stationery</span></div>
-      <div class="portfolio-overlay"><h3>Branded Pens & Stationery</h3><p>Custom branded pens and stationery</p></div>
-    </div>
-    <div class="portfolio-item">
-      <img src="https://images.unsplash.com/photo-1588072432836-e10032774350?w=600&q=80" alt="School Branding" loading="lazy"/>
-      <div class="portfolio-always"><span class="p-cat">School Branding</span></div>
-      <div class="portfolio-overlay"><h3>School Uniforms & Books</h3><p>Full school branding packages</p></div>
-    </div>
-    <div class="portfolio-item">
-      <img src="https://images.unsplash.com/photo-1611532736597-de2d4265fba3?w=600&q=80" alt="Campaign Banners" loading="lazy"/>
-      <div class="portfolio-always"><span class="p-cat">Campaign Branding</span></div>
-      <div class="portfolio-overlay"><h3>Campaign Banners & Posters</h3><p>Full election campaign branding</p></div>
-    </div>
-    <div class="portfolio-item">
-      <img src="https://images.unsplash.com/photo-1561070791-2526d30994b5?w=600&q=80" alt="Event Branding" loading="lazy"/>
-      <div class="portfolio-always"><span class="p-cat">Event Branding</span></div>
-      <div class="portfolio-overlay"><h3>Branded Tents & Pull-ups</h3><p>Full event branding setup</p></div>
-    </div>
-    <div class="portfolio-item">
-      <img src="https://images.unsplash.com/photo-1611532736597-de2d4265fba3?w=600&q=80" alt="Corporate Hampers" loading="lazy"/>
-      <div class="portfolio-always"><span class="p-cat">Corporate Gifting</span></div>
-      <div class="portfolio-overlay"><h3>Corporate Gift Hampers</h3><p>Branded executive gift sets</p></div>
-    </div>
-    <div class="portfolio-item">
-      <img src="https://images.unsplash.com/photo-1514228742587-6b1558fcca3d?w=600&q=80" alt="Branded Mugs" loading="lazy"/>
-      <div class="portfolio-always"><span class="p-cat">Mugs & Bottles</span></div>
-      <div class="portfolio-overlay"><h3>Branded Mugs & Bottles</h3><p>Custom printed mugs and flasks</p></div>
-    </div>
-    <div class="portfolio-item">
-      <img src="https://images.unsplash.com/photo-1503342564462-699cf398c0a1?w=600&q=80" alt="Hoodies" loading="lazy"/>
-      <div class="portfolio-always"><span class="p-cat">Hoodies & Caps</span></div>
-      <div class="portfolio-overlay"><h3>Custom Hoodies & Caps</h3><p>Embroidered and printed hoodies</p></div>
-    </div>
-    <div class="portfolio-item">
-      <img src="https://images.unsplash.com/photo-1520333789090-1afc82db536a?w=600&q=80" alt="Church Branding" loading="lazy"/>
-      <div class="portfolio-always"><span class="p-cat">Church Branding</span></div>
-      <div class="portfolio-overlay"><h3>Church & Ministry Kits</h3><p>Ministry logos, uniforms and banners</p></div>
+
+    <div class="services-grid">
+
+      <article class="service-card">
+        <div class="service-icon">
+          <svg viewBox="0 0 40 40" fill="none"><rect x="6" y="8" width="20" height="26" rx="3" stroke="currentColor" stroke-width="1.5"/><rect x="14" y="8" width="20" height="26" rx="3" fill="currentColor" opacity="0.08" stroke="currentColor" stroke-width="1.5"/><line x1="10" y1="16" x2="22" y2="16" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/><line x1="10" y1="20" x2="22" y2="20" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/><line x1="10" y1="24" x2="18" y2="24" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg>
+        </div>
+        <span class="service-num">01</span>
+        <h3 class="service-name">Printing, Branding &amp; Imaging</h3>
+        <p class="service-desc">Digital, offset, screen &amp; large-format printing. Stationery, cloth, ceramics, and hard-plastic branding using the latest technology.</p>
+        <a href="services.html#printing" class="service-link">Learn more <span>→</span></a>
+      </article>
+
+      <article class="service-card service-card--accent">
+        <div class="service-icon">
+          <svg viewBox="0 0 40 40" fill="none"><rect x="8" y="10" width="24" height="16" rx="3" stroke="currentColor" stroke-width="1.5"/><path d="M14 26v4M26 26v4M11 30h18" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><circle cx="20" cy="18" r="3" fill="currentColor" opacity="0.3" stroke="currentColor" stroke-width="1.2"/></svg>
+        </div>
+        <span class="service-num">02</span>
+        <h3 class="service-name">Stationery Supplies</h3>
+        <p class="service-desc">Top market brands delivered with after-sale care. High quality, assorted stationery for every office need. Stay stationary — get stationery.</p>
+        <a href="services.html#stationery" class="service-link">Learn more <span>→</span></a>
+      </article>
+
+      <article class="service-card">
+        <div class="service-icon">
+          <svg viewBox="0 0 40 40" fill="none"><rect x="8" y="12" width="18" height="14" rx="2" stroke="currentColor" stroke-width="1.5"/><rect x="8" y="26" width="18" height="2" rx="1" fill="currentColor" opacity="0.5"/><rect x="14" y="28" width="6" height="3" rx="1" fill="currentColor" opacity="0.3"/><path d="M28 14h4v16h-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <span class="service-num">03</span>
+        <h3 class="service-name">IT Installations &amp; Support</h3>
+        <p class="service-desc">Quality computers, accessories, and software installations. Ongoing maintenance and client system management for seamless operations.</p>
+        <a href="services.html#it" class="service-link">Learn more <span>→</span></a>
+      </article>
+
+      <article class="service-card">
+        <div class="service-icon">
+          <svg viewBox="0 0 40 40" fill="none"><circle cx="20" cy="16" r="7" stroke="currentColor" stroke-width="1.5"/><path d="M8 32c0-5.523 5.373-10 12-10s12 4.477 12 10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><path d="M24 13l3-3M26 19l3 1" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg>
+        </div>
+        <span class="service-num">04</span>
+        <h3 class="service-name">Graphic Design &amp; Advertising</h3>
+        <p class="service-desc">Business profiles, brochures, flyers, cards and posters. Social media advertising tailored to your brand at affordable prices.</p>
+        <a href="services.html#design" class="service-link">Learn more <span>→</span></a>
+      </article>
+
     </div>
   </div>
 </section>
 
-<!-- PRICING -->
-<section id="pricing">
-  <div class="pricing-header reveal">
-    <div class="section-label">Investment</div>
-    <h2 class="section-title">Affordable. Transparent.<br/>No Hidden Costs.</h2>
-    <p class="pricing-sub">All packages include consultation, design work and delivery coordination. Pay on delivery or via M-Pesa — your choice.</p>
-  </div>
-  <div class="currency-toggle reveal">
-    <span id="usdLabel" class="active">USD $</span>
-    <div class="toggle-track" id="currencyToggle"><div class="toggle-knob"></div></div>
-    <span id="kesLabel">KES Ksh</span>
-  </div>
-  <div class="pricing-grid" id="pricingGrid">
-    <div class="pricing-card reveal">
-      <div class="pricing-tier">Starter</div>
-      <div class="pricing-price">$150<span> /project</span></div>
-      <div class="kes-price">Ksh 20,000</div>
-      <div class="pricing-desc">For small businesses, chamas and startups building their brand from scratch.</div>
-      <ul class="pricing-features">
-        <li><span class="check">✦</span> Logo design (2 concepts)</li>
-        <li><span class="check">✦</span> Brand colour palette</li>
-        <li><span class="check">✦</span> Business card design</li>
-        <li><span class="check">✦</span> Letterhead & stamp design</li>
-        <li><span class="check">✦</span> WhatsApp profile setup</li>
-        <li><span class="check">✦</span> 2 revision rounds</li>
-        <li class="faded"><span class="check">✗</span> Merchandise production</li>
-        <li class="faded"><span class="check">✗</span> Social media kit</li>
-      </ul>
-      <a href="pages/order.html?package=starter" class="pricing-btn">Order Starter</a>
-    </div>
-    <div class="pricing-card featured reveal">
-      <div class="pricing-badge">Most Popular</div>
-      <div class="pricing-tier">Business</div>
-      <div class="pricing-price">$400<span> /project</span></div>
-      <div class="kes-price">Ksh 55,000</div>
-      <div class="pricing-desc">Complete branding for growing businesses needing design and physical branded items.</div>
-      <ul class="pricing-features">
-        <li><span class="check">✦</span> Everything in Starter</li>
-        <li><span class="check">✦</span> Full brand identity system</li>
-        <li><span class="check">✦</span> Social media kit</li>
-        <li><span class="check">✦</span> 50 branded T-shirts</li>
-        <li><span class="check">✦</span> 2 pull-up banners</li>
-        <li><span class="check">✦</span> 100 branded pens</li>
-        <li><span class="check">✦</span> WhatsApp Business setup</li>
-        <li><span class="check">✦</span> 4 revision rounds</li>
-      </ul>
-      <a href="pages/order.html?package=business" class="pricing-btn gold-btn">Order Business</a>
-    </div>
-    <div class="pricing-card reveal">
-      <div class="pricing-tier">Enterprise</div>
-      <div class="pricing-price">$1,200<span> /project</span></div>
-      <div class="kes-price">Ksh 160,000</div>
-      <div class="pricing-desc">Full branding for large institutions, campaigns and county government tenders.</div>
-      <ul class="pricing-features">
-        <li><span class="check">✦</span> Everything in Business</li>
-        <li><span class="check">✦</span> Full merchandise production</li>
-        <li><span class="check">✦</span> Campaign full kit</li>
-        <li><span class="check">✦</span> Event branding setup</li>
-        <li><span class="check">✦</span> Vehicle branding design</li>
-        <li><span class="check">✦</span> County tender package</li>
-        <li><span class="check">✦</span> 1-year brand support</li>
-        <li><span class="check">✦</span> Unlimited revisions</li>
-      </ul>
-      <a href="pages/order.html?package=enterprise" class="pricing-btn">Order Enterprise</a>
-    </div>
-  </div>
-  <div class="pricing-note reveal">Need a custom quote? <a href="mailto:info@arendgesin.co.ke">Email us directly.</a></div>
-  <div class="pod-row reveal"><div class="pod-dot"></div> M-Pesa accepted · Pay on delivery available · No hidden charges</div>
-</section>
-
-<!-- VALUES -->
-<section id="values" style="padding:0;overflow:hidden;">
-  <div style="display:grid;grid-template-columns:1fr 1fr;min-height:580px;">
-    <!-- Left: real office/workspace photo matching PDF page 9 -->
-    <div style="background-image:url('https://images.unsplash.com/photo-1497366216548-37526070297c?w=900&q=80');background-size:cover;background-position:center;min-height:580px;"></div>
-    <!-- Right: gold-bg values text, matching PDF pages 9-10 -->
-    <div style="background:#EF9F27;padding:4rem 5%;display:flex;flex-direction:column;justify-content:center;" class="reveal">
-      <div class="section-label" style="color:#7a4d00;">Why Choose Us</div>
-      <h2 style="font-family:'Syne',sans-serif;font-size:clamp(1.8rem,3.5vw,2.8rem);font-weight:800;color:#fff;line-height:1.1;margin-bottom:1rem;">WHY CHOOSE US?<br/><span style="font-size:0.7em;">(Values &amp; Principles)</span></h2>
-      <p style="color:#fff;line-height:1.8;margin-bottom:2rem;font-size:.92rem;">In our commitment to excite and transcend our client's expectations, we strive to make THAT Child smile, we stand out from the rest.</p>
-      <div style="display:flex;flex-direction:column;gap:1.2rem;">
-        <div><strong style="display:block;color:#fff;font-size:.82rem;font-weight:700;letter-spacing:1px;margin-bottom:3px;">We believe in GOD</strong><p style="color:rgba(255,255,255,.9);font-size:.85rem;line-height:1.6;margin:0;">We believe in God working through our hearts and minds in all our undertakings for THAT Child.</p></div>
-        <div><strong style="display:block;color:#fff;font-size:.82rem;font-weight:700;letter-spacing:1px;margin-bottom:3px;">We believe in TRANSPARENCY</strong><p style="color:rgba(255,255,255,.9);font-size:.85rem;line-height:1.6;margin:0;">Our services are anchored on transparency and accountability. Anyone can hold to the helm when the sea is quiet. However, we deliver more when the competition is stiff. In fact, we become stronger.</p></div>
-        <div><strong style="display:block;color:#fff;font-size:.82rem;font-weight:700;letter-spacing:1px;margin-bottom:3px;">We believe in INTEGRITY</strong><p style="color:rgba(255,255,255,.9);font-size:.85rem;line-height:1.6;margin:0;">We attribute this to making our clients our friends. We serve with an honest heart for tomorrow.</p></div>
-        <div><strong style="display:block;color:#fff;font-size:.82rem;font-weight:700;letter-spacing:1px;margin-bottom:3px;">We believe in INVOLVEMENT</strong><p style="color:rgba(255,255,255,.9);font-size:.85rem;line-height:1.6;margin:0;">Our team believes in working together to tighten all the loose ends. We incorporate open forum discussions and individual meetings to iron out any hiccups during our service delivery.</p></div>
-        <div><strong style="display:block;color:#fff;font-size:.82rem;font-weight:700;letter-spacing:1px;margin-bottom:3px;">We believe in CUSTOMER SATISFACTION</strong><p style="color:rgba(255,255,255,.9);font-size:.85rem;line-height:1.6;margin:0;">We believe that a satisfied customer is the best form of advertisement. What a customer thinks about our products becomes our reality.</p></div>
-        <div style="margin-top:.5rem;"><strong style="display:block;color:#fff;font-size:.9rem;font-weight:800;margin-bottom:3px;">Your Role</strong><p style="color:rgba(255,255,255,.9);font-size:.88rem;margin:0;">Help THAT Child. Ask us how.</p></div>
+<!-- ═══════════════════════════════════════════════
+     WHY AGI (VALUES)
+══════════════════════════════════════════════════ -->
+<section class="why-agi">
+  <div class="container">
+    <div class="why-inner">
+      <div class="why-left">
+        <p class="section-tag">Why choose us</p>
+        <h2 class="section-title">Principles we<br><em>never compromise.</em></h2>
+        <p class="why-body">We are more than a branding company. We are a family that puts God, transparency, and your satisfaction at the heart of every project.</p>
+        <a href="about.html" class="btn-primary">Meet the team</a>
       </div>
-    </div>
-  </div>
-</section>
-
-<!-- CSR -->
-<section id="csr" style="padding:0;overflow:hidden;">
-  <div style="display:grid;grid-template-columns:1fr 1fr;min-height:600px;">
-    <!-- Left: real photo like PDF page 8 -->
-    <div style="position:relative;min-height:600px;background-image:url('https://images.unsplash.com/photo-1521791136064-7986c2920216?w=900&q=80');background-size:cover;background-position:center;">
-      <div style="position:absolute;inset:0;background:rgba(192,24,26,0.55);"></div>
-      <div style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:3rem;z-index:2;">
-        <div class="csr-logo-text">MIND MASTERS</div>
-        <div class="csr-logo-sub">by Arend Gesin Investment</div>
-        <div class="csr-desc">AGI's flagship youth empowerment programme — designed to inspire, motivate and coach THAT Child on the power of the human mind in shaping their destiny. Targeting youth in learning institutions.</div>
-      </div>
-    </div>
-    <div class="csr-text reveal" style="padding:5rem 5%;display:flex;flex-direction:column;justify-content:center;background:#fff;">
-      <div class="section-label">Partnerships & CSR</div>
-      <h2 class="section-title">Help THAT Child.<br/>Ask Us How.</h2>
-      <p>AGI knows, THAT Child deserves the best. We work closely with other players and partners within the sector to facilitate CSR initiatives targeting the youth. We raise awareness through motivational speaking and personal development.</p>
-      <p>Through our <span class="that-child">MIND MASTERS</span> programme we aim to inspire (create confidence), motivate (create a feeling of 'wanting to') and coach (give skills) you on the power of the human mind in shaping their destiny.</p>
-      <p>It is designed for individuals, learning institutions and corporate. Its core agenda is to guide people to understand the power of the mind in living the lives of their dreams. In it you will learn how to set new goals and make decisions towards achieving them; carry out a sincere Personal Development Audit (PDA); and come up with a detailed Action Plan for your life.</p>
-      <div style="margin-top:2rem;"><a href="/cdn-cgi/l/email-protection#9df4f3fbf2ddfceff8f3f9faf8eef4f3b3fef2b3f6f8" class="btn-gold">Partner With Us</a></div>
-    </div>
-  </div>
-</section>
-
-<!-- ABOUT -->
-<section id="about" style="padding:0;overflow:hidden;">
-  <div style="display:grid;grid-template-columns:1fr 1fr;min-height:560px;">
-    <!-- Left photo card with red overlay matching PDF page 4 -->
-    <div style="position:relative;min-height:560px;background-image:url('https://images.unsplash.com/photo-1551836022-d5d88e9218df?w=900&q=80');background-size:cover;background-position:center;">
-      <div style="position:absolute;inset:0;background:rgba(192,24,26,0.18);"></div>
-      <div style="position:absolute;bottom:0;left:0;right:0;background:rgba(192,24,26,0.88);padding:2.5rem;z-index:2;">
-        <div class="section-label" style="position:relative;">Est. 2020 · Nakuru</div>
-        <h3 style="font-family:'Syne',sans-serif;font-size:1.6rem;font-weight:800;color:#fff;margin-bottom:1.5rem;line-height:1.2;">Arend Gesin Investment.<br/>Strength of Family.</h3>
-        <div class="about-stats">
-          <div class="astat"><div class="astat-num">500+</div><div class="astat-label">Brands Delivered</div></div>
-          <div class="astat"><div class="astat-num">5</div><div class="astat-label">Counties Served</div></div>
-          <div class="astat"><div class="astat-num">4</div><div class="astat-label">Core Services</div></div>
-          <div class="astat"><div class="astat-num">8+</div><div class="astat-label">Happy Clients</div></div>
+      <div class="why-right">
+        <div class="value-item">
+          <div class="value-icon value-icon--red">✦</div>
+          <div>
+            <h4 class="value-name">Faith &amp; Purpose</h4>
+            <p class="value-desc">We believe in God working through our hearts and minds in every project we undertake for THAT Child.</p>
+          </div>
+        </div>
+        <div class="value-item">
+          <div class="value-icon value-icon--amber">✦</div>
+          <div>
+            <h4 class="value-name">Transparency</h4>
+            <p class="value-desc">Anchored on full accountability. We become stronger when the competition is stiffest.</p>
+          </div>
+        </div>
+        <div class="value-item">
+          <div class="value-icon value-icon--red">✦</div>
+          <div>
+            <h4 class="value-name">Integrity</h4>
+            <p class="value-desc">We treat every client as a friend, serving with an honest heart — today and for tomorrow.</p>
+          </div>
+        </div>
+        <div class="value-item">
+          <div class="value-icon value-icon--amber">✦</div>
+          <div>
+            <h4 class="value-name">Customer Satisfaction</h4>
+            <p class="value-desc">A satisfied client is our best advertisement. What you think of us becomes our reality.</p>
+          </div>
         </div>
       </div>
     </div>
-    <div class="about-text reveal" style="padding:5rem 5%;display:flex;flex-direction:column;justify-content:center;background:#fff;">
-      <div class="section-label">About AGI</div>
-      <h2 class="section-title">A Business Built<br/>on Family Values.</h2>
-      <p>AREND GESIN INVESTMENT is a family based business that focuses on THAT Child and is youth friendly. Comprising of highly skilled human resource base with broad professional experience in IT and project management. The business commits to best practice solutions and provision of your needs in all areas of our operation.</p>
-      <p>AGI's network of partners and clients is critical to our long-term success. AGI business model is predominantly direct sales and services with an adaptable design specific to target customers. We endeavor to pull support for education and life in its fullness for THAT Child. Our model expands operations to youth as ambassadors creating an environment of self-reliance.</p>
-      <div class="founder-name">Brian Soita</div>
-      <div class="founder-title">Founder & Creative Director</div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════
+     CSR TEASER — THAT CHILD
+══════════════════════════════════════════════════ -->
+<section class="csr-teaser">
+  <div class="container">
+    <div class="csr-inner">
+      <div class="csr-badge">CSR Initiative</div>
+      <h2 class="csr-headline">Every purchase helps<br><strong>THAT Child.</strong></h2>
+      <p class="csr-body">Through our <em>Mind Masters</em> programme, AGI inspires, motivates and coaches youth in learning institutions — creating a world better than today, one brand at a time.</p>
+      <a href="csr.html" class="btn-csr">Discover our mission</a>
     </div>
   </div>
 </section>
 
-<!-- OUR CLIENT PORTFOLIO -->
-<section id="clients" style="padding:0;overflow:hidden;">
-  <div style="display:grid;grid-template-columns:1fr 1fr;min-height:520px;">
-    <!-- Left: target clients on light bg -->
-    <div style="padding:5rem 5%;background:#fff;display:flex;flex-direction:column;justify-content:center;" class="reveal">
-      <div class="section-label">Client Portfolio</div>
-      <h2 class="section-title" style="font-size:clamp(1.8rem,3vw,2.6rem);">OUR CLIENT<br/>PORT FOLIO</h2>
-      <h3 style="font-family:'Syne',sans-serif;font-size:1.1rem;font-weight:700;color:#C0181A;margin-bottom:1rem;">Target Clients</h3>
-      <ul style="list-style:none;display:flex;flex-direction:column;gap:.55rem;">
-        <li style="color:#444;font-size:.9rem;display:flex;align-items:center;gap:8px;"><span style="color:#C0181A;font-size:.6rem;">●</span> NGOs</li>
-        <li style="color:#444;font-size:.9rem;display:flex;align-items:center;gap:8px;"><span style="color:#C0181A;font-size:.6rem;">●</span> CBOs</li>
-        <li style="color:#444;font-size:.9rem;display:flex;align-items:center;gap:8px;"><span style="color:#C0181A;font-size:.6rem;">●</span> Corporates</li>
-        <li style="color:#444;font-size:.9rem;display:flex;align-items:center;gap:8px;"><span style="color:#C0181A;font-size:.6rem;">●</span> INGOs</li>
-        <li style="color:#444;font-size:.9rem;display:flex;align-items:center;gap:8px;"><span style="color:#C0181A;font-size:.6rem;">●</span> National and County Governments</li>
-        <li style="color:#444;font-size:.9rem;display:flex;align-items:center;gap:8px;"><span style="color:#C0181A;font-size:.6rem;">●</span> State Corporations</li>
-        <li style="color:#444;font-size:.9rem;display:flex;align-items:center;gap:8px;"><span style="color:#C0181A;font-size:.6rem;">●</span> Institutions of higher education</li>
-        <li style="color:#444;font-size:.9rem;display:flex;align-items:center;gap:8px;"><span style="color:#C0181A;font-size:.6rem;">●</span> Apex organizations</li>
-        <li style="color:#444;font-size:.9rem;display:flex;align-items:center;gap:8px;"><span style="color:#C0181A;font-size:.6rem;">●</span> Youth led organizations</li>
-        <li style="color:#444;font-size:.9rem;display:flex;align-items:center;gap:8px;"><span style="color:#C0181A;font-size:.6rem;">●</span> Private businesses</li>
-      </ul>
+<!-- ═══════════════════════════════════════════════
+     TESTIMONIALS
+══════════════════════════════════════════════════ -->
+<section class="testimonials" id="testimonials">
+  <div class="container">
+    <div class="section-header">
+      <p class="section-tag">Kind words</p>
+      <h2 class="section-title">What our clients say.</h2>
     </div>
-    <!-- Right: smiling man photo with red overlay & clients list — matching PDF page 11 -->
-    <div style="position:relative;min-height:520px;background-image:url('https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=900&q=80');background-size:cover;background-position:center top;">
-      <div style="position:absolute;inset:0;background:rgba(192,24,26,0.82);"></div>
-      <div style="position:absolute;inset:0;padding:4rem 2.5rem;display:flex;flex-direction:column;justify-content:center;z-index:2;">
-        <h3 style="font-family:'Syne',sans-serif;font-size:1.4rem;font-weight:800;color:#fff;margin-bottom:1.5rem;">Our Happy Clients &amp; Partners</h3>
-        <ul style="list-style:none;display:flex;flex-direction:column;gap:.7rem;">
-          <li style="color:rgba(255,255,255,.9);font-size:.9rem;display:flex;align-items:center;gap:10px;"><span style="color:#EF9F27;font-size:.6rem;">●</span> AYS East Africa Limited</li>
-          <li style="color:rgba(255,255,255,.9);font-size:.9rem;display:flex;align-items:center;gap:10px;"><span style="color:#EF9F27;font-size:.6rem;">●</span> Beacon Contractors</li>
-          <li style="color:rgba(255,255,255,.9);font-size:.9rem;display:flex;align-items:center;gap:10px;"><span style="color:#EF9F27;font-size:.6rem;">●</span> Innosearch Limited</li>
-          <li style="color:rgba(255,255,255,.9);font-size:.9rem;display:flex;align-items:center;gap:10px;"><span style="color:#EF9F27;font-size:.6rem;">●</span> Soita Siundu Advocates</li>
-          <li style="color:rgba(255,255,255,.9);font-size:.9rem;display:flex;align-items:center;gap:10px;"><span style="color:#EF9F27;font-size:.6rem;">●</span> St. Erastus Preparatory School Kitale</li>
-          <li style="color:rgba(255,255,255,.9);font-size:.9rem;display:flex;align-items:center;gap:10px;"><span style="color:#EF9F27;font-size:.6rem;">●</span> Trendy Scents</li>
-          <li style="color:rgba(255,255,255,.9);font-size:.9rem;display:flex;align-items:center;gap:10px;"><span style="color:#EF9F27;font-size:.6rem;">●</span> Noni Enterprises</li>
-          <li style="color:rgba(255,255,255,.9);font-size:.9rem;display:flex;align-items:center;gap:10px;"><span style="color:#EF9F27;font-size:.6rem;">●</span> Bralison Limited</li>
+
+    <div class="testi-grid">
+      <article class="testi-card">
+        <div class="testi-stars">★★★★★</div>
+        <p class="testi-quote">"AGI delivered our branding materials on time and beyond expectations. The quality is outstanding — our clients noticed the difference immediately."</p>
+        <div class="testi-author">
+          <div class="testi-avatar">AE</div>
+          <div>
+            <p class="testi-name">AYS East Africa</p>
+            <p class="testi-role">Corporate Client</p>
+          </div>
+        </div>
+      </article>
+
+      <article class="testi-card testi-card--featured">
+        <div class="testi-stars">★★★★★</div>
+        <p class="testi-quote">"The team at AGI understood our vision perfectly. From business cards to a full office rebrand — professional, affordable, and genuinely caring."</p>
+        <div class="testi-author">
+          <div class="testi-avatar">BC</div>
+          <div>
+            <p class="testi-name">Beacon Contractors</p>
+            <p class="testi-role">Corporate Client</p>
+          </div>
+        </div>
+      </article>
+
+      <article class="testi-card">
+        <div class="testi-stars">★★★★★</div>
+        <p class="testi-quote">"AGI's MIND MASTERS session transformed our team. The youth in our community are better for it. A company that truly walks the talk."</p>
+        <div class="testi-author">
+          <div class="testi-avatar">SE</div>
+          <div>
+            <p class="testi-name">St. Erastus School</p>
+            <p class="testi-role">Education Partner</p>
+          </div>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════
+     CTA BANNER
+══════════════════════════════════════════════════ -->
+<section class="cta-banner">
+  <div class="container">
+    <div class="cta-inner">
+      <h2 class="cta-headline">Ready to build your brand?</h2>
+      <p class="cta-sub">Let's create something remarkable together — for your business and for THAT Child.</p>
+      <div class="cta-actions">
+        <a href="pages/order/index.html" class="btn-primary btn-large">Place an order</a>
+        <a href="contact.html" class="btn-outline-light">Talk to us first</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════
+     FOOTER
+══════════════════════════════════════════════════ -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-top">
+
+      <!-- Brand column -->
+      <div class="footer-brand">
+        <a href="index.html" class="nav-logo footer-logo" aria-label="AGI home">
+          <svg class="logo-svg" viewBox="0 0 120 44" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <g class="logo-icon">
+              <polygon points="18,4 34,16 2,16" fill="currentColor"/>
+              <rect x="5" y="8" width="4" height="8" fill="currentColor"/>
+              <rect x="4" y="16" width="28" height="16" fill="currentColor" opacity="0.15"/>
+              <rect x="4" y="16" width="28" height="16" fill="none" stroke="currentColor" stroke-width="1.5"/>
+              <rect x="14" y="22" width="8" height="10" rx="1" fill="currentColor" opacity="0.8"/>
+              <path d="M0 35 Q17 40 36 33" stroke="#BA7517" stroke-width="2" fill="none" stroke-linecap="round"/>
+            </g>
+            <text x="40" y="23" font-family="'Bebas Neue', sans-serif" font-size="22" fill="currentColor" letter-spacing="1">AGI</text>
+            <text x="40" y="35" font-family="'DM Sans', sans-serif" font-size="7.5" fill="#BA7517" letter-spacing="1.5" font-style="italic">HOME OF BRANDING</text>
+          </svg>
+        </a>
+        <p class="footer-tagline">Strength of Family.</p>
+        <p class="footer-desc">A family-based branding company empowering youth and giving THAT Child a chance — one brand at a time.</p>
+        <div class="footer-contact-mini">
+          <a href="tel:+254735518090">+254 735 518 090</a>
+          <a href="mailto:info@arendgesin.co.ke">info@arendgesin.co.ke</a>
+        </div>
+      </div>
+
+      <!-- Services -->
+      <div class="footer-col">
+        <h5 class="footer-col-title">Services</h5>
+        <ul>
+          <li><a href="services.html#printing">Printing &amp; Branding</a></li>
+          <li><a href="services.html#stationery">Stationery Supplies</a></li>
+          <li><a href="services.html#it">IT Installations</a></li>
+          <li><a href="services.html#design">Graphic Design</a></li>
+          <li><a href="services.html#ppe">Work Safety (PPEs)</a></li>
         </ul>
       </div>
-    </div>
-  </div>
-</section>
 
-<!-- TESTIMONIALS -->
-<section id="testimonials">
-  <div class="reveal" style="margin-bottom:3rem;">
-    <div class="section-label">Client Voices</div>
-    <h2 class="section-title">What Our Clients<br/>Say About AGI.</h2>
-  </div>
-  <div style="overflow:hidden;">
-    <div class="testi-track">
-      <div class="testi-card"><div class="testi-stars">★★★★★</div><blockquote>"AGI branded our entire campaign — T-shirts, caps, banners and vehicle stickers. Delivered on time and looked absolutely professional."</blockquote><div class="testi-author"><div class="testi-avatar">JK</div><div><div class="testi-name">James Kipchoge</div><div class="testi-role">Campaign Client</div></div></div></div>
-      <div class="testi-card"><div class="testi-stars">★★★★★</div><blockquote>"Our school has never looked this professional. From the logo to the uniforms to the branded books — AGI transformed our whole institution."</blockquote><div class="testi-author"><div class="testi-avatar">GM</div><div><div class="testi-name">Grace Muthoni</div><div class="testi-role">Head Teacher, Nakuru</div></div></div></div>
-      <div class="testi-card"><div class="testi-stars">★★★★★</div><blockquote>"Quality branded merchandise delivered in 4 days. AGI is our permanent branding partner — professional, fast and affordable."</blockquote><div class="testi-author"><div class="testi-avatar">DO</div><div><div class="testi-name">David Omondi</div><div class="testi-role">HR Director, Nairobi</div></div></div></div>
-      <div class="testi-card"><div class="testi-stars">★★★★★</div><blockquote>"Our ministry now looks like an international organisation. The branded choir uniforms and programmes are beautiful."</blockquote><div class="testi-author"><div class="testi-avatar">PN</div><div><div class="testi-name">Pastor Njoroge</div><div class="testi-role">Senior Pastor, Eldoret</div></div></div></div>
-      <div class="testi-card"><div class="testi-stars">★★★★★</div><blockquote>"AGI delivered over 10,000 branded items for our county tender on time and to every specification. Highly professional."</blockquote><div class="testi-author"><div class="testi-avatar">AW</div><div><div class="testi-name">Agnes Wanjiku</div><div class="testi-role">Procurement, County Government</div></div></div></div>
-      <div class="testi-card"><div class="testi-stars">★★★★★</div><blockquote>"AGI branded our entire campaign — T-shirts, caps, banners and vehicle stickers. Delivered on time and looked absolutely professional."</blockquote><div class="testi-author"><div class="testi-avatar">JK</div><div><div class="testi-name">James Kipchoge</div><div class="testi-role">Campaign Client</div></div></div></div>
-      <div class="testi-card"><div class="testi-stars">★★★★★</div><blockquote>"Our school has never looked this professional. From the logo to the uniforms to the branded books — AGI transformed our whole institution."</blockquote><div class="testi-author"><div class="testi-avatar">GM</div><div><div class="testi-name">Grace Muthoni</div><div class="testi-role">Head Teacher, Nakuru</div></div></div></div>
-    </div>
-  </div>
-</section>
+      <!-- Company -->
+      <div class="footer-col">
+        <h5 class="footer-col-title">Company</h5>
+        <ul>
+          <li><a href="about.html">About AGI</a></li>
+          <li><a href="csr.html">THAT Child / CSR</a></li>
+          <li><a href="portfolio.html">Portfolio</a></li>
+          <li><a href="blog.html">Insights</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </div>
 
-<!-- CONTACT -->
-<section id="contact">
-  <div class="contact-grid">
-    <div class="contact-text reveal">
-      <div class="section-label">Get In Touch</div>
-      <h2 class="section-title">Let's Work<br/>Together.</h2>
-      <p>Ready to brand your business, institution or campaign? Our team responds quickly — usually the same day.</p>
-      <div class="contact-info">
-        <div class="info-item"><div class="info-icon">✉</div><div><strong>Email</strong>info@arendgesin.co.ke</div></div>
-        <div class="info-item"><div class="info-icon">☎</div><div><strong>Phone</strong>+254 735 518 090 · +254 718 260 115</div></div>
-        <div class="info-item"><div class="info-icon">◎</div><div><strong>Website</strong>www.arendgesin.co.ke</div></div>
-        <div class="info-item"><div class="info-icon">◈</div><div><strong>Address</strong>P.O. Box 20100–12236, Nakuru</div></div>
-        <div class="info-item"><div class="info-icon">⬡</div><div><strong>Counties</strong>Nakuru · Uasin Gishu · Bungoma · Trans Nzoia · Nairobi</div></div>
-        <div class="info-item"><div class="info-icon">◉</div><div><strong>Payment</strong>M-Pesa · Pay on delivery</div></div>
+      <!-- Counties -->
+      <div class="footer-col">
+        <h5 class="footer-col-title">We operate in</h5>
+        <ul>
+          <li><span>Nakuru County</span></li>
+          <li><span>Nairobi County</span></li>
+          <li><span>Uasin Gishu</span></li>
+          <li><span>Trans Nzoia</span></li>
+          <li><span>Bungoma County</span></li>
+        </ul>
       </div>
-    </div>
-    <div class="contact-form reveal">
-      <h3>Send Us a Message</h3>
-      <div class="form-row">
-        <div class="form-group"><label>First Name</label><input type="text" placeholder="Wanjiku"/></div>
-        <div class="form-group"><label>Last Name</label><input type="text" placeholder="Kamau"/></div>
-      </div>
-      <div class="form-group"><label>Business / Organisation</label><input type="text" placeholder="Your Business Name"/></div>
-      <div class="form-group"><label>Phone / WhatsApp</label><input type="tel" placeholder="07XX XXX XXX"/></div>
-      <div class="form-group">
-        <label>Service Needed</label>
-        <select>
-          <option value="">Select a service</option>
-          <option>Printing, Branding & Imaging</option>
-          <option>Stationery Supplies</option>
-          <option>IT Installations & Client Management</option>
-          <option>Graphic Design & Advertisement</option>
-          <option>Other</option>
-        </select>
-      </div>
-      <div class="form-group"><label>Message</label><textarea placeholder="Tell us what you need..."></textarea></div>
-      <button class="submit-btn" id="contactSubmit">Send Message</button>
-    </div>
-  </div>
-</section>
 
-<!-- FOOTER -->
-<footer>
-  <div class="footer-top">
-    <div class="footer-brand">
-      <a href="index.html" class="logo-wrap" style="margin-bottom:1rem;">
-        <svg width="44" height="49" viewBox="0 0 200 220">
-          <polygon points="100,4 196,72 4,72" fill="none" stroke="#e8eaf0" stroke-width="10" stroke-linejoin="round"/>
-          <line x1="4" y1="72" x2="0" y2="64" stroke="#e8eaf0" stroke-width="8" stroke-linecap="round"/>
-          <line x1="196" y1="72" x2="200" y2="64" stroke="#e8eaf0" stroke-width="8" stroke-linecap="round"/>
-          <rect x="22" y="72" width="156" height="96" fill="none" stroke="#e8eaf0" stroke-width="8"/>
-          <text x="100" y="148" text-anchor="middle" font-family="Arial Black,sans-serif" font-size="46" font-weight="900" fill="#EF9F27" letter-spacing="4">AGI</text>
-          <path d="M 8,180 Q 100,198 192,178" fill="none" stroke="#e8eaf0" stroke-width="6" stroke-linecap="round"/>
-          <line x1="188" y1="172" x2="204" y2="166" stroke="#e8eaf0" stroke-width="5" stroke-linecap="round"/>
-          <line x1="190" y1="180" x2="208" y2="176" stroke="#e8eaf0" stroke-width="5" stroke-linecap="round"/>
-          <line x1="191" y1="188" x2="210" y2="186" stroke="#e8eaf0" stroke-width="5" stroke-linecap="round"/>
-        </svg>
-        <div class="logo-text"><span class="logo-name" style="font-size:1.2rem;">AREND GESIN</span><span class="logo-tag">Home Of Branding</span></div>
-      </a>
-      <p>A family-based business focused on THAT Child. We take empowerment very seriously and consider knowledge and skills transfer as the key to an empowered individual and organization. Branding, printing, stationery, IT and graphic design — delivered with integrity and purpose.</p>
-      <p style="font-style:italic;color:var(--gold);font-size:.85rem;margin-top:.5rem;">"Strength of Family"</p>
-      <div class="footer-contacts">
-        <a href="tel:+254735518090">+254 735 518 090</a>
-        <a href="tel:+254718260115">+254 718 260 115</a>
-        <a href="mailto:info@arendgesin.co.ke">info@arendgesin.co.ke</a>
-        <a href="http://www.arendgesin.co.ke">www.arendgesin.co.ke</a>
-      </div>
     </div>
-    <div class="footer-col"><h4>Our Services</h4><ul>
-      <li><a href="#services">Printing, Branding & Imaging</a></li>
-      <li><a href="#services">Stationery Supplies</a></li>
-      <li><a href="#services">IT Installations</a></li>
-      <li><a href="#services">Graphic Design</a></li>
-    </ul></div>
-    <div class="footer-col"><h4>Company</h4><ul>
-      <li><a href="#who">Who We Are</a></li>
-      <li><a href="#values">Our Values</a></li>
-      <li><a href="#csr">MIND MASTERS CSR</a></li>
-      <li><a href="#clients">Client Portfolio</a></li>
-      <li><a href="pages/order.html">Place an Order</a></li>
-      <li><a href="pages/admin.html">Admin</a></li>
-    </ul></div>
-    <div class="footer-col"><h4>Counties We Serve</h4><ul>
-      <li><a href="#">Nakuru (HQ)</a></li>
-      <li><a href="#">Uasin Gishu</a></li>
-      <li><a href="#">Bungoma</a></li>
-      <li><a href="#">Trans Nzoia</a></li>
-      <li><a href="#">Nairobi</a></li>
-    </ul></div>
-  </div>
-  <div class="footer-bottom">
-    <p>© 2025 Arend Gesin Investment · Home Of Branding · P.O. Box 20100–12236, Nakuru · Strength of Family</p>
-    <div class="footer-socials">
-      <a href="#" class="social-link">FB</a>
-      <a href="#" class="social-link">IG</a>
-      <a href="#" class="social-link">WA</a>
-      <a href="#" class="social-link">TT</a>
+
+    <div class="footer-bottom">
+      <p class="footer-copy">© 2025 Arend Gesin Investment. All rights reserved.</p>
+      <a href="http://www.arendgesin.co.ke" class="footer-web" target="_blank" rel="noopener">www.arendgesin.co.ke</a>
     </div>
   </div>
 </footer>
 
 <script src="js/main.js"></script>
 <script>
-const t
+// Navbar scroll behaviour
+(function(){
+  const nav = document.getElementById('navbar');
+  window.addEventListener('scroll', () => {
+    nav.classList.toggle('scrolled', window.scrollY > 40);
+  }, { passive: true });
+
+  // Hamburger
+  const ham = document.getElementById('hamburger');
+  const links = document.getElementById('navLinks');
+  ham.addEventListener('click', () => {
+    const open = links.classList.toggle('open');
+    ham.setAttribute('aria-expanded', open);
+    ham.classList.toggle('active', open);
+  });
+
+  // Scroll reveal
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('revealed');
+        observer.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.12 });
+  document.querySelectorAll('.service-card, .value-item, .testi-card').forEach(el => {
+    el.classList.add('reveal');
+    observer.observe(el);
+  });
+})();
+</script>
+</body>
+</html>
