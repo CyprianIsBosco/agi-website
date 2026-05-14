@@ -1233,18 +1233,20 @@ Heard about AGI: ${how || 'Not stated'}
   // Open mailto
   window.location.href = `mailto:info@arendgesin.co.ke?subject=${subject}&body=${body}`;
 
-  // Show success panel
-  document.querySelector('.form-card-header').style.display = 'none';
-  document.querySelector('.form-card-body').style.display = 'none';
-  document.getElementById('successPanel').classList.add('active');
-
-  // Mark all steps done in stepper
-  [1,2,3].forEach(i => {
-    const item = document.getElementById('step-item-' + i);
-    item.classList.remove('active');
-    item.classList.add('done');
-    item.querySelector('.step-circle').textContent = '✓';
+  // Build success page URL with params
+  const sp = new URLSearchParams({
+    ref,
+    service, county, item, qty,
+    deadline: document.getElementById('deadline').value.trim(),
+    budget:   document.getElementById('budget').value,
+    fname, lname,
+    phone, email,
   });
+
+  // Short delay so mailto opens, then redirect
+  setTimeout(() => {
+    window.location.href = 'success.html?' + sp.toString();
+  }, 600);
 }
 
 /* ══ Navbar scroll + hamburger ══ */

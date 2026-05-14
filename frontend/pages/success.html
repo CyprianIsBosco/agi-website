@@ -3,69 +3,356 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Order Confirmed — AGI Brand Division</title>
-<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
-<link rel="stylesheet" href="../css/style.css"/>
+<title>Order Confirmed — Arend Gesin Investment</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
 <style>
-.success-page { min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 2rem; text-align: center; position: relative; overflow: hidden; }
-.success-page::before { content:''; position:absolute; inset:0; opacity:.04; background-image:linear-gradient(var(--gold) 1px,transparent 1px),linear-gradient(90deg,var(--gold) 1px,transparent 1px); background-size:60px 60px; }
-.success-glow { position:absolute; width:600px; height:600px; background:radial-gradient(circle,rgba(239,159,39,.12) 0%,transparent 70%); border-radius:50%; top:50%;left:50%;transform:translate(-50%,-50%); animation: pulse 6s ease-in-out infinite; }
-.success-content { position:relative;z-index:2;max-width:560px; }
-.success-icon-ring { width:100px;height:100px;border:2px solid var(--gold);border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 2rem;font-size:2.5rem;animation:fadeUp .8s ease .2s both;box-shadow:0 0 40px rgba(239,159,39,.2); }
-.success-content h1 { font-family:'Syne',sans-serif;font-size:clamp(2rem,5vw,3.5rem);font-weight:800;margin-bottom:1rem;animation:fadeUp .8s ease .4s both; }
-.success-content p { color:var(--muted);font-size:1rem;line-height:1.8;margin-bottom:1.5rem;animation:fadeUp .8s ease .6s both; }
-.success-steps { display:flex;flex-direction:column;gap:.8rem;margin:2rem 0;animation:fadeUp .8s ease .8s both; }
-.success-step { display:flex;align-items:center;gap:1rem;background:var(--navy2);border:1px solid var(--border);border-radius:4px;padding:1rem 1.2rem;text-align:left; }
-.step-dot { width:8px;height:8px;border-radius:50%;background:var(--gold);flex-shrink:0;box-shadow:0 0 10px rgba(239,159,39,.5); }
-.step-text { font-size:.88rem;color:var(--text); }
-.step-text span { color:var(--muted);font-size:.82rem;display:block;margin-top:2px; }
+:root {
+  --ink:        #1A1A1A;
+  --ink-muted:  #555;
+  --surface:    #F8F7F4;
+  --off-white:  #F2F0EB;
+  --border:     rgba(0,0,0,0.10);
+  --red:        #A32D2D;
+  --red-light:  rgba(163,45,45,0.08);
+  --gold:       #BA7517;
+  --white:      #fff;
+  --font-sans:  'DM Sans', sans-serif;
+  --font-head:  'Bebas Neue', sans-serif;
+  --font-display: 'DM Serif Display', serif;
+  --nav-h:      72px;
+  --max-w:      1200px;
+  --radius:     10px;
+  --radius-lg:  16px;
+  --shadow:     0 2px 24px rgba(0,0,0,0.08);
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: var(--font-sans);
+  background: var(--surface);
+  color: var(--ink);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  min-height: 100vh;
+}
+a { text-decoration: none; color: inherit; }
+
+/* ── Navbar ── */
+.navbar {
+  position: fixed; top: 0; left: 0; right: 0;
+  height: var(--nav-h);
+  z-index: 100;
+  background: rgba(26,26,26,0.97);
+  backdrop-filter: blur(12px);
+  border-bottom: 0.5px solid rgba(255,255,255,0.07);
+}
+.nav-inner {
+  max-width: var(--max-w); margin: 0 auto;
+  height: 100%; padding: 0 24px;
+  display: flex; align-items: center; justify-content: space-between;
+}
+.nav-logo { display: flex; align-items: center; color: #fff; }
+.logo-svg { height: 36px; width: auto; }
+
+/* ── Page ── */
+.success-page {
+  min-height: 100vh;
+  display: flex; align-items: center; justify-content: center;
+  padding: calc(var(--nav-h) + 48px) 24px 80px;
+  position: relative; overflow: hidden;
+}
+.success-page::before {
+  content: '';
+  position: absolute; inset: 0;
+  background-image:
+    linear-gradient(rgba(0,0,0,0.02) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0,0,0,0.02) 1px, transparent 1px);
+  background-size: 60px 60px;
+}
+.success-glow {
+  position: absolute;
+  width: 640px; height: 640px;
+  background: radial-gradient(circle, rgba(163,45,45,0.07) 0%, transparent 70%);
+  border-radius: 50%;
+  top: 50%; left: 50%; transform: translate(-50%,-50%);
+  animation: pulse 6s ease-in-out infinite;
+  pointer-events: none;
+}
+@keyframes pulse { 0%,100%{opacity:.6;transform:translate(-50%,-50%) scale(1);}50%{opacity:1;transform:translate(-50%,-50%) scale(1.08);} }
+@keyframes fadeUp { from{opacity:0;transform:translateY(20px);}to{opacity:1;transform:translateY(0);} }
+
+.success-content {
+  position: relative; z-index: 2;
+  max-width: 600px; width: 100%;
+  text-align: center;
+}
+
+/* Icon ring */
+.success-icon-ring {
+  width: 88px; height: 88px;
+  border: 2px solid var(--red);
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  margin: 0 auto 28px;
+  font-size: 2.2rem; color: var(--red);
+  animation: fadeUp .7s ease .1s both;
+  box-shadow: 0 0 40px var(--red-light);
+}
+
+.success-content h1 {
+  font-family: var(--font-head);
+  font-size: clamp(40px, 7vw, 80px);
+  line-height: 0.95; letter-spacing: 0.02em;
+  color: var(--ink);
+  margin-bottom: 16px;
+  animation: fadeUp .7s ease .25s both;
+}
+.success-content h1 span { color: var(--red); }
+
+.success-intro {
+  font-size: 15px; color: var(--ink-muted);
+  line-height: 1.8; max-width: 480px; margin: 0 auto 32px;
+  animation: fadeUp .7s ease .4s both;
+}
+
+/* Order reference pill */
+.success-ref {
+  display: inline-block;
+  background: var(--white);
+  border: 0.5px solid var(--border);
+  border-radius: 99px;
+  padding: 8px 20px;
+  font-size: 13px; color: var(--ink-muted);
+  margin-bottom: 36px;
+  box-shadow: var(--shadow);
+  animation: fadeUp .7s ease .5s both;
+}
+.success-ref strong { color: var(--red); }
+
+/* Order summary card */
+.success-card {
+  background: var(--white);
+  border: 0.5px solid var(--border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow);
+  overflow: hidden;
+  margin-bottom: 32px;
+  animation: fadeUp .7s ease .55s both;
+  text-align: left;
+}
+.success-card-header {
+  padding: 18px 24px;
+  background: var(--ink);
+  display: flex; align-items: center; justify-content: space-between;
+}
+.success-card-label {
+  font-size: 11px; font-weight: 500;
+  letter-spacing: 0.16em; text-transform: uppercase;
+  color: rgba(255,255,255,0.4);
+}
+.success-card-body { padding: 8px 0; }
+.summary-row {
+  display: flex; align-items: flex-start;
+  justify-content: space-between; gap: 16px;
+  padding: 12px 24px;
+  border-bottom: 0.5px solid var(--border);
+  font-size: 13.5px;
+}
+.summary-row:last-child { border-bottom: none; }
+.summary-label { color: var(--ink-muted); flex-shrink: 0; min-width: 100px; }
+.summary-val { color: var(--ink); font-weight: 500; text-align: right; }
+.summary-val.empty { color: rgba(0,0,0,0.2); font-weight: 400; font-style: italic; }
+
+/* Next steps */
+.steps-title {
+  font-size: 11px; font-weight: 500;
+  letter-spacing: 0.16em; text-transform: uppercase;
+  color: var(--ink-muted); margin-bottom: 16px;
+  animation: fadeUp .7s ease .65s both;
+}
+.success-steps {
+  display: flex; flex-direction: column; gap: 10px;
+  margin-bottom: 36px;
+  animation: fadeUp .7s ease .7s both;
+  text-align: left;
+}
+.success-step {
+  display: flex; align-items: flex-start; gap: 14px;
+  background: var(--white);
+  border: 0.5px solid var(--border);
+  border-radius: var(--radius);
+  padding: 14px 18px;
+}
+.step-dot {
+  width: 8px; height: 8px; border-radius: 50%;
+  background: var(--red);
+  flex-shrink: 0; margin-top: 6px;
+  box-shadow: 0 0 8px var(--red-light);
+}
+.step-text { font-size: 13.5px; color: var(--ink); line-height: 1.5; }
+.step-text span { color: var(--ink-muted); font-size: 12px; display: block; margin-top: 2px; }
+
+/* Buttons */
+.success-actions {
+  display: flex; gap: 12px; justify-content: center; flex-wrap: wrap;
+  animation: fadeUp .7s ease .85s both;
+}
+.btn-primary {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 12px 28px;
+  background: var(--red); color: #fff;
+  font-family: var(--font-sans); font-size: 14px; font-weight: 500;
+  border-radius: 99px; border: none; cursor: pointer;
+  transition: background 0.2s, transform 0.15s, box-shadow 0.2s;
+}
+.btn-primary:hover { background: #8a2424; transform: translateY(-1px); box-shadow: 0 4px 16px rgba(163,45,45,0.3); }
+.btn-outline {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 12px 28px;
+  background: transparent; color: var(--ink);
+  font-family: var(--font-sans); font-size: 14px; font-weight: 500;
+  border-radius: 99px; border: 1.5px solid var(--border);
+  transition: border-color 0.2s, color 0.2s;
+}
+.btn-outline:hover { border-color: var(--ink); }
+
+/* Footer strip */
+.footer-strip {
+  position: fixed; bottom: 0; left: 0; right: 0;
+  background: var(--ink);
+  padding: 14px 24px;
+  display: flex; align-items: center; justify-content: center; gap: 4px;
+  font-size: 12px; color: rgba(255,255,255,0.25);
+  z-index: 50;
+}
+.footer-strip a { color: rgba(255,255,255,0.35); transition: color 0.2s; }
+.footer-strip a:hover { color: rgba(255,255,255,0.7); }
 </style>
 </head>
 <body>
 
-<div class="cursor" id="cursor"></div>
-<div class="cursor-ring" id="cursorRing"></div>
-
-<nav id="navbar">
-  <a href="../index.html" class="logo">AGI<span>.</span></a>
+<!-- Navbar -->
+<nav class="navbar">
+  <div class="nav-inner">
+    <a href="../index.html" class="nav-logo" aria-label="AGI home">
+      <svg class="logo-svg" viewBox="0 0 120 44" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <g>
+          <polygon points="18,4 34,16 2,16" fill="currentColor"/>
+          <rect x="5" y="8" width="4" height="8" fill="currentColor"/>
+          <rect x="4" y="16" width="28" height="16" fill="currentColor" opacity="0.15"/>
+          <rect x="4" y="16" width="28" height="16" fill="none" stroke="currentColor" stroke-width="1.5"/>
+          <rect x="14" y="22" width="8" height="10" rx="1" fill="currentColor" opacity="0.8"/>
+          <path d="M0 35 Q17 40 36 33" stroke="#BA7517" stroke-width="2" fill="none" stroke-linecap="round"/>
+        </g>
+        <text x="40" y="23" font-family="'Bebas Neue', sans-serif" font-size="22" fill="currentColor" letter-spacing="1">AGI</text>
+        <text x="40" y="35" font-family="'DM Sans', sans-serif" font-size="7.5" fill="#BA7517" letter-spacing="1.5" font-style="italic">HOME OF BRANDING</text>
+      </svg>
+    </a>
+  </div>
 </nav>
 
 <div class="success-page">
   <div class="success-glow"></div>
   <div class="success-content">
-    <div class="success-icon-ring">✦</div>
-    <h1 style="color:var(--text);">Payment <span style="color:var(--gold);">Confirmed.</span></h1>
-    <p>Thank you for choosing Arend Gesin Investment. Your brand transformation begins now. Here's what happens next:</p>
 
+    <div class="success-icon-ring">✓</div>
+
+    <h1>Order <span>Received.</span></h1>
+    <p class="success-intro">
+      Thank you for choosing Arend Gesin Investment. We've received your request and will send
+      a personalised quote to your email within <strong>24 hours</strong>.
+    </p>
+
+    <div class="success-ref">Reference: <strong id="orderRef">AGI-000000</strong></div>
+
+    <!-- Order summary -->
+    <div class="success-card">
+      <div class="success-card-header">
+        <span class="success-card-label">Your order summary</span>
+      </div>
+      <div class="success-card-body">
+        <div class="summary-row"><span class="summary-label">Service</span><span class="summary-val" id="sumService">—</span></div>
+        <div class="summary-row"><span class="summary-label">County</span><span class="summary-val" id="sumCounty">—</span></div>
+        <div class="summary-row"><span class="summary-label">Item / Product</span><span class="summary-val" id="sumItem">—</span></div>
+        <div class="summary-row"><span class="summary-label">Quantity</span><span class="summary-val" id="sumQty">—</span></div>
+        <div class="summary-row"><span class="summary-label">Deadline</span><span class="summary-val" id="sumDeadline">Flexible</span></div>
+        <div class="summary-row"><span class="summary-label">Budget</span><span class="summary-val" id="sumBudget">—</span></div>
+        <div class="summary-row"><span class="summary-label">Client</span><span class="summary-val" id="sumName">—</span></div>
+        <div class="summary-row"><span class="summary-label">Contact</span><span class="summary-val" id="sumContact">—</span></div>
+      </div>
+    </div>
+
+    <!-- Next steps -->
+    <p class="steps-title">What happens next</p>
     <div class="success-steps">
       <div class="success-step">
         <div class="step-dot"></div>
-        <div class="step-text">Confirmation email sent to your inbox<span>Check your spam folder if you don't see it within 5 minutes</span></div>
+        <div class="step-text">We review your order request
+          <span>Our team will go over your specifications and prepare a tailored quote</span>
+        </div>
       </div>
       <div class="success-step">
         <div class="step-dot"></div>
-        <div class="step-text">Dedicated brand strategist assigned within 24 hours<span>They will reach out to schedule your kickoff call</span></div>
+        <div class="step-text">Quote sent within 24 hours
+          <span>Check your email — and your spam folder just in case</span>
+        </div>
       </div>
       <div class="success-step">
         <div class="step-dot"></div>
-        <div class="step-text">Project kickoff call within 48 hours<span>We'll align on vision, timeline, and deliverables</span></div>
+        <div class="step-text">Confirm &amp; we get to work
+          <span>Once you approve the quote, production or design begins immediately</span>
+        </div>
       </div>
       <div class="success-step">
         <div class="step-dot"></div>
-        <div class="step-text">Brand work begins<span>Your transformation is now officially underway</span></div>
+        <div class="step-text">Delivery to your location
+          <span>We serve Nakuru, Nairobi, Uasin Gishu, Trans Nzoia &amp; Bungoma counties</span>
+        </div>
       </div>
     </div>
 
-    <p id="orderRef" style="font-size:.82rem;margin-top:.5rem;"></p>
-
-    <div style="display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;margin-top:2rem;animation:fadeUp .8s ease 1s both;">
-      <a href="../index.html" class="btn-primary">Back to Home</a>
-      <a href="/cdn-cgi/l/email-protection#4a222f2626250a2b382f242e672d2f39232464292527" class="btn-outline">Contact Our Team</a>
+    <div class="success-actions">
+      <a href="../index.html" class="btn-primary">← Back to Home</a>
+      <a href="mailto:info@arendgesin.co.ke" class="btn-outline">Email Our Team</a>
     </div>
+
   </div>
 </div>
 
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script src="../js/main.js"></script>
+<!-- Footer strip -->
+<div class="footer-strip">
+  © 2025 Arend Gesin Investment ·
+  <a href="tel:+254735518090">+254 735 518 090</a> ·
+  <a href="mailto:info@arendgesin.co.ke">info@arendgesin.co.ke</a>
+</div>
+
 <script>
+// Read URL params (passed from order.html on submit)
 const params = new URLSearchParams(window.location.search);
-const order
+
+function setEl(id, val, fallback) {
+  const el = document.getElementById(id);
+  if (!el) return;
+  const v = val || fallback || '—';
+  el.textContent = v;
+  if (!val) el.classList.add('empty');
+}
+
+const ref = params.get('ref') || ('AGI-' + Date.now().toString().slice(-6));
+document.getElementById('orderRef').textContent = ref;
+
+setEl('sumService',  params.get('service'));
+setEl('sumCounty',   params.get('county'));
+setEl('sumItem',     params.get('item'));
+setEl('sumQty',      params.get('qty') ? params.get('qty') + ' unit(s)' : '');
+setEl('sumDeadline', params.get('deadline'), 'Flexible');
+setEl('sumBudget',   params.get('budget'));
+const name = [params.get('fname'), params.get('lname')].filter(Boolean).join(' ');
+setEl('sumName', name);
+const contact = [params.get('phone'), params.get('email')].filter(Boolean).join(' · ');
+setEl('sumContact', contact);
+</script>
+</body>
+</html>
