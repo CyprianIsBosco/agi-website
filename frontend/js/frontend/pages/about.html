@@ -1,0 +1,1035 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>About Us — Arend Gesin Investment</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../css/style.css">
+<style>
+
+/* ── Page hero ── */
+.about-hero {
+  padding: calc(var(--nav-h) + 80px) 0 0;
+  background: var(--ink);
+  position: relative;
+  overflow: hidden;
+}
+.about-hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(255,255,255,0.018) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.018) 1px, transparent 1px);
+  background-size: 64px 64px;
+}
+.about-hero-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 64px;
+  align-items: end;
+  position: relative;
+  z-index: 1;
+}
+.about-hero-text { padding-bottom: 72px; }
+.page-breadcrumb {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12px;
+  color: rgba(255,255,255,0.35);
+  margin-bottom: 28px;
+  letter-spacing: 0.04em;
+}
+.page-breadcrumb a { color: rgba(255,255,255,0.35); transition: color 0.2s; }
+.page-breadcrumb a:hover { color: rgba(255,255,255,0.7); }
+.page-breadcrumb span { color: rgba(255,255,255,0.55); }
+.about-hero-tag {
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--red);
+  margin-bottom: 18px;
+}
+.about-hero-title {
+  font-family: var(--font-head);
+  font-size: clamp(56px, 8vw, 108px);
+  line-height: 0.9;
+  color: #fff;
+  letter-spacing: 0.02em;
+  margin-bottom: 28px;
+}
+.about-hero-title span {
+  display: block;
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: clamp(24px, 3vw, 40px);
+  line-height: 1.3;
+  color: rgba(255,255,255,0.45);
+  letter-spacing: 0;
+  margin-top: 10px;
+}
+.about-hero-body {
+  font-size: 15.5px;
+  color: rgba(255,255,255,0.52);
+  max-width: 460px;
+  line-height: 1.8;
+  margin-bottom: 36px;
+}
+.about-hero-body strong { color: var(--amber); font-weight: 500; }
+.about-hero-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.hero-chip {
+  font-size: 12px;
+  padding: 6px 14px;
+  border-radius: 99px;
+  border: 0.5px solid rgba(255,255,255,0.15);
+  color: rgba(255,255,255,0.55);
+  background: rgba(255,255,255,0.05);
+}
+
+/* Hero image panel */
+.about-hero-visual {
+  position: relative;
+  align-self: stretch;
+  min-height: 460px;
+}
+.about-hero-img {
+  position: absolute;
+  inset: 0;
+  border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+  overflow: hidden;
+}
+.about-hero-img img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  filter: grayscale(25%) contrast(1.05);
+}
+.about-hero-img::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(10,10,10,0.55), transparent 50%);
+}
+.about-hero-float {
+  position: absolute;
+  bottom: 24px;
+  left: 24px;
+  z-index: 2;
+  background: rgba(10,10,10,0.80);
+  backdrop-filter: blur(12px);
+  border: 0.5px solid rgba(255,255,255,0.12);
+  border-radius: var(--radius-md);
+  padding: 18px 22px;
+  display: flex;
+  gap: 24px;
+}
+.float-stat { text-align: center; }
+.float-stat-num {
+  display: block;
+  font-family: var(--font-head);
+  font-size: 30px;
+  color: #fff;
+  line-height: 1;
+  margin-bottom: 4px;
+}
+.float-stat-label {
+  font-size: 10.5px;
+  color: rgba(255,255,255,0.40);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+.float-divider {
+  width: 0.5px;
+  background: rgba(255,255,255,0.12);
+  align-self: stretch;
+}
+
+/* ── Est. band ── */
+.est-band {
+  background: var(--red);
+  padding: 16px 0;
+  overflow: hidden;
+}
+.est-marquee {
+  display: flex;
+  gap: 48px;
+  white-space: nowrap;
+  animation: marquee 18s linear infinite;
+  width: max-content;
+}
+.est-item {
+  font-family: var(--font-head);
+  font-size: 15px;
+  letter-spacing: 0.18em;
+  color: rgba(255,255,255,0.55);
+}
+.est-item strong { color: #fff; }
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+
+/* ── Who we are ── */
+.who-section {
+  padding: 100px 0;
+  background: var(--off-white);
+}
+.who-inner {
+  display: grid;
+  grid-template-columns: 5fr 4fr;
+  gap: 80px;
+  align-items: start;
+}
+.who-text {}
+.who-label {
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--red);
+  margin-bottom: 14px;
+}
+.who-title {
+  font-family: var(--font-display);
+  font-size: clamp(32px, 4vw, 50px);
+  font-weight: 400;
+  line-height: 1.15;
+  margin-bottom: 28px;
+  color: var(--ink);
+}
+.who-title em { font-style: italic; color: var(--red); }
+.who-para {
+  font-size: 15px;
+  color: var(--ink-muted);
+  line-height: 1.85;
+  margin-bottom: 20px;
+  max-width: 560px;
+}
+.who-para strong { color: var(--ink); font-weight: 500; }
+
+/* Side facts */
+.who-facts {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding-top: 12px;
+}
+.fact-card {
+  background: var(--surface);
+  border: 0.5px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: 24px;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+.fact-card:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-md);
+}
+.fact-num {
+  font-family: var(--font-head);
+  font-size: 40px;
+  line-height: 1;
+  color: var(--red);
+  margin-bottom: 6px;
+  letter-spacing: 0.02em;
+}
+.fact-label {
+  font-size: 13.5px;
+  color: var(--ink-muted);
+  line-height: 1.5;
+}
+.fact-label strong { color: var(--ink); }
+
+/* ── Mission Vision Goal ── */
+.mvg-section {
+  padding: 100px 0;
+  background: var(--surface);
+}
+.mvg-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+.mvg-card {
+  border-radius: var(--radius-lg);
+  padding: 44px 36px;
+  position: relative;
+  overflow: hidden;
+}
+.mvg-card.goal  { background: var(--off-white); border: 0.5px solid var(--border); }
+.mvg-card.mission { background: var(--ink); }
+.mvg-card.vision { background: var(--red); }
+
+.mvg-icon {
+  width: 44px; height: 44px;
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 20px;
+  margin-bottom: 28px;
+}
+.mvg-card.goal    .mvg-icon { background: var(--red-light); }
+.mvg-card.mission .mvg-icon { background: rgba(255,255,255,0.08); }
+.mvg-card.vision  .mvg-icon { background: rgba(255,255,255,0.15); }
+
+.mvg-type {
+  font-size: 10.5px;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  margin-bottom: 12px;
+}
+.mvg-card.goal    .mvg-type { color: var(--red); }
+.mvg-card.mission .mvg-type { color: rgba(255,255,255,0.40); }
+.mvg-card.vision  .mvg-type { color: rgba(255,255,255,0.60); }
+
+.mvg-title {
+  font-family: var(--font-display);
+  font-size: 26px;
+  font-weight: 400;
+  margin-bottom: 16px;
+  line-height: 1.2;
+}
+.mvg-card.goal    .mvg-title { color: var(--ink); }
+.mvg-card.mission .mvg-title { color: #fff; }
+.mvg-card.vision  .mvg-title { color: #fff; }
+
+.mvg-body {
+  font-size: 14.5px;
+  line-height: 1.75;
+}
+.mvg-card.goal    .mvg-body { color: var(--ink-muted); }
+.mvg-card.mission .mvg-body { color: rgba(255,255,255,0.55); }
+.mvg-card.vision  .mvg-body { color: rgba(255,255,255,0.75); }
+
+/* ── Story timeline ── */
+.story-section {
+  padding: 100px 0;
+  background: var(--off-white);
+}
+.story-inner {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  align-items: center;
+}
+.story-img-wrap {
+  position: relative;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  aspect-ratio: 3/4;
+  background: #e0ddd8;
+}
+.story-img-wrap img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s ease;
+}
+.story-img-wrap:hover img { transform: scale(1.04); }
+.story-img-accent {
+  position: absolute;
+  bottom: -1px; left: -1px; right: -1px;
+  height: 4px;
+  background: linear-gradient(90deg, var(--red), var(--amber));
+}
+
+.story-content {}
+.timeline {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  margin-top: 36px;
+}
+.timeline-item {
+  display: flex;
+  gap: 24px;
+  position: relative;
+}
+.timeline-item:not(:last-child) {
+  padding-bottom: 32px;
+}
+.timeline-item:not(:last-child)::before {
+  content: '';
+  position: absolute;
+  left: 15px;
+  top: 32px;
+  bottom: 0;
+  width: 0.5px;
+  background: var(--border);
+}
+.timeline-dot {
+  width: 32px; height: 32px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 11px;
+  font-weight: 500;
+  position: relative;
+  z-index: 1;
+}
+.timeline-dot.red   { background: var(--red-light); color: var(--red); }
+.timeline-dot.amber { background: var(--amber-light); color: var(--amber); }
+.timeline-dot.dark  { background: var(--ink); color: #fff; }
+.timeline-year {
+  font-family: var(--font-head);
+  font-size: 13px;
+  letter-spacing: 0.08em;
+  color: var(--ink-faint);
+  margin-bottom: 4px;
+}
+.timeline-title {
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--ink);
+  margin-bottom: 6px;
+}
+.timeline-desc {
+  font-size: 13.5px;
+  color: var(--ink-muted);
+  line-height: 1.7;
+}
+
+/* ── Values ── */
+.values-section {
+  padding: 100px 0;
+  background: var(--surface);
+}
+.values-header {
+  text-align: center;
+  max-width: 560px;
+  margin: 0 auto 60px;
+}
+.values-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 20px;
+}
+.value-card {
+  background: var(--off-white);
+  border: 0.5px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 36px 28px;
+  transition: transform 0.25s, box-shadow 0.25s, background 0.25s;
+  position: relative;
+  overflow: hidden;
+}
+.value-card::after {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 3px;
+  background: transparent;
+  transition: background 0.25s;
+}
+.value-card:hover {
+  background: var(--surface);
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-md);
+}
+.value-card:hover::after { background: var(--red); }
+.value-card.amber-accent:hover::after { background: var(--amber); }
+
+.value-card-icon {
+  font-size: 22px;
+  margin-bottom: 20px;
+  display: block;
+}
+.value-card-name {
+  font-family: var(--font-display);
+  font-size: 22px;
+  font-weight: 400;
+  color: var(--ink);
+  margin-bottom: 10px;
+}
+.value-card-desc {
+  font-size: 13.5px;
+  color: var(--ink-muted);
+  line-height: 1.75;
+}
+
+/* ── Counties we serve ── */
+.counties-section {
+  padding: 80px 0;
+  background: var(--ink);
+  position: relative;
+  overflow: hidden;
+}
+.counties-section::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at 80% 50%, rgba(163,45,45,0.15), transparent 60%);
+  pointer-events: none;
+}
+.counties-inner {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  align-items: center;
+}
+.counties-text .who-title { color: #fff; }
+.counties-text .who-para { color: rgba(255,255,255,0.50); }
+.counties-text .who-label { color: var(--amber); }
+.counties-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.county-row {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 18px 22px;
+  background: rgba(255,255,255,0.04);
+  border: 0.5px solid rgba(255,255,255,0.08);
+  border-radius: var(--radius-md);
+  transition: background 0.2s, border-color 0.2s;
+}
+.county-row:hover {
+  background: rgba(255,255,255,0.07);
+  border-color: rgba(255,255,255,0.15);
+}
+.county-num {
+  font-family: var(--font-head);
+  font-size: 18px;
+  color: var(--red);
+  width: 28px;
+  flex-shrink: 0;
+}
+.county-name {
+  font-size: 15px;
+  font-weight: 500;
+  color: rgba(255,255,255,0.80);
+  flex: 1;
+}
+.county-tag {
+  font-size: 11px;
+  color: rgba(255,255,255,0.30);
+  letter-spacing: 0.08em;
+}
+
+/* ── CTA ── */
+.about-cta {
+  padding: 80px 0;
+  background: var(--red);
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+.about-cta::before {
+  content: '';
+  position: absolute;
+  top: -60%; right: -10%;
+  width: 500px; height: 500px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.06);
+  pointer-events: none;
+}
+.about-cta-inner { position: relative; z-index: 1; }
+.about-cta h2 {
+  font-family: var(--font-display);
+  font-size: clamp(32px, 5vw, 52px);
+  font-weight: 400;
+  color: #fff;
+  margin-bottom: 16px;
+}
+.about-cta p {
+  font-size: 15px;
+  color: rgba(255,255,255,0.68);
+  max-width: 480px;
+  margin: 0 auto 36px;
+  line-height: 1.75;
+}
+.about-cta-btns {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  flex-wrap: wrap;
+}
+.about-cta-btns .btn-primary {
+  background: #fff;
+  color: var(--red);
+}
+.about-cta-btns .btn-primary:hover {
+  background: var(--off-white);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.2);
+}
+
+/* ── Responsive ── */
+@media (max-width: 960px) {
+  .about-hero-grid { grid-template-columns: 1fr; }
+  .about-hero-visual { min-height: 320px; border-radius: var(--radius-lg); overflow: hidden; margin-top: 40px; }
+  .about-hero-img { position: relative; border-radius: var(--radius-lg); height: 320px; }
+  .who-inner { grid-template-columns: 1fr; gap: 48px; }
+  .mvg-grid { grid-template-columns: 1fr; }
+  .story-inner { grid-template-columns: 1fr; }
+  .story-img-wrap { aspect-ratio: 16/9; }
+  .counties-inner { grid-template-columns: 1fr; gap: 48px; }
+}
+@media (max-width: 600px) {
+  .about-hero-float { flex-direction: column; gap: 16px; }
+  .float-divider { width: 100%; height: 0.5px; }
+  .mvg-card { padding: 32px 24px; }
+  .values-grid { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+
+<!-- ══════════════════ NAVBAR ══════════════════ -->
+<nav class="navbar scrolled" id="navbar">
+  <div class="nav-inner">
+    <a href="/" class="nav-logo" aria-label="AGI home">
+      <img src="../assets/logo.png" alt="Arend Gesin Investment — Home of Branding" style="height:44px;width:auto;display:block;">
+    </a>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="/pages/services.html">Services</a></li>
+      <li><a href="/pages/about.html" style="color:var(--red);font-weight:500;">About</a></li>
+      <li><a href="/pages/portfolio.html">Portfolio</a></li>
+      <li><a href="/pages/blog.html">Insights</a></li>
+      <li><a href="/pages/csr.html">THAT Child</a></li>
+      <li><a href="/pages/contact.html">Contact</a></li>
+    </ul>
+    <div class="nav-right">
+      <a href="/pages/order/index.html" class="btn-nav-cta">Order now</a>
+      <button class="hamburger" id="hamburger" aria-label="Toggle menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</nav>
+
+<!-- ══════════════════ HERO ══════════════════ -->
+<section class="about-hero">
+  <div class="container">
+    <div class="about-hero-grid">
+
+      <div class="about-hero-text">
+        <nav class="page-breadcrumb" aria-label="Breadcrumb">
+          <a href="/">Home</a>
+          <span>›</span>
+          <span>About Us</span>
+        </nav>
+        <p class="about-hero-tag">Our story</p>
+        <h1 class="about-hero-title">
+          STRENGTH
+          <br>OF FAMILY
+          <span>A business built on purpose, people, and THAT Child.</span>
+        </h1>
+        <p class="about-hero-body">
+          Arend Gesin Investment is a <strong>family-based business</strong> founded in 2020 in Nakuru, Kenya.
+          We combine highly skilled IT and project management expertise with a deep commitment to
+          branding, community, and the empowerment of Kenya's youth.
+        </p>
+        <div class="about-hero-chips">
+          <span class="hero-chip">Est. 2020 · Nakuru</span>
+          <span class="hero-chip">Family-owned</span>
+          <span class="hero-chip">Youth-focused CSR</span>
+          <span class="hero-chip">5 Counties</span>
+        </div>
+      </div>
+
+      <div class="about-hero-visual">
+        <div class="about-hero-img">
+          <img
+            src="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?w=900&auto=format&fit=crop&q=80"
+            alt="Professional team collaborating in a modern office"
+            loading="eager"
+          >
+        </div>
+        <div class="about-hero-float">
+          <div class="float-stat">
+            <span class="float-stat-num">5+</span>
+            <span class="float-stat-label">Counties</span>
+          </div>
+          <div class="float-divider"></div>
+          <div class="float-stat">
+            <span class="float-stat-num">4+</span>
+            <span class="float-stat-label">Years active</span>
+          </div>
+          <div class="float-divider"></div>
+          <div class="float-stat">
+            <span class="float-stat-num">8+</span>
+            <span class="float-stat-label">Clients</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════ MARQUEE BAND ══════════════════ -->
+<div class="est-band" aria-hidden="true">
+  <div class="est-marquee">
+    <span class="est-item"><strong>AREND GESIN</strong> · HOME OF BRANDING ·</span>
+    <span class="est-item"><strong>EST. 2020</strong> · NAKURU, KENYA ·</span>
+    <span class="est-item"><strong>STRENGTH OF FAMILY</strong> · BRANDING · PRINTING · IT ·</span>
+    <span class="est-item"><strong>THAT CHILD</strong> · EMPOWERING YOUTH ·</span>
+    <span class="est-item"><strong>AREND GESIN</strong> · HOME OF BRANDING ·</span>
+    <span class="est-item"><strong>EST. 2020</strong> · NAKURU, KENYA ·</span>
+    <span class="est-item"><strong>STRENGTH OF FAMILY</strong> · BRANDING · PRINTING · IT ·</span>
+    <span class="est-item"><strong>THAT CHILD</strong> · EMPOWERING YOUTH ·</span>
+  </div>
+</div>
+
+<!-- ══════════════════ WHO WE ARE ══════════════════ -->
+<section class="who-section">
+  <div class="container">
+    <div class="who-inner">
+
+      <div class="who-text reveal">
+        <p class="who-label">Who we are</p>
+        <h2 class="who-title">More than a branding<br>company — <em>a family.</em></h2>
+        <p class="who-para">
+          AREND GESIN is a family-based business that focuses on <strong>THAT Child</strong> and is youth-friendly.
+          Comprising a highly skilled human resource base with broad professional experience in IT
+          and project management, we commit to best-practice solutions in every area of our operation.
+        </p>
+        <p class="who-para">
+          We believe in <strong>data as the new oil</strong>. We take empowerment very seriously and consider
+          knowledge and skills transfer as the key to an empowered individual and organisation.
+          As the world comes to terms with the pressures of the knowledge economy, we equip the
+          youth and women with requisite skills in entrepreneurship, customer service, branding,
+          and personal development.
+        </p>
+        <p class="who-para">
+          With such competencies, they will be ready to live the dream of Kenya's <strong>Vision 2030</strong>
+          and the <strong>Sustainable Development Goals</strong>.
+        </p>
+      </div>
+
+      <div class="who-facts reveal">
+        <div class="fact-card">
+          <div class="fact-num">2020</div>
+          <div class="fact-label"><strong>Year founded</strong> — AGI was established with a clear mission: brand businesses, empower youth, touch THAT Child.</div>
+        </div>
+        <div class="fact-card">
+          <div class="fact-num">5+</div>
+          <div class="fact-label"><strong>Counties served</strong> — Nakuru, Uasin Gishu, Bungoma, Trans Nzoia, and Nairobi.</div>
+        </div>
+        <div class="fact-card">
+          <div class="fact-num">100%</div>
+          <div class="fact-label"><strong>Family-owned</strong> — Every decision is made with the strength of family values at the centre.</div>
+        </div>
+        <div class="fact-card">
+          <div class="fact-num">SDGs</div>
+          <div class="fact-label"><strong>Vision-aligned</strong> — All our work ties directly to Kenya's Vision 2030 and the Sustainable Development Goals.</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════ MISSION / VISION / GOAL ══════════════════ -->
+<section class="mvg-section">
+  <div class="container">
+    <div class="section-header" style="text-align:center; margin-bottom:56px;">
+      <p class="section-tag">Our direction</p>
+      <h2 class="section-title">Goal. Mission. <em>Vision.</em></h2>
+    </div>
+    <div class="mvg-grid">
+
+      <div class="mvg-card goal reveal">
+        <div class="mvg-icon">🎯</div>
+        <p class="mvg-type">Our Goal</p>
+        <h3 class="mvg-title">Empower youth &amp; give THAT Child a chance</h3>
+        <p class="mvg-body">
+          We exist to open doors for the next generation — giving every child, regardless of background,
+          the opportunity to rise through skills, confidence, and access to opportunity.
+        </p>
+      </div>
+
+      <div class="mvg-card mission reveal">
+        <div class="mvg-icon">🚀</div>
+        <p class="mvg-type">Our Mission</p>
+        <h3 class="mvg-title">To be a trendsetter in professional service</h3>
+        <p class="mvg-body">
+          To be a trendsetter in the professionalism of services offered — with an eye on CSR that
+          deliberately touches THAT Child within the communities we operate in.
+        </p>
+      </div>
+
+      <div class="mvg-card vision reveal">
+        <div class="mvg-icon">💡</div>
+        <p class="mvg-type">Our Vision</p>
+        <h3 class="mvg-title">A world better than today</h3>
+        <p class="mvg-body">
+          Our vision for THAT Child is a world better than today — where every young person has the
+          knowledge, skills, and confidence to shape their own destiny.
+        </p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════ OUR STORY TIMELINE ══════════════════ -->
+<section class="story-section">
+  <div class="container">
+    <div class="story-inner">
+
+      <div class="story-img-wrap reveal">
+        <img
+          src="https://images.unsplash.com/photo-1573497620053-ea5300f94f21?w=800&auto=format&fit=crop&q=80"
+          alt="Business woman working at a desk, representing AGI's professional team"
+          loading="lazy"
+        >
+        <div class="story-img-accent"></div>
+      </div>
+
+      <div class="story-content reveal">
+        <p class="who-label">Our journey</p>
+        <h2 class="who-title">How AGI came<br>to <em>be.</em></h2>
+
+        <div class="timeline">
+          <div class="timeline-item">
+            <div class="timeline-dot red">✦</div>
+            <div>
+              <p class="timeline-year">2020</p>
+              <p class="timeline-title">AGI is founded in Nakuru</p>
+              <p class="timeline-desc">Arend Gesin Investment is established with core business in branding &amp; imaging, driven by family values and a passion for youth empowerment.</p>
+            </div>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-dot amber">✦</div>
+            <div>
+              <p class="timeline-year">2020 – 2021</p>
+              <p class="timeline-title">Expanding our service lines</p>
+              <p class="timeline-desc">We added stationery supplies, IT installations, and work safety equipment (PPEs) to better serve our growing client base across counties.</p>
+            </div>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-dot red">✦</div>
+            <div>
+              <p class="timeline-year">2022</p>
+              <p class="timeline-title">MIND MASTERS programme launched</p>
+              <p class="timeline-desc">We launched our flagship CSR initiative — inspiring, motivating and coaching youth in schools and institutions to unlock the power of their minds.</p>
+            </div>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-dot amber">✦</div>
+            <div>
+              <p class="timeline-year">2023 – 2024</p>
+              <p class="timeline-title">Growing across 5 counties</p>
+              <p class="timeline-desc">Operations expanded across Nakuru, Nairobi, Uasin Gishu, Trans Nzoia and Bungoma — building a network of youth ambassadors and trusted partners.</p>
+            </div>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-dot dark">→</div>
+            <div>
+              <p class="timeline-year">Today &amp; beyond</p>
+              <p class="timeline-title">Building for the future</p>
+              <p class="timeline-desc">AGI continues to grow its client portfolio, CSR reach, and digital presence — always keeping THAT Child at the centre of everything we do.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════ VALUES ══════════════════ -->
+<section class="values-section">
+  <div class="container">
+    <div class="values-header">
+      <p class="section-tag">What drives us</p>
+      <h2 class="section-title">Principles we<br><em>never compromise.</em></h2>
+    </div>
+    <div class="values-grid">
+
+      <div class="value-card reveal">
+        <span class="value-card-icon">🙏</span>
+        <h3 class="value-card-name">Faith in God</h3>
+        <p class="value-card-desc">We believe in God working through our hearts and minds in all our undertakings — especially for THAT Child. Faith is our foundation.</p>
+      </div>
+
+      <div class="value-card amber-accent reveal">
+        <span class="value-card-icon">🔍</span>
+        <h3 class="value-card-name">Transparency</h3>
+        <p class="value-card-desc">Our services are anchored on transparency and accountability. Anyone can hold the helm when the sea is quiet — we thrive when the challenge is greatest.</p>
+      </div>
+
+      <div class="value-card reveal">
+        <span class="value-card-icon">🤝</span>
+        <h3 class="value-card-name">Integrity</h3>
+        <p class="value-card-desc">We make our clients our friends. We serve with an honest heart — not just for today, but for the long-term relationship we are building for tomorrow.</p>
+      </div>
+
+      <div class="value-card amber-accent reveal">
+        <span class="value-card-icon">👥</span>
+        <h3 class="value-card-name">Involvement</h3>
+        <p class="value-card-desc">Our team believes in working together to tighten all loose ends. Open forum discussions and individual meetings iron out every challenge in our service delivery.</p>
+      </div>
+
+      <div class="value-card reveal">
+        <span class="value-card-icon">⭐</span>
+        <h3 class="value-card-name">Customer Satisfaction</h3>
+        <p class="value-card-desc">A satisfied customer is our best advertisement. What a client thinks about our products and services becomes our reality — and our motivation to improve.</p>
+      </div>
+
+      <div class="value-card amber-accent reveal">
+        <span class="value-card-icon">🌱</span>
+        <h3 class="value-card-name">Empowerment</h3>
+        <p class="value-card-desc">We believe knowledge is power. Skills transfer — especially to youth and women — is the key to an empowered individual, organisation, and nation.</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════ COUNTIES ══════════════════ -->
+<section class="counties-section">
+  <div class="container">
+    <div class="counties-inner">
+
+      <div class="counties-text reveal">
+        <p class="who-label">Where we work</p>
+        <h2 class="who-title" style="color:#fff;">We go where<br><em style="color:var(--amber);">you need us.</em></h2>
+        <p class="who-para">
+          AGI primarily operates across five counties in Kenya, with an adaptable, mobile team
+          ready to serve clients wherever they are. Our direct-sales model means we come to you —
+          not the other way around.
+        </p>
+        <a href="/pages/contact.html" class="btn-primary" style="margin-top:8px;">Get in touch</a>
+      </div>
+
+      <div class="counties-list reveal">
+        <div class="county-row">
+          <span class="county-num">01</span>
+          <span class="county-name">Nakuru County</span>
+          <span class="county-tag">Headquarters</span>
+        </div>
+        <div class="county-row">
+          <span class="county-num">02</span>
+          <span class="county-name">Nairobi County</span>
+          <span class="county-tag">Major market</span>
+        </div>
+        <div class="county-row">
+          <span class="county-num">03</span>
+          <span class="county-name">Uasin Gishu</span>
+          <span class="county-tag">Active</span>
+        </div>
+        <div class="county-row">
+          <span class="county-num">04</span>
+          <span class="county-name">Trans Nzoia</span>
+          <span class="county-tag">Active</span>
+        </div>
+        <div class="county-row">
+          <span class="county-num">05</span>
+          <span class="county-name">Bungoma County</span>
+          <span class="county-tag">Active</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════ ABOUT CTA ══════════════════ -->
+<section class="about-cta">
+  <div class="container">
+    <div class="about-cta-inner">
+      <h2>Let's build something together.</h2>
+      <p>Whether you need branding, printing, IT support, or want to partner with us on THAT Child — we're ready to listen.</p>
+      <div class="about-cta-btns">
+        <a href="/pages/order/index.html" class="btn-primary">Place an order</a>
+        <a href="/pages/contact.html" class="btn-outline-light">Contact us</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════ FOOTER ══════════════════ -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <a href="/" class="nav-logo footer-logo">
+      <img src="../assets/logo.png" alt="Arend Gesin Investment — Home of Branding" style="height:44px;width:auto;display:block;">
+    </a>
+        <p class="footer-tagline">Strength of Family.</p>
+        <p class="footer-desc">A family-based branding company empowering youth and giving THAT Child a chance.</p>
+        <div class="footer-contact-mini">
+          <a href="tel:+254735518090">+254 735 518 090</a>
+          <a href="mailto:info@arendgesin.co.ke">info@arendgesin.co.ke</a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h5 class="footer-col-title">Services</h5>
+        <ul>
+          <li><a href="/pages/services.html#printing">Printing &amp; Branding</a></li>
+          <li><a href="/pages/services.html#stationery">Stationery Supplies</a></li>
+          <li><a href="/pages/services.html#it">IT Installations</a></li>
+          <li><a href="/pages/services.html#design">Graphic Design</a></li>
+          <li><a href="/pages/services.html#ppe">Work Safety (PPEs)</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h5 class="footer-col-title">Company</h5>
+        <ul>
+          <li><a href="/pages/about.html">About AGI</a></li>
+          <li><a href="/pages/csr.html">THAT Child / CSR</a></li>
+          <li><a href="/pages/portfolio.html">Portfolio</a></li>
+          <li><a href="/pages/blog.html">Insights</a></li>
+          <li><a href="/pages/contact.html">Contact</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h5 class="footer-col-title">We operate in</h5>
+        <ul>
+          <li><span>Nakuru County</span></li>
+          <li><span>Nairobi County</span></li>
+          <li><span>Uasin Gishu</span></li>
+          <li><span>Trans Nzoia</span></li>
+          <li><span>Bungoma County</span></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p class="footer-copy">© 2025 Arend Gesin Investment. All rights reserved.</p>
+      <a href="http://www.arendgesin.co.ke" class="footer-web" target="_blank" rel="noopener">www.arendgesin.co.ke</a>
+    </div>
+  </div>
+</footer>
+
+<script src="../js/main.js"></script>
+<script>
+(function(){
+  const ham = document.getElementById('hamburger');
+  const links = document.getElementById('navLinks');
+  if (ham && links) {
+    ham.addEventListener('click', () => {
+      const open = links.classList.toggle('open');
+      ham.setAttribute('aria-expanded', String(open));
+      ham.classList.toggle('active', open);
+    });
+  }
+  const io = new IntersectionObserver(entries => {
+    entries.forEach((e, i) => {
+      if (e.isIntersecting) {
+        const siblings = Array.from(e.target.parentElement.children);
+        const idx = siblings.indexOf(e.target);
+        e.target.style.transitionDelay = (idx * 80) + 'ms';
+        e.target.classList.add('revealed');
+        io.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.10 });
+  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+})();
+</script>
+</body>
+</html>

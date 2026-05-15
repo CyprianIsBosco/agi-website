@@ -1,0 +1,674 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Our Services — Arend Gesin Investment</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../css/style.css">
+<style>
+/* ── Services page specific ── */
+.page-hero {
+  padding: calc(var(--nav-h) + 72px) 0 72px;
+  background: var(--ink);
+  position: relative;
+  overflow: hidden;
+}
+.page-hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
+  background-size: 60px 60px;
+}
+.page-hero::after {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(163,45,45,0.5), transparent);
+}
+.page-hero-inner {
+  position: relative;
+  z-index: 1;
+  max-width: 720px;
+}
+.page-breadcrumb {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12px;
+  color: rgba(255,255,255,0.35);
+  margin-bottom: 24px;
+  letter-spacing: 0.04em;
+}
+.page-breadcrumb a { color: rgba(255,255,255,0.35); transition: color 0.2s; }
+.page-breadcrumb a:hover { color: rgba(255,255,255,0.7); }
+.page-breadcrumb span { color: rgba(255,255,255,0.55); }
+.page-hero-tag {
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--red);
+  margin-bottom: 16px;
+}
+.page-hero-title {
+  font-family: var(--font-head);
+  font-size: clamp(52px, 8vw, 100px);
+  line-height: 0.92;
+  color: #fff;
+  letter-spacing: 0.02em;
+  margin-bottom: 24px;
+}
+.page-hero-title em {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: clamp(28px, 4vw, 48px);
+  display: block;
+  color: rgba(255,255,255,0.55);
+  letter-spacing: 0;
+  margin-top: 8px;
+  line-height: 1.3;
+}
+.page-hero-body {
+  font-size: 16px;
+  color: rgba(255,255,255,0.50);
+  max-width: 540px;
+  line-height: 1.75;
+}
+
+/* ── Service nav pills ── */
+.service-nav {
+  background: var(--surface);
+  border-bottom: 0.5px solid var(--border);
+  position: sticky;
+  top: var(--nav-h);
+  z-index: 50;
+}
+.service-nav-inner {
+  display: flex;
+  gap: 4px;
+  padding: 12px 24px;
+  max-width: var(--max-w);
+  margin: 0 auto;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+.service-nav-inner::-webkit-scrollbar { display: none; }
+.service-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+  font-weight: 400;
+  padding: 7px 16px;
+  border-radius: 99px;
+  white-space: nowrap;
+  color: var(--ink-muted);
+  transition: background 0.2s, color 0.2s;
+  cursor: pointer;
+  border: none;
+  background: none;
+  text-decoration: none;
+}
+.service-pill:hover, .service-pill.active {
+  background: var(--red-light);
+  color: var(--red);
+  font-weight: 500;
+}
+.service-pill-dot {
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: currentColor;
+  opacity: 0.5;
+  flex-shrink: 0;
+}
+
+/* ── Service block ── */
+.service-block {
+  padding: 100px 0;
+  scroll-margin-top: calc(var(--nav-h) + 56px);
+}
+.service-block:nth-child(even) { background: var(--surface); }
+.service-block:nth-child(odd)  { background: var(--off-white); }
+
+.service-block-inner {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 72px;
+  align-items: center;
+}
+.service-block-inner.reverse { direction: rtl; }
+.service-block-inner.reverse > * { direction: ltr; }
+
+/* Photo */
+.service-photo-wrap {
+  position: relative;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  aspect-ratio: 4/3;
+  background: #e0ddd8;
+}
+.service-photo-wrap img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.6s cubic-bezier(0.25,0.46,0.45,0.94);
+}
+.service-photo-wrap:hover img { transform: scale(1.04); }
+.service-photo-badge {
+  position: absolute;
+  top: 20px; left: 20px;
+  background: var(--ink);
+  color: #fff;
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  padding: 6px 14px;
+  border-radius: 99px;
+}
+.service-photo-num {
+  position: absolute;
+  bottom: 20px; right: 20px;
+  font-family: var(--font-head);
+  font-size: 72px;
+  line-height: 1;
+  color: rgba(255,255,255,0.12);
+  letter-spacing: 0.02em;
+  user-select: none;
+}
+
+/* Text */
+.service-text { }
+.service-block-tag {
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--red);
+  margin-bottom: 12px;
+}
+.service-block-title {
+  font-family: var(--font-display);
+  font-size: clamp(28px, 3.5vw, 42px);
+  font-weight: 400;
+  line-height: 1.15;
+  color: var(--ink);
+  margin-bottom: 20px;
+}
+.service-block-title em { font-style: italic; color: var(--red); }
+.service-block-body {
+  font-size: 15px;
+  color: var(--ink-muted);
+  line-height: 1.8;
+  margin-bottom: 32px;
+}
+
+/* Feature list */
+.service-features {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: 36px;
+}
+.service-feature {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  font-size: 14px;
+  color: var(--ink-muted);
+  line-height: 1.6;
+}
+.feature-check {
+  width: 20px; height: 20px;
+  border-radius: 50%;
+  background: var(--red-light);
+  color: var(--red);
+  font-size: 11px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  margin-top: 2px;
+  font-weight: 600;
+}
+.feature-check.amber {
+  background: var(--amber-light);
+  color: var(--amber);
+}
+
+/* CTA strip */
+.services-cta {
+  padding: 80px 0;
+  background: var(--ink);
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+.services-cta::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at 50% 0%, rgba(163,45,45,0.2), transparent 65%);
+  pointer-events: none;
+}
+.services-cta-inner { position: relative; z-index: 1; }
+.services-cta h2 {
+  font-family: var(--font-display);
+  font-size: clamp(32px, 5vw, 54px);
+  font-weight: 400;
+  color: #fff;
+  margin-bottom: 16px;
+}
+.services-cta p {
+  font-size: 15px;
+  color: rgba(255,255,255,0.50);
+  max-width: 480px;
+  margin: 0 auto 36px;
+  line-height: 1.75;
+}
+.services-cta-btns {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  flex-wrap: wrap;
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+  .service-block-inner,
+  .service-block-inner.reverse {
+    grid-template-columns: 1fr;
+    direction: ltr;
+    gap: 40px;
+  }
+  .service-block { padding: 72px 0; }
+}
+@media (max-width: 600px) {
+  .service-nav-inner { padding: 10px 16px; }
+  .page-hero { padding: calc(var(--nav-h) + 48px) 0 48px; }
+}
+</style>
+</head>
+<body>
+
+<!-- ═══════════════ NAVBAR ═══════════════ -->
+<nav class="navbar scrolled" id="navbar">
+  <div class="nav-inner">
+    <a href="/" class="nav-logo" aria-label="AGI home">
+      <img src="../assets/logo.png" alt="Arend Gesin Investment — Home of Branding" style="height:44px;width:auto;display:block;">
+    </a>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="/pages/services.html" style="color:var(--red);font-weight:500;">Services</a></li>
+      <li><a href="/pages/about.html">About</a></li>
+      <li><a href="/pages/portfolio.html">Portfolio</a></li>
+      <li><a href="/pages/blog.html">Insights</a></li>
+      <li><a href="/pages/csr.html">THAT Child</a></li>
+      <li><a href="/pages/contact.html">Contact</a></li>
+    </ul>
+    <div class="nav-right">
+      <a href="/pages/order/index.html" class="btn-nav-cta">Order now</a>
+      <button class="hamburger" id="hamburger" aria-label="Toggle menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</nav>
+
+<!-- ═══════════════ PAGE HERO ═══════════════ -->
+<section class="page-hero">
+  <div class="container">
+    <div class="page-hero-inner">
+      <nav class="page-breadcrumb" aria-label="Breadcrumb">
+        <a href="/">Home</a>
+        <span>›</span>
+        <span>Services</span>
+      </nav>
+      <p class="page-hero-tag">What we offer</p>
+      <h1 class="page-hero-title">
+        OUR SERVICES
+        <em>Everything your brand needs, under one roof.</em>
+      </h1>
+      <p class="page-hero-body">
+        From large-format printing to IT installations and personal protective equipment —
+        AGI delivers quality, speed and care across five counties in Kenya.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════ SERVICE NAV PILLS ═══════════════ -->
+<div class="service-nav" role="navigation" aria-label="Jump to service">
+  <div class="service-nav-inner">
+    <a href="#printing"   class="service-pill active"><span class="service-pill-dot"></span>Printing &amp; Branding</a>
+    <a href="#stationery" class="service-pill"><span class="service-pill-dot"></span>Stationery</a>
+    <a href="#it"         class="service-pill"><span class="service-pill-dot"></span>IT Installations</a>
+    <a href="#design"     class="service-pill"><span class="service-pill-dot"></span>Graphic Design</a>
+    <a href="#ppe"        class="service-pill"><span class="service-pill-dot"></span>Work Safety (PPEs)</a>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════
+     SERVICE 01 — PRINTING, BRANDING & IMAGING
+════════════════════════════════════════════════ -->
+<section class="service-block" id="printing">
+  <div class="container">
+    <div class="service-block-inner">
+
+      <div class="service-photo-wrap reveal">
+        <img
+          src="https://images.unsplash.com/photo-1626785774573-4b799315345d?w=800&auto=format&fit=crop&q=80"
+          alt="Professional offset printing press in operation"
+          loading="lazy"
+        >
+        <span class="service-photo-badge">Printing &amp; Branding</span>
+        <span class="service-photo-num">01</span>
+      </div>
+
+      <div class="service-text reveal">
+        <p class="service-block-tag">Service 01</p>
+        <h2 class="service-block-title">Printing, Branding<br>&amp; <em>Imaging</em></h2>
+        <p class="service-block-body">
+          We offer a comprehensive range of affordable, high-quality printing and branding services.
+          Using the latest technology, we help your business leave a lasting impression — on paper,
+          fabric, ceramics, or hard plastic.
+        </p>
+        <ul class="service-features">
+          <li class="service-feature"><span class="feature-check">✓</span>Basic, offset &amp; digital printing</li>
+          <li class="service-feature"><span class="feature-check">✓</span>Large-format &amp; full-colour printing</li>
+          <li class="service-feature"><span class="feature-check">✓</span>Screen printing &amp; pad printing</li>
+          <li class="service-feature"><span class="feature-check">✓</span>Stationery, cloth &amp; ceramics branding</li>
+          <li class="service-feature"><span class="feature-check">✓</span>Hard plastic branded merchandise</li>
+          <li class="service-feature"><span class="feature-check">✓</span>Promotional giveaways &amp; corporate gifts</li>
+        </ul>
+        <a href="/pages/order/index.html" class="btn-primary">Order printing</a>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════
+     SERVICE 02 — STATIONERY SUPPLIES
+════════════════════════════════════════════════ -->
+<section class="service-block" id="stationery">
+  <div class="container">
+    <div class="service-block-inner reverse">
+
+      <div class="service-photo-wrap reveal">
+        <img
+          src="https://images.unsplash.com/photo-1456735190827-d1262f71b8a3?w=800&auto=format&fit=crop&q=80"
+          alt="Assorted office stationery supplies on a desk"
+          loading="lazy"
+        >
+        <span class="service-photo-badge">Stationery Supplies</span>
+        <span class="service-photo-num">02</span>
+      </div>
+
+      <div class="service-text reveal">
+        <p class="service-block-tag">Service 02</p>
+        <h2 class="service-block-title">Stationery<br><em>Supplies</em></h2>
+        <p class="service-block-body">
+          AGI supplies the best market brands in stationery products, backed by reliable after-sale
+          service for our esteemed clients. High quality, assorted stationery delivered to your door.
+          <strong>Stay STATIONARY. Get STATIONERY.</strong>
+        </p>
+        <ul class="service-features">
+          <li class="service-feature"><span class="feature-check amber">✓</span>Top market stationery brands</li>
+          <li class="service-feature"><span class="feature-check amber">✓</span>Pens, notebooks, files &amp; folders</li>
+          <li class="service-feature"><span class="feature-check amber">✓</span>Office consumables &amp; supplies</li>
+          <li class="service-feature"><span class="feature-check amber">✓</span>Bulk orders for institutions</li>
+          <li class="service-feature"><span class="feature-check amber">✓</span>After-sale support included</li>
+          <li class="service-feature"><span class="feature-check amber">✓</span>Delivery across 5 counties</li>
+        </ul>
+        <a href="/pages/order/index.html" class="btn-primary">Order stationery</a>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════
+     SERVICE 03 — IT INSTALLATIONS
+════════════════════════════════════════════════ -->
+<section class="service-block" id="it">
+  <div class="container">
+    <div class="service-block-inner">
+
+      <div class="service-photo-wrap reveal">
+        <img
+          src="https://images.unsplash.com/photo-1593642632559-0c6d3fc62b89?w=800&auto=format&fit=crop&q=80"
+          alt="Computer setup and IT installation workspace"
+          loading="lazy"
+        >
+        <span class="service-photo-badge">IT &amp; Support</span>
+        <span class="service-photo-num">03</span>
+      </div>
+
+      <div class="service-text reveal">
+        <p class="service-block-tag">Service 03</p>
+        <h2 class="service-block-title">IT Installations &amp;<br><em>Client Management</em></h2>
+        <p class="service-block-body">
+          AGI offers timely, professional IT support to our clients. From sourcing quality hardware
+          to full software installation and ongoing maintenance — we keep your systems running so
+          you can focus on your business.
+        </p>
+        <ul class="service-features">
+          <li class="service-feature"><span class="feature-check">✓</span>Quality computers &amp; accessories supply</li>
+          <li class="service-feature"><span class="feature-check">✓</span>Software installation &amp; configuration</li>
+          <li class="service-feature"><span class="feature-check">✓</span>System maintenance &amp; servicing</li>
+          <li class="service-feature"><span class="feature-check">✓</span>Network setup &amp; troubleshooting</li>
+          <li class="service-feature"><span class="feature-check">✓</span>Ongoing client management contracts</li>
+          <li class="service-feature"><span class="feature-check">✓</span>On-site &amp; remote support available</li>
+        </ul>
+        <a href="/pages/order/index.html" class="btn-primary">Request IT support</a>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════
+     SERVICE 04 — GRAPHIC DESIGN & ADVERTISING
+════════════════════════════════════════════════ -->
+<section class="service-block" id="design">
+  <div class="container">
+    <div class="service-block-inner reverse">
+
+      <div class="service-photo-wrap reveal">
+        <img
+          src="https://images.unsplash.com/photo-1561070791-2526d30994b5?w=800&auto=format&fit=crop&q=80"
+          alt="Graphic designer working on branding and logo design"
+          loading="lazy"
+        >
+        <span class="service-photo-badge">Design &amp; Ads</span>
+        <span class="service-photo-num">04</span>
+      </div>
+
+      <div class="service-text reveal">
+        <p class="service-block-tag">Service 04</p>
+        <h2 class="service-block-title">Graphic Design &amp;<br><em>Advertising</em></h2>
+        <p class="service-block-body">
+          We create visual identities that speak for your business. From business profiles and
+          brochures to social media advertising — our creative team develops content tailored
+          to your brand and audience, at prices that make sense.
+        </p>
+        <ul class="service-features">
+          <li class="service-feature"><span class="feature-check amber">✓</span>Business profiles &amp; company brochures</li>
+          <li class="service-feature"><span class="feature-check amber">✓</span>Flyers, posters &amp; banners</li>
+          <li class="service-feature"><span class="feature-check amber">✓</span>Custom business card design</li>
+          <li class="service-feature"><span class="feature-check amber">✓</span>Logo &amp; brand identity design</li>
+          <li class="service-feature"><span class="feature-check amber">✓</span>Social media content &amp; advertising</li>
+          <li class="service-feature"><span class="feature-check amber">✓</span>Affordable ad placement packages</li>
+        </ul>
+        <a href="/pages/order/index.html" class="btn-primary">Start a design project</a>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════
+     SERVICE 05 — WORK SAFETY (PPEs)
+════════════════════════════════════════════════ -->
+<section class="service-block" id="ppe">
+  <div class="container">
+    <div class="service-block-inner">
+
+      <div class="service-photo-wrap reveal">
+        <img
+          src="https://images.unsplash.com/photo-1504328345606-18bbc8c9d7d1?w=800&auto=format&fit=crop&q=80"
+          alt="Personal protective equipment hard hat and safety gear"
+          loading="lazy"
+        >
+        <span class="service-photo-badge">Work Safety</span>
+        <span class="service-photo-num">05</span>
+      </div>
+
+      <div class="service-text reveal">
+        <p class="service-block-tag">Service 05</p>
+        <h2 class="service-block-title">Work Safety<br><em>Equipment (PPEs)</em></h2>
+        <p class="service-block-body">
+          Protecting your workforce is non-negotiable. AGI supplies certified, high-quality personal
+          protective equipment for construction sites, institutions, and corporates across Kenya —
+          keeping your team safe and compliant.
+        </p>
+        <ul class="service-features">
+          <li class="service-feature"><span class="feature-check">✓</span>Hard hats &amp; safety helmets</li>
+          <li class="service-feature"><span class="feature-check">✓</span>Reflective vests &amp; safety wear</li>
+          <li class="service-feature"><span class="feature-check">✓</span>Gloves, goggles &amp; ear protection</li>
+          <li class="service-feature"><span class="feature-check">✓</span>Safety boots &amp; footwear</li>
+          <li class="service-feature"><span class="feature-check">✓</span>Branded PPEs with your company logo</li>
+          <li class="service-feature"><span class="feature-check">✓</span>Bulk supply for construction &amp; NGOs</li>
+        </ul>
+        <a href="/pages/order/index.html" class="btn-primary">Order PPE supplies</a>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════ CTA STRIP ═══════════════ -->
+<section class="services-cta">
+  <div class="container">
+    <div class="services-cta-inner">
+      <h2>Not sure what you need?</h2>
+      <p>Talk to us — we'll listen, understand your business needs, and craft the right solution together.</p>
+      <div class="services-cta-btns">
+        <a href="/pages/contact.html" class="btn-primary">Talk to us</a>
+        <a href="/pages/order/index.html" class="btn-outline-light">Place an order</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════ FOOTER ═══════════════ -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <a href="/" class="nav-logo footer-logo">
+      <img src="../assets/logo.png" alt="Arend Gesin Investment — Home of Branding" style="height:44px;width:auto;display:block;">
+    </a>
+        <p class="footer-tagline">Strength of Family.</p>
+        <p class="footer-desc">A family-based branding company empowering youth and giving THAT Child a chance.</p>
+        <div class="footer-contact-mini">
+          <a href="tel:+254735518090">+254 735 518 090</a>
+          <a href="mailto:info@arendgesin.co.ke">info@arendgesin.co.ke</a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h5 class="footer-col-title">Services</h5>
+        <ul>
+          <li><a href="#printing">Printing &amp; Branding</a></li>
+          <li><a href="#stationery">Stationery Supplies</a></li>
+          <li><a href="#it">IT Installations</a></li>
+          <li><a href="#design">Graphic Design</a></li>
+          <li><a href="#ppe">Work Safety (PPEs)</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h5 class="footer-col-title">Company</h5>
+        <ul>
+          <li><a href="/pages/about.html">About AGI</a></li>
+          <li><a href="/pages/csr.html">THAT Child / CSR</a></li>
+          <li><a href="/pages/portfolio.html">Portfolio</a></li>
+          <li><a href="/pages/blog.html">Insights</a></li>
+          <li><a href="/pages/contact.html">Contact</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h5 class="footer-col-title">We operate in</h5>
+        <ul>
+          <li><span>Nakuru County</span></li>
+          <li><span>Nairobi County</span></li>
+          <li><span>Uasin Gishu</span></li>
+          <li><span>Trans Nzoia</span></li>
+          <li><span>Bungoma County</span></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p class="footer-copy">© 2025 Arend Gesin Investment. All rights reserved.</p>
+      <a href="http://www.arendgesin.co.ke" class="footer-web" target="_blank" rel="noopener">www.arendgesin.co.ke</a>
+    </div>
+  </div>
+</footer>
+
+<script src="../js/main.js"></script>
+<script>
+(function(){
+  // Highlight active pill on scroll
+  const sections = ['printing','stationery','it','design','ppe'];
+  const pills = document.querySelectorAll('.service-pill');
+  const navH = parseInt(getComputedStyle(document.documentElement).getPropertyValue('--nav-h')) + 70;
+
+  function getActive() {
+    for (let i = sections.length - 1; i >= 0; i--) {
+      const el = document.getElementById(sections[i]);
+      if (el && el.getBoundingClientRect().top <= navH) return sections[i];
+    }
+    return sections[0];
+  }
+
+  window.addEventListener('scroll', () => {
+    const active = getActive();
+    pills.forEach(p => {
+      p.classList.toggle('active', p.getAttribute('href') === '#' + active);
+    });
+  }, { passive: true });
+
+  // Hamburger
+  const ham = document.getElementById('hamburger');
+  const links = document.getElementById('navLinks');
+  if (ham && links) {
+    ham.addEventListener('click', () => {
+      const open = links.classList.toggle('open');
+      ham.setAttribute('aria-expanded', String(open));
+      ham.classList.toggle('active', open);
+    });
+  }
+
+  // Scroll reveal
+  const io = new IntersectionObserver(entries => {
+    entries.forEach((e, i) => {
+      if (e.isIntersecting) {
+        e.target.style.transitionDelay = '100ms';
+        e.target.classList.add('revealed');
+        io.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.12 });
+  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+})();
+</script>
+</body>
+</html>
