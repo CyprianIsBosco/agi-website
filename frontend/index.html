@@ -19,41 +19,22 @@
 
     <!-- Logo -->
     <a href="index.html" class="nav-logo" aria-label="Arend Gesin Investment home">
-      <svg class="logo-svg" viewBox="0 0 120 44" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-        <!-- House icon -->
-        <g class="logo-icon">
-          <!-- Roof -->
-          <polygon points="18,4 34,16 2,16" fill="currentColor"/>
-          <!-- Left chimney -->
-          <rect x="5" y="8" width="4" height="8" fill="currentColor"/>
-          <!-- Wall -->
-          <rect x="4" y="16" width="28" height="16" fill="currentColor" opacity="0.15"/>
-          <rect x="4" y="16" width="28" height="16" fill="none" stroke="currentColor" stroke-width="1.5"/>
-          <!-- Door -->
-          <rect x="14" y="22" width="8" height="10" rx="1" fill="currentColor" opacity="0.8"/>
-          <!-- Swoosh underline -->
-          <path d="M0 35 Q17 40 36 33" stroke="#BA7517" stroke-width="2" fill="none" stroke-linecap="round"/>
-        </g>
-        <!-- AGI text -->
-        <text x="40" y="23" font-family="'Bebas Neue', sans-serif" font-size="22" fill="currentColor" letter-spacing="1">AGI</text>
-        <!-- Tagline -->
-        <text x="40" y="35" font-family="'DM Sans', sans-serif" font-size="7.5" fill="#BA7517" letter-spacing="1.5" font-style="italic">HOME OF BRANDING</text>
-      </svg>
+      <img src="assets/logo.png" alt="Arend Gesin Investment — Home of Branding" class="logo-img" style="height:44px;width:auto;display:block;">
     </a>
 
     <!-- Nav links -->
     <ul class="nav-links" id="navLinks">
-      <li><a href="services.html">Services</a></li>
-      <li><a href="about.html">About</a></li>
-      <li><a href="portfolio.html">Portfolio</a></li>
-      <li><a href="blog.html">Insights</a></li>
-      <li><a href="csr.html">THAT Child</a></li>
-      <li><a href="contact.html">Contact</a></li>
+      <li><a href="/pages/services.html">Services</a></li>
+      <li><a href="/pages/about.html">About</a></li>
+      <li><a href="/pages/portfolio.html">Portfolio</a></li>
+      <li><a href="/pages/blog.html">Insights</a></li>
+      <li><a href="/pages/csr.html">THAT Child</a></li>
+      <li><a href="/pages/contact.html">Contact</a></li>
     </ul>
 
     <!-- CTA + hamburger -->
     <div class="nav-right">
-      <a href="pages/order/index.html" class="btn-nav-cta">Order now</a>
+      <a href="/pages/order/index.html" class="btn-nav-cta">Order now</a>
       <button class="hamburger" id="hamburger" aria-label="Toggle menu" aria-expanded="false">
         <span></span><span></span><span></span>
       </button>
@@ -67,42 +48,13 @@
 ══════════════════════════════════════════════════ -->
 <section class="hero" id="hero">
 
-  <!-- Background: B&W room with plastic blue chair feel -->
-  <div class="hero-bg">
-    <div class="hero-bg-grid"></div>
-    <!-- Abstract chair silhouette (CSS + SVG inline) -->
-    <div class="hero-chair-wrap" aria-hidden="true">
-      <svg class="hero-chair-svg" viewBox="0 0 420 520" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <!-- Chair back -->
-        <rect x="60" y="40" width="300" height="200" rx="24" fill="#1A9BF0" opacity="0.92"/>
-        <!-- Back highlight gloss -->
-        <ellipse cx="150" cy="95" rx="60" ry="30" fill="white" opacity="0.12" transform="rotate(-15 150 95)"/>
-        <!-- Chair seat -->
-        <rect x="40" y="225" width="340" height="80" rx="18" fill="#1A9BF0" opacity="0.95"/>
-        <!-- Seat gloss -->
-        <ellipse cx="140" cy="248" rx="80" ry="18" fill="white" opacity="0.1"/>
-        <!-- Left back leg -->
-        <rect x="80" y="300" width="22" height="180" rx="8" fill="#0e7fd4"/>
-        <!-- Right back leg -->
-        <rect x="318" y="300" width="22" height="180" rx="8" fill="#0e7fd4"/>
-        <!-- Left front leg -->
-        <rect x="60" y="295" width="22" height="185" rx="8" fill="#1285db"/>
-        <!-- Right front leg -->
-        <rect x="338" y="295" width="22" height="185" rx="8" fill="#1285db"/>
-        <!-- Armrest left -->
-        <rect x="30" y="195" width="60" height="22" rx="10" fill="#0e7fd4"/>
-        <rect x="30" y="195" width="22" height="110" rx="10" fill="#0e7fd4"/>
-        <!-- Armrest right -->
-        <rect x="330" y="195" width="60" height="22" rx="10" fill="#0e7fd4"/>
-        <rect x="368" y="195" width="22" height="110" rx="10" fill="#0e7fd4"/>
-        <!-- Floor shadow -->
-        <ellipse cx="210" cy="490" rx="160" ry="16" fill="black" opacity="0.25"/>
-      </svg>
+  <div class="hero-bg" style="background-image:url('https://images.unsplash.com/photo-1564424224827-cd24b8915874?w=1600&q=85');background-size:cover;background-position:center top;">
+    <div class="hero-bg-grid" style="display:none"></div>
+    <div class="hero-chair-wrap" aria-hidden="true" style="display:none">
+      <svg class="hero-chair-svg" viewBox="0 0 420 520" fill="none" xmlns="http://www.w3.org/2000/svg"></svg>
     </div>
-    <!-- Noise/grain overlay -->
-    <div class="hero-grain"></div>
-    <!-- Dark gradient overlay -->
-    <div class="hero-overlay"></div>
+    <!-- Overlay: dark left for text readability, lighter right to reveal the child -->
+    <div class="hero-overlay" style="background:linear-gradient(120deg, rgba(8,0,0,0.90) 40%, rgba(163,45,45,0.45) 70%, rgba(0,0,0,0.20) 100%)"></div>
   </div>
 
   <!-- Hero content -->
@@ -124,8 +76,8 @@
     </p>
 
     <div class="hero-actions">
-      <a href="pages/order/index.html" class="btn-primary">Get a quote</a>
-      <a href="portfolio.html" class="btn-ghost">See our work <span class="btn-arrow">→</span></a>
+      <a href="/pages/order/index.html" class="btn-primary">Get a quote</a>
+      <a href="/pages/portfolio.html" class="btn-ghost">See our work <span class="btn-arrow">→</span></a>
     </div>
 
     <!-- Mini stats row inside hero -->
@@ -189,43 +141,38 @@
     <div class="services-grid">
 
       <article class="service-card">
-        <div class="service-icon">
-          <svg viewBox="0 0 40 40" fill="none"><rect x="6" y="8" width="20" height="26" rx="3" stroke="currentColor" stroke-width="1.5"/><rect x="14" y="8" width="20" height="26" rx="3" fill="currentColor" opacity="0.08" stroke="currentColor" stroke-width="1.5"/><line x1="10" y1="16" x2="22" y2="16" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/><line x1="10" y1="20" x2="22" y2="20" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/><line x1="10" y1="24" x2="18" y2="24" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg>
-        </div>
-        <span class="service-num">01</span>
-        <h3 class="service-name">Printing, Branding &amp; Imaging</h3>
-        <p class="service-desc">Digital, offset, screen &amp; large-format printing. Stationery, cloth, ceramics, and hard-plastic branding using the latest technology.</p>
-        <a href="services.html#printing" class="service-link">Learn more <span>→</span></a>
+        <div class="service-icon">🖨️</div>
+        <h3 class="service-name">Printing &amp; Branding</h3>
+        <p class="service-desc">Basic, offset, digital, large-format, screen and pad printing. Stationery, cloth, ceramics and hard-plastic branding.</p>
+        <a href="/pages/services.html#printing" class="service-link">Learn more →</a>
       </article>
 
-      <article class="service-card service-card--accent">
-        <div class="service-icon">
-          <svg viewBox="0 0 40 40" fill="none"><rect x="8" y="10" width="24" height="16" rx="3" stroke="currentColor" stroke-width="1.5"/><path d="M14 26v4M26 26v4M11 30h18" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><circle cx="20" cy="18" r="3" fill="currentColor" opacity="0.3" stroke="currentColor" stroke-width="1.2"/></svg>
-        </div>
-        <span class="service-num">02</span>
+      <article class="service-card">
+        <div class="service-icon">📦</div>
         <h3 class="service-name">Stationery Supplies</h3>
-        <p class="service-desc">Top market brands delivered with after-sale care. High quality, assorted stationery for every office need. Stay stationary — get stationery.</p>
-        <a href="services.html#stationery" class="service-link">Learn more <span>→</span></a>
+        <p class="service-desc">Best market brands in stationery products with after-sale service. High quality and assorted options for every need.</p>
+        <a href="/pages/services.html#stationery" class="service-link">Learn more →</a>
       </article>
 
       <article class="service-card">
-        <div class="service-icon">
-          <svg viewBox="0 0 40 40" fill="none"><rect x="8" y="12" width="18" height="14" rx="2" stroke="currentColor" stroke-width="1.5"/><rect x="8" y="26" width="18" height="2" rx="1" fill="currentColor" opacity="0.5"/><rect x="14" y="28" width="6" height="3" rx="1" fill="currentColor" opacity="0.3"/><path d="M28 14h4v16h-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        </div>
-        <span class="service-num">03</span>
-        <h3 class="service-name">IT Installations &amp; Support</h3>
-        <p class="service-desc">Quality computers, accessories, and software installations. Ongoing maintenance and client system management for seamless operations.</p>
-        <a href="services.html#it" class="service-link">Learn more <span>→</span></a>
+        <div class="service-icon">💻</div>
+        <h3 class="service-name">IT Installations</h3>
+        <p class="service-desc">Quality computers, accessories and software installations. We maintain and service client systems and machines.</p>
+        <a href="/pages/services.html#it" class="service-link">Learn more →</a>
       </article>
 
       <article class="service-card">
-        <div class="service-icon">
-          <svg viewBox="0 0 40 40" fill="none"><circle cx="20" cy="16" r="7" stroke="currentColor" stroke-width="1.5"/><path d="M8 32c0-5.523 5.373-10 12-10s12 4.477 12 10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><path d="M24 13l3-3M26 19l3 1" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg>
-        </div>
-        <span class="service-num">04</span>
-        <h3 class="service-name">Graphic Design &amp; Advertising</h3>
-        <p class="service-desc">Business profiles, brochures, flyers, cards and posters. Social media advertising tailored to your brand at affordable prices.</p>
-        <a href="services.html#design" class="service-link">Learn more <span>→</span></a>
+        <div class="service-icon">🎨</div>
+        <h3 class="service-name">Graphic Design &amp; Ads</h3>
+        <p class="service-desc">Business profiles, brochures, flyers, cards and posters. Social media advertising at affordable prices.</p>
+        <a href="/pages/services.html#design" class="service-link">Learn more →</a>
+      </article>
+
+      <article class="service-card">
+        <div class="service-icon">🦺</div>
+        <h3 class="service-name">Work Safety (PPEs)</h3>
+        <p class="service-desc">Quality personal protective equipment for your team. Safety meets your brand identity.</p>
+        <a href="/pages/services.html#ppe" class="service-link">Learn more →</a>
       </article>
 
     </div>
@@ -233,46 +180,39 @@
 </section>
 
 <!-- ═══════════════════════════════════════════════
-     WHY AGI (VALUES)
+     VALUES
 ══════════════════════════════════════════════════ -->
-<section class="why-agi">
+<section class="values" id="values">
   <div class="container">
-    <div class="why-inner">
-      <div class="why-left">
-        <p class="section-tag">Why choose us</p>
-        <h2 class="section-title">Principles we<br><em>never compromise.</em></h2>
-        <p class="why-body">We are more than a branding company. We are a family that puts God, transparency, and your satisfaction at the heart of every project.</p>
-        <a href="about.html" class="btn-primary">Meet the team</a>
+    <div class="section-header">
+      <p class="section-tag">Why choose us</p>
+      <h2 class="section-title">Built on values that<br><em>actually matter.</em></h2>
+    </div>
+    <div class="values-grid">
+      <div class="value-item">
+        <div class="value-icon">✦</div>
+        <h4 class="value-name">We believe in GOD</h4>
+        <p class="value-desc">God working through our hearts and minds in all our undertakings for THAT Child.</p>
       </div>
-      <div class="why-right">
-        <div class="value-item">
-          <div class="value-icon value-icon--red">✦</div>
-          <div>
-            <h4 class="value-name">Faith &amp; Purpose</h4>
-            <p class="value-desc">We believe in God working through our hearts and minds in every project we undertake for THAT Child.</p>
-          </div>
-        </div>
-        <div class="value-item">
-          <div class="value-icon value-icon--amber">✦</div>
-          <div>
-            <h4 class="value-name">Transparency</h4>
-            <p class="value-desc">Anchored on full accountability. We become stronger when the competition is stiffest.</p>
-          </div>
-        </div>
-        <div class="value-item">
-          <div class="value-icon value-icon--red">✦</div>
-          <div>
-            <h4 class="value-name">Integrity</h4>
-            <p class="value-desc">We treat every client as a friend, serving with an honest heart — today and for tomorrow.</p>
-          </div>
-        </div>
-        <div class="value-item">
-          <div class="value-icon value-icon--amber">✦</div>
-          <div>
-            <h4 class="value-name">Customer Satisfaction</h4>
-            <p class="value-desc">A satisfied client is our best advertisement. What you think of us becomes our reality.</p>
-          </div>
-        </div>
+      <div class="value-item">
+        <div class="value-icon">✦</div>
+        <h4 class="value-name">Transparency</h4>
+        <p class="value-desc">Anchored on transparency and accountability. We become stronger when competition is stiff.</p>
+      </div>
+      <div class="value-item">
+        <div class="value-icon">✦</div>
+        <h4 class="value-name">Integrity</h4>
+        <p class="value-desc">We make our clients our friends. We serve with an honest heart for tomorrow.</p>
+      </div>
+      <div class="value-item">
+        <div class="value-icon">✦</div>
+        <h4 class="value-name">Involvement</h4>
+        <p class="value-desc">Open forum discussions and individual meetings to iron out any hiccups during delivery.</p>
+      </div>
+      <div class="value-item">
+        <div class="value-icon">✦</div>
+        <h4 class="value-name">Customer Satisfaction</h4>
+        <p class="value-desc">A satisfied customer is the best form of advertisement. What you think becomes our reality.</p>
       </div>
     </div>
   </div>
@@ -287,7 +227,7 @@
       <div class="csr-badge">CSR Initiative</div>
       <h2 class="csr-headline">Every purchase helps<br><strong>THAT Child.</strong></h2>
       <p class="csr-body">Through our <em>Mind Masters</em> programme, AGI inspires, motivates and coaches youth in learning institutions — creating a world better than today, one brand at a time.</p>
-      <a href="csr.html" class="btn-csr">Discover our mission</a>
+      <a href="/pages/csr.html" class="btn-csr">Discover our mission</a>
     </div>
   </div>
 </section>
@@ -351,8 +291,8 @@
       <h2 class="cta-headline">Ready to build your brand?</h2>
       <p class="cta-sub">Let's create something remarkable together — for your business and for THAT Child.</p>
       <div class="cta-actions">
-        <a href="pages/order/index.html" class="btn-primary btn-large">Place an order</a>
-        <a href="contact.html" class="btn-outline-light">Talk to us first</a>
+        <a href="/pages/order/index.html" class="btn-primary btn-large">Place an order</a>
+        <a href="/pages/contact.html" class="btn-outline-light">Talk to us first</a>
       </div>
     </div>
   </div>
@@ -368,18 +308,7 @@
       <!-- Brand column -->
       <div class="footer-brand">
         <a href="index.html" class="nav-logo footer-logo" aria-label="AGI home">
-          <svg class="logo-svg" viewBox="0 0 120 44" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <g class="logo-icon">
-              <polygon points="18,4 34,16 2,16" fill="currentColor"/>
-              <rect x="5" y="8" width="4" height="8" fill="currentColor"/>
-              <rect x="4" y="16" width="28" height="16" fill="currentColor" opacity="0.15"/>
-              <rect x="4" y="16" width="28" height="16" fill="none" stroke="currentColor" stroke-width="1.5"/>
-              <rect x="14" y="22" width="8" height="10" rx="1" fill="currentColor" opacity="0.8"/>
-              <path d="M0 35 Q17 40 36 33" stroke="#BA7517" stroke-width="2" fill="none" stroke-linecap="round"/>
-            </g>
-            <text x="40" y="23" font-family="'Bebas Neue', sans-serif" font-size="22" fill="currentColor" letter-spacing="1">AGI</text>
-            <text x="40" y="35" font-family="'DM Sans', sans-serif" font-size="7.5" fill="#BA7517" letter-spacing="1.5" font-style="italic">HOME OF BRANDING</text>
-          </svg>
+          <img src="assets/logo.png" alt="Arend Gesin Investment — Home of Branding" class="logo-img" style="height:44px;width:auto;display:block;">
         </a>
         <p class="footer-tagline">Strength of Family.</p>
         <p class="footer-desc">A family-based branding company empowering youth and giving THAT Child a chance — one brand at a time.</p>
@@ -393,11 +322,11 @@
       <div class="footer-col">
         <h5 class="footer-col-title">Services</h5>
         <ul>
-          <li><a href="services.html#printing">Printing &amp; Branding</a></li>
-          <li><a href="services.html#stationery">Stationery Supplies</a></li>
-          <li><a href="services.html#it">IT Installations</a></li>
-          <li><a href="services.html#design">Graphic Design</a></li>
-          <li><a href="services.html#ppe">Work Safety (PPEs)</a></li>
+          <li><a href="/pages/services.html#printing">Printing &amp; Branding</a></li>
+          <li><a href="/pages/services.html#stationery">Stationery Supplies</a></li>
+          <li><a href="/pages/services.html#it">IT Installations</a></li>
+          <li><a href="/pages/services.html#design">Graphic Design</a></li>
+          <li><a href="/pages/services.html#ppe">Work Safety (PPEs)</a></li>
         </ul>
       </div>
 
@@ -405,11 +334,11 @@
       <div class="footer-col">
         <h5 class="footer-col-title">Company</h5>
         <ul>
-          <li><a href="about.html">About AGI</a></li>
-          <li><a href="csr.html">THAT Child / CSR</a></li>
-          <li><a href="portfolio.html">Portfolio</a></li>
-          <li><a href="blog.html">Insights</a></li>
-          <li><a href="contact.html">Contact</a></li>
+          <li><a href="/pages/about.html">About AGI</a></li>
+          <li><a href="/pages/csr.html">THAT Child / CSR</a></li>
+          <li><a href="/pages/portfolio.html">Portfolio</a></li>
+          <li><a href="/pages/blog.html">Insights</a></li>
+          <li><a href="/pages/contact.html">Contact</a></li>
         </ul>
       </div>
 
@@ -436,14 +365,12 @@
 
 <script src="js/main.js"></script>
 <script>
-// Navbar scroll behaviour
 (function(){
   const nav = document.getElementById('navbar');
   window.addEventListener('scroll', () => {
     nav.classList.toggle('scrolled', window.scrollY > 40);
   }, { passive: true });
 
-  // Hamburger
   const ham = document.getElementById('hamburger');
   const links = document.getElementById('navLinks');
   ham.addEventListener('click', () => {
@@ -452,7 +379,6 @@
     ham.classList.toggle('active', open);
   });
 
-  // Scroll reveal
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(e => {
       if (e.isIntersecting) {
