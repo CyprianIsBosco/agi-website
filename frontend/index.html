@@ -8,6 +8,88 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="css/style.css">
+<style>
+/* Ken Burns */
+@keyframes kenburns {
+  0%   { transform: scale(1)    translateX(0)     translateY(0); }
+  50%  { transform: scale(1.08) translateX(-1.5%) translateY(-1%); }
+  100% { transform: scale(1.04) translateX(1%)    translateY(-0.5%); }
+}
+.hero-bg {
+  animation: kenburns 22s ease-in-out infinite alternate;
+  transform-origin: center center;
+  will-change: transform;
+}
+
+/* Hero entrance */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(32px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.hero-eyebrow { opacity:0; animation: fadeUp 1s ease forwards 0.4s; }
+.hero-headline{ opacity:0; animation: fadeUp 1s ease forwards 0.8s; }
+.hero-body    { opacity:0; animation: fadeUp 1s ease forwards 1.2s; }
+.hero-actions { opacity:0; animation: fadeUp 1s ease forwards 1.5s; }
+.hero-stats   { opacity:0; animation: fadeUp 1s ease forwards 1.9s; }
+.hero-scroll  { opacity:0; animation: fadeUp 1s ease forwards 2.4s; }
+
+/* Typewriter cursor */
+.tw-cursor {
+  display: inline-block; width: 3px; background: currentColor;
+  margin-left: 3px; vertical-align: baseline; height: 0.85em;
+  animation: blink 0.9s step-end infinite;
+}
+@keyframes blink { 50% { opacity: 0; } }
+
+/* Scroll reveal */
+.rv { opacity:0; transform: translateY(40px); transition: opacity 0.85s cubic-bezier(.22,1,.36,1), transform 0.85s cubic-bezier(.22,1,.36,1); }
+.rv.in { opacity:1; transform: translateY(0); }
+.rv-l { opacity:0; transform: translateX(-40px); transition: opacity 0.85s cubic-bezier(.22,1,.36,1), transform 0.85s cubic-bezier(.22,1,.36,1); }
+.rv-l.in { opacity:1; transform: translateX(0); }
+.rv-r { opacity:0; transform: translateX(40px); transition: opacity 0.85s cubic-bezier(.22,1,.36,1), transform 0.85s cubic-bezier(.22,1,.36,1); }
+.rv-r.in { opacity:1; transform: translateX(0); }
+
+/* Card hovers */
+.service-card { transition: transform 0.35s cubic-bezier(.22,1,.36,1), box-shadow 0.35s ease !important; }
+.service-card:hover { transform: translateY(-8px) scale(1.02) !important; box-shadow: 0 20px 48px rgba(0,0,0,0.13) !important; }
+.testi-card { transition: transform 0.35s cubic-bezier(.22,1,.36,1), box-shadow 0.35s ease !important; }
+.testi-card:hover { transform: translateY(-6px) !important; box-shadow: 0 16px 40px rgba(0,0,0,0.10) !important; }
+
+/* Value icon pulse */
+@keyframes pop { 0%,100%{transform:scale(1)} 50%{transform:scale(1.3)} }
+.value-item.in .value-icon { animation: pop 0.5s ease forwards; animation-delay: var(--d,0s); }
+
+/* Marquee */
+.trusted-logos { overflow: hidden; }
+.trusted-track { display:flex; width:max-content; animation: marquee 22s linear infinite; }
+.trusted-track:hover { animation-play-state: paused; }
+@keyframes marquee { from{transform:translateX(0)} to{transform:translateX(-50%)} }
+
+/* Scroll line bounce */
+@keyframes sbounce { 0%,100%{transform:scaleY(1);opacity:1} 50%{transform:scaleY(1.7);opacity:.4} }
+.scroll-line { animation: sbounce 1.8s ease-in-out infinite; transform-origin: top; }
+
+/* CSR glow pulse */
+@keyframes glow { 0%,100%{box-shadow:0 0 0 0 rgba(163,45,45,0)} 50%{box-shadow:0 0 50px 10px rgba(163,45,45,0.2)} }
+.csr-teaser.in { animation: glow 3.5s ease-in-out infinite; }
+
+/* Button ripple */
+.btn-primary,.btn-ghost,.btn-csr,.btn-nav-cta { position:relative; overflow:hidden; }
+.rpl { position:absolute; border-radius:50%; background:rgba(255,255,255,0.3); transform:scale(0); animation:rpl .6s linear; pointer-events:none; }
+@keyframes rpl { to { transform:scale(4); opacity:0; } }
+
+/* Navbar entrance */
+@keyframes navIn { from{opacity:0;transform:translateY(-16px)} to{opacity:1;transform:translateY(0)} }
+.navbar { animation: navIn 0.7s ease forwards 0.1s; opacity:0; }
+
+/* Section headings draw-in underline */
+.section-title { position: relative; display: inline-block; }
+.section-title::after {
+  content:''; position:absolute; bottom:-6px; left:0; width:0; height:2px;
+  background: currentColor; transition: width 1.2s cubic-bezier(.22,1,.36,1);
+}
+.rv.in .section-title::after, .section-header.in .section-title::after { width: 100%; }
+</style>
 </head>
 <body>
 
@@ -48,7 +130,7 @@
 ══════════════════════════════════════════════════ -->
 <section class="hero" id="hero">
 
-  <div class="hero-bg" style="background-image:url('https://images.unsplash.com/photo-1564424224827-cd24b8915874?w=1600&q=85');background-size:cover;background-position:center top;">
+  <div class="hero-bg" style="background-image:url('https://images.unsplash.com/photo-1528750717929-32abb73d3bd9?w=1600&q=85');background-size:cover;background-position:center top;">
     <div class="hero-bg-grid" style="display:none"></div>
     <div class="hero-chair-wrap" aria-hidden="true" style="display:none">
       <svg class="hero-chair-svg" viewBox="0 0 420 520" fill="none" xmlns="http://www.w3.org/2000/svg"></svg>
@@ -118,12 +200,20 @@
   <div class="container">
     <p class="trusted-label">Trusted by</p>
     <div class="trusted-logos">
-      <span class="trusted-name">AYS East Africa</span>
-      <span class="trusted-name">Beacon Contractors</span>
-      <span class="trusted-name">Innosearch Limited</span>
-      <span class="trusted-name">Soita Siundu Advocates</span>
-      <span class="trusted-name">Bralison Limited</span>
-      <span class="trusted-name">Noni Enterprises</span>
+      <div class="trusted-track">
+        <span class="trusted-name">AYS East Africa</span>
+        <span class="trusted-name">Beacon Contractors</span>
+        <span class="trusted-name">Innosearch Limited</span>
+        <span class="trusted-name">Soita Siundu Advocates</span>
+        <span class="trusted-name">Bralison Limited</span>
+        <span class="trusted-name">Noni Enterprises</span>
+        <span class="trusted-name">AYS East Africa</span>
+        <span class="trusted-name">Beacon Contractors</span>
+        <span class="trusted-name">Innosearch Limited</span>
+        <span class="trusted-name">Soita Siundu Advocates</span>
+        <span class="trusted-name">Bralison Limited</span>
+        <span class="trusted-name">Noni Enterprises</span>
+      </div>
     </div>
   </div>
 </section>
@@ -366,11 +456,14 @@
 <script src="js/main.js"></script>
 <script>
 (function(){
+
+  /* ── Navbar scroll ── */
   const nav = document.getElementById('navbar');
   window.addEventListener('scroll', () => {
     nav.classList.toggle('scrolled', window.scrollY > 40);
   }, { passive: true });
 
+  /* ── Hamburger ── */
   const ham = document.getElementById('hamburger');
   const links = document.getElementById('navLinks');
   ham.addEventListener('click', () => {
@@ -379,18 +472,138 @@
     ham.classList.toggle('active', open);
   });
 
-  const observer = new IntersectionObserver((entries) => {
+  /* ── Typewriter on hero headline ── */
+  const lines = [
+    { el: document.querySelector('.headline-main'),   text: 'We Brand.' },
+    { el: document.querySelector('.headline-accent'),  text: 'We Build.' },
+    { el: document.querySelector('.headline-sub'),     text: 'We Empower.' }
+  ];
+  function typeLine(el, text, done) {
+    el.textContent = '';
+    const cursor = document.createElement('span');
+    cursor.className = 'tw-cursor';
+    el.appendChild(cursor);
+    let i = 0;
+    const id = setInterval(() => {
+      el.insertBefore(document.createTextNode(text[i]), cursor);
+      i++;
+      if (i >= text.length) {
+        clearInterval(id);
+        setTimeout(() => {
+          cursor.remove();
+          if (done) done();
+        }, 300);
+      }
+    }, 55);
+  }
+  let lineIdx = 0;
+  function typeNext() {
+    if (lineIdx >= lines.length) return;
+    const { el, text } = lines[lineIdx++];
+    typeLine(el, text, typeNext);
+  }
+  setTimeout(typeNext, 900);
+
+  /* ── Parallax on hero bg ── */
+  const heroBg = document.querySelector('.hero-bg');
+  window.addEventListener('scroll', () => {
+    const y = window.scrollY;
+    if (y < window.innerHeight) {
+      heroBg.style.transform = 'translateY(' + (y * 0.35) + 'px)';
+    }
+  }, { passive: true });
+
+  /* ── Scroll reveal observer ── */
+  const revObs = new IntersectionObserver((entries) => {
     entries.forEach(e => {
       if (e.isIntersecting) {
-        e.target.classList.add('revealed');
-        observer.unobserve(e.target);
+        e.target.classList.add('in');
+        revObs.unobserve(e.target);
       }
     });
   }, { threshold: 0.12 });
-  document.querySelectorAll('.service-card, .value-item, .testi-card').forEach(el => {
-    el.classList.add('reveal');
-    observer.observe(el);
+
+  /* Section headers */
+  document.querySelectorAll('.section-header').forEach(el => {
+    el.classList.add('rv');
+    revObs.observe(el);
   });
+
+  /* Service cards — staggered */
+  document.querySelectorAll('.service-card').forEach((el, i) => {
+    el.classList.add('rv');
+    el.style.transitionDelay = (i * 0.1) + 's';
+    revObs.observe(el);
+  });
+
+  /* Value items — staggered with icon delay */
+  document.querySelectorAll('.value-item').forEach((el, i) => {
+    el.classList.add('rv');
+    el.style.transitionDelay = (i * 0.12) + 's';
+    el.style.setProperty('--d', (i * 0.12) + 's');
+    revObs.observe(el);
+  });
+
+  /* Testimonial cards — alternate sides */
+  document.querySelectorAll('.testi-card').forEach((el, i) => {
+    el.classList.add(i % 2 === 0 ? 'rv-l' : 'rv-r');
+    el.style.transitionDelay = (i * 0.15) + 's';
+    revObs.observe(el);
+  });
+
+  /* CSR teaser */
+  const csr = document.querySelector('.csr-teaser');
+  if (csr) { csr.classList.add('rv'); revObs.observe(csr); }
+
+  /* CTA banner */
+  const cta = document.querySelector('.cta-banner .cta-inner');
+  if (cta) { cta.classList.add('rv'); revObs.observe(cta); }
+
+  /* Trusted section */
+  const trusted = document.querySelector('.trusted');
+  if (trusted) { trusted.classList.add('rv'); revObs.observe(trusted); }
+
+  /* ── Counting stats ── */
+  const stats = document.querySelectorAll('.stat-num');
+  const statTargets = [5, 4, 8, 100];
+  const statSuffixes = ['+', '+', '+', '%'];
+  let statsDone = false;
+  const statObs = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting && !statsDone) {
+        statsDone = true;
+        stats.forEach((el, i) => {
+          const target = statTargets[i];
+          const suffix = statSuffixes[i];
+          let start = 0;
+          const dur = 1800;
+          const step = 16;
+          const inc = target / (dur / step);
+          const id = setInterval(() => {
+            start = Math.min(start + inc, target);
+            el.textContent = Math.floor(start) + suffix;
+            if (start >= target) clearInterval(id);
+          }, step);
+        });
+        statObs.disconnect();
+      }
+    });
+  }, { threshold: 0.5 });
+  if (stats.length) statObs.observe(stats[0].closest('.hero-stats'));
+
+  /* ── Button ripple ── */
+  document.querySelectorAll('.btn-primary,.btn-ghost,.btn-csr,.btn-nav-cta').forEach(btn => {
+    btn.addEventListener('click', function(e) {
+      const r = document.createElement('span');
+      r.className = 'rpl';
+      const rect = this.getBoundingClientRect();
+      const size = Math.max(rect.width, rect.height);
+      r.style.cssText = 'width:' + size + 'px;height:' + size + 'px;left:' + (e.clientX - rect.left - size/2) + 'px;top:' + (e.clientY - rect.top - size/2) + 'px';
+      this.appendChild(r);
+      setTimeout(() => r.remove(), 700);
+    });
+  });
+
 })();
 </script>
 </body>
