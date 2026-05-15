@@ -10,7 +10,7 @@
 
 <style>
 /* ══════════════════════════════════════════
-   DESIGN TOKENS (match site)
+   DESIGN TOKENS
 ══════════════════════════════════════════ */
 :root {
   --ink:        #1A1A1A;
@@ -94,6 +94,7 @@ button { cursor: pointer; font-family: inherit; }
   transition: color 0.2s;
 }
 .nav-links a:hover { color: #fff; }
+.nav-links a.active { color: #fff; }
 .nav-right { display: flex; align-items: center; gap: 16px; }
 .btn-nav-cta {
   display: inline-flex;
@@ -108,6 +109,10 @@ button { cursor: pointer; font-family: inherit; }
   white-space: nowrap;
 }
 .btn-nav-cta:hover { background: #8a2424; transform: translateY(-1px); }
+.btn-nav-cta.active-link {
+  background: rgba(163,45,45,0.25);
+  border: 1px solid rgba(163,45,45,0.5);
+}
 .hamburger {
   display: none;
   flex-direction: column;
@@ -234,11 +239,7 @@ button { cursor: pointer; font-family: inherit; }
   margin: 0 4px;
   transition: background 0.3s;
 }
-.step-item.done + .step-item .step-line,
 .step-item.done .step-line { background: var(--ink); }
-.step-label {
-  display: none;
-}
 
 /* ── Form card ── */
 .form-card {
@@ -363,13 +364,11 @@ textarea { resize: vertical; min-height: 100px; line-height: 1.6; }
   border-radius: 8px;
   background: rgba(0,0,0,0.05);
   display: flex; align-items: center; justify-content: center;
-  color: var(--ink-muted);
   font-size: 18px;
-  transition: background 0.2s, color 0.2s;
+  transition: background 0.2s;
 }
 .service-option input:checked + .service-option-card .service-option-icon {
   background: var(--red);
-  color: #fff;
 }
 .service-option-name {
   font-size: 13px; font-weight: 500; color: var(--ink); line-height: 1.3;
@@ -462,7 +461,7 @@ textarea { resize: vertical; min-height: 100px; line-height: 1.6; }
 .summary-row:last-child { border-bottom: none; }
 .summary-row-label { color: var(--ink-muted); flex-shrink: 0; }
 .summary-row-val { color: var(--ink); font-weight: 500; text-align: right; }
-.summary-row-val.empty { color: var(--border); font-weight: 400; font-style: italic; }
+.summary-row-val.empty { color: rgba(0,0,0,0.18); font-weight: 400; font-style: italic; }
 
 /* Trust badges */
 .trust-card {
@@ -470,6 +469,7 @@ textarea { resize: vertical; min-height: 100px; line-height: 1.6; }
   border-radius: var(--radius-lg);
   border: 0.5px solid var(--border);
   padding: 20px 24px;
+  margin-bottom: 20px;
 }
 .trust-title {
   font-size: 12px; font-weight: 500;
@@ -492,13 +492,35 @@ textarea { resize: vertical; min-height: 100px; line-height: 1.6; }
   margin-top: 1px;
 }
 
-/* ══════════════════════════════════════════
-   SUCCESS STATE
-══════════════════════════════════════════ */
+/* Contact card */
+.contact-card {
+  background: var(--ink);
+  border-radius: var(--radius-lg);
+  padding: 20px 24px;
+}
+.contact-card-title {
+  font-size: 12px; font-weight: 500;
+  letter-spacing: 0.1em; text-transform: uppercase;
+  color: rgba(255,255,255,0.35); margin-bottom: 16px;
+}
+.contact-card-item {
+  display: flex; align-items: center; gap: 10px;
+  font-size: 13px; color: rgba(255,255,255,0.55);
+  margin-bottom: 10px; transition: color 0.2s;
+}
+.contact-card-item:last-child { margin-bottom: 0; }
+.contact-card-item:hover { color: rgba(255,255,255,0.85); }
+.contact-card-item a { color: inherit; }
+.contact-card-dot {
+  width: 6px; height: 6px; border-radius: 50%;
+  background: var(--gold); flex-shrink: 0;
+}
+
+/* ── Success state ── */
 .success-panel {
   display: none;
   text-align: center;
-  padding: 48px 32px;
+  padding: 56px 32px;
 }
 .success-panel.active { display: block; }
 .success-icon {
@@ -514,7 +536,10 @@ textarea { resize: vertical; min-height: 100px; line-height: 1.6; }
   font-family: var(--font-display);
   font-size: 30px; color: var(--ink); margin-bottom: 12px;
 }
-.success-body { font-size: 15px; color: var(--ink-muted); line-height: 1.8; max-width: 400px; margin: 0 auto 32px; }
+.success-body {
+  font-size: 15px; color: var(--ink-muted);
+  line-height: 1.8; max-width: 400px; margin: 0 auto 28px;
+}
 .success-ref {
   display: inline-block;
   font-size: 13px; font-weight: 500;
@@ -524,8 +549,76 @@ textarea { resize: vertical; min-height: 100px; line-height: 1.6; }
   padding: 6px 18px;
   color: var(--ink-muted);
   margin-bottom: 32px;
+  letter-spacing: 0.05em;
 }
 .success-ref strong { color: var(--red); }
+.success-next {
+  display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; margin-top: 8px;
+}
+
+/* ══════════════════════════════════════════
+   PROCESS STRIP
+══════════════════════════════════════════ */
+.process-section {
+  background: var(--white);
+  border-top: 0.5px solid var(--border);
+  border-bottom: 0.5px solid var(--border);
+  padding: 64px 0;
+}
+.process-label {
+  font-size: 11px; font-weight: 500;
+  letter-spacing: 0.18em; text-transform: uppercase;
+  color: var(--red); margin-bottom: 8px;
+}
+.process-title {
+  font-family: var(--font-display);
+  font-size: clamp(22px, 3vw, 32px);
+  color: var(--ink); margin-bottom: 48px;
+}
+.process-steps {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0;
+  position: relative;
+}
+.process-steps::before {
+  content: '';
+  position: absolute;
+  top: 20px; left: 10%; right: 10%;
+  height: 1.5px;
+  background: linear-gradient(90deg, var(--border), var(--red), var(--border));
+  z-index: 0;
+}
+.process-step {
+  display: flex; flex-direction: column;
+  align-items: center; text-align: center;
+  padding: 0 16px;
+  position: relative; z-index: 1;
+}
+.process-num {
+  width: 40px; height: 40px;
+  border-radius: 50%;
+  background: var(--white);
+  border: 2px solid var(--border);
+  display: flex; align-items: center; justify-content: center;
+  font-family: var(--font-head);
+  font-size: 18px; color: var(--ink-muted);
+  margin-bottom: 18px;
+  transition: all 0.3s;
+  box-shadow: 0 0 0 6px var(--white);
+}
+.process-step.highlight .process-num {
+  background: var(--red); border-color: var(--red);
+  color: #fff; box-shadow: 0 0 0 6px var(--white), 0 4px 16px rgba(163,45,45,0.25);
+}
+.process-step-title {
+  font-size: 13px; font-weight: 500;
+  color: var(--ink); margin-bottom: 6px;
+}
+.process-step-desc {
+  font-size: 12px; color: var(--ink-muted);
+  line-height: 1.6;
+}
 
 /* ══════════════════════════════════════════
    FOOTER
@@ -543,20 +636,34 @@ textarea { resize: vertical; min-height: 100px; line-height: 1.6; }
   margin-bottom: 64px;
 }
 .footer-brand .nav-logo { color: #fff; margin-bottom: 16px; display: inline-flex; }
-.footer-tagline { font-family: var(--font-display); font-style: italic; font-size: 18px; color: #fff; margin-bottom: 12px; }
-.footer-desc { font-size: 13px; line-height: 1.8; color: rgba(255,255,255,0.4); margin-bottom: 20px; }
+.footer-tagline {
+  font-family: var(--font-display); font-style: italic;
+  font-size: 18px; color: #fff; margin-bottom: 12px;
+}
+.footer-desc {
+  font-size: 13px; line-height: 1.8;
+  color: rgba(255,255,255,0.4); margin-bottom: 20px;
+}
 .footer-contact-mini { display: flex; flex-direction: column; gap: 4px; }
-.footer-contact-mini a { font-size: 13px; color: rgba(255,255,255,0.5); transition: color 0.2s; }
+.footer-contact-mini a {
+  font-size: 13px; color: rgba(255,255,255,0.5); transition: color 0.2s;
+}
 .footer-contact-mini a:hover { color: #fff; }
-.footer-col-title { font-size: 11px; font-weight: 500; letter-spacing: 0.16em; text-transform: uppercase; color: rgba(255,255,255,0.35); margin-bottom: 20px; }
+.footer-col-title {
+  font-size: 11px; font-weight: 500;
+  letter-spacing: 0.16em; text-transform: uppercase;
+  color: rgba(255,255,255,0.35); margin-bottom: 20px;
+}
 .footer-col ul { display: flex; flex-direction: column; gap: 10px; }
-.footer-col ul li a, .footer-col ul li span { font-size: 13px; color: rgba(255,255,255,0.45); transition: color 0.2s; }
+.footer-col ul li a,
+.footer-col ul li span {
+  font-size: 13px; color: rgba(255,255,255,0.45); transition: color 0.2s;
+}
 .footer-col ul li a:hover { color: #fff; }
 .footer-bottom {
   border-top: 0.5px solid rgba(255,255,255,0.06);
   padding: 24px 0;
-  display: flex; align-items: center; justify-content: space-between;
-  gap: 16px;
+  display: flex; align-items: center; justify-content: space-between; gap: 16px;
 }
 .footer-copy { font-size: 12px; color: rgba(255,255,255,0.25); }
 .footer-web { font-size: 12px; color: rgba(255,255,255,0.25); transition: color 0.2s; }
@@ -568,6 +675,8 @@ textarea { resize: vertical; min-height: 100px; line-height: 1.6; }
 @media (max-width: 900px) {
   .order-layout { grid-template-columns: 1fr; }
   .order-sidebar { position: static; }
+  .process-steps { grid-template-columns: 1fr 1fr; gap: 32px; }
+  .process-steps::before { display: none; }
   .footer-top { grid-template-columns: 1fr 1fr; gap: 36px; }
 }
 @media (max-width: 640px) {
@@ -576,19 +685,19 @@ textarea { resize: vertical; min-height: 100px; line-height: 1.6; }
     display: flex;
     flex-direction: column;
     position: fixed;
-    top: var(--nav-h);
-    left: 0; right: 0; bottom: 0;
+    top: var(--nav-h); left: 0; right: 0; bottom: 0;
     background: var(--ink);
     padding: 32px 24px;
-    gap: 24px;
-    z-index: 90;
+    gap: 24px; z-index: 90;
   }
   .nav-links.open a { font-size: 18px; color: rgba(255,255,255,0.8); }
   .hamburger { display: flex; }
   .field-row { grid-template-columns: 1fr; }
   .service-selector { grid-template-columns: 1fr; }
   .form-card-body { padding: 20px; }
+  .process-steps { grid-template-columns: 1fr; }
   .footer-top { grid-template-columns: 1fr; }
+  .success-next { flex-direction: column; align-items: center; }
 }
 </style>
 </head>
@@ -617,12 +726,12 @@ textarea { resize: vertical; min-height: 100px; line-height: 1.6; }
       <li><a href="about.html">About</a></li>
       <li><a href="portfolio.html">Portfolio</a></li>
       <li><a href="blog.html">Insights</a></li>
-      <li><a href="csr.html">THAT Child</a></li>
+      <li><a href="thatChild.html">THAT Child</a></li>
       <li><a href="contact.html">Contact</a></li>
     </ul>
 
     <div class="nav-right">
-      <a href="order.html" class="btn-nav-cta">Order now</a>
+      <a href="order.html" class="btn-nav-cta active-link">Order now</a>
       <button class="hamburger" id="hamburger" aria-label="Toggle menu" aria-expanded="false">
         <span></span><span></span><span></span>
       </button>
@@ -684,15 +793,14 @@ textarea { resize: vertical; min-height: 100px; line-height: 1.6; }
 
           <div class="form-card-body">
 
-            <!-- ══ STEP 1 — Service selection ══ -->
+            <!-- ══ STEP 1 — Service + Location ══ -->
             <div class="step-panel active" id="panel-1">
-
               <div class="field-group" id="fg-service">
                 <label>Select a service <span class="required-star">*</span></label>
                 <div class="service-selector">
 
                   <label class="service-option">
-                    <input type="radio" name="service" value="Printing & Branding">
+                    <input type="radio" name="service" value="Printing &amp; Branding">
                     <div class="service-option-card">
                       <div class="service-option-icon">🖨️</div>
                       <div class="service-option-name">Printing &amp; Branding</div>
@@ -752,7 +860,7 @@ textarea { resize: vertical; min-height: 100px; line-height: 1.6; }
               <hr class="form-divider">
 
               <div class="field-group" id="fg-county">
-                <label for="county">Your County / Location <span class="required-star">*</span></label>
+                <label for="county">Your county / location <span class="required-star">*</span></label>
                 <select id="county" name="county">
                   <option value="" disabled selected>Select your county</option>
                   <option>Nakuru</option>
@@ -839,8 +947,8 @@ textarea { resize: vertical; min-height: 100px; line-height: 1.6; }
                 </div>
               </div>
 
-              <div class="field-group" id="fg-org">
-                <label for="org">Organisation / Company</label>
+              <div class="field-group">
+                <label for="org">Organisation / company</label>
                 <input type="text" id="org" name="org" placeholder="e.g. Beacon Contractors Ltd (optional)">
               </div>
 
@@ -889,8 +997,10 @@ textarea { resize: vertical; min-height: 100px; line-height: 1.6; }
               send a personalised quote to your email within <strong>24 hours</strong>.
             </p>
             <div class="success-ref">Reference: <strong id="orderRef">AGI-000000</strong></div>
-            <br>
-            <a href="index.html" class="btn-primary" style="display:inline-flex;margin:0 auto;">← Back to home</a>
+            <div class="success-next">
+              <a href="index.html" class="btn-primary" style="display:inline-flex;">← Back to home</a>
+              <a href="contact.html" class="btn-back" style="display:inline-flex;">Contact the team</a>
+            </div>
           </div>
 
         </div><!-- /form-card -->
@@ -954,7 +1064,54 @@ textarea { resize: vertical; min-height: 100px; line-height: 1.6; }
           </div>
         </div>
 
+        <!-- Quick contact -->
+        <div class="contact-card">
+          <p class="contact-card-title">Need help?</p>
+          <div class="contact-card-item">
+            <div class="contact-card-dot"></div>
+            <a href="https://wa.me/254735518090" target="_blank">WhatsApp us directly</a>
+          </div>
+          <div class="contact-card-item">
+            <div class="contact-card-dot"></div>
+            <a href="tel:+254735518090">+254 735 518 090</a>
+          </div>
+          <div class="contact-card-item">
+            <div class="contact-card-dot"></div>
+            <a href="mailto:info@arendgesin.co.ke">info@arendgesin.co.ke</a>
+          </div>
+        </div>
+
       </aside>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════ PROCESS STRIP ═══════════════════ -->
+<section class="process-section">
+  <div class="container">
+    <p class="process-label">How it works</p>
+    <h2 class="process-title">From request to delivery — four simple steps</h2>
+    <div class="process-steps">
+      <div class="process-step highlight">
+        <div class="process-num">1</div>
+        <div class="process-step-title">Submit your request</div>
+        <div class="process-step-desc">Fill in the order form with your service, product, and contact details.</div>
+      </div>
+      <div class="process-step">
+        <div class="process-num">2</div>
+        <div class="process-step-title">We review your order</div>
+        <div class="process-step-desc">Our team reads every submission carefully and prepares your quote.</div>
+      </div>
+      <div class="process-step">
+        <div class="process-num">3</div>
+        <div class="process-step-title">You receive a quote</div>
+        <div class="process-step-desc">A personalised quote lands in your inbox within 24 hours — often sooner.</div>
+      </div>
+      <div class="process-step">
+        <div class="process-num">4</div>
+        <div class="process-step-title">We deliver</div>
+        <div class="process-step-desc">Once confirmed, we get to work and deliver on time, every time.</div>
+      </div>
     </div>
   </div>
 </section>
@@ -964,9 +1121,16 @@ textarea { resize: vertical; min-height: 100px; line-height: 1.6; }
   <div class="container">
     <div class="footer-top">
       <div class="footer-brand">
-        <a href="index.html" class="nav-logo footer-logo" aria-label="AGI home">
+        <a href="index.html" class="nav-logo" aria-label="AGI home">
           <svg class="logo-svg" viewBox="0 0 120 44" fill="none">
-            <g><polygon points="18,4 34,16 2,16" fill="currentColor"/><rect x="5" y="8" width="4" height="8" fill="currentColor"/><rect x="4" y="16" width="28" height="16" fill="currentColor" opacity="0.15"/><rect x="4" y="16" width="28" height="16" fill="none" stroke="currentColor" stroke-width="1.5"/><rect x="14" y="22" width="8" height="10" rx="1" fill="currentColor" opacity="0.8"/><path d="M0 35 Q17 40 36 33" stroke="#BA7517" stroke-width="2" fill="none" stroke-linecap="round"/></g>
+            <g>
+              <polygon points="18,4 34,16 2,16" fill="currentColor"/>
+              <rect x="5" y="8" width="4" height="8" fill="currentColor"/>
+              <rect x="4" y="16" width="28" height="16" fill="currentColor" opacity="0.15"/>
+              <rect x="4" y="16" width="28" height="16" fill="none" stroke="currentColor" stroke-width="1.5"/>
+              <rect x="14" y="22" width="8" height="10" rx="1" fill="currentColor" opacity="0.8"/>
+              <path d="M0 35 Q17 40 36 33" stroke="#BA7517" stroke-width="2" fill="none" stroke-linecap="round"/>
+            </g>
             <text x="40" y="23" font-family="'Bebas Neue', sans-serif" font-size="22" fill="currentColor" letter-spacing="1">AGI</text>
             <text x="40" y="35" font-family="'DM Sans', sans-serif" font-size="7.5" fill="#BA7517" letter-spacing="1.5" font-style="italic">HOME OF BRANDING</text>
           </svg>
@@ -975,24 +1139,25 @@ textarea { resize: vertical; min-height: 100px; line-height: 1.6; }
         <p class="footer-desc">A family-based branding company empowering youth and giving THAT Child a chance — one brand at a time.</p>
         <div class="footer-contact-mini">
           <a href="tel:+254735518090">+254 735 518 090</a>
+          <a href="tel:+254718260115">+254 718 260 115</a>
           <a href="mailto:info@arendgesin.co.ke">info@arendgesin.co.ke</a>
         </div>
       </div>
       <div class="footer-col">
         <h5 class="footer-col-title">Services</h5>
         <ul>
-          <li><a href="services.html#printing">Printing &amp; Branding</a></li>
-          <li><a href="services.html#stationery">Stationery Supplies</a></li>
-          <li><a href="services.html#it">IT Installations</a></li>
-          <li><a href="services.html#design">Graphic Design</a></li>
-          <li><a href="services.html#ppe">Work Safety (PPEs)</a></li>
+          <li><a href="services.html">Printing &amp; Branding</a></li>
+          <li><a href="services.html">Stationery Supplies</a></li>
+          <li><a href="services.html">IT Installations</a></li>
+          <li><a href="services.html">Graphic Design</a></li>
+          <li><a href="services.html">Work Safety (PPEs)</a></li>
         </ul>
       </div>
       <div class="footer-col">
         <h5 class="footer-col-title">Company</h5>
         <ul>
           <li><a href="about.html">About AGI</a></li>
-          <li><a href="csr.html">THAT Child / CSR</a></li>
+          <li><a href="thatChild.html">THAT Child / CSR</a></li>
           <li><a href="portfolio.html">Portfolio</a></li>
           <li><a href="blog.html">Insights</a></li>
           <li><a href="contact.html">Contact</a></li>
@@ -1029,76 +1194,50 @@ const stepMeta = {
   3: { label: 'Step 3 of 3', title: 'Your contact info' },
 };
 
-/* ══ Validation per step ══ */
+/* ══ Validation ══ */
 function validateStep(step) {
   let valid = true;
 
   if (step === 1) {
-    // Service
     const serviceChecked = document.querySelector('input[name="service"]:checked');
     const fgService = document.getElementById('fg-service');
-    if (!serviceChecked) {
-      fgService.classList.add('has-error');
-      valid = false;
-    } else {
-      fgService.classList.remove('has-error');
-    }
+    if (!serviceChecked) { fgService.classList.add('has-error'); valid = false; }
+    else { fgService.classList.remove('has-error'); }
 
-    // County
     const county = document.getElementById('county');
     const fgCounty = document.getElementById('fg-county');
     if (!county.value) {
-      fgCounty.classList.add('has-error');
-      county.classList.add('invalid');
-      valid = false;
-    } else {
-      fgCounty.classList.remove('has-error');
-      county.classList.remove('invalid');
-    }
+      fgCounty.classList.add('has-error'); county.classList.add('invalid'); valid = false;
+    } else { fgCounty.classList.remove('has-error'); county.classList.remove('invalid'); }
   }
 
   if (step === 2) {
     const item = document.getElementById('item');
     const fgItem = document.getElementById('fg-item');
     if (!item.value.trim()) {
-      fgItem.classList.add('has-error');
-      item.classList.add('invalid');
-      valid = false;
-    } else {
-      fgItem.classList.remove('has-error');
-      item.classList.remove('invalid');
-    }
+      fgItem.classList.add('has-error'); item.classList.add('invalid'); valid = false;
+    } else { fgItem.classList.remove('has-error'); item.classList.remove('invalid'); }
 
     const qty = document.getElementById('qty');
     const fgQty = document.getElementById('fg-qty');
     if (!qty.value || parseInt(qty.value) < 1) {
-      fgQty.classList.add('has-error');
-      qty.classList.add('invalid');
-      valid = false;
-    } else {
-      fgQty.classList.remove('has-error');
-      qty.classList.remove('invalid');
-    }
+      fgQty.classList.add('has-error'); qty.classList.add('invalid'); valid = false;
+    } else { fgQty.classList.remove('has-error'); qty.classList.remove('invalid'); }
   }
 
   if (step === 3) {
     const fields = [
-      { id: 'fname',  fg: 'fg-fname',  check: v => v.trim().length > 0 },
-      { id: 'lname',  fg: 'fg-lname',  check: v => v.trim().length > 0 },
-      { id: 'email',  fg: 'fg-email',  check: v => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v) },
-      { id: 'phone',  fg: 'fg-phone',  check: v => v.trim().length >= 7 },
+      { id: 'fname', fg: 'fg-fname', check: v => v.trim().length > 0 },
+      { id: 'lname', fg: 'fg-lname', check: v => v.trim().length > 0 },
+      { id: 'email', fg: 'fg-email', check: v => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v) },
+      { id: 'phone', fg: 'fg-phone', check: v => v.trim().length >= 7 },
     ];
     fields.forEach(f => {
       const el = document.getElementById(f.id);
       const fg = document.getElementById(f.fg);
       if (!f.check(el.value)) {
-        fg.classList.add('has-error');
-        el.classList.add('invalid');
-        valid = false;
-      } else {
-        fg.classList.remove('has-error');
-        el.classList.remove('invalid');
-      }
+        fg.classList.add('has-error'); el.classList.add('invalid'); valid = false;
+      } else { fg.classList.remove('has-error'); el.classList.remove('invalid'); }
     });
   }
 
@@ -1117,45 +1256,35 @@ function prevStep(from) {
 }
 
 function goToStep(n) {
-  // Hide current panel
   document.getElementById('panel-' + currentStep).classList.remove('active');
-  // Mark done
   const prevItem = document.getElementById('step-item-' + currentStep);
   if (n > currentStep) {
     prevItem.classList.remove('active');
     prevItem.classList.add('done');
     prevItem.querySelector('.step-circle').textContent = '✓';
   } else {
-    prevItem.classList.remove('done','active');
+    prevItem.classList.remove('done', 'active');
     prevItem.querySelector('.step-circle').textContent = currentStep;
     prevItem.classList.add('active');
   }
 
   currentStep = n;
-
-  // Activate new panel
   document.getElementById('panel-' + currentStep).classList.add('active');
   const newItem = document.getElementById('step-item-' + currentStep);
   newItem.classList.remove('done');
   newItem.classList.add('active');
 
-  // Update header
   document.getElementById('stepLabel').textContent = stepMeta[currentStep].label;
   document.getElementById('stepTitle').textContent = stepMeta[currentStep].title;
 
   window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
-/* ══ Live summary update ══ */
+/* ══ Live summary ══ */
 function setSummaryVal(id, val) {
   const el = document.getElementById(id);
-  if (val) {
-    el.textContent = val;
-    el.classList.remove('empty');
-  } else {
-    el.textContent = '—';
-    el.classList.add('empty');
-  }
+  if (val) { el.textContent = val; el.classList.remove('empty'); }
+  else { el.textContent = '—'; el.classList.add('empty'); }
 }
 
 function updateSummary() {
@@ -1168,19 +1297,14 @@ function updateSummary() {
   setSummaryVal('sum-budget', document.getElementById('budget').value || '');
   const fname = document.getElementById('fname').value.trim();
   const lname = document.getElementById('lname').value.trim();
-  const email = document.getElementById('email').value.trim();
   const phone = document.getElementById('phone').value.trim();
-  if (fname || lname || email) {
-    setSummaryVal('sum-contact', [fname + ' ' + lname, phone].filter(Boolean).join(' · ').trim());
-  } else {
-    setSummaryVal('sum-contact', '');
-  }
+  if (fname || lname) {
+    setSummaryVal('sum-contact', [(fname + ' ' + lname).trim(), phone].filter(Boolean).join(' · '));
+  } else { setSummaryVal('sum-contact', ''); }
 }
 
-/* Live summary for step 1 fields */
-document.querySelectorAll('input[name="service"]').forEach(r => {
-  r.addEventListener('change', updateSummary);
-});
+/* Live summary listeners for step 1 */
+document.querySelectorAll('input[name="service"]').forEach(r => r.addEventListener('change', updateSummary));
 document.getElementById('county').addEventListener('change', updateSummary);
 
 /* ══ Submit ══ */
@@ -1188,25 +1312,23 @@ function submitOrder() {
   if (!validateStep(3)) return;
   updateSummary();
 
-  // Build WhatsApp message as fallback delivery mechanism
-  const service = document.querySelector('input[name="service"]:checked')?.value || '';
-  const county  = document.getElementById('county').value;
-  const item    = document.getElementById('item').value.trim();
-  const qty     = document.getElementById('qty').value;
-  const deadline= document.getElementById('deadline').value.trim();
-  const details = document.getElementById('details').value.trim();
-  const budget  = document.getElementById('budget').value;
-  const fname   = document.getElementById('fname').value.trim();
-  const lname   = document.getElementById('lname').value.trim();
-  const org     = document.getElementById('org').value.trim();
-  const email   = document.getElementById('email').value.trim();
-  const phone   = document.getElementById('phone').value.trim();
-  const how     = document.getElementById('how').value;
+  const service  = document.querySelector('input[name="service"]:checked')?.value || '';
+  const county   = document.getElementById('county').value;
+  const item     = document.getElementById('item').value.trim();
+  const qty      = document.getElementById('qty').value;
+  const deadline = document.getElementById('deadline').value.trim();
+  const details  = document.getElementById('details').value.trim();
+  const budget   = document.getElementById('budget').value;
+  const fname    = document.getElementById('fname').value.trim();
+  const lname    = document.getElementById('lname').value.trim();
+  const org      = document.getElementById('org').value.trim();
+  const email    = document.getElementById('email').value.trim();
+  const phone    = document.getElementById('phone').value.trim();
+  const how      = document.getElementById('how').value;
 
   const ref = 'AGI-' + Date.now().toString().slice(-6);
   document.getElementById('orderRef').textContent = ref;
 
-  // Build mailto fallback (primary — works without backend)
   const subject = encodeURIComponent(`[Order ${ref}] ${service} — ${fname} ${lname}`);
   const body = encodeURIComponent(
 `ORDER REFERENCE: ${ref}
@@ -1230,26 +1352,26 @@ Phone: ${phone}
 Heard about AGI: ${how || 'Not stated'}
 `);
 
-  // Open mailto
   window.location.href = `mailto:info@arendgesin.co.ke?subject=${subject}&body=${body}`;
 
-  // Build success page URL with params
-  const sp = new URLSearchParams({
-    ref,
-    service, county, item, qty,
-    deadline: document.getElementById('deadline').value.trim(),
-    budget:   document.getElementById('budget').value,
-    fname, lname,
-    phone, email,
-  });
-
-  // Short delay so mailto opens, then redirect
+  /* Show success panel after short delay */
   setTimeout(() => {
-    window.location.href = 'success.html?' + sp.toString();
+    document.getElementById('formCard').querySelector('.form-card-body').style.display = 'none';
+    document.getElementById('successPanel').classList.add('active');
+    document.getElementById('stepLabel').textContent = 'Complete';
+    document.getElementById('stepTitle').textContent = 'Order submitted';
+
+    /* Mark all steps done */
+    [1,2,3].forEach(i => {
+      const item = document.getElementById('step-item-' + i);
+      item.classList.remove('active');
+      item.classList.add('done');
+      item.querySelector('.step-circle').textContent = '✓';
+    });
   }, 600);
 }
 
-/* ══ Navbar scroll + hamburger ══ */
+/* ══ Navbar + hamburger ══ */
 (function(){
   const nav = document.getElementById('navbar');
   window.addEventListener('scroll', () => {
