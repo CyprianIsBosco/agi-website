@@ -1,0 +1,718 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>AGI Admin — Orders Dashboard</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="../css/style.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<style>
+:root{
+  --navy:#050d1f;--navy2:#0a1630;--navy3:#0e1e3a;
+  --text:#e8eaf0;--muted:#7a8aaa;
+  --gold:#EF9F27;--neon:#EF9F27;--border:rgba(239,159,39,.12);
+  --red:#E24B4A;--green:#97C459;--purple:#7b5fff;
+  --font:'DM Sans',sans-serif;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+body{background:var(--navy);color:var(--text);font-family:var(--font);-webkit-font-smoothing:antialiased;}
+a{color:inherit;text-decoration:none;}
+button{font-family:var(--font);cursor:pointer;}
+input,select,textarea{font-family:var(--font);}
+
+/* Nav */
+#navbar{
+  position:fixed;top:0;left:0;right:0;height:68px;
+  background:rgba(5,13,31,.97);border-bottom:1px solid var(--border);
+  display:flex;align-items:center;padding:0 5%;z-index:100;gap:20px;
+}
+.logo-wrap{display:flex;align-items:center;gap:12px;}
+.logo-text{display:flex;flex-direction:column;}
+.logo-name{font-family:'Bebas Neue',sans-serif;font-size:18px;letter-spacing:2px;color:var(--text);}
+.logo-tag{font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--muted);}
+.nav-links{display:flex;gap:24px;margin-left:auto;}
+.nav-links a{font-size:.83rem;color:var(--muted);transition:color .2s;}
+.nav-links a:hover{color:var(--gold);}
+
+/* Body */
+.admin-body{padding:5.5rem 5% 4rem;min-height:100vh;}
+.section-label{font-size:.68rem;letter-spacing:2.5px;text-transform:uppercase;color:var(--muted);margin-bottom:.4rem;}
+.admin-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:2.5rem;flex-wrap:wrap;gap:1rem;}
+.admin-top h1{font-family:'Bebas Neue',sans-serif;font-size:2.2rem;letter-spacing:1px;}
+
+/* Login */
+.login-box{max-width:420px;margin:4rem auto;background:var(--navy2);border:1px solid var(--border);border-radius:8px;padding:2.5rem;}
+.login-box h2{font-size:1.5rem;font-weight:700;margin-bottom:1.5rem;}
+.form-group{margin-bottom:1.2rem;}
+.form-group label{display:block;font-size:.72rem;letter-spacing:1.5px;text-transform:uppercase;color:var(--muted);margin-bottom:.5rem;}
+.form-group input{width:100%;background:var(--navy3);border:1px solid var(--border);border-radius:4px;padding:.7rem 1rem;color:var(--text);font-size:.9rem;outline:none;transition:border-color .2s;}
+.form-group input:focus{border-color:var(--gold);}
+.submit-btn{width:100%;background:var(--gold);color:var(--navy);border:none;border-radius:4px;padding:.75rem;font-size:.9rem;font-weight:700;letter-spacing:1px;transition:opacity .2s;}
+.submit-btn:hover{opacity:.85;}
+.login-hint{font-size:.75rem;color:var(--muted);text-align:center;margin-top:.8rem;}
+
+/* Stats */
+.stats-row{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:1rem;margin-bottom:2.5rem;}
+.stat-card{background:var(--navy2);border:1px solid var(--border);border-radius:4px;padding:1.5rem;position:relative;overflow:hidden;transition:border-color .3s;}
+.stat-card:hover{border-color:var(--gold);}
+.stat-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;}
+.stat-card.s-total::before{background:var(--neon);}
+.stat-card.s-pending::before{background:#EF9F27;}
+.stat-card.s-progress::before{background:var(--purple);}
+.stat-card.s-delivered::before{background:var(--green);}
+.stat-card.s-completed::before{background:var(--green);}
+.s-label{font-size:.65rem;letter-spacing:2px;text-transform:uppercase;color:var(--muted);margin-bottom:.5rem;}
+.s-val{font-family:'Bebas Neue',sans-serif;font-size:2.5rem;color:var(--neon);line-height:1;}
+.s-val.amber{color:#EF9F27;}.s-val.purple{color:var(--purple);}.s-val.green{color:var(--green);}
+
+/* Tabs */
+.tab-row{display:flex;gap:.5rem;margin-bottom:2rem;flex-wrap:wrap;}
+.tab{background:transparent;border:1px solid var(--border);color:var(--muted);padding:.4rem 1rem;border-radius:2px;font-size:.75rem;font-weight:600;letter-spacing:1px;cursor:pointer;transition:all .2s;}
+.tab.active{border-color:var(--gold);color:var(--gold);background:rgba(239,159,39,.06);}
+.tab-content{display:none;}
+.tab-content.active{display:block;}
+
+/* Charts */
+.charts-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;margin-bottom:2.5rem;}
+.chart-card{background:var(--navy2);border:1px solid var(--border);border-radius:4px;padding:1.5rem;}
+.chart-card.wide{grid-column:span 2;}
+.chart-title{font-size:.88rem;font-weight:700;margin-bottom:1.2rem;color:var(--text);}
+.chart-wrap{position:relative;height:220px;}
+
+/* Table */
+.refresh-btn{background:transparent;border:1px solid var(--border);color:var(--muted);padding:.5rem 1.2rem;border-radius:2px;font-size:.78rem;letter-spacing:1px;cursor:pointer;transition:border-color .3s,color .3s;}
+.refresh-btn:hover{border-color:var(--gold);color:var(--gold);}
+.search-bar{display:flex;gap:.8rem;margin-bottom:1.5rem;flex-wrap:wrap;}
+.search-bar input,.search-bar select{background:var(--navy2);border:1px solid var(--border);border-radius:2px;padding:.6rem 1rem;color:var(--text);font-size:.85rem;outline:none;transition:border-color .3s;}
+.search-bar input:focus,.search-bar select:focus{border-color:var(--gold);}
+.search-bar select option{background:var(--navy2);}
+.search-bar input{flex:1;min-width:200px;}
+.table-wrap{overflow-x:auto;background:var(--navy2);border:1px solid var(--border);border-radius:4px;}
+.orders-table{width:100%;border-collapse:collapse;}
+.orders-table th{font-size:.65rem;letter-spacing:2px;text-transform:uppercase;color:var(--muted);padding:.8rem 1rem;text-align:left;border-bottom:1px solid var(--border);background:var(--navy3);}
+.orders-table td{padding:.8rem 1rem;border-bottom:1px solid rgba(239,159,39,.05);font-size:.84rem;vertical-align:middle;}
+.orders-table tr:hover td{background:rgba(255,255,255,.02);}
+.empty-state{text-align:center;padding:4rem;color:var(--muted);}
+
+/* Badges */
+.status-badge{display:inline-block;font-size:.6rem;letter-spacing:1.5px;text-transform:uppercase;padding:3px 9px;border-radius:2px;white-space:nowrap;}
+.status-pending{background:rgba(186,117,23,.15);color:#EF9F27;}
+.status-in_progress{background:rgba(123,95,255,.15);color:#7b5fff;}
+.status-delivered{background:rgba(99,153,34,.2);color:#97C459;}
+.status-completed{background:rgba(99,153,34,.2);color:#97C459;}
+.status-failed{background:rgba(226,75,74,.15);color:#E24B4A;}
+.svc-badge{font-size:.62rem;letter-spacing:1px;text-transform:uppercase;padding:2px 8px;border-radius:2px;background:rgba(239,159,39,.08);color:var(--gold);max-width:130px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;display:inline-block;}
+
+/* Status select & actions */
+.status-select{background:var(--navy3);border:1px solid var(--border);color:var(--text);padding:4px 8px;border-radius:2px;font-size:.75rem;cursor:pointer;outline:none;transition:border-color .3s;max-width:140px;}
+.status-select:hover,.status-select:focus{border-color:var(--gold);}
+.status-select option{background:var(--navy2);}
+.saving{opacity:.4;pointer-events:none;}
+.action-btn{font-size:.68rem;letter-spacing:1px;text-transform:uppercase;padding:4px 10px;border-radius:2px;border:1px solid;cursor:pointer;font-weight:700;transition:all .2s;background:transparent;}
+.btn-view{border-color:var(--neon);color:var(--neon);}
+.btn-view:hover{background:var(--neon);color:var(--navy);}
+
+/* Modal */
+.order-modal{display:none;position:fixed;inset:0;background:rgba(5,13,31,.95);z-index:200;align-items:center;justify-content:center;padding:2rem;}
+.order-modal.show{display:flex;}
+.modal-box{background:var(--navy2);border:1px solid var(--border);border-radius:8px;padding:2.5rem;max-width:660px;width:100%;max-height:88vh;overflow-y:auto;position:relative;}
+.modal-close{position:absolute;top:1rem;right:1rem;background:none;border:none;color:var(--muted);font-size:1.2rem;cursor:pointer;transition:color .3s;}
+.modal-close:hover{color:var(--gold);}
+.modal-grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:1rem;}
+.m-label{font-size:.62rem;letter-spacing:2px;text-transform:uppercase;color:var(--muted);margin-bottom:3px;}
+.m-val{font-size:.9rem;color:var(--text);}
+.m-brief{font-size:.85rem;color:var(--muted);line-height:1.7;white-space:pre-wrap;margin-top:4px;}
+
+/* Recent activity */
+.recent-list{display:flex;flex-direction:column;gap:.6rem;}
+.recent-item{display:flex;align-items:center;justify-content:space-between;padding:.8rem 1rem;background:var(--navy3);border-radius:4px;border:1px solid var(--border);font-size:.83rem;}
+.recent-item-left{display:flex;flex-direction:column;gap:2px;}
+.recent-name{color:var(--text);font-weight:500;}
+.recent-meta{color:var(--muted);font-size:.75rem;}
+
+/* Toast */
+.toast{position:fixed;bottom:2rem;right:2rem;background:var(--navy3);border:1px solid var(--gold);border-radius:4px;padding:.8rem 1.5rem;font-size:.85rem;color:var(--gold);z-index:300;transform:translateY(100px);opacity:0;transition:all .3s;}
+.toast.show{transform:translateY(0);opacity:1;}
+
+@media(max-width:900px){.charts-grid{grid-template-columns:1fr;}.chart-card.wide{grid-column:span 1;}.modal-grid{grid-template-columns:1fr;}}
+@media(max-width:600px){.stats-row{grid-template-columns:1fr 1fr;}}
+</style>
+</head>
+<body>
+
+<nav id="navbar">
+  <a href="../index.html" class="logo-wrap">
+    <svg width="36" height="42" viewBox="0 0 200 220">
+      <polygon points="100,4 196,72 4,72" fill="none" stroke="#e8eaf0" stroke-width="10" stroke-linejoin="round"/>
+      <line x1="4" y1="72" x2="0" y2="64" stroke="#e8eaf0" stroke-width="8" stroke-linecap="round"/>
+      <line x1="196" y1="72" x2="200" y2="64" stroke="#e8eaf0" stroke-width="8" stroke-linecap="round"/>
+      <rect x="22" y="72" width="156" height="96" fill="none" stroke="#e8eaf0" stroke-width="8"/>
+      <text x="100" y="148" text-anchor="middle" font-family="Arial Black,sans-serif" font-size="46" font-weight="900" fill="#EF9F27" letter-spacing="4">AGI</text>
+      <path d="M 8,180 Q 100,198 192,178" fill="none" stroke="#e8eaf0" stroke-width="6" stroke-linecap="round"/>
+    </svg>
+    <div class="logo-text">
+      <span class="logo-name">AREND GESIN</span>
+      <span class="logo-tag">Admin Panel</span>
+    </div>
+  </a>
+  <ul class="nav-links"><li><a href="../index.html">← Main Site</a></li></ul>
+</nav>
+
+<div class="admin-body">
+
+  <!-- LOGIN -->
+  <div id="loginView">
+    <div class="login-box">
+      <div class="section-label">Admin Access</div>
+      <h2>Orders Dashboard</h2>
+      <div class="form-group">
+        <label>Admin Key</label>
+        <input type="password" id="adminKeyInput" placeholder="Enter your admin key"/>
+      </div>
+      <button class="submit-btn" id="loginBtn">Access Dashboard</button>
+      <p class="login-hint">Key: agi-admin-2025</p>
+    </div>
+  </div>
+
+  <!-- DASHBOARD -->
+  <div id="dashView" style="display:none;">
+
+    <div class="admin-top">
+      <div>
+        <div class="section-label">AGI · Admin Panel</div>
+        <h1>Business Dashboard</h1>
+      </div>
+      <button class="refresh-btn" id="refreshBtn">↻ Refresh Data</button>
+    </div>
+
+    <!-- TABS -->
+    <div class="tab-row">
+      <button class="tab active" onclick="switchTab('overview')">Overview</button>
+      <button class="tab" onclick="switchTab('orders')">All Orders</button>
+      <button class="tab" onclick="switchTab('analytics')">Analytics</button>
+      <button class="tab" onclick="switchTab('recent')">Recent Activity</button>
+    </div>
+
+    <!-- TAB: OVERVIEW -->
+    <div class="tab-content active" id="tab-overview">
+      <div class="stats-row">
+        <div class="stat-card s-total"><div class="s-label">Total Orders</div><div class="s-val" id="statTotal">—</div></div>
+        <div class="stat-card s-pending"><div class="s-label">Pending</div><div class="s-val amber" id="statPending">—</div></div>
+        <div class="stat-card s-progress"><div class="s-label">In Progress</div><div class="s-val purple" id="statProgress">—</div></div>
+        <div class="stat-card s-delivered"><div class="s-label">Delivered</div><div class="s-val green" id="statDelivered">—</div></div>
+        <div class="stat-card s-completed"><div class="s-label">Completed</div><div class="s-val green" id="statCompleted">—</div></div>
+      </div>
+
+      <div class="charts-grid">
+        <div class="chart-card">
+          <div class="chart-title">Orders by Service</div>
+          <div class="chart-wrap"><canvas id="serviceChart"></canvas></div>
+        </div>
+        <div class="chart-card">
+          <div class="chart-title">Orders by Status</div>
+          <div class="chart-wrap"><canvas id="statusChart"></canvas></div>
+        </div>
+        <div class="chart-card wide">
+          <div class="chart-title">Orders Over Time (Last 14 Days)</div>
+          <div class="chart-wrap" style="height:200px;"><canvas id="timelineChart"></canvas></div>
+        </div>
+      </div>
+
+      <!-- Recent 5 -->
+      <div class="chart-card">
+        <div class="chart-title">Latest Orders</div>
+        <div class="table-wrap" style="border:none;">
+          <table class="orders-table">
+            <thead><tr><th>Date</th><th>Client</th><th>Service</th><th>County</th><th>Status</th></tr></thead>
+            <tbody id="recentOrdersBody"><tr><td colspan="5" class="empty-state">Loading...</td></tr></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- TAB: ALL ORDERS -->
+    <div class="tab-content" id="tab-orders">
+      <div class="search-bar">
+        <input type="text" id="searchInput" placeholder="Search by name, phone, email or ref…"/>
+        <select id="filterService">
+          <option value="">All Services</option>
+          <option>Printing &amp; Branding</option>
+          <option>Stationery Supplies</option>
+          <option>IT Installations</option>
+          <option>Graphic Design</option>
+          <option>Work Safety (PPEs)</option>
+          <option>Other / Not Sure</option>
+        </select>
+        <select id="filterStatus">
+          <option value="">All Statuses</option>
+          <option value="pending">Pending</option>
+          <option value="in_progress">In Progress</option>
+          <option value="delivered">Delivered</option>
+          <option value="completed">Completed</option>
+          <option value="failed">Failed</option>
+        </select>
+        <select id="filterCounty">
+          <option value="">All Counties</option>
+          <option>Nakuru</option>
+          <option>Nairobi</option>
+          <option>Uasin Gishu</option>
+          <option>Trans Nzoia</option>
+          <option>Bungoma</option>
+          <option>Other</option>
+        </select>
+      </div>
+      <div class="table-wrap">
+        <table class="orders-table">
+          <thead>
+            <tr>
+              <th>Date</th><th>Ref</th><th>Client</th><th>Phone</th><th>Service</th><th>Item</th><th>Qty</th><th>County</th><th>Budget</th><th>Status</th><th>Update</th><th>View</th>
+            </tr>
+          </thead>
+          <tbody id="ordersBody"><tr><td colspan="12" class="empty-state">Loading...</td></tr></tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- TAB: ANALYTICS -->
+    <div class="tab-content" id="tab-analytics">
+      <div class="charts-grid">
+        <div class="chart-card wide">
+          <div class="chart-title">Orders by Service</div>
+          <div class="chart-wrap" style="height:260px;"><canvas id="revenueByServiceChart"></canvas></div>
+        </div>
+        <div class="chart-card">
+          <div class="chart-title">Orders by County</div>
+          <div class="chart-wrap"><canvas id="ordersByCountyChart"></canvas></div>
+        </div>
+        <div class="chart-card">
+          <div class="chart-title">Orders by Budget Range</div>
+          <div class="chart-wrap"><canvas id="budgetChart"></canvas></div>
+        </div>
+        <div class="chart-card wide">
+          <div class="chart-title">Daily Orders Trend (30 Days)</div>
+          <div class="chart-wrap" style="height:220px;"><canvas id="dailyTrendChart"></canvas></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- TAB: RECENT ACTIVITY -->
+    <div class="tab-content" id="tab-recent">
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;">
+        <div class="chart-card">
+          <div class="chart-title">Latest Orders</div>
+          <div class="recent-list" id="recentOrdersList"></div>
+        </div>
+        <div class="chart-card">
+          <div class="chart-title">Latest by County</div>
+          <div class="recent-list" id="recentCountyList"></div>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /dashView -->
+</div>
+
+<!-- ORDER MODAL -->
+<div class="order-modal" id="orderModal">
+  <div class="modal-box">
+    <button class="modal-close" id="modalClose">✕</button>
+    <div class="section-label">Order Details</div>
+    <h2 style="font-weight:700;font-size:1.2rem;margin-bottom:1.5rem;" id="modalTitle">—</h2>
+
+    <div class="modal-grid">
+      <div><div class="m-label">Reference</div><div class="m-val" id="mRef">—</div></div>
+      <div><div class="m-label">Date</div><div class="m-val" id="mDate">—</div></div>
+      <div><div class="m-label">Client Name</div><div class="m-val" id="mName">—</div></div>
+      <div><div class="m-label">Organisation</div><div class="m-val" id="mCompany">—</div></div>
+      <div><div class="m-label">Phone</div><div class="m-val" id="mPhone">—</div></div>
+      <div><div class="m-label">Email</div><div class="m-val" id="mEmail">—</div></div>
+      <div><div class="m-label">Service</div><div class="m-val" id="mService">—</div></div>
+      <div><div class="m-label">County</div><div class="m-val" id="mCounty">—</div></div>
+      <div><div class="m-label">Item / Product</div><div class="m-val" id="mItem">—</div></div>
+      <div><div class="m-label">Quantity</div><div class="m-val" id="mQty">—</div></div>
+      <div><div class="m-label">Deadline</div><div class="m-val" id="mDeadline">—</div></div>
+      <div><div class="m-label">Budget Range</div><div class="m-val" id="mBudget">—</div></div>
+      <div><div class="m-label">Order Status</div><div class="m-val" id="mStatus">—</div></div>
+      <div><div class="m-label">Heard About Us</div><div class="m-val" id="mHow">—</div></div>
+    </div>
+
+    <div style="margin-top:.5rem;">
+      <div class="m-label">Additional Details / Brief</div>
+      <div class="m-brief" id="mBrief">—</div>
+    </div>
+
+    <div style="margin-top:1.5rem;padding-top:1.5rem;border-top:1px solid var(--border);">
+      <div class="m-label" style="margin-bottom:.8rem;">Update Order Status</div>
+      <div style="display:flex;gap:.5rem;flex-wrap:wrap;" id="modalStatusBtns"></div>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+const API = 'https://agi-backend-8cdh.onrender.com';
+let adminKey = '';
+let allOrders = [];
+let charts = {};
+
+const SERVICES = [
+  'Printing & Branding',
+  'Stationery Supplies',
+  'IT Installations',
+  'Graphic Design',
+  'Work Safety (PPEs)',
+  'Other / Not Sure',
+];
+const SERVICES_SHORT = {
+  'Printing & Branding':    'Printing',
+  'Stationery Supplies':    'Stationery',
+  'IT Installations':       'IT',
+  'Graphic Design':         'Design',
+  'Work Safety (PPEs)':     'PPEs',
+  'Other / Not Sure':       'Other',
+};
+const COUNTIES = ['Nakuru','Nairobi','Uasin Gishu','Trans Nzoia','Bungoma','Other'];
+const BUDGETS  = ['Under KES 5,000','KES 5,000 – 15,000','KES 15,000 – 50,000','KES 50,000 – 150,000','Over KES 150,000','Discuss with team'];
+const COLORS   = ['#EF9F27','#7b5fff','#97C459','#E24B4A','#1A9BF0','#BA7517'];
+
+// ── Tab switching ──
+function switchTab(name) {
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
+  document.querySelector(`.tab[onclick="switchTab('${name}')"]`).classList.add('active');
+  document.getElementById('tab-' + name).classList.add('active');
+  if (name === 'analytics') renderAnalyticsCharts();
+}
+
+// ── Login ──
+document.getElementById('loginBtn').addEventListener('click', () => {
+  adminKey = document.getElementById('adminKeyInput').value.trim();
+  if (!adminKey) return;
+  loadOrders();
+});
+document.getElementById('adminKeyInput').addEventListener('keydown', e => {
+  if (e.key === 'Enter') document.getElementById('loginBtn').click();
+});
+document.getElementById('refreshBtn').addEventListener('click', loadOrders);
+document.getElementById('modalClose').addEventListener('click', () => document.getElementById('orderModal').classList.remove('show'));
+
+['searchInput','filterService','filterStatus','filterCounty'].forEach(id => {
+  document.getElementById(id)?.addEventListener('input', filterOrders);
+  document.getElementById(id)?.addEventListener('change', filterOrders);
+});
+
+// ── Load orders ──
+async function loadOrders() {
+  try {
+    const res = await fetch(`${API}/api/admin/orders`, { headers: { 'x-admin-key': adminKey } });
+    if (res.status === 401) { alert('Invalid admin key'); return; }
+    allOrders = await res.json();
+    document.getElementById('loginView').style.display = 'none';
+    document.getElementById('dashView').style.display = 'block';
+    renderAll();
+  } catch {
+    alert('Cannot connect to backend. Make sure the server is running at ' + API);
+  }
+}
+
+function renderAll() {
+  renderStats();
+  renderOverviewCharts();
+  renderTable(allOrders);
+  renderRecentOrders();
+  renderRecentActivity();
+}
+
+// ── Stats ──
+function renderStats() {
+  const pending    = allOrders.filter(o => (o.status||'pending') === 'pending');
+  const inProgress = allOrders.filter(o => o.status === 'in_progress');
+  const delivered  = allOrders.filter(o => o.status === 'delivered');
+  const completed  = allOrders.filter(o => o.status === 'completed');
+  document.getElementById('statTotal').textContent     = allOrders.length;
+  document.getElementById('statPending').textContent   = pending.length;
+  document.getElementById('statProgress').textContent  = inProgress.length;
+  document.getElementById('statDelivered').textContent = delivered.length;
+  document.getElementById('statCompleted').textContent = completed.length;
+}
+
+// ── Overview charts ──
+function renderOverviewCharts() {
+  // Orders by service
+  const svcCounts = SERVICES.map(s => allOrders.filter(o => o.service === s).length);
+  renderChart('serviceChart', 'bar', SERVICES.map(s => SERVICES_SHORT[s]||s), svcCounts, COLORS);
+
+  // Orders by status
+  const statuses = ['pending','in_progress','delivered','completed','failed'];
+  const statusLabels = ['Pending','In Progress','Delivered','Completed','Failed'];
+  const statusCounts = statuses.map(s => allOrders.filter(o => (o.status||'pending') === s).length);
+  renderChart('statusChart', 'doughnut', statusLabels, statusCounts, COLORS);
+
+  // Timeline 14 days
+  const days = [], dayCounts = [];
+  for (let i = 13; i >= 0; i--) {
+    const d = new Date(); d.setDate(d.getDate() - i);
+    days.push(d.toLocaleDateString('en-GB', { day:'2-digit', month:'short' }));
+    dayCounts.push(allOrders.filter(o => new Date(o.createdAt).toDateString() === d.toDateString()).length);
+  }
+  renderChart('timelineChart', 'line', days, dayCounts, [COLORS[0]], true);
+}
+
+// ── Analytics charts ──
+function renderAnalyticsCharts() {
+  // Orders by service (bar)
+  const svcCounts = SERVICES.map(s => allOrders.filter(o => o.service === s).length);
+  renderChart('revenueByServiceChart', 'bar', SERVICES.map(s => SERVICES_SHORT[s]||s), svcCounts, COLORS);
+
+  // Orders by county
+  const countyCounts = COUNTIES.map(c => allOrders.filter(o => o.county === c).length);
+  renderChart('ordersByCountyChart', 'bar', COUNTIES, countyCounts, COLORS);
+
+  // Budget distribution
+  const budgetCounts = BUDGETS.map(b => allOrders.filter(o => o.budget === b).length);
+  renderChart('budgetChart', 'doughnut', BUDGETS, budgetCounts, COLORS);
+
+  // Daily trend 30 days
+  const days30 = [], dayCounts30 = [];
+  for (let i = 29; i >= 0; i--) {
+    const d = new Date(); d.setDate(d.getDate() - i);
+    days30.push(d.toLocaleDateString('en-GB', { day:'2-digit', month:'short' }));
+    dayCounts30.push(allOrders.filter(o => new Date(o.createdAt).toDateString() === d.toDateString()).length);
+  }
+  renderChart('dailyTrendChart', 'line', days30, dayCounts30, [COLORS[0]], true);
+}
+
+// ── Chart helper ──
+function renderChart(id, type, labels, data, colors, isLine=false) {
+  const canvas = document.getElementById(id);
+  if (!canvas) return;
+  if (charts[id]) charts[id].destroy();
+  const isDoughnut = type === 'doughnut';
+  charts[id] = new Chart(canvas.getContext('2d'), {
+    type,
+    data: {
+      labels,
+      datasets: [{
+        data,
+        backgroundColor: isDoughnut ? colors.map(c => c+'bb') : (isLine ? 'transparent' : colors.map(c => c+'bb')),
+        borderColor: isDoughnut ? colors : (isLine ? colors[0] : colors),
+        borderWidth: isDoughnut ? 2 : (isLine ? 2 : 1),
+        fill: isLine,
+        tension: isLine ? 0.4 : 0,
+        pointBackgroundColor: isLine ? colors[0] : undefined,
+        pointRadius: isLine ? 3 : undefined,
+      }]
+    },
+    options: {
+      responsive: true, maintainAspectRatio: false,
+      plugins: {
+        legend: { display: isDoughnut, labels: { color: '#7a8aaa', font:{size:11}, padding:12 } },
+        tooltip: { backgroundColor:'#0a1630', titleColor:'#e8eaf0', bodyColor:'#7a8aaa', borderColor:'#EF9F27', borderWidth:1 }
+      },
+      scales: isDoughnut ? {} : {
+        x: { ticks:{color:'#7a8aaa',font:{size:10}}, grid:{color:'rgba(239,159,39,0.04)'} },
+        y: { ticks:{color:'#7a8aaa',font:{size:10}}, grid:{color:'rgba(239,159,39,0.06)'}, beginAtZero:true }
+      }
+    }
+  });
+}
+
+// ── Filter ──
+function filterOrders() {
+  const search  = document.getElementById('searchInput').value.toLowerCase();
+  const svc     = document.getElementById('filterService').value;
+  const status  = document.getElementById('filterStatus').value;
+  const county  = document.getElementById('filterCounty').value;
+  const filtered = allOrders.filter(o => {
+    const matchSearch = !search ||
+      o.fname?.toLowerCase().includes(search) ||
+      o.lname?.toLowerCase().includes(search) ||
+      o.phone?.includes(search) ||
+      o.email?.toLowerCase().includes(search) ||
+      o.ref?.toLowerCase().includes(search) ||
+      o._id?.includes(search);
+    const matchSvc    = !svc    || o.service === svc;
+    const matchStatus = !status || (o.status||'pending') === status;
+    const matchCounty = !county || o.county === county;
+    return matchSearch && matchSvc && matchStatus && matchCounty;
+  });
+  renderTable(filtered);
+}
+
+// ── Render main table ──
+function renderTable(orders) {
+  const tbody = document.getElementById('ordersBody');
+  if (!orders.length) {
+    tbody.innerHTML = '<tr><td colspan="12" class="empty-state">No orders match your filters.</td></tr>';
+    return;
+  }
+  tbody.innerHTML = orders.map(o => `
+    <tr>
+      <td style="color:var(--muted);font-size:.76rem;white-space:nowrap;">${fmtDate(o.createdAt)}</td>
+      <td style="color:var(--muted);font-size:.72rem;">${o.ref||o._id?.slice(-6)||'—'}</td>
+      <td style="font-weight:500;">${fullName(o)}</td>
+      <td style="color:var(--muted);font-size:.8rem;">${o.phone||'—'}</td>
+      <td><span class="svc-badge">${SERVICES_SHORT[o.service]||o.service||'—'}</span></td>
+      <td style="font-size:.8rem;max-width:120px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">${o.item||'—'}</td>
+      <td style="color:var(--muted);font-size:.8rem;">${o.qty||'—'}</td>
+      <td style="font-size:.8rem;">${o.county||'—'}</td>
+      <td style="font-size:.75rem;color:var(--muted);max-width:110px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">${o.budget||'—'}</td>
+      <td><span class="status-badge status-${o.status||'pending'}">${(o.status||'pending').replace('_',' ')}</span></td>
+      <td>
+        <select class="status-select" onchange="updateStatus('${o._id}',this.value,this)">
+          <option value="pending" ${(o.status||'pending')==='pending'?'selected':''}>Pending</option>
+          <option value="in_progress" ${o.status==='in_progress'?'selected':''}>In Progress</option>
+          <option value="delivered" ${o.status==='delivered'?'selected':''}>Delivered</option>
+          <option value="completed" ${o.status==='completed'?'selected':''}>Completed</option>
+          <option value="failed" ${o.status==='failed'?'selected':''}>Failed</option>
+        </select>
+      </td>
+      <td><button class="action-btn btn-view" onclick="openModal('${o._id}')">View</button></td>
+    </tr>
+  `).join('');
+}
+
+// ── Recent orders (overview tab) ──
+function renderRecentOrders() {
+  const recent = [...allOrders].sort((a,b) => new Date(b.createdAt)-new Date(a.createdAt)).slice(0,5);
+  const tbody  = document.getElementById('recentOrdersBody');
+  if (!tbody) return;
+  tbody.innerHTML = recent.map(o => `
+    <tr>
+      <td style="color:var(--muted);font-size:.76rem;">${fmtDate(o.createdAt)}</td>
+      <td>${fullName(o)}</td>
+      <td><span class="svc-badge">${SERVICES_SHORT[o.service]||o.service||'—'}</span></td>
+      <td style="font-size:.8rem;">${o.county||'—'}</td>
+      <td><span class="status-badge status-${o.status||'pending'}">${(o.status||'pending').replace('_',' ')}</span></td>
+    </tr>
+  `).join('') || '<tr><td colspan="5" class="empty-state">No orders yet</td></tr>';
+}
+
+// ── Recent activity tab ──
+function renderRecentActivity() {
+  const recent = [...allOrders].sort((a,b) => new Date(b.createdAt)-new Date(a.createdAt)).slice(0,8);
+
+  const recentList = document.getElementById('recentOrdersList');
+  if (recentList) recentList.innerHTML = recent.map(o => `
+    <div class="recent-item">
+      <div class="recent-item-left">
+        <span class="recent-name">${fullName(o)}</span>
+        <span class="recent-meta">${SERVICES_SHORT[o.service]||o.service||'—'} · ${fmtDate(o.createdAt)}</span>
+      </div>
+      <span class="status-badge status-${o.status||'pending'}">${(o.status||'pending').replace('_',' ')}</span>
+    </div>
+  `).join('') || '<p style="color:var(--muted);font-size:.85rem;">No orders yet</p>';
+
+  const countyList = document.getElementById('recentCountyList');
+  if (countyList) countyList.innerHTML = recent.map(o => `
+    <div class="recent-item">
+      <div class="recent-item-left">
+        <span class="recent-name">${fullName(o)} — ${o.item||'—'}</span>
+        <span class="recent-meta">${o.county||'—'} · ${fmtDate(o.createdAt)}</span>
+      </div>
+      <span class="svc-badge">${SERVICES_SHORT[o.service]||'—'}</span>
+    </div>
+  `).join('') || '<p style="color:var(--muted);font-size:.85rem;">No orders yet</p>';
+}
+
+// ── Update status ──
+async function updateStatus(id, newStatus, selectEl) {
+  selectEl.classList.add('saving');
+  try {
+    const res = await fetch(`${API}/api/admin/orders/${id}/status`, {
+      method:'PATCH',
+      headers:{'Content-Type':'application/json','x-admin-key':adminKey},
+      body: JSON.stringify({ status: newStatus })
+    });
+    if (res.ok) {
+      const idx = allOrders.findIndex(o => o._id === id);
+      if (idx > -1) allOrders[idx].status = newStatus;
+      renderStats();
+      const row   = selectEl.closest('tr');
+      const badge = row?.querySelector('.status-badge');
+      if (badge) { badge.className = 'status-badge status-'+newStatus; badge.textContent = newStatus.replace('_',' '); }
+      showToast('Status updated: ' + newStatus.replace('_',' '));
+    }
+  } catch { showToast('Cannot reach backend'); }
+  selectEl.classList.remove('saving');
+}
+
+// ── Modal ──
+function openModal(id) {
+  const o = allOrders.find(o => o._id === id);
+  if (!o) return;
+  document.getElementById('modalTitle').textContent = fullName(o) + ' — ' + (SERVICES_SHORT[o.service]||o.service||'—');
+  document.getElementById('mRef').textContent      = o.ref || o._id?.slice(-6) || '—';
+  document.getElementById('mDate').textContent     = o.createdAt ? new Date(o.createdAt).toLocaleDateString('en-GB',{day:'2-digit',month:'long',year:'numeric'}) : '—';
+  document.getElementById('mName').textContent     = fullName(o);
+  document.getElementById('mCompany').textContent  = o.org || '—';
+  document.getElementById('mPhone').textContent    = o.phone || '—';
+  document.getElementById('mEmail').textContent    = o.email || '—';
+  document.getElementById('mService').textContent  = o.service || '—';
+  document.getElementById('mCounty').textContent   = o.county || '—';
+  document.getElementById('mItem').textContent     = o.item || '—';
+  document.getElementById('mQty').textContent      = o.qty ? o.qty + ' unit(s)' : '—';
+  document.getElementById('mDeadline').textContent = o.deadline || 'Flexible';
+  document.getElementById('mBudget').textContent   = o.budget || '—';
+  document.getElementById('mHow').textContent      = o.how || '—';
+  document.getElementById('mStatus').innerHTML     = `<span class="status-badge status-${o.status||'pending'}">${(o.status||'pending').replace('_',' ')}</span>`;
+  document.getElementById('mBrief').textContent    = o.details || o.brief || 'No additional details provided';
+
+  const btns = document.getElementById('modalStatusBtns');
+  const statuses = [
+    {v:'pending',    l:'Pending',     c:'#EF9F27'},
+    {v:'in_progress',l:'In Progress', c:'#7b5fff'},
+    {v:'delivered',  l:'Delivered',   c:'#97C459'},
+    {v:'completed',  l:'Completed',   c:'#97C459'},
+    {v:'failed',     l:'Failed',      c:'#E24B4A'},
+  ];
+  btns.innerHTML = statuses.map(s => `
+    <button class="action-btn ${o.status===s.v?'saving':''}" style="border-color:${s.c};color:${s.c};"
+      onclick="updateStatusFromModal('${id}','${s.v}',this)">${s.l}</button>
+  `).join('');
+  document.getElementById('orderModal').classList.add('show');
+}
+
+async function updateStatusFromModal(id, status, btn) {
+  const select = document.querySelector(`select[data-id="${id}"]`);
+  if (select) { select.value = status; await updateStatus(id, status, select); }
+  else {
+    // No matching row in table (might be filtered), update directly
+    const selectEl = { classList: { add:()=>{}, remove:()=>{} } };
+    try {
+      const res = await fetch(`${API}/api/admin/orders/${id}/status`, {
+        method:'PATCH',
+        headers:{'Content-Type':'application/json','x-admin-key':adminKey},
+        body: JSON.stringify({ status })
+      });
+      if (res.ok) {
+        const idx = allOrders.findIndex(o => o._id === id);
+        if (idx > -1) allOrders[idx].status = status;
+        renderStats();
+        showToast('Status updated: ' + status.replace('_',' '));
+      }
+    } catch { showToast('Cannot reach backend'); }
+  }
+  document.querySelectorAll('#modalStatusBtns .action-btn').forEach(b => b.classList.remove('saving'));
+  btn.classList.add('saving');
+  document.getElementById('mStatus').innerHTML = `<span class="status-badge status-${status}">${status.replace('_',' ')}</span>`;
+}
+
+// ── Helpers ──
+function fullName(o) {
+  return [o.fname, o.lname].filter(Boolean).join(' ') || o.name || '—';
+}
+function fmtDate(d) {
+  if (!d) return '—';
+  return new Date(d).toLocaleDateString('en-GB',{day:'2-digit',month:'short',year:'2-digit'});
+}
+function showToast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg; t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 3000);
+}
+</script>
+</body>
+</html>
