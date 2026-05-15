@@ -5,17 +5,47 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Contact Us — Arend Gesin Investment</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;1,500&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
   <style>
-    /* ── Page-specific overrides for contact.html ── */
-    /* Re-map legacy tokens to style.css tokens */
+    /* ── CSS Variables ── */
     :root {
-      --transition-page: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+      --red:       #C0272D;
+      --red-dark:  #8B1A1F;
+      --gold:      #D4A017;
+      --gold-light:#F5C842;
+      --dark:      #111111;
+      --charcoal:  #1E1E1E;
+      --mid:       #555555;
+      --light:     #F9F6F1;
+      --white:     #FFFFFF;
+      --card-bg:   #FFFFFF;
+      --border:    rgba(0,0,0,0.08);
+      --shadow:    0 8px 32px rgba(0,0,0,0.08);
+      --shadow-lg: 0 20px 60px rgba(0,0,0,0.13);
+      --radius:    16px;
+      --radius-sm: 10px;
+      --transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+      --font-display: 'Playfair Display', Georgia, serif;
+      --font-body:    'DM Sans', sans-serif;
     }
 
-    /* ── Scroll Reveal (page-specific, style.css uses .revealed) ── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: var(--font-body);
+      background: var(--light);
+      color: var(--dark);
+      line-height: 1.7;
+      overflow-x: hidden;
+    }
+
+    /* ── Scroll Reveal ── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.65s ease, transform 0.65s ease;
+    }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
     .reveal-left {
       opacity: 0; transform: translateX(-36px);
       transition: opacity 0.65s ease, transform 0.65s ease;
@@ -27,13 +57,93 @@
     }
     .reveal-right.visible { opacity: 1; transform: translateX(0); }
 
-    /* ── HERO (contact page – dark bg, overrides style.css hero which uses mint bg) ── */
+    /* ── NAVBAR ── */
+    .navbar {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 1000;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 5%;
+      height: 72px;
+      background: rgba(255,255,255,0.95);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(0,0,0,0.06);
+      transition: var(--transition);
+    }
+    .navbar.scrolled { box-shadow: 0 4px 24px rgba(0,0,0,0.08); }
+    .nav-logo {
+      display: flex; align-items: center; gap: 10px;
+      text-decoration: none;
+    }
+    .nav-logo-icon {
+      width: 40px; height: 40px;
+      background: var(--red);
+      border-radius: 10px;
+      display: flex; align-items: center; justify-content: center;
+      color: #fff;
+      font-family: var(--font-display);
+      font-weight: 700; font-size: 15px;
+    }
+    .nav-logo-text {
+      font-family: var(--font-display);
+      font-size: 17px; font-weight: 700;
+      color: var(--dark); line-height: 1.2;
+    }
+    .nav-logo-text span { color: var(--red); }
+    .nav-links { display: flex; gap: 32px; list-style: none; }
+    .nav-links a {
+      text-decoration: none; font-size: 14px;
+      font-weight: 500; color: var(--mid);
+      letter-spacing: 0.3px; transition: color 0.25s;
+      position: relative;
+    }
+    .nav-links a::after {
+      content: ''; position: absolute;
+      bottom: -3px; left: 0;
+      width: 0; height: 2px;
+      background: var(--red); transition: width 0.25s;
+    }
+    .nav-links a:hover, .nav-links a.active { color: var(--red); }
+    .nav-links a:hover::after, .nav-links a.active::after { width: 100%; }
+    .nav-cta {
+      background: var(--red); color: #fff !important;
+      padding: 9px 22px; border-radius: 50px;
+      font-weight: 600 !important;
+    }
+    .nav-cta::after { display: none !important; }
+    .nav-cta:hover { background: var(--red-dark) !important; transform: translateY(-1px); }
+    .nav-hamburger {
+      display: none; flex-direction: column; gap: 5px;
+      cursor: pointer; background: none; border: none; padding: 4px;
+    }
+    .nav-hamburger span {
+      display: block; width: 24px; height: 2px;
+      background: var(--dark); border-radius: 2px;
+      transition: var(--transition);
+    }
+    .mobile-menu {
+      display: none; position: fixed;
+      top: 72px; left: 0; right: 0;
+      background: #fff; padding: 20px 5% 28px;
+      border-bottom: 1px solid rgba(0,0,0,0.06);
+      z-index: 999; box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+    }
+    .mobile-menu.open { display: block; }
+    .mobile-menu ul { list-style: none; display: flex; flex-direction: column; gap: 16px; }
+    .mobile-menu a {
+      text-decoration: none; font-size: 15px;
+      font-weight: 500; color: var(--dark); display: block; padding: 4px 0;
+    }
+    .mobile-menu a.active, .mobile-menu a:hover { color: var(--red); }
+
+    /* ── HERO ── */
     .hero {
       padding: 140px 5% 90px;
       background: linear-gradient(135deg, #1a0608 0%, #2d0b0e 45%, #1c1005 100%);
-      position: relative; overflow: hidden;
-      min-height: auto; /* override style.css 100svh */
-      display: block;   /* override style.css flex */
+      position: relative;
+      overflow: hidden;
     }
     .hero-bg-pattern {
       position: absolute; inset: 0; opacity: 0.05;
@@ -56,50 +166,67 @@
       position: relative; z-index: 2;
       max-width: 1200px; margin: 0 auto;
       display: flex; align-items: flex-end;
-      justify-content: space-between; gap: 40px; flex-wrap: wrap;
+      justify-content: space-between; gap: 40px;
+      flex-wrap: wrap;
     }
     .hero-text { max-width: 580px; }
     .hero-badge {
       display: inline-flex; align-items: center; gap: 8px;
-      background: rgba(192,39,45,0.18); border: 1px solid rgba(192,39,45,0.35);
-      color: #f5a0a3; padding: 7px 18px; border-radius: var(--radius-pill);
-      font-size: 12px; font-weight: 600; letter-spacing: 1.2px;
-      text-transform: uppercase; margin-bottom: 24px;
+      background: rgba(192,39,45,0.18);
+      border: 1px solid rgba(192,39,45,0.35);
+      color: #f5a0a3;
+      padding: 7px 18px; border-radius: 50px;
+      font-size: 12px; font-weight: 600;
+      letter-spacing: 1.2px; text-transform: uppercase;
+      margin-bottom: 24px;
       animation: fadeDown 0.8s ease both;
     }
     .hero-badge::before {
       content: ''; width: 6px; height: 6px;
-      background: #F5C842; border-radius: 50%;
+      background: var(--gold-light); border-radius: 50%;
+      animation: pulse 2s infinite;
+    }
+    @keyframes pulse {
+      0%,100%{opacity:1;transform:scale(1);}
+      50%{opacity:.5;transform:scale(1.4);}
     }
     .hero h1 {
       font-family: var(--font-display);
       font-size: clamp(2rem, 4.5vw, 3.4rem);
-      font-weight: 400; color: var(--white);
+      font-weight: 700; color: #fff;
       line-height: 1.2; margin-bottom: 18px;
+      animation: fadeDown 0.9s 0.15s ease both;
     }
-    .hero h1 em { font-style: italic; color: var(--gold); }
+    .hero h1 em { font-style: italic; color: var(--gold-light); }
     .hero p {
-      font-size: 1.05rem; color: rgba(255,255,255,0.68); font-weight: 300;
+      font-size: 1.05rem;
+      color: rgba(255,255,255,0.68);
+      font-weight: 300;
+      animation: fadeDown 1s 0.3s ease both;
     }
     .hero-breadcrumb {
       display: flex; align-items: center; gap: 8px;
       font-size: 12px; color: rgba(255,255,255,0.35);
-      letter-spacing: 0.5px; align-self: flex-end;
+      letter-spacing: 0.5px;
+      animation: fadeDown 1s 0.4s ease both;
+      align-self: flex-end;
     }
-    .hero-breadcrumb a { color: rgba(255,255,255,0.5); }
-    .hero-breadcrumb a:hover { color: var(--gold); }
-    .hero-breadcrumb span { color: var(--gold); }
+    .hero-breadcrumb a { color: rgba(255,255,255,0.5); text-decoration: none; }
+    .hero-breadcrumb a:hover { color: var(--gold-light); }
+    .hero-breadcrumb span { color: var(--gold-light); }
     @keyframes fadeDown {
-      from { opacity: 0; transform: translateY(-16px); }
-      to   { opacity: 1; transform: translateY(0); }
+      from { opacity:0; transform:translateY(-16px); }
+      to   { opacity:1; transform:translateY(0); }
     }
 
-    /* ── SHARED SECTION ── */
+    /* ── SHARED ── */
     .section { padding: 90px 5%; }
-    .section-alt { background: var(--white); }
+    .section-alt { background: #fff; }
+    .container { max-width: 1200px; margin: 0 auto; }
     .section-label {
-      font-size: 11px; font-weight: 700; letter-spacing: 2px;
-      text-transform: uppercase; color: var(--red); margin-bottom: 12px;
+      font-size: 11px; font-weight: 700;
+      letter-spacing: 2px; text-transform: uppercase;
+      color: var(--red); margin-bottom: 12px;
       display: flex; align-items: center; gap: 10px;
     }
     .section-label::before {
@@ -109,10 +236,13 @@
     .section-title {
       font-family: var(--font-display);
       font-size: clamp(1.7rem, 3vw, 2.5rem);
-      font-weight: 400; color: var(--navy);
+      font-weight: 700; color: var(--dark);
       line-height: 1.25; margin-bottom: 14px;
     }
-    .section-sub { font-size: 1rem; color: var(--ink-muted); font-weight: 300; }
+    .section-sub {
+      font-size: 1rem; color: var(--mid);
+      font-weight: 300;
+    }
 
     /* ── QUICK CONTACT CARDS ── */
     .quick-cards {
@@ -279,17 +409,17 @@
 
     /* Info Card */
     .info-card {
-      background: var(--navy-dark);
-      border-radius: var(--radius-md);
+      background: var(--charcoal);
+      border-radius: var(--radius);
       padding: 40px 36px;
-      color: var(--white);
+      color: #fff;
       position: sticky;
       top: 96px;
     }
     .info-card-title {
       font-family: var(--font-display);
-      font-size: 1.3rem; font-weight: 400;
-      color: var(--white); margin-bottom: 6px;
+      font-size: 1.3rem; font-weight: 700;
+      color: #fff; margin-bottom: 6px;
     }
     .info-card-sub {
       font-size: 0.88rem;
@@ -302,7 +432,7 @@
     }
     .info-icon {
       width: 42px; height: 42px;
-      border-radius: var(--radius-sm);
+      border-radius: 10px;
       background: rgba(255,255,255,0.07);
       display: flex; align-items: center; justify-content: center;
       font-size: 17px; flex-shrink: 0;
@@ -311,59 +441,121 @@
     .info-label {
       font-size: 11px; font-weight: 700;
       letter-spacing: 1px; text-transform: uppercase;
-      color: var(--gold); margin-bottom: 4px;
+      color: var(--gold-light); margin-bottom: 4px;
     }
     .info-value {
       font-size: 0.9rem; color: rgba(255,255,255,0.85);
       font-weight: 400; line-height: 1.55;
     }
-    .info-value a { color: rgba(255,255,255,0.85); }
-    .info-value a:hover { color: var(--gold); }
-    .divider { height: 1px; background: rgba(255,255,255,0.08); margin: 28px 0; }
-    .hours-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px 16px; }
-    .hours-row { font-size: 13px; }
+    .info-value a { color: rgba(255,255,255,0.85); text-decoration: none; }
+    .info-value a:hover { color: var(--gold-light); }
+    .divider {
+      height: 1px;
+      background: rgba(255,255,255,0.08);
+      margin: 28px 0;
+    }
+    .hours-grid {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 8px 16px;
+    }
+    .hours-row {
+      font-size: 13px;
+    }
     .hours-day { color: rgba(255,255,255,0.45); font-weight: 300; }
     .hours-time { color: rgba(255,255,255,0.8); font-weight: 500; }
-    .social-row { display: flex; gap: 10px; margin-top: 28px; }
-    .social-btn {
-      width: 40px; height: 40px; border-radius: var(--radius-sm);
-      background: rgba(255,255,255,0.07); border: 1px solid rgba(255,255,255,0.1);
-      display: flex; align-items: center; justify-content: center;
-      font-size: 16px; transition: var(--transition-page); cursor: pointer;
+    .social-row {
+      display: flex; gap: 10px; margin-top: 28px;
     }
-    .social-btn:hover { background: var(--red); border-color: var(--red); transform: translateY(-3px); }
-    .map-wrap { border-radius: var(--radius-sm); overflow: hidden; margin-top: 28px; border: 1px solid rgba(255,255,255,0.08); }
-    .map-wrap iframe { width: 100%; height: 180px; display: block; border: none; filter: grayscale(30%) contrast(1.05); }
+    .social-btn {
+      width: 40px; height: 40px;
+      border-radius: 10px;
+      background: rgba(255,255,255,0.07);
+      border: 1px solid rgba(255,255,255,0.1);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 16px; text-decoration: none;
+      transition: var(--transition);
+      cursor: pointer;
+    }
+    .social-btn:hover {
+      background: var(--red);
+      border-color: var(--red);
+      transform: translateY(-3px);
+    }
+
+    /* Map */
+    .map-wrap {
+      border-radius: var(--radius-sm);
+      overflow: hidden;
+      margin-top: 28px;
+      border: 1px solid rgba(255,255,255,0.08);
+    }
+    .map-wrap iframe {
+      width: 100%; height: 180px;
+      display: block; border: none;
+      filter: grayscale(30%) contrast(1.05);
+    }
 
     /* ── FAQ ── */
-    .faq-section { background: var(--surface); }
-    .faq-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 48px; }
-    .faq-item {
-      background: var(--white); border-radius: var(--radius-sm);
-      border: 1px solid var(--border); overflow: hidden; transition: box-shadow 0.25s;
+    .faq-section { background: var(--light); }
+    .faq-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin-top: 48px;
     }
-    .faq-item.open { box-shadow: var(--shadow-sm); }
+    .faq-item {
+      background: #fff;
+      border-radius: var(--radius-sm);
+      border: 1px solid rgba(0,0,0,0.06);
+      overflow: hidden;
+      transition: box-shadow 0.25s;
+    }
+    .faq-item.open { box-shadow: var(--shadow); }
     .faq-question {
       width: 100%; padding: 20px 24px;
-      display: flex; align-items: center; justify-content: space-between; gap: 16px;
-      background: none; border: none; font-family: var(--font-body);
-      font-size: 14px; font-weight: 600; color: var(--navy); text-align: left; cursor: pointer; transition: color 0.25s;
+      display: flex; align-items: center;
+      justify-content: space-between; gap: 16px;
+      background: none; border: none;
+      font-family: var(--font-body);
+      font-size: 14px; font-weight: 600;
+      color: var(--dark); text-align: left;
+      cursor: pointer; transition: color 0.25s;
     }
     .faq-item.open .faq-question { color: var(--red); }
     .faq-icon {
-      width: 28px; height: 28px; border-radius: 50%;
-      background: var(--off-white); display: flex; align-items: center; justify-content: center;
-      flex-shrink: 0; font-size: 16px; color: var(--ink-muted); transition: var(--transition-page);
+      width: 28px; height: 28px;
+      border-radius: 50%;
+      background: var(--light);
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+      font-size: 16px; color: var(--mid);
+      transition: var(--transition);
     }
-    .faq-item.open .faq-icon { background: var(--red-light); color: var(--red); transform: rotate(45deg); }
-    .faq-answer { max-height: 0; overflow: hidden; transition: max-height 0.4s cubic-bezier(0.4,0,0.2,1), padding 0.3s ease; padding: 0 24px; }
-    .faq-item.open .faq-answer { max-height: 200px; padding: 0 24px 20px; }
-    .faq-answer p { font-size: 14px; color: var(--ink-muted); font-weight: 300; line-height: 1.75; }
+    .faq-item.open .faq-icon {
+      background: rgba(192,39,45,0.08);
+      color: var(--red);
+      transform: rotate(45deg);
+    }
+    .faq-answer {
+      max-height: 0; overflow: hidden;
+      transition: max-height 0.4s cubic-bezier(0.4,0,0.2,1), padding 0.3s ease;
+      padding: 0 24px;
+    }
+    .faq-item.open .faq-answer {
+      max-height: 200px;
+      padding: 0 24px 20px;
+    }
+    .faq-answer p {
+      font-size: 14px; color: var(--mid);
+      font-weight: 300; line-height: 1.75;
+    }
 
     /* ── CTA ── */
     .cta-section {
-      background: var(--navy-dark); padding: 90px 5%;
-      text-align: center; position: relative; overflow: hidden;
+      background: linear-gradient(135deg, var(--dark) 0%, #2a0a0c 50%, var(--charcoal) 100%);
+      padding: 90px 5%;
+      text-align: center;
+      position: relative; overflow: hidden;
     }
     .cta-section::before {
       content: ''; position: absolute; inset: 0;
@@ -371,7 +563,8 @@
       background-size: 32px 32px;
     }
     .cta-glow {
-      position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%);
+      position: absolute; top: 50%; left: 50%;
+      transform: translate(-50%,-50%);
       width: 600px; height: 350px;
       background: radial-gradient(ellipse, rgba(192,39,45,0.15) 0%, transparent 70%);
       pointer-events: none;
@@ -380,14 +573,21 @@
     .cta-section h2 {
       font-family: var(--font-display);
       font-size: clamp(1.7rem, 3.5vw, 2.7rem);
-      font-weight: 400; color: var(--white); margin-bottom: 16px; line-height: 1.2;
+      font-weight: 700; color: #fff;
+      margin-bottom: 16px; line-height: 1.2;
     }
-    .cta-section h2 em { color: var(--gold); font-style: italic; }
-    .cta-section p { font-size: 1rem; color: rgba(255,255,255,0.6); margin-bottom: 40px; font-weight: 300; }
-    .cta-buttons { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+    .cta-section h2 em { color: var(--gold-light); font-style: italic; }
+    .cta-section p {
+      font-size: 1rem; color: rgba(255,255,255,0.6);
+      margin-bottom: 40px; font-weight: 300;
+    }
+    .cta-buttons {
+      display: flex; gap: 16px;
+      justify-content: center; flex-wrap: wrap;
+    }
     .btn {
       display: inline-flex; align-items: center; gap: 8px;
-      padding: 14px 30px; border-radius: var(--radius-pill);
+      padding: 14px 30px; border-radius: 50px;
       font-size: 15px; font-weight: 600;
       text-decoration: none; transition: var(--transition);
       letter-spacing: 0.3px; cursor: pointer; border: none;
@@ -410,14 +610,29 @@
       transform: translateY(-2px);
     }
 
-    /* ── RESPONSIVE (page-specific) ── */
+    /* ── FOOTER ── */
+    footer {
+      background: var(--dark); color: rgba(255,255,255,0.45);
+      text-align: center; padding: 28px 5%;
+      font-size: 13px;
+      border-top: 1px solid rgba(255,255,255,0.05);
+    }
+    footer a { color: var(--gold-light); text-decoration: none; }
+
+    /* ── RESPONSIVE ── */
     @media (max-width: 1024px) {
       .contact-grid { grid-template-columns: 1fr; }
       .info-card { position: static; }
       .faq-grid { grid-template-columns: 1fr; }
     }
     @media (max-width: 768px) {
-      .quick-cards { grid-template-columns: 1fr; transform: translateY(-30px); padding: 0 5%; }
+      .nav-links { display: none; }
+      .nav-hamburger { display: flex; }
+      .quick-cards {
+        grid-template-columns: 1fr;
+        transform: translateY(-30px);
+        padding: 0 5%;
+      }
       .form-row { grid-template-columns: 1fr; }
       .form-card { padding: 28px 22px; }
       .hours-grid { grid-template-columns: 1fr; }
@@ -432,37 +647,35 @@
 
   <!-- ══ NAVBAR ══ -->
   <nav class="navbar" id="navbar">
-    <div class="nav-inner">
-      <a href="/" class="nav-logo" aria-label="Arend Gesin Investment home">
-        <svg class="logo-svg" viewBox="0 0 120 44" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <g>
-            <polygon points="18,4 34,16 2,16" fill="currentColor"/>
-            <rect x="5" y="8" width="4" height="8" fill="currentColor"/>
-            <rect x="4" y="16" width="28" height="16" fill="currentColor" opacity="0.15"/>
-            <rect x="4" y="16" width="28" height="16" fill="none" stroke="currentColor" stroke-width="1.5"/>
-            <rect x="14" y="22" width="8" height="10" rx="1" fill="currentColor" opacity="0.8"/>
-            <path d="M0 35 Q17 40 36 33" stroke="#C9933A" stroke-width="2" fill="none" stroke-linecap="round"/>
-          </g>
-          <text x="40" y="23" font-family="'Bebas Neue', sans-serif" font-size="22" fill="currentColor" letter-spacing="1">AGI</text>
-          <text x="40" y="35" font-family="'DM Sans', sans-serif" font-size="7.5" fill="#C9933A" letter-spacing="1.5" font-style="italic">HOME OF BRANDING</text>
-        </svg>
-      </a>
-      <ul class="nav-links" id="navLinks">
-        <li><a href="/">Home</a></li>
-        <li><a href="/pages/about.html">About</a></li>
-        <li><a href="/pages/services.html">Services</a></li>
-        <li><a href="/pages/portfolio.html">Portfolio</a></li>
-        <li><a href="/pages/csr.html">THAT Child</a></li>
-        <li><a href="/pages/blog.html">Blog</a></li>
-      </ul>
-      <div class="nav-right">
-        <a href="/pages/contact.html" class="btn-nav-cta">Contact Us</a>
-        <button class="hamburger" id="hamburger" aria-label="Toggle menu" aria-expanded="false">
-          <span></span><span></span><span></span>
-        </button>
-      </div>
-    </div>
+    <a href="/" class="nav-logo">
+      <div class="nav-logo-icon">AGI</div>
+      <div class="nav-logo-text">Arend <span>Gesin</span></div>
+    </a>
+    <ul class="nav-links">
+      <li><a href="/">Home</a></li>
+      <li><a href="/pages/about.html">About</a></li>
+      <li><a href="/pages/services.html">Services</a></li>
+      <li><a href="/pages/portfolio.html">Portfolio</a></li>
+      <li><a href="/pages/csr.html">CSR</a></li>
+      <li><a href="/pages/blog.html">Blog</a></li>
+      <li><a href="/pages/contact.html" class="nav-cta active">Contact Us</a></li>
+    </ul>
+    <button class="nav-hamburger" id="hamburger" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
   </nav>
+
+  <div class="mobile-menu" id="mobileMenu">
+    <ul>
+      <li><a href="/">Home</a></li>
+      <li><a href="/pages/about.html">About</a></li>
+      <li><a href="/pages/services.html">Services</a></li>
+      <li><a href="/pages/portfolio.html">Portfolio</a></li>
+      <li><a href="/pages/csr.html">CSR</a></li>
+      <li><a href="/pages/blog.html">Blog</a></li>
+      <li><a href="/pages/contact.html" class="active">Contact Us</a></li>
+    </ul>
+  </div>
 
   <!-- ══ HERO ══ -->
   <section class="hero">
@@ -746,67 +959,11 @@
   </section>
 
   <!-- ══ FOOTER ══ -->
-  <footer class="footer">
-    <div class="container">
-      <div class="footer-top">
-        <div class="footer-logo">
-          <a href="/" aria-label="AGI home">
-            <svg class="logo-svg" viewBox="0 0 120 44" fill="none">
-              <g>
-                <polygon points="18,4 34,16 2,16" fill="currentColor"/>
-                <rect x="5" y="8" width="4" height="8" fill="currentColor"/>
-                <rect x="4" y="16" width="28" height="16" fill="currentColor" opacity="0.15"/>
-                <rect x="4" y="16" width="28" height="16" fill="none" stroke="currentColor" stroke-width="1.5"/>
-                <rect x="14" y="22" width="8" height="10" rx="1" fill="currentColor" opacity="0.8"/>
-                <path d="M0 35 Q17 40 36 33" stroke="#C9933A" stroke-width="2" fill="none" stroke-linecap="round"/>
-              </g>
-              <text x="40" y="23" font-family="'Bebas Neue', sans-serif" font-size="22" fill="currentColor" letter-spacing="1">AGI</text>
-              <text x="40" y="35" font-family="'DM Sans', sans-serif" font-size="7.5" fill="#C9933A" letter-spacing="1.5" font-style="italic">HOME OF BRANDING</text>
-            </svg>
-          </a>
-          <p class="footer-tagline">Strength of Family.</p>
-          <p class="footer-desc">A family-based branding company empowering youth and giving THAT Child a chance — one brand at a time.</p>
-          <div class="footer-contact-mini">
-            <a href="tel:+254735518090">+254 735 518 090</a>
-            <a href="tel:+254718260115">+254 718 260 115</a>
-            <a href="mailto:info@arendgesin.co.ke">info@arendgesin.co.ke</a>
-          </div>
-        </div>
-        <div class="footer-col">
-          <h5 class="footer-col-title">Services</h5>
-          <ul>
-            <li><a href="/pages/services.html">Printing &amp; Branding</a></li>
-            <li><a href="/pages/services.html">Stationery Supplies</a></li>
-            <li><a href="/pages/services.html">IT Installations</a></li>
-            <li><a href="/pages/services.html">Graphic Design</a></li>
-          </ul>
-        </div>
-        <div class="footer-col">
-          <h5 class="footer-col-title">Company</h5>
-          <ul>
-            <li><a href="/pages/about.html">About AGI</a></li>
-            <li><a href="/pages/csr.html">THAT Child / CSR</a></li>
-            <li><a href="/pages/portfolio.html">Portfolio</a></li>
-            <li><a href="/pages/blog.html">Insights</a></li>
-            <li><a href="/pages/contact.html">Contact</a></li>
-          </ul>
-        </div>
-        <div class="footer-col">
-          <h5 class="footer-col-title">We operate in</h5>
-          <ul>
-            <li><span>Nakuru County</span></li>
-            <li><span>Nairobi County</span></li>
-            <li><span>Uasin Gishu</span></li>
-            <li><span>Trans Nzoia</span></li>
-            <li><span>Bungoma County</span></li>
-          </ul>
-        </div>
-      </div>
-      <div class="footer-bottom">
-        <p class="footer-copy">© 2025 Arend Gesin Investment. All rights reserved.</p>
-        <a href="http://www.arendgesin.co.ke" class="footer-web" target="_blank" rel="noopener">www.arendgesin.co.ke</a>
-      </div>
-    </div>
+  <footer>
+    <p>© 2024 Arend Gesin Investment. All rights reserved. |
+      <a href="mailto:info@arendgesin.co.ke">info@arendgesin.co.ke</a> |
+      <a href="tel:+254735518090">+254 735 518 090</a>
+    </p>
   </footer>
 
   <!-- ══ SCRIPTS ══ -->
@@ -817,13 +974,9 @@
       navbar.classList.toggle('scrolled', window.scrollY > 20);
     });
 
-    // Mobile hamburger (style.css uses .open on nav-links)
-    const ham = document.getElementById('hamburger');
-    const navLinks = document.getElementById('navLinks');
-    ham.addEventListener('click', () => {
-      const open = navLinks.classList.toggle('open');
-      ham.classList.toggle('active', open);
-      ham.setAttribute('aria-expanded', String(open));
+    // Mobile menu
+    document.getElementById('hamburger').addEventListener('click', () => {
+      document.getElementById('mobileMenu').classList.toggle('open');
     });
 
     // Scroll reveal
