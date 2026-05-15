@@ -19,26 +19,7 @@
 
     <!-- Logo -->
     <a href="index.html" class="nav-logo" aria-label="Arend Gesin Investment home">
-      <svg class="logo-svg" viewBox="0 0 120 44" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-        <!-- House icon -->
-        <g class="logo-icon">
-          <!-- Roof -->
-          <polygon points="18,4 34,16 2,16" fill="currentColor"/>
-          <!-- Left chimney -->
-          <rect x="5" y="8" width="4" height="8" fill="currentColor"/>
-          <!-- Wall -->
-          <rect x="4" y="16" width="28" height="16" fill="currentColor" opacity="0.15"/>
-          <rect x="4" y="16" width="28" height="16" fill="none" stroke="currentColor" stroke-width="1.5"/>
-          <!-- Door -->
-          <rect x="14" y="22" width="8" height="10" rx="1" fill="currentColor" opacity="0.8"/>
-          <!-- Swoosh underline -->
-          <path d="M0 35 Q17 40 36 33" stroke="#BA7517" stroke-width="2" fill="none" stroke-linecap="round"/>
-        </g>
-        <!-- AGI text -->
-        <text x="40" y="23" font-family="'Bebas Neue', sans-serif" font-size="22" fill="currentColor" letter-spacing="1">AGI</text>
-        <!-- Tagline -->
-        <text x="40" y="35" font-family="'DM Sans', sans-serif" font-size="7.5" fill="#BA7517" letter-spacing="1.5" font-style="italic">HOME OF BRANDING</text>
-      </svg>
+      <img src="assets/logo.png" alt="Arend Gesin Investment — Home of Branding" class="logo-img" style="height:44px;width:auto;display:block;">
     </a>
 
     <!-- Nav links -->
@@ -67,36 +48,102 @@
 ══════════════════════════════════════════════════ -->
 <section class="hero" id="hero">
 
-  <!-- Background: B&W room with plastic blue chair feel -->
-  <div class="hero-bg">
+    <div class="hero-bg">
     <div class="hero-bg-grid"></div>
-    <!-- Abstract chair silhouette (CSS + SVG inline) -->
+    <!-- Isometric building with brand overlays -->
     <div class="hero-chair-wrap" aria-hidden="true">
       <svg class="hero-chair-svg" viewBox="0 0 420 520" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <!-- Chair back -->
-        <rect x="60" y="40" width="300" height="200" rx="24" fill="#1A9BF0" opacity="0.92"/>
-        <!-- Back highlight gloss -->
-        <ellipse cx="150" cy="95" rx="60" ry="30" fill="white" opacity="0.12" transform="rotate(-15 150 95)"/>
-        <!-- Chair seat -->
-        <rect x="40" y="225" width="340" height="80" rx="18" fill="#1A9BF0" opacity="0.95"/>
-        <!-- Seat gloss -->
-        <ellipse cx="140" cy="248" rx="80" ry="18" fill="white" opacity="0.1"/>
-        <!-- Left back leg -->
-        <rect x="80" y="300" width="22" height="180" rx="8" fill="#0e7fd4"/>
-        <!-- Right back leg -->
-        <rect x="318" y="300" width="22" height="180" rx="8" fill="#0e7fd4"/>
-        <!-- Left front leg -->
-        <rect x="60" y="295" width="22" height="185" rx="8" fill="#1285db"/>
-        <!-- Right front leg -->
-        <rect x="338" y="295" width="22" height="185" rx="8" fill="#1285db"/>
-        <!-- Armrest left -->
-        <rect x="30" y="195" width="60" height="22" rx="10" fill="#0e7fd4"/>
-        <rect x="30" y="195" width="22" height="110" rx="10" fill="#0e7fd4"/>
-        <!-- Armrest right -->
-        <rect x="330" y="195" width="60" height="22" rx="10" fill="#0e7fd4"/>
-        <rect x="368" y="195" width="22" height="110" rx="10" fill="#0e7fd4"/>
-        <!-- Floor shadow -->
-        <ellipse cx="210" cy="490" rx="160" ry="16" fill="black" opacity="0.25"/>
+        <defs>
+          <style>
+            @keyframes agi-float{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
+            @keyframes agi-rise{0%{transform:translateY(60px);opacity:0}100%{transform:translateY(0);opacity:1}}
+            @keyframes agi-glow{0%,100%{opacity:0.55}50%{opacity:1}}
+            @keyframes agi-b1{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+            @keyframes agi-b2{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
+            @keyframes agi-b3{0%,100%{transform:translateY(0)}50%{transform:translateY(-9px)}}
+            .agi-scene{animation:agi-float 4s ease-in-out infinite;transform-origin:210px 300px}
+            .agi-bld{animation:agi-rise 1.2s cubic-bezier(.22,1,.36,1) forwards;transform-origin:210px 400px}
+            .agi-w1{animation:agi-glow 2.1s ease-in-out infinite}
+            .agi-w2{animation:agi-glow 2.6s ease-in-out infinite .3s}
+            .agi-w3{animation:agi-glow 1.9s ease-in-out infinite .6s}
+            .agi-w4{animation:agi-glow 2.4s ease-in-out infinite .9s}
+            .agi-w5{animation:agi-glow 3.0s ease-in-out infinite .2s}
+            .agi-w6{animation:agi-glow 2.2s ease-in-out infinite .7s}
+            .agi-bd1{animation:agi-b1 3.5s ease-in-out infinite .5s;transform-origin:88px 290px}
+            .agi-bd2{animation:agi-b2 4.2s ease-in-out infinite 1.1s;transform-origin:335px 200px}
+            .agi-bd3{animation:agi-b3 3.8s ease-in-out infinite .2s;transform-origin:335px 370px}
+          </style>
+        </defs>
+        <g class="agi-scene">
+          <g class="agi-bld">
+            <!-- Ground shadow -->
+            <ellipse cx="210" cy="460" rx="130" ry="18" fill="#1a0000" opacity="0.18"/>
+            <!-- Left face -->
+            <polygon points="140,220 210,180 210,440 140,460" fill="#7a1e1e"/>
+            <!-- Right face -->
+            <polygon points="280,220 210,180 210,440 280,460" fill="#a32d2d"/>
+            <!-- Top face (gold) -->
+            <polygon points="140,220 210,180 280,220 210,260" fill="#BA7517"/>
+            <!-- Left face windows -->
+            <rect class="agi-w1" x="150" y="235" width="22" height="16" rx="2" fill="#f0c060" opacity="0.7"/>
+            <rect class="agi-w2" x="177" y="235" width="22" height="16" rx="2" fill="#f0c060" opacity="0.55"/>
+            <rect class="agi-w3" x="150" y="265" width="22" height="16" rx="2" fill="#f0c060" opacity="0.85"/>
+            <rect class="agi-w4" x="177" y="265" width="22" height="16" rx="2" fill="#f0c060" opacity="0.6"/>
+            <rect class="agi-w1" x="150" y="295" width="22" height="16" rx="2" fill="#f0c060" opacity="0.5"/>
+            <rect class="agi-w5" x="177" y="295" width="22" height="16" rx="2" fill="#f0c060" opacity="0.9"/>
+            <rect class="agi-w6" x="150" y="325" width="22" height="16" rx="2" fill="#f0c060" opacity="0.65"/>
+            <rect class="agi-w2" x="177" y="325" width="22" height="16" rx="2" fill="#f0c060" opacity="0.75"/>
+            <rect class="agi-w3" x="150" y="355" width="22" height="16" rx="2" fill="#f0c060" opacity="0.8"/>
+            <rect class="agi-w4" x="177" y="355" width="22" height="16" rx="2" fill="#f0c060" opacity="0.5"/>
+            <rect class="agi-w5" x="150" y="385" width="22" height="16" rx="2" fill="#f0c060" opacity="0.7"/>
+            <rect class="agi-w6" x="177" y="385" width="22" height="16" rx="2" fill="#f0c060" opacity="0.6"/>
+            <!-- Right face windows -->
+            <rect class="agi-w2" x="218" y="235" width="22" height="16" rx="2" fill="#f0c060" opacity="0.6"/>
+            <rect class="agi-w5" x="247" y="235" width="22" height="16" rx="2" fill="#f0c060" opacity="0.45"/>
+            <rect class="agi-w1" x="218" y="265" width="22" height="16" rx="2" fill="#f0c060" opacity="0.8"/>
+            <rect class="agi-w3" x="247" y="265" width="22" height="16" rx="2" fill="#f0c060" opacity="0.55"/>
+            <rect class="agi-w4" x="218" y="295" width="22" height="16" rx="2" fill="#f0c060" opacity="0.65"/>
+            <rect class="agi-w6" x="247" y="295" width="22" height="16" rx="2" fill="#f0c060" opacity="0.85"/>
+            <rect class="agi-w5" x="218" y="325" width="22" height="16" rx="2" fill="#f0c060" opacity="0.5"/>
+            <rect class="agi-w1" x="247" y="325" width="22" height="16" rx="2" fill="#f0c060" opacity="0.7"/>
+            <rect class="agi-w2" x="218" y="355" width="22" height="16" rx="2" fill="#f0c060" opacity="0.9"/>
+            <rect class="agi-w4" x="247" y="355" width="22" height="16" rx="2" fill="#f0c060" opacity="0.55"/>
+            <rect class="agi-w3" x="218" y="385" width="22" height="16" rx="2" fill="#f0c060" opacity="0.65"/>
+            <rect class="agi-w6" x="247" y="385" width="22" height="16" rx="2" fill="#f0c060" opacity="0.75"/>
+            <!-- Antenna -->
+            <line x1="210" y1="180" x2="210" y2="140" stroke="#BA7517" stroke-width="2.5" stroke-linecap="round"/>
+            <circle cx="210" cy="136" r="5" fill="#BA7517" opacity="0.9"/>
+            <circle cx="210" cy="136" r="9" fill="#BA7517" opacity="0.25"/>
+            <!-- Badge 1: Printing -->
+            <g class="agi-bd1">
+              <rect x="44" y="268" width="88" height="60" rx="8" fill="#1a0505" opacity="0.88"/>
+              <rect x="44" y="268" width="88" height="60" rx="8" fill="none" stroke="#BA7517" stroke-width="1"/>
+              <rect x="54" y="280" width="50" height="4" rx="2" fill="#BA7517" opacity="0.9"/>
+              <rect x="54" y="290" width="36" height="4" rx="2" fill="#a32d2d" opacity="0.8"/>
+              <rect x="54" y="300" width="44" height="4" rx="2" fill="#BA7517" opacity="0.6"/>
+              <rect x="54" y="310" width="28" height="4" rx="2" fill="#a32d2d" opacity="0.5"/>
+              <text x="88" y="324" font-family="'DM Sans',sans-serif" font-size="8" fill="#BA7517" text-anchor="middle" letter-spacing="1" opacity="0.9">PRINTING</text>
+            </g>
+            <!-- Badge 2: Branding swatches -->
+            <g class="agi-bd2">
+              <rect x="298" y="172" width="74" height="56" rx="8" fill="#1a0505" opacity="0.88"/>
+              <rect x="298" y="172" width="74" height="56" rx="8" fill="none" stroke="#BA7517" stroke-width="1"/>
+              <circle cx="315" cy="196" r="10" fill="#a32d2d"/>
+              <circle cx="335" cy="196" r="10" fill="#BA7517"/>
+              <circle cx="355" cy="196" r="10" fill="#f0c060"/>
+              <text x="335" y="220" font-family="'DM Sans',sans-serif" font-size="8" fill="#BA7517" text-anchor="middle" letter-spacing="1" opacity="0.9">BRANDING</text>
+            </g>
+            <!-- Badge 3: AGI stamp -->
+            <g class="agi-bd3">
+              <rect x="300" y="345" width="68" height="68" rx="8" fill="#1a0505" opacity="0.88"/>
+              <rect x="300" y="345" width="68" height="68" rx="8" fill="none" stroke="#BA7517" stroke-width="1"/>
+              <polygon points="334,356 346,360 352,372 346,384 334,388 322,384 316,372 322,360" fill="none" stroke="#a32d2d" stroke-width="1.5"/>
+              <polygon points="334,361 343,364 348,372 343,380 334,383 325,380 320,372 325,364" fill="#a32d2d" opacity="0.3"/>
+              <text x="334" y="376" font-family="'Bebas Neue',sans-serif" font-size="9" fill="#BA7517" text-anchor="middle" letter-spacing="0.5">AGI</text>
+              <text x="334" y="404" font-family="'DM Sans',sans-serif" font-size="8" fill="#BA7517" text-anchor="middle" letter-spacing="1" opacity="0.9">IMAGING</text>
+            </g>
+          </g>
+        </g>
       </svg>
     </div>
     <!-- Noise/grain overlay -->
@@ -368,18 +415,7 @@
       <!-- Brand column -->
       <div class="footer-brand">
         <a href="index.html" class="nav-logo footer-logo" aria-label="AGI home">
-          <svg class="logo-svg" viewBox="0 0 120 44" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <g class="logo-icon">
-              <polygon points="18,4 34,16 2,16" fill="currentColor"/>
-              <rect x="5" y="8" width="4" height="8" fill="currentColor"/>
-              <rect x="4" y="16" width="28" height="16" fill="currentColor" opacity="0.15"/>
-              <rect x="4" y="16" width="28" height="16" fill="none" stroke="currentColor" stroke-width="1.5"/>
-              <rect x="14" y="22" width="8" height="10" rx="1" fill="currentColor" opacity="0.8"/>
-              <path d="M0 35 Q17 40 36 33" stroke="#BA7517" stroke-width="2" fill="none" stroke-linecap="round"/>
-            </g>
-            <text x="40" y="23" font-family="'Bebas Neue', sans-serif" font-size="22" fill="currentColor" letter-spacing="1">AGI</text>
-            <text x="40" y="35" font-family="'DM Sans', sans-serif" font-size="7.5" fill="#BA7517" letter-spacing="1.5" font-style="italic">HOME OF BRANDING</text>
-          </svg>
+          <img src="assets/logo.png" alt="Arend Gesin Investment — Home of Branding" class="logo-img" style="height:44px;width:auto;display:block;">
         </a>
         <p class="footer-tagline">Strength of Family.</p>
         <p class="footer-desc">A family-based branding company empowering youth and giving THAT Child a chance — one brand at a time.</p>
