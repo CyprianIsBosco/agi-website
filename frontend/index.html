@@ -82,6 +82,11 @@
 @keyframes navIn { from{opacity:0;transform:translateY(-16px)} to{opacity:1;transform:translateY(0)} }
 .navbar { animation: navIn 0.7s ease forwards 0.1s; opacity:0; }
 
+/* Hide brand name on small screens */
+@media (max-width: 480px) {
+  .nav-brand-name { display: none !important; }
+}
+
 /* Section headings draw-in underline */
 .section-title { position: relative; display: inline-block; }
 .section-title::after {
@@ -99,9 +104,13 @@
 <nav class="navbar" id="navbar">
   <div class="nav-inner">
 
-    <!-- Logo -->
-    <a href="index.html" class="nav-logo" aria-label="Arend Gesin Investment home">
-      <img src="assets/logo.png" alt="Arend Gesin Investment — Home of Branding" class="logo-img" style="height:44px;width:auto;display:block;">
+    <!-- Logo + Company Name -->
+    <a href="index.html" class="nav-logo" aria-label="Arend Gesin Investment home" style="display:flex;align-items:center;gap:12px;text-decoration:none;">
+      <img src="assets/logo.png" alt="Arend Gesin Investment — Home of Branding" class="logo-img" style="height:44px;width:auto;display:block;flex-shrink:0;">
+      <div class="nav-brand-name" aria-label="Arend Gesin Investment" style="display:flex;flex-direction:column;line-height:1.1;">
+        <span class="nav-brand-top" style="font-family:'Bebas Neue',sans-serif;font-size:1.15rem;letter-spacing:0.12em;color:#ffffff;display:block;overflow:hidden;white-space:nowrap;"></span>
+        <span class="nav-brand-bottom" style="font-family:'Bebas Neue',sans-serif;font-size:0.78rem;letter-spacing:0.22em;color:#a32d2d;display:block;overflow:hidden;white-space:nowrap;"></span>
+      </div>
     </a>
 
     <!-- Nav links -->
@@ -456,6 +465,24 @@
 <script src="js/main.js"></script>
 <script>
 (function(){
+
+  /* ── Brand name typewriter ── */
+  const brandTop    = document.querySelector('.nav-brand-top');
+  const brandBottom = document.querySelector('.nav-brand-bottom');
+  function typeNavLine(el, text, delay, done) {
+    setTimeout(() => {
+      let i = 0;
+      const id = setInterval(() => {
+        el.textContent += text[i];
+        i++;
+        if (i >= text.length) { clearInterval(id); if (done) done(); }
+      }, 48);
+    }, delay);
+  }
+  // Start after navbar slides in (0.8s) then type top line, then bottom
+  typeNavLine(brandTop, 'AREND GESIN', 900, () => {
+    typeNavLine(brandBottom, 'INVESTMENT', 120, null);
+  });
 
   /* ── Navbar scroll ── */
   const nav = document.getElementById('navbar');
