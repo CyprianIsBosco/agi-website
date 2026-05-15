@@ -48,10 +48,10 @@
 ══════════════════════════════════════════════════ -->
 <section class="hero" id="hero">
 
-    <div class="hero-bg">
-    <div class="hero-bg-grid"></div>
-    <!-- Isometric building with brand overlays -->
-    <div class="hero-chair-wrap" aria-hidden="true">
+    <div class="hero-bg" style="background-image:url('https://images.unsplash.com/photo-1444723121867-7a241cacace9?w=1600&q=85');background-size:cover;background-position:center;">
+    <div class="hero-bg-grid" style="display:none"></div>
+    <!-- Night city photo hero — hidden SVG placeholder kept for markup compatibility -->
+    <div class="hero-chair-wrap" aria-hidden="true" style="display:none">
       <svg class="hero-chair-svg" viewBox="0 0 420 520" fill="none" xmlns="http://www.w3.org/2000/svg">
         <defs>
           <style>
@@ -146,10 +146,8 @@
         </g>
       </svg>
     </div>
-    <!-- Noise/grain overlay -->
-    <div class="hero-grain"></div>
-    <!-- Dark gradient overlay -->
-    <div class="hero-overlay"></div>
+    <!-- Dark gradient overlay — warm red/gold to complement night city -->
+    <div class="hero-overlay" style="background:linear-gradient(120deg, rgba(8,0,0,0.88) 40%, rgba(163,45,45,0.45) 75%, rgba(186,117,23,0.2) 100%)"></div>
   </div>
 
   <!-- Hero content -->
