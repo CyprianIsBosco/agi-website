@@ -125,6 +125,20 @@ ul { list-style: none; }
 }
 .btn-nav-cta:hover { background: var(--red-dark); transform: translateY(-1px); }
 
+/* Nav CTA link (blog nav "Get in Touch" uses .nav-cta on an <a> inside nav-links) */
+.nav-links a.nav-cta {
+  background: var(--red);
+  color: #fff !important;
+  padding: 7px 18px;
+  border-radius: 99px;
+  font-weight: 500;
+  transition: background 0.2s, transform 0.15s;
+}
+.nav-links a.nav-cta:hover {
+  background: var(--red-dark);
+  transform: translateY(-1px);
+}
+
 /* Hamburger */
 .hamburger {
   display: none;
@@ -476,6 +490,7 @@ ul { list-style: none; }
   color: var(--ink);
 }
 .section-title em { font-style: italic; color: var(--red); }
+/* Shared section-header: centred, max-width constrained */
 .section-header {
   text-align: center;
   max-width: 600px;
@@ -570,9 +585,17 @@ ul { list-style: none; }
 }
 .service-link:hover { gap: 8px; }
 
-/* Scroll reveal */
-.reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.5s, transform 0.5s; }
-.reveal.revealed { opacity: 1; transform: translateY(0); }
+/* Scroll reveal — .revealed used by: about, portfolio, services
+                  .visible used by:  blog, contact, csr           */
+.reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.6s ease, transform 0.6s ease; }
+.reveal.revealed,
+.reveal.visible { opacity: 1; transform: translateY(0); }
+
+/* Side-entrance variants (CSR, About) */
+.reveal-left  { opacity: 0; transform: translateX(-40px); transition: opacity 0.7s ease, transform 0.7s ease; }
+.reveal-right { opacity: 0; transform: translateX( 40px); transition: opacity 0.7s ease, transform 0.7s ease; }
+.reveal-left.visible,  .reveal-left.revealed  { opacity: 1; transform: translateX(0); }
+.reveal-right.visible, .reveal-right.revealed { opacity: 1; transform: translateX(0); }
 
 /* ══════════════════════════════════════
    WHY AGI
@@ -1347,7 +1370,8 @@ textarea { resize: vertical; min-height: 100px; line-height: 1.6; }
 /* ══════════════════════════════════════
    SHARED PAGE UTILITIES (all inner pages)
 ══════════════════════════════════════ */
-.section { padding: 90px 5%; }
+.section { padding: 90px 0; }
+.section .container { padding: 0 24px; }
 .section-alt { background: var(--surface); }
 .section-label {
   font-size: 11px; font-weight: 700;
@@ -1358,20 +1382,11 @@ textarea { resize: vertical; min-height: 100px; line-height: 1.6; }
 .section-label::before {
   content: ''; width: 28px; height: 2px;
   background: var(--red); border-radius: 2px;
+  flex-shrink: 0;
 }
 .section-sub { font-size: 1rem; color: var(--ink-muted); font-weight: 300; }
 
-/* Reveal animations (shared) */
-.reveal-left {
-  opacity: 0; transform: translateX(-40px);
-  transition: opacity 0.7s ease, transform 0.7s ease;
-}
-.reveal-left.visible { opacity: 1; transform: translateX(0); }
-.reveal-right {
-  opacity: 0; transform: translateX(40px);
-  transition: opacity 0.7s ease, transform 0.7s ease;
-}
-.reveal-right.visible { opacity: 1; transform: translateX(0); }
+/* reveal-left / reveal-right defined near .reveal above */
 
 /* Mobile menu (light theme — shared by CSR & Contact) */
 .mobile-menu {
@@ -1502,13 +1517,15 @@ footer.simple-footer a { color: var(--amber); text-decoration: none; }
 .blog-section { padding: 0 5% 100px; background: var(--ink); }
 .blog-inner { max-width: 1200px; margin: 0 auto; }
 
-/* Section header inside blog */
-.section-header {
+/* Section header inside blog (scoped to avoid overriding shared .section-header) */
+.blog-inner .section-header {
   display: flex; align-items: center; justify-content: space-between;
   margin-bottom: 28px;
+  text-align: left;
+  max-width: none;
 }
-.section-header .section-title { font-family: var(--font-body); font-size: 1rem; font-weight: 600; color: rgba(255,255,255,0.5); }
-.section-header .section-title span { color: rgba(255,255,255,0.25); margin-left: 6px; }
+.blog-inner .section-header .section-title { font-family: var(--font-body); font-size: 1rem; font-weight: 600; color: rgba(255,255,255,0.5); }
+.blog-inner .section-header .section-title span { color: rgba(255,255,255,0.25); margin-left: 6px; }
 .view-all { font-size: 0.82rem; color: var(--red); font-weight: 500; display: flex; align-items: center; gap: 4px; transition: gap 0.2s; }
 .view-all:hover { gap: 8px; }
 
