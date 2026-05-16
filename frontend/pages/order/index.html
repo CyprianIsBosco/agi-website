@@ -1287,7 +1287,7 @@ document.querySelectorAll('input[name="service"]').forEach(r => r.addEventListen
 document.getElementById('county').addEventListener('change', updateSummary);
 
 /* ══ Submit ══ */
-function submitOrder() {
+async function submitOrder() {
   if (!validateStep(3)) return;
   updateSummary();
 
@@ -1305,49 +1305,46 @@ function submitOrder() {
   const phone    = document.getElementById('phone').value.trim();
   const how      = document.getElementById('how').value;
 
-  const ref = 'AGI-' + Date.now().toString().slice(-6);
-  document.getElementById('orderRef').textContent = ref;
+  /* Disable button & show loading state */
+  const submitBtn = document.getElementById('submitBtn');
+  const btnText   = submitBtn.querySelector('.btn-text');
+  const original  = btnText.textContent;
+  submitBtn.disabled = true;
+  btnText.textContent = 'Submitting…';
 
-  const subject = encodeURIComponent(`[Order ${ref}] ${service} — ${fname} ${lname}`);
-  const body = encodeURIComponent(
-`ORDER REFERENCE: ${ref}
-
-SERVICE: ${service}
-COUNTY: ${county}
-
-ITEM / PRODUCT: ${item}
-QUANTITY: ${qty}
-DEADLINE: ${deadline || 'Flexible'}
-BUDGET: ${budget || 'Not specified'}
-
-DETAILS:
-${details || 'None provided'}
-
-— CLIENT INFO —
-Name: ${fname} ${lname}
-Organisation: ${org || 'N/A'}
-Email: ${email}
-Phone: ${phone}
-Heard about AGI: ${how || 'Not stated'}
-`);
-
-  window.location.href = `mailto:info@arendgesin.co.ke?subject=${subject}&body=${body}`;
-
-  /* Show success panel after short delay */
-  setTimeout(() => {
-    document.getElementById('formCard').querySelector('.form-card-body').style.display = 'none';
-    document.getElementById('successPanel').classList.add('active');
-    document.getElementById('stepLabel').textContent = 'Complete';
-    document.getElementById('stepTitle').textContent = 'Order submitted';
-
-    /* Mark all steps done */
-    [1,2,3].forEach(i => {
-      const item = document.getElementById('step-item-' + i);
-      item.classList.remove('active');
-      item.classList.add('done');
-      item.querySelector('.step-circle').textContent = '✓';
+  try {
+    const res = await fetch('https://agi-backend-8cdh.onrender.com/api/orders', {
+      method:  'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ service, county, item, qty, deadline, details,
+                             budget, fname, lname, org, email, phone, how }),
     });
-  }, 600);
+
+    const data = await res.json();
+    if (!res.ok) throw new Error(data.error || 'Submission failed');
+
+    /* Update the visible ref then show success panel */
+    document.getElementById('orderRef').textContent = data.ref;
+
+    setTimeout(() => {
+      document.getElementById('formCard').querySelector('.form-card-body').style.display = 'none';
+      document.getElementById('successPanel').classList.add('active');
+      document.getElementById('stepLabel').textContent = 'Complete';
+      document.getElementById('stepTitle').textContent = 'Order submitted';
+
+      [1,2,3].forEach(i => {
+        const item = document.getElementById('step-item-' + i);
+        item.classList.remove('active');
+        item.classList.add('done');
+        item.querySelector('.step-circle').textContent = '✓';
+      });
+    }, 400);
+
+  } catch (err) {
+    alert('Sorry — ' + err.message + '.\nPlease try again or call us on +254 735 518 090.');
+    submitBtn.disabled = false;
+    btnText.textContent = original;
+  }
 }
 
 /* ══ Navbar + hamburger ══ */

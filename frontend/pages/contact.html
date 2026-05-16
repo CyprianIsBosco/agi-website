@@ -377,18 +377,35 @@
       });
     });
 
-    // Form submit simulation
-    document.getElementById('contactForm').addEventListener('submit', function(e) {
+    // Contact form — POST to AGI backend
+    document.getElementById('contactForm').addEventListener('submit', async function(e) {
       e.preventDefault();
       const btn = document.getElementById('submitBtn');
       const msg = document.getElementById('successMsg');
       btn.classList.add('loading');
-      setTimeout(() => {
-        btn.classList.remove('loading');
+
+      try {
+        const res = await fetch('https://agi-backend-8cdh.onrender.com/api/contact', {
+          method:  'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            fname:   document.getElementById('fname').value.trim(),
+            lname:   document.getElementById('lname').value.trim(),
+            email:   document.getElementById('email').value.trim(),
+            phone:   document.getElementById('phone').value.trim(),
+            subject: document.getElementById('subject').value,
+            message: document.getElementById('message').value.trim(),
+          }),
+        });
+        if (!res.ok) throw new Error('Failed');
         msg.classList.add('show');
         this.reset();
         setTimeout(() => msg.classList.remove('show'), 6000);
-      }, 1800);
+      } catch {
+        alert('Sorry, something went wrong. Please email us directly at info@arendgesin.co.ke');
+      } finally {
+        btn.classList.remove('loading');
+      }
     });
   </script>
 </body>
