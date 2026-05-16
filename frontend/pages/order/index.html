@@ -1306,11 +1306,10 @@ async function submitOrder() {
   const how      = document.getElementById('how').value;
 
   /* Disable button & show loading state */
-  const submitBtn = document.getElementById('submitBtn');
-  const btnText   = submitBtn.querySelector('.btn-text');
-  const original  = btnText.textContent;
+  const submitBtn   = document.getElementById('submitBtn');
+  const originalTxt = submitBtn.textContent;
   submitBtn.disabled = true;
-  btnText.textContent = 'Submitting…';
+  submitBtn.textContent = 'Submitting…';
 
   try {
     const res = await fetch('https://agi-backend-8cdh.onrender.com/api/orders', {
@@ -1324,26 +1323,31 @@ async function submitOrder() {
     if (!res.ok) throw new Error(data.error || 'Submission failed');
 
     /* Update the visible ref then show success panel */
-    document.getElementById('orderRef').textContent = data.ref;
+    const refEl = document.getElementById('orderRef');
+    if (refEl) refEl.textContent = data.ref;
 
     setTimeout(() => {
-      document.getElementById('formCard').querySelector('.form-card-body').style.display = 'none';
-      document.getElementById('successPanel').classList.add('active');
-      document.getElementById('stepLabel').textContent = 'Complete';
-      document.getElementById('stepTitle').textContent = 'Order submitted';
-
+      const formBody = document.getElementById('formCard')?.querySelector('.form-card-body');
+      if (formBody) formBody.style.display = 'none';
+      document.getElementById('successPanel')?.classList.add('active');
+      const stepLabel = document.getElementById('stepLabel');
+      const stepTitle = document.getElementById('stepTitle');
+      if (stepLabel) stepLabel.textContent = 'Complete';
+      if (stepTitle) stepTitle.textContent = 'Order submitted';
       [1,2,3].forEach(i => {
-        const item = document.getElementById('step-item-' + i);
-        item.classList.remove('active');
-        item.classList.add('done');
-        item.querySelector('.step-circle').textContent = '✓';
+        const stepItem = document.getElementById('step-item-' + i);
+        if (!stepItem) return;
+        stepItem.classList.remove('active');
+        stepItem.classList.add('done');
+        const circle = stepItem.querySelector('.step-circle');
+        if (circle) circle.textContent = '✓';
       });
     }, 400);
 
   } catch (err) {
     alert('Sorry — ' + err.message + '.\nPlease try again or call us on +254 735 518 090.');
     submitBtn.disabled = false;
-    btnText.textContent = original;
+    submitBtn.textContent = originalTxt;
   }
 }
 
