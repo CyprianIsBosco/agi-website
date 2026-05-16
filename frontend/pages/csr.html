@@ -4,46 +4,528 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>THAT Child — Arend Gesin Investment</title>
+
+  <!-- Fonts: same stack as style.css -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
-  
-<link rel="stylesheet" href="../css/style.css">
+
+  <!-- Main stylesheet — single source of truth -->
+  <link rel="stylesheet" href="../css/style.css">
+
+  <!-- Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+
+  <style>
+    /* ═══════════════════════════════════════════════════
+       CSR / THAT CHILD — page-specific styles only.
+       Tokens (--red, --amber, --ink, fonts, etc.),
+       navbar, footer, buttons, and .reveal all come
+       from style.css. Nothing here should duplicate those.
+    ═══════════════════════════════════════════════════ */
+
+    /* ── Light page base ── */
+    body {
+      background: #F9F6F1;
+      color: #111;
+    }
+
+    /* ── Reveal variants ── */
+    /* Base .reveal is in style.css; we add side-entrance variants used here */
+    .reveal.visible        { opacity: 1; transform: translateY(0); }
+    .reveal-left           { opacity: 0; transform: translateX(-40px); transition: opacity 0.7s ease, transform 0.7s ease; }
+    .reveal-left.visible   { opacity: 1; transform: translateX(0); }
+    .reveal-right          { opacity: 0; transform: translateX(40px); transition: opacity 0.7s ease, transform 0.7s ease; }
+    .reveal-right.visible  { opacity: 1; transform: translateX(0); }
+
+    /* ── Navbar: light/scrolled look for this page ── */
+    .navbar {
+      background: rgba(255,255,255,0.95);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      box-shadow: 0 1px 0 rgba(0,0,0,0.06);
+    }
+    .navbar.scrolled { box-shadow: 0 4px 24px rgba(0,0,0,0.08); }
+    .navbar .nav-links a { color: #555; }
+    .navbar .nav-links a:hover { color: var(--red); background: transparent; }
+    .navbar .hamburger span { background: #111; }
+
+    /* ── Shared section layout ── */
+    .section { padding: 100px 0; }
+    .section-alt { background: #fff; }
+    .container { max-width: var(--max-w); margin: 0 auto; padding: 0 24px; }
+
+    .section-label {
+      font-size: 11px; font-weight: 500; letter-spacing: 0.16em;
+      text-transform: uppercase; color: var(--red); margin-bottom: 12px;
+      display: flex; align-items: center; gap: 10px;
+    }
+    .section-label::before { content: ''; width: 28px; height: 2px; background: var(--red); border-radius: 2px; }
+    .section-label-gold { color: var(--amber); }
+    .section-label-gold::before { background: var(--amber); }
+
+    .section-heading {
+      font-family: var(--font-display);
+      font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+      font-weight: 400; color: #111; line-height: 1.25; margin-bottom: 16px;
+    }
+    .section-heading-light { color: #fff; }
+    .section-body { font-size: 1rem; color: #555; line-height: 1.75; }
+    .section-body-light { color: rgba(255,255,255,0.6); }
+
+    /* ── HERO ── */
+    .hero {
+      min-height: 100vh;
+      display: flex; align-items: center;
+      padding: calc(var(--nav-h) + 80px) 0 100px;
+      background: linear-gradient(135deg, #0d0305 0%, #1f0507 35%, #1a0c02 70%, #0d0305 100%);
+      position: relative; overflow: hidden;
+    }
+    .hero-bg-pattern {
+      position: absolute; inset: 0; opacity: 0.04;
+      background-image: radial-gradient(circle at 2px 2px, #fff 1px, transparent 0);
+      background-size: 36px 36px;
+    }
+    .hero-glow-1 {
+      position: absolute; top: -120px; right: -80px;
+      width: 700px; height: 700px;
+      background: radial-gradient(circle, rgba(163,45,45,0.2) 0%, transparent 65%);
+      pointer-events: none;
+    }
+    .hero-glow-2 {
+      position: absolute; bottom: -120px; left: -80px;
+      width: 600px; height: 600px;
+      background: radial-gradient(circle, rgba(186,117,23,0.12) 0%, transparent 65%);
+      pointer-events: none;
+    }
+    .hero-glow-3 {
+      position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%);
+      width: 900px; height: 500px;
+      background: radial-gradient(ellipse, rgba(163,45,45,0.07) 0%, transparent 60%);
+      pointer-events: none;
+    }
+    .hero-content {
+      position: relative; z-index: 2;
+      max-width: 820px; margin: 0 auto; text-align: center;
+      padding: 0 24px;
+    }
+    .hero-eyebrow {
+      display: inline-flex; align-items: center; gap: 10px;
+      margin-bottom: 32px;
+      animation: fadeDown 0.8s ease both;
+    }
+    .eyebrow-line {
+      width: 40px; height: 1.5px;
+      background: linear-gradient(to right, transparent, var(--amber));
+      border-radius: 2px;
+    }
+    .eyebrow-line.right { background: linear-gradient(to left, transparent, var(--amber)); }
+    .eyebrow-text {
+      font-family: var(--font-head);
+      font-size: 12px; letter-spacing: 2.5px;
+      text-transform: uppercase; color: var(--amber);
+    }
+    .hero h1 {
+      font-family: var(--font-head);
+      font-size: clamp(3rem, 8vw, 6.5rem);
+      line-height: 1.0; color: #fff;
+      margin-bottom: 28px;
+      animation: fadeDown 0.9s 0.15s ease both;
+    }
+    .hero h1 em { font-style: normal; color: var(--amber); }
+    .hero-sub {
+      font-size: 1.1rem; color: rgba(255,255,255,0.65);
+      max-width: 620px; margin: 0 auto 48px;
+      line-height: 1.85;
+      animation: fadeDown 1s 0.3s ease both;
+    }
+    .hero-actions {
+      display: flex; gap: 14px; justify-content: center; flex-wrap: wrap;
+      animation: fadeDown 1s 0.45s ease both;
+    }
+    .hero-scroll {
+      position: absolute; bottom: 36px; left: 50%; transform: translateX(-50%);
+      display: flex; flex-direction: column; align-items: center; gap: 8px;
+      color: rgba(255,255,255,0.3); font-size: 11px; letter-spacing: 1.5px;
+      text-transform: uppercase; animation: fadeDown 1.2s 0.8s ease both;
+    }
+    .scroll-line {
+      width: 1px; height: 44px;
+      background: linear-gradient(to bottom, rgba(255,255,255,0.4), transparent);
+      animation: scrollPulse 1.8s ease-in-out infinite;
+    }
+    @keyframes scrollPulse {
+      0%   { transform: scaleY(0); transform-origin: top; }
+      50%  { transform: scaleY(1); transform-origin: top; }
+      51%  { transform: scaleY(1); transform-origin: bottom; }
+      100% { transform: scaleY(0); transform-origin: bottom; }
+    }
+    @keyframes fadeDown {
+      from { opacity: 0; transform: translateY(-18px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ── WHO IS THAT CHILD ── */
+    .who-grid {
+      display: grid; grid-template-columns: 1fr 1.4fr;
+      gap: 80px; align-items: center; margin-top: 64px;
+    }
+    .who-pull {
+      font-family: var(--font-display);
+      font-size: clamp(1.4rem, 2.5vw, 2rem);
+      font-style: italic; color: #111; line-height: 1.5;
+      position: relative; padding-left: 28px;
+    }
+    .who-pull::before {
+      content: '';
+      position: absolute; left: 0; top: 4px;
+      width: 4px; height: calc(100% - 8px);
+      background: linear-gradient(to bottom, var(--red), var(--amber));
+      border-radius: 4px;
+    }
+    .who-pull em { color: var(--red); font-style: italic; }
+    .who-visual-block { display: flex; flex-direction: column; gap: 10px; margin-top: 32px; }
+    .who-tag {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: rgba(163,45,45,0.07);
+      border: 1px solid rgba(163,45,45,0.15);
+      color: var(--red); padding: 7px 16px; border-radius: 99px;
+      font-size: 13px; font-weight: 400; width: fit-content;
+    }
+    .who-text p { font-size: 1rem; color: #555; line-height: 1.85; margin-bottom: 18px; }
+    .who-text p strong { color: #111; font-weight: 600; }
+    .who-highlight {
+      background: linear-gradient(135deg, rgba(163,45,45,0.06) 0%, rgba(186,117,23,0.06) 100%);
+      border-left: 3px solid var(--red);
+      border-radius: 0 var(--radius-md) var(--radius-md) 0;
+      padding: 18px 22px; margin-top: 8px;
+      font-size: 15px; color: #111; font-style: italic; line-height: 1.7;
+    }
+
+    /* ── HOW WE SHOW UP ── */
+    .show-up-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      gap: 28px; margin-top: 56px;
+    }
+    .show-card {
+      background: #fff; border-radius: var(--radius-lg);
+      padding: 44px 36px; box-shadow: var(--shadow-sm);
+      border: 1px solid rgba(0,0,0,0.05);
+      transition: transform 0.25s, box-shadow 0.25s;
+      position: relative; overflow: hidden;
+    }
+    .show-card::after {
+      content: '';
+      position: absolute; bottom: 0; left: 0; right: 0;
+      height: 3px; border-radius: 0 0 var(--radius-lg) var(--radius-lg);
+      background: linear-gradient(90deg, var(--red), var(--amber));
+      transform: scaleX(0); transition: transform 0.3s ease;
+      transform-origin: left;
+    }
+    .show-card:hover { transform: translateY(-8px); box-shadow: var(--shadow-lg); }
+    .show-card:hover::after { transform: scaleX(1); }
+    .show-icon {
+      width: 60px; height: 60px; border-radius: var(--radius-md);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 26px; margin-bottom: 24px;
+    }
+    .show-icon.red   { background: rgba(163,45,45,0.09); }
+    .show-icon.gold  { background: rgba(186,117,23,0.10); }
+    .show-icon.dark  { background: rgba(17,17,17,0.06); }
+    .show-card h3 {
+      font-family: var(--font-display);
+      font-size: 1.2rem; color: #111; margin-bottom: 12px; line-height: 1.3;
+    }
+    .show-card p { font-size: 14px; color: #555; line-height: 1.75; }
+
+    /* ── MIND MASTERS SECTION ── */
+    .mm-section {
+      background: linear-gradient(135deg, #0d0305 0%, #1f0507 40%, #1a0c02 100%);
+      position: relative; overflow: hidden;
+    }
+    .mm-section::before {
+      content: ''; position: absolute; inset: 0; opacity: 0.04;
+      background-image: radial-gradient(circle at 2px 2px, #fff 1px, transparent 0);
+      background-size: 36px 36px;
+    }
+    .mm-glow-1 {
+      position: absolute; top: -100px; right: -100px;
+      width: 500px; height: 500px;
+      background: radial-gradient(circle, rgba(163,45,45,0.18) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .mm-glow-2 {
+      position: absolute; bottom: -100px; left: -100px;
+      width: 400px; height: 400px;
+      background: radial-gradient(circle, rgba(186,117,23,0.10) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .mm-inner { position: relative; z-index: 2; max-width: var(--max-w); margin: 0 auto; padding: 0 24px; }
+    .mm-header { text-align: center; max-width: 660px; margin: 0 auto 64px; }
+    .mm-logo {
+      display: inline-flex; align-items: center; gap: 10px;
+      background: rgba(245,200,66,0.12); border: 1px solid rgba(245,200,66,0.25);
+      padding: 8px 20px; border-radius: 99px; margin-bottom: 24px;
+    }
+    .mm-logo-dot {
+      width: 8px; height: 8px; border-radius: 50%;
+      background: var(--amber); animation: pulse 2s infinite;
+    }
+    @keyframes pulse {
+      0%,100% { opacity:1; transform:scale(1); }
+      50%      { opacity:.5; transform:scale(1.4); }
+    }
+    .mm-logo-text { font-size: 12px; font-weight: 500; letter-spacing: 2px; text-transform: uppercase; color: var(--amber); }
+    .mm-title {
+      font-family: var(--font-head);
+      font-size: clamp(2rem, 5vw, 3.5rem);
+      color: #fff; line-height: 1.1; margin-bottom: 20px;
+    }
+    .mm-title em { color: var(--amber); font-style: normal; }
+    .mm-desc { font-size: 1.05rem; color: rgba(255,255,255,0.65); line-height: 1.85; }
+
+    /* Pillars */
+    .mm-pillars {
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      gap: 24px; margin-bottom: 64px;
+    }
+    .mm-pillar {
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.09);
+      border-radius: var(--radius-lg); padding: 40px 32px;
+      text-align: center;
+      transition: background 0.25s, transform 0.25s;
+      position: relative; overflow: hidden;
+    }
+    .mm-pillar::before {
+      content: '';
+      position: absolute; top: 0; left: 0; right: 0; height: 3px;
+      background: linear-gradient(90deg, var(--red), var(--amber));
+      border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+    }
+    .mm-pillar:hover { background: rgba(255,255,255,0.09); transform: translateY(-6px); }
+    .mm-pillar-num {
+      font-family: var(--font-head);
+      font-size: 3.5rem; color: rgba(255,255,255,0.06);
+      line-height: 1; position: absolute; top: 16px; right: 20px;
+    }
+    .mm-pillar-icon { font-size: 2.5rem; margin-bottom: 20px; display: block; position: relative; z-index: 1; }
+    .mm-pillar h4 {
+      font-family: var(--font-display);
+      font-size: 1.2rem; color: var(--amber); margin-bottom: 12px;
+    }
+    .mm-pillar p { font-size: 14px; color: rgba(255,255,255,0.6); line-height: 1.75; }
+
+    /* What you'll learn */
+    .mm-learn {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: var(--radius-lg); padding: 44px 48px;
+    }
+    .mm-learn-title {
+      font-family: var(--font-display);
+      font-size: 1.4rem; color: #fff; margin-bottom: 28px;
+    }
+    .mm-learn-title span { color: var(--amber); }
+    .mm-learn-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; }
+    .mm-learn-item {
+      display: flex; align-items: flex-start; gap: 12px;
+      font-size: 14px; color: rgba(255,255,255,0.75); line-height: 1.6;
+    }
+    .mm-learn-check {
+      width: 22px; height: 22px; border-radius: 50%;
+      background: rgba(163,45,45,0.25); border: 1.5px solid rgba(163,45,45,0.5);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 11px; color: #f5a0a3; flex-shrink: 0; margin-top: 1px;
+    }
+    .mm-targets {
+      margin-top: 28px; padding-top: 28px;
+      border-top: 1px solid rgba(255,255,255,0.07);
+      font-size: 13px; color: rgba(255,255,255,0.4);
+    }
+    .mm-targets span { color: var(--amber); font-weight: 500; }
+
+    /* ── IMPACT STATS ── */
+    .stats-section {
+      background: linear-gradient(135deg, var(--red-dark) 0%, var(--red) 50%, #8B2A14 100%);
+      padding: 70px 0;
+    }
+    .stats-grid {
+      display: grid; grid-template-columns: repeat(4, 1fr);
+      gap: 20px; max-width: var(--max-w); margin: 0 auto; padding: 0 24px;
+      text-align: center;
+    }
+    .stat-card {
+      padding: 32px 20px; border-radius: var(--radius-lg);
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.12);
+      transition: background 0.25s, transform 0.25s;
+    }
+    .stat-card:hover { background: rgba(255,255,255,0.14); transform: translateY(-4px); }
+    .stat-icon { font-size: 22px; margin-bottom: 12px; display: block; }
+    .stat-number {
+      font-family: var(--font-head);
+      font-size: 3rem; color: var(--amber); line-height: 1; display: block;
+    }
+    .stat-label { font-size: 13px; color: rgba(255,255,255,0.7); margin-top: 10px; }
+
+    /* ── STORIES ── */
+    .stories-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      gap: 24px; margin-top: 56px;
+    }
+    .story-card {
+      background: #fff; border-radius: var(--radius-lg);
+      padding: 36px 32px; box-shadow: var(--shadow-sm);
+      border: 1px solid rgba(0,0,0,0.05);
+      transition: transform 0.25s, box-shadow 0.25s; position: relative;
+    }
+    .story-card:hover { transform: translateY(-5px); box-shadow: var(--shadow-lg); }
+    .story-card::before {
+      content: '\201C';
+      position: absolute; top: 18px; right: 24px;
+      font-family: var(--font-display); font-size: 5rem;
+      color: rgba(163,45,45,0.07); line-height: 1;
+    }
+    .story-stars { display: flex; gap: 3px; margin-bottom: 16px; }
+    .star { color: var(--amber); font-size: 14px; }
+    .story-text {
+      font-size: 15px; color: #555; line-height: 1.8;
+      margin-bottom: 24px; font-style: italic;
+    }
+    .story-author {
+      display: flex; align-items: center; gap: 14px;
+      border-top: 1px solid rgba(0,0,0,0.06); padding-top: 18px;
+    }
+    .author-avatar {
+      width: 44px; height: 44px; border-radius: 50%;
+      background: linear-gradient(135deg, var(--red), var(--amber));
+      display: flex; align-items: center; justify-content: center;
+      font-family: var(--font-head); color: #fff; font-size: 15px; flex-shrink: 0;
+    }
+    .author-name { font-weight: 500; font-size: 14px; color: #111; }
+    .author-role { font-size: 12px; color: #777; }
+
+    /* ── YOUR ROLE CTA ── */
+    .role-section {
+      background: linear-gradient(135deg, #0d0305 0%, #1f0507 40%, #180d01 100%);
+      padding: 110px 0; text-align: center; position: relative; overflow: hidden;
+    }
+    .role-section::before {
+      content: ''; position: absolute; inset: 0; opacity: 0.04;
+      background-image: radial-gradient(circle at 2px 2px, #fff 1px, transparent 0);
+      background-size: 32px 32px;
+    }
+    .role-glow {
+      position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%);
+      width: 800px; height: 500px;
+      background: radial-gradient(ellipse, rgba(163,45,45,0.13) 0%, transparent 65%);
+      pointer-events: none;
+    }
+    .role-glow-gold {
+      position: absolute; bottom: -100px; right: -80px;
+      width: 500px; height: 500px;
+      background: radial-gradient(circle, rgba(186,117,23,0.08) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .role-inner { position: relative; z-index: 2; max-width: 800px; margin: 0 auto; padding: 0 24px; }
+    .role-eyebrow {
+      display: inline-flex; align-items: center; gap: 10px; margin-bottom: 28px;
+    }
+    .role-eyebrow-text {
+      font-family: var(--font-head);
+      font-size: 12px; letter-spacing: 2.5px; text-transform: uppercase; color: var(--amber);
+    }
+    .role-title {
+      font-family: var(--font-head);
+      font-size: clamp(2.5rem, 6vw, 4.5rem);
+      color: #fff; line-height: 1.1; margin-bottom: 22px;
+    }
+    .role-title em { color: var(--amber); font-style: normal; }
+    .role-sub {
+      font-size: 1.05rem; color: rgba(255,255,255,0.6);
+      line-height: 1.85; margin-bottom: 52px;
+    }
+    .role-cards {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 20px; margin-bottom: 48px;
+    }
+    .role-card {
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: var(--radius-lg); padding: 32px 28px;
+      text-align: left;
+      transition: background 0.25s, border-color 0.25s, transform 0.25s;
+      text-decoration: none; display: block;
+    }
+    .role-card:hover {
+      background: rgba(255,255,255,0.09);
+      border-color: rgba(255,255,255,0.2); transform: translateY(-4px);
+    }
+    .role-card-icon { font-size: 2rem; margin-bottom: 16px; display: block; }
+    .role-card h4 {
+      font-family: var(--font-display);
+      font-size: 1.1rem; color: #fff; margin-bottom: 10px;
+    }
+    .role-card p { font-size: 14px; color: rgba(255,255,255,0.55); line-height: 1.7; }
+    .role-card-arrow {
+      display: inline-flex; align-items: center; gap: 6px;
+      font-size: 12px; font-weight: 500; color: var(--amber);
+      margin-top: 16px; letter-spacing: 0.5px;
+    }
+    .role-direct { font-size: 14px; color: rgba(255,255,255,0.4); margin-top: 8px; }
+    .role-direct a { color: var(--amber); text-decoration: none; font-weight: 500; }
+    .role-direct a:hover { text-decoration: underline; }
+
+    /* ── Responsive ── */
+    @media (max-width: 1024px) {
+      .show-up-grid { grid-template-columns: 1fr 1fr; }
+      .mm-pillars { grid-template-columns: 1fr; }
+      .stats-grid { grid-template-columns: repeat(2, 1fr); }
+      .stories-grid { grid-template-columns: 1fr 1fr; }
+      .role-cards { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 768px) {
+      .section { padding: 70px 0; }
+      .who-grid { grid-template-columns: 1fr; gap: 40px; }
+      .show-up-grid { grid-template-columns: 1fr; }
+      .stories-grid { grid-template-columns: 1fr; }
+      .mm-learn { padding: 28px 24px; }
+      .mm-learn-grid { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 480px) {
+      .hero h1 { font-size: 2.8rem; }
+      .stats-grid { grid-template-columns: 1fr 1fr; gap: 12px; }
+    }
+  </style>
 </head>
 <body>
 
-  <!-- ══ NAVBAR ══ -->
-  <nav class="navbar navbar-light" id="navbar">
-    <a href="/" class="nav-logo">
-      <img src="../assets/logo.png" alt="Arend Gesin Investment — Home of Branding" style="height:44px;width:auto;display:block;">
-    </a>
-    <ul class="nav-links">
-      <li><a href="/">Home</a></li>
-      <li><a href="/pages/about.html">About</a></li>
-      <li><a href="/pages/services.html">Services</a></li>
-      <li><a href="/pages/portfolio.html">Portfolio</a></li>
-      <li><a href="/pages/csr.html" class="active">THAT Child</a></li>
-      <li><a href="/pages/blog.html">Blog</a></li>
-      <li><a href="/pages/contact.html" class="nav-cta">Contact Us</a></li>
-    </ul>
-    <button class="nav-hamburger" id="hamburger" aria-label="Menu">
-      <span></span><span></span><span></span>
-    </button>
+  <!-- ── Navbar (uses style.css .navbar + .nav-inner + .nav-links + .hamburger) ── -->
+  <nav class="navbar" id="navbar">
+    <div class="nav-inner">
+      <a href="/" class="nav-logo">
+        <img src="../assets/logo.png" alt="Arend Gesin Investment — Home of Branding" style="height:44px;width:auto;display:block;">
+      </a>
+      <ul class="nav-links">
+        <li><a href="/">Home</a></li>
+        <li><a href="/pages/about.html">About</a></li>
+        <li><a href="/pages/services.html">Services</a></li>
+        <li><a href="/pages/portfolio.html">Portfolio</a></li>
+        <li><a href="/pages/csr.html" style="color:var(--red);">THAT Child</a></li>
+        <li><a href="/pages/blog.html">Blog</a></li>
+      </ul>
+      <div class="nav-right">
+        <a href="/pages/contact.html" class="btn-nav-cta">Contact Us</a>
+        <button class="hamburger" id="hamburger" onclick="toggleMenu()" aria-label="Menu">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
   </nav>
 
-  <div class="mobile-menu" id="mobileMenu">
-    <ul>
-      <li><a href="/">Home</a></li>
-      <li><a href="/pages/about.html">About</a></li>
-      <li><a href="/pages/services.html">Services</a></li>
-      <li><a href="/pages/portfolio.html">Portfolio</a></li>
-      <li><a href="/pages/csr.html" class="active">THAT Child</a></li>
-      <li><a href="/pages/blog.html">Blog</a></li>
-      <li><a href="/pages/contact.html">Contact Us</a></li>
-    </ul>
-  </div>
-
   <!-- ══ HERO ══ -->
-  <section class="csr-hero">
+  <section class="hero">
     <div class="hero-bg-pattern"></div>
     <div class="hero-glow-1"></div>
     <div class="hero-glow-2"></div>
@@ -57,8 +539,8 @@
       <h1>Every Child<br>Deserves a <em>Chance.</em></h1>
       <p class="hero-sub">At the heart of everything Arend Gesin Investment does is <strong style="color:rgba(255,255,255,0.9);">THAT Child</strong> — the young person in our community who is overlooked, underestimated, and underserved. We exist to change that story.</p>
       <div class="hero-actions">
-        <a href="#mindmasters" class="btn-hero-primary">Discover MIND MASTERS →</a>
-        <a href="#role" class="btn-hero-outline">How You Can Help</a>
+        <a href="#mindmasters" class="btn-primary">Discover MIND MASTERS <i class="fas fa-arrow-right btn-arrow"></i></a>
+        <a href="#role" class="btn-ghost">How You Can Help</a>
       </div>
     </div>
     <div class="hero-scroll">
@@ -72,14 +554,14 @@
     <div class="container">
       <div class="reveal">
         <div class="section-label">The Heart of AGI</div>
-        <h2 class="section-title">Who Is THAT Child?</h2>
+        <h2 class="section-heading">Who Is THAT Child?</h2>
       </div>
       <div class="who-grid">
         <div class="reveal-left">
           <p class="who-pull">
             "THAT Child is not a statistic. <em>THAT Child is a name, a face, a future waiting to be unlocked.</em>"
           </p>
-          <div class="who-visual-block" style="margin-top: 28px;">
+          <div class="who-visual-block" style="margin-top:28px;">
             <div class="who-tag">🧒 The overlooked youth</div>
             <div class="who-tag">🌍 In every community we serve</div>
             <div class="who-tag">💛 Deserving better than today</div>
@@ -100,10 +582,10 @@
   <!-- ══ HOW WE SHOW UP ══ -->
   <section class="section">
     <div class="container">
-      <div class="reveal" style="text-align:center; max-width:580px; margin:0 auto;">
+      <div class="reveal" style="text-align:center;max-width:580px;margin:0 auto;">
         <div class="section-label" style="justify-content:center;">Our Commitment</div>
-        <h2 class="section-title">How We Show Up for THAT Child</h2>
-        <p class="section-sub">Three deliberate ways AGI turns business success into community impact.</p>
+        <h2 class="section-heading">How We Show Up for THAT Child</h2>
+        <p class="section-body">Three deliberate ways AGI turns business success into community impact.</p>
       </div>
       <div class="show-up-grid">
         <div class="show-card reveal" style="transition-delay:0.1s">
@@ -224,10 +706,10 @@
   <!-- ══ STORIES ══ -->
   <section class="section section-alt">
     <div class="container">
-      <div class="reveal" style="text-align:center; max-width:560px; margin:0 auto;">
+      <div class="reveal" style="text-align:center;max-width:560px;margin:0 auto;">
         <div class="section-label" style="justify-content:center;">Community Voices</div>
-        <h2 class="section-title">Stories That Keep Us Going</h2>
-        <p class="section-sub">The real measure of our work is in the lives touched, one child at a time.</p>
+        <h2 class="section-heading">Stories That Keep Us Going</h2>
+        <p class="section-body">The real measure of our work is in the lives touched, one child at a time.</p>
       </div>
       <div class="stories-grid">
         <div class="story-card reveal" style="transition-delay:0.1s">
@@ -307,27 +789,72 @@
     </div>
   </section>
 
-  <!-- ══ FOOTER ══ -->
-  <footer class="simple-footer">
-    <p>© 2024 Arend Gesin Investment. All rights reserved. |
-      <a href="mailto:info@arendgesin.co.ke">info@arendgesin.co.ke</a> |
-      <a href="tel:+254735518090">+254 735 518 090</a>
-    </p>
+  <!-- ── Footer (uses style.css .footer classes) ── -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-top">
+        <div class="footer-logo">
+          <svg class="logo-svg" viewBox="0 0 120 44" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <text x="0" y="32" font-family="Georgia,serif" font-size="15" font-weight="700" fill="currentColor">AREND GESIN</text>
+          </svg>
+          <p class="footer-tagline">Home of Branding</p>
+          <p class="footer-desc">Empowering businesses and youth across Kenya since 2020.</p>
+          <div class="footer-contact-mini">
+            <a href="tel:+254735518090">+254 735 518 090</a>
+            <a href="mailto:info@arendgesin.co.ke">info@arendgesin.co.ke</a>
+          </div>
+        </div>
+        <div class="footer-col">
+          <div class="footer-col-title">Quick Links</div>
+          <ul>
+            <li><a href="/">Home</a></li>
+            <li><a href="/pages/about.html">About Us</a></li>
+            <li><a href="/pages/services.html">Services</a></li>
+            <li><a href="/pages/portfolio.html">Portfolio</a></li>
+            <li><a href="/pages/blog.html">Blog</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <div class="footer-col-title">Services</div>
+          <ul>
+            <li><a href="/pages/services.html">Printing & Branding</a></li>
+            <li><a href="/pages/services.html">Stationery Supplies</a></li>
+            <li><a href="/pages/services.html">IT Installations</a></li>
+            <li><a href="/pages/services.html">Graphic Design</a></li>
+            <li><a href="/pages/csr.html">CSR & Mind Masters</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <div class="footer-col-title">Contact</div>
+          <ul>
+            <li><span>P.O. Box 20100–12236, Nakuru</span></li>
+            <li><span>+254 735 518 090</span></li>
+            <li><span>+254 718 260 115</span></li>
+            <li><span>info@arendgesin.co.ke</span></li>
+            <li><span>www.arendgesin.co.ke</span></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span class="footer-copy">© 2026 Arend Gesin Investment. All rights reserved.</span>
+        <a href="#" class="footer-web">Privacy Policy</a>
+      </div>
+    </div>
   </footer>
 
-  <!-- ══ SCRIPTS ══ -->
   <script>
-    // Navbar scroll
+    /* ── Navbar scroll effect ── */
     window.addEventListener('scroll', () => {
       document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 20);
     });
 
-    // Mobile menu
-    document.getElementById('hamburger').addEventListener('click', () => {
-      document.getElementById('mobileMenu').classList.toggle('open');
-    });
+    /* ── Mobile menu ── */
+    function toggleMenu() {
+      document.querySelector('.nav-links').classList.toggle('open');
+      document.querySelector('.hamburger').classList.toggle('active');
+    }
 
-    // Scroll reveal
+    /* ── Scroll reveal ── */
     const revealEls = document.querySelectorAll('.reveal, .reveal-left, .reveal-right');
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(e => {
@@ -336,7 +863,7 @@
     }, { threshold: 0.1 });
     revealEls.forEach(el => observer.observe(el));
 
-    // Counter animation
+    /* ── Counter animation ── */
     function animateCounter(el) {
       const target = parseInt(el.dataset.target);
       const suffix = el.dataset.suffix || '';
@@ -352,13 +879,12 @@
       };
       requestAnimationFrame(step);
     }
-    const statNums = document.querySelectorAll('.stat-number[data-target]');
     const counterObs = new IntersectionObserver((entries) => {
       entries.forEach(e => {
         if (e.isIntersecting) { animateCounter(e.target); counterObs.unobserve(e.target); }
       });
     }, { threshold: 0.5 });
-    statNums.forEach(el => counterObs.observe(el));
+    document.querySelectorAll('.stat-number[data-target]').forEach(el => counterObs.observe(el));
   </script>
 </body>
 </html>

@@ -4,28 +4,452 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Blog & Insights — Arend Gesin Investment</title>
-  
-<link rel="stylesheet" href="../css/style.css">
+
+  <!-- Fonts: same stack as style.css (Bebas Neue + DM Serif Display + DM Sans) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
+
+  <!-- Main stylesheet — single source of truth for tokens, navbar, footer, buttons, reveal -->
+  <link rel="stylesheet" href="../css/style.css">
+
+  <!-- Icons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+
+  <style>
+    /* ═══════════════════════════════════════════
+       BLOG PAGE — page-specific overrides only.
+       All tokens, navbar, footer, buttons, and
+       the .reveal animation come from style.css.
+    ═══════════════════════════════════════════ */
+
+    /* ── Dark page body ── */
+    body {
+      background: #0f0f0f;
+      color: #e8e8e8;
+    }
+
+    /* ── Navbar: always use the dark/scrolled look on interior pages ── */
+    .navbar {
+      background: rgba(15,15,15,0.88);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      box-shadow: 0 1px 0 rgba(255,255,255,0.07);
+    }
+    /* Keep link colours readable on dark bg */
+    .navbar .nav-links a { color: rgba(255,255,255,0.65); }
+    .navbar .nav-links a:hover { background: rgba(255,255,255,0.08); color: #fff; }
+    .navbar .hamburger span { background: #fff; }
+
+    /* ── Page Header ── */
+    .page-header {
+      padding: calc(var(--nav-h) + 72px) 0 70px;
+      position: relative;
+      overflow: hidden;
+      background: #0f0f0f;
+    }
+    .page-header::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: radial-gradient(ellipse 60% 70% at 80% 50%, rgba(163,45,45,0.12) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .page-header-inner {
+      max-width: var(--max-w); margin: 0 auto; padding: 0 24px;
+      display: flex; align-items: flex-end; justify-content: space-between;
+      gap: 2rem; flex-wrap: wrap;
+    }
+    .page-header-label {
+      display: inline-flex; align-items: center; gap: 8px;
+      font-size: 11px; font-weight: 500;
+      color: var(--amber);
+      letter-spacing: 0.16em; text-transform: uppercase;
+      margin-bottom: 1rem;
+    }
+    .page-header-label::before {
+      content: '';
+      display: block; width: 28px; height: 2px;
+      background: var(--amber); border-radius: 2px;
+    }
+    .page-header h1 {
+      font-family: var(--font-head);
+      font-size: clamp(2.6rem, 6vw, 4.5rem);
+      line-height: 1.0;
+      letter-spacing: 0.01em;
+      color: #fff;
+    }
+    .page-header h1 em {
+      font-style: normal;
+      color: var(--red);
+    }
+    .page-header-sub {
+      font-size: 1rem;
+      color: rgba(255,255,255,0.55);
+      max-width: 380px;
+      line-height: 1.65;
+      margin-top: 1rem;
+    }
+    .header-stats { display: flex; gap: 2.5rem; flex-shrink: 0; }
+    .stat-item { text-align: center; }
+    .stat-number {
+      font-family: var(--font-head);
+      font-size: 2rem;
+      color: #fff;
+      line-height: 1;
+    }
+    .stat-number span { color: var(--red); }
+    .stat-label {
+      font-size: 11px;
+      color: rgba(255,255,255,0.45);
+      margin-top: 4px;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+
+    /* ── Filter Bar ── */
+    .filter-section { padding: 0 0 50px; }
+    .filter-inner {
+      max-width: var(--max-w); margin: 0 auto; padding: 0 24px;
+      display: flex; align-items: center; gap: 0.6rem; flex-wrap: wrap;
+    }
+    .filter-label {
+      font-size: 11px; font-weight: 500;
+      color: rgba(255,255,255,0.4);
+      letter-spacing: 0.1em; text-transform: uppercase;
+      margin-right: 0.4rem;
+    }
+    .filter-btn {
+      padding: 0.45rem 1.1rem;
+      border-radius: 99px;
+      border: 1.5px solid rgba(255,255,255,0.1);
+      background: transparent;
+      color: rgba(255,255,255,0.5);
+      font-family: var(--font-body);
+      font-size: 13px; font-weight: 500;
+      cursor: pointer;
+      transition: border-color 0.2s, color 0.2s, background 0.2s;
+    }
+    .filter-btn:hover { border-color: rgba(255,255,255,0.25); color: #fff; }
+    .filter-btn.active { background: var(--red); border-color: var(--red); color: #fff; }
+
+    /* ── Blog Section Wrapper ── */
+    .blog-section { padding: 0 0 100px; }
+    .blog-inner { max-width: var(--max-w); margin: 0 auto; padding: 0 24px; }
+
+    /* ── Blog Section Header (list header, not page header) ── */
+    .blog-section-header {
+      display: flex; align-items: center; justify-content: space-between;
+      margin-bottom: 2rem; flex-wrap: wrap; gap: 1rem;
+    }
+    .blog-section-title {
+      font-family: var(--font-display);
+      font-size: 1.4rem; font-weight: 400;
+      color: rgba(255,255,255,0.9);
+    }
+    .blog-section-title span { color: rgba(255,255,255,0.35); font-size: 1rem; margin-left: 0.5rem; }
+    .view-all {
+      display: inline-flex; align-items: center; gap: 6px;
+      font-size: 13px; font-weight: 500;
+      color: var(--red);
+      transition: gap 0.2s;
+    }
+    .view-all:hover { gap: 10px; }
+
+    /* ── Featured Post ── */
+    .featured-post {
+      position: relative;
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      margin-bottom: 60px;
+      min-height: 460px;
+      display: flex;
+      align-items: flex-end;
+      cursor: pointer;
+      background: #1a0a09;
+    }
+    .featured-bg {
+      position: absolute; inset: 0;
+      background:
+        linear-gradient(to right, rgba(0,0,0,0.92) 0%, rgba(0,0,0,0.6) 50%, rgba(0,0,0,0.2) 100%),
+        linear-gradient(135deg, #1a0a09 0%, #2a1010 40%, #1e1a10 100%);
+    }
+    .featured-bg-pattern {
+      position: absolute; inset: 0; opacity: 0.06;
+      background-image: repeating-linear-gradient(45deg, var(--red) 0, var(--red) 1px, transparent 0, transparent 50%);
+      background-size: 20px 20px;
+    }
+    .featured-accent {
+      position: absolute; top: 0; right: 0;
+      width: 45%; height: 100%;
+      background: radial-gradient(ellipse at right center, rgba(163,45,45,0.25) 0%, transparent 70%);
+    }
+    .featured-tag-top {
+      position: absolute; top: 2rem; left: 2.5rem;
+      display: inline-flex; align-items: center; gap: 6px;
+      background: rgba(163,45,45,0.15);
+      border: 1px solid rgba(163,45,45,0.3);
+      color: #ff6b65;
+      font-size: 11px; font-weight: 600;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      padding: 0.3rem 0.8rem; border-radius: 99px;
+    }
+    .featured-content {
+      position: relative; z-index: 2;
+      padding: 3rem 2.5rem; max-width: 620px;
+    }
+    .featured-category {
+      display: inline-block;
+      background: rgba(186,117,23,0.15);
+      border: 1px solid rgba(186,117,23,0.3);
+      color: var(--amber);
+      font-size: 11px; font-weight: 600;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      padding: 0.28rem 0.8rem; border-radius: 99px;
+      margin-bottom: 1rem;
+    }
+    .featured-title {
+      font-family: var(--font-display);
+      font-size: clamp(1.6rem, 3vw, 2.2rem);
+      font-weight: 400;
+      line-height: 1.2;
+      color: #fff;
+      margin-bottom: 1rem;
+    }
+    .featured-excerpt {
+      font-size: 15px;
+      color: rgba(255,255,255,0.6);
+      line-height: 1.7;
+      margin-bottom: 1.6rem;
+    }
+    .featured-meta {
+      display: flex; align-items: center; gap: 1.2rem;
+      margin-bottom: 1.8rem;
+    }
+    .meta-author { display: flex; align-items: center; gap: 8px; }
+    .author-avatar {
+      width: 32px; height: 32px; border-radius: 50%;
+      background: linear-gradient(135deg, var(--red), var(--amber));
+      display: flex; align-items: center; justify-content: center;
+      font-family: var(--font-head);
+      font-size: 13px; color: #fff; flex-shrink: 0;
+    }
+    .author-name { font-size: 13px; font-weight: 500; color: #e8e8e8; }
+    .meta-divider { width: 4px; height: 4px; border-radius: 50%; background: rgba(255,255,255,0.3); }
+    .meta-date, .meta-read { font-size: 13px; color: rgba(255,255,255,0.45); }
+
+    /* ── Blog Grid ── */
+    .blog-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.6rem;
+      margin-bottom: 60px;
+    }
+
+    /* ── Blog Card ── */
+    .blog-card {
+      background: #161616;
+      border: 1px solid rgba(255,255,255,0.07);
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      transition: transform 0.25s, border-color 0.25s, box-shadow 0.25s;
+      cursor: pointer;
+      display: flex; flex-direction: column;
+    }
+    .blog-card:hover {
+      transform: translateY(-6px);
+      border-color: rgba(163,45,45,0.25);
+      box-shadow: var(--shadow-md), 0 0 40px rgba(163,45,45,0.08);
+    }
+    .card-thumb { height: 190px; overflow: hidden; position: relative; }
+    .card-thumb-inner {
+      width: 100%; height: 100%;
+      transition: transform 0.5s ease;
+    }
+    .blog-card:hover .card-thumb-inner { transform: scale(1.06); }
+    .thumb-overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(to top, rgba(0,0,0,0.6) 0%, transparent 60%);
+    }
+    /* Placeholder thumbnail gradients */
+    .thumb-1 { background: linear-gradient(135deg, #1a0808 0%, #3d1010 50%, #1a1208 100%); }
+    .thumb-2 { background: linear-gradient(135deg, #080d1a 0%, #101e3d 50%, #08121a 100%); }
+    .thumb-3 { background: linear-gradient(135deg, #080f10 0%, #0d2e30 50%, #08100e 100%); }
+    .thumb-4 { background: linear-gradient(135deg, #100808 0%, #2e0d0d 50%, #180f08 100%); }
+    .thumb-5 { background: linear-gradient(135deg, #0d0d0d 0%, #1e1a10 50%, #101008 100%); }
+    .thumb-6 { background: linear-gradient(135deg, #100815 0%, #200d30 50%, #0f0815 100%); }
+    .thumb-icon {
+      position: absolute; top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      font-size: 2.5rem; opacity: 0.22; color: #fff;
+    }
+    /* Category pills */
+    .card-category-pill {
+      position: absolute; top: 1rem; left: 1rem;
+      padding: 0.25rem 0.7rem; border-radius: 99px;
+      font-size: 11px; font-weight: 600;
+      letter-spacing: 0.08em; text-transform: uppercase;
+    }
+    .pill-branding { background: rgba(163,45,45,0.2); border: 1px solid rgba(163,45,45,0.35); color: #ff7a75; }
+    .pill-tech     { background: rgba(30,100,200,0.2); border: 1px solid rgba(30,100,200,0.35); color: #70a8ff; }
+    .pill-csr      { background: rgba(20,160,80,0.2);  border: 1px solid rgba(20,160,80,0.35);  color: #5dd48a; }
+    .pill-news     { background: rgba(186,117,23,0.15); border: 1px solid rgba(186,117,23,0.3); color: var(--amber); }
+    .pill-youth    { background: rgba(160,80,200,0.2); border: 1px solid rgba(160,80,200,0.35); color: #c07bff; }
+
+    /* Card body */
+    .card-body { padding: 1.4rem; flex: 1; display: flex; flex-direction: column; }
+    .card-title {
+      font-family: var(--font-display);
+      font-size: 1rem; font-weight: 400;
+      color: #fff; line-height: 1.4;
+      margin-bottom: 0.65rem;
+      transition: color 0.2s;
+    }
+    .blog-card:hover .card-title { color: #ffb3b0; }
+    .card-excerpt {
+      font-size: 13px; color: rgba(255,255,255,0.45);
+      line-height: 1.65; flex: 1; margin-bottom: 1.2rem;
+    }
+    .card-footer {
+      display: flex; align-items: center; justify-content: space-between;
+      padding-top: 1rem;
+      border-top: 1px solid rgba(255,255,255,0.07);
+    }
+    .card-meta { display: flex; align-items: center; gap: 0.5rem; }
+    .card-avatar {
+      width: 26px; height: 26px; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-family: var(--font-head); font-size: 11px;
+      color: #fff; flex-shrink: 0;
+    }
+    .av-red   { background: linear-gradient(135deg, var(--red), #e05050); }
+    .av-gold  { background: linear-gradient(135deg, var(--amber), #f5c842); }
+    .av-blue  { background: linear-gradient(135deg, #1e64c8, #4a9af5); }
+    .av-green { background: linear-gradient(135deg, #14a050, #40d080); }
+    .card-date { font-size: 12px; color: rgba(255,255,255,0.35); }
+    .card-read-time { display: flex; align-items: center; gap: 4px; font-size: 12px; color: rgba(255,255,255,0.35); }
+    .card-read-time i { font-size: 10px; color: var(--red); }
+    .card-arrow {
+      display: inline-flex; align-items: center; justify-content: center;
+      width: 30px; height: 30px; border-radius: 50%;
+      background: #252525; color: rgba(255,255,255,0.45);
+      font-size: 12px; transition: background 0.2s, color 0.2s, transform 0.2s;
+    }
+    .blog-card:hover .card-arrow { background: var(--red); color: #fff; transform: rotate(-45deg); }
+
+    /* ── Newsletter Strip ── */
+    .newsletter-strip {
+      background: linear-gradient(135deg, #1e1e1e 0%, #1e0a0a 100%);
+      border: 1px solid rgba(163,45,45,0.2);
+      border-radius: var(--radius-lg);
+      padding: 3rem;
+      display: flex; align-items: center; justify-content: space-between;
+      gap: 2rem; margin-bottom: 60px;
+      position: relative; overflow: hidden;
+    }
+    .newsletter-strip::before {
+      content: '';
+      position: absolute; top: 0; right: 0;
+      width: 300px; height: 100%;
+      background: radial-gradient(ellipse at right, rgba(163,45,45,0.15) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .newsletter-text { position: relative; }
+    .newsletter-eyebrow {
+      font-size: 11px; font-weight: 600;
+      letter-spacing: 0.12em; text-transform: uppercase;
+      color: var(--red); margin-bottom: 0.5rem;
+    }
+    .newsletter-title {
+      font-family: var(--font-display);
+      font-size: 1.5rem; font-weight: 400;
+      color: #fff; line-height: 1.25; margin-bottom: 0.4rem;
+    }
+    .newsletter-sub { font-size: 13px; color: rgba(255,255,255,0.45); }
+    .newsletter-form { display: flex; gap: 0.8rem; flex-shrink: 0; position: relative; }
+    .newsletter-input {
+      padding: 0.75rem 1.2rem;
+      background: #252525;
+      border: 1.5px solid rgba(255,255,255,0.08);
+      border-radius: 99px;
+      color: #fff; font-family: var(--font-body); font-size: 14px;
+      width: 240px; outline: none;
+      transition: border-color 0.2s;
+    }
+    .newsletter-input::placeholder { color: rgba(255,255,255,0.3); }
+    .newsletter-input:focus { border-color: rgba(163,45,45,0.5); }
+    .newsletter-submit {
+      padding: 0.75rem 1.5rem;
+      background: var(--red); color: #fff;
+      border: none; border-radius: 99px;
+      font-family: var(--font-body); font-size: 14px; font-weight: 500;
+      cursor: pointer; transition: background 0.2s; white-space: nowrap;
+    }
+    .newsletter-submit:hover { background: var(--red-dark); }
+
+    /* ── Pagination ── */
+    .pagination { display: flex; align-items: center; justify-content: center; gap: 0.5rem; }
+    .page-btn {
+      width: 38px; height: 38px;
+      display: flex; align-items: center; justify-content: center;
+      border-radius: 50%;
+      border: 1.5px solid rgba(255,255,255,0.1);
+      background: transparent;
+      color: rgba(255,255,255,0.45);
+      font-family: var(--font-body); font-size: 14px; font-weight: 500;
+      cursor: pointer; transition: border-color 0.2s, color 0.2s, background 0.2s;
+    }
+    .page-btn:hover { border-color: rgba(255,255,255,0.25); color: #fff; }
+    .page-btn.active { background: var(--red); border-color: var(--red); color: #fff; }
+
+    /* ── Footer dark override ── */
+    /* style.css footer is already dark (#111110) so it matches naturally */
+
+    /* ── Scroll Reveal (visible class used by this page's JS) ── */
+    /* Base .reveal state is in style.css; we just need .visible (this page uses "visible" not "revealed") */
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+
+    /* ── Responsive ── */
+    @media (max-width: 1024px) {
+      .blog-grid { grid-template-columns: repeat(2, 1fr); }
+      .header-stats { display: none; }
+    }
+    @media (max-width: 768px) {
+      .page-header { padding-bottom: 50px; }
+      .blog-grid { grid-template-columns: 1fr; }
+      .newsletter-strip { flex-direction: column; align-items: flex-start; }
+      .newsletter-form { flex-direction: column; width: 100%; }
+      .newsletter-input { width: 100%; }
+      .featured-post { min-height: 380px; }
+      .featured-content { padding: 2rem 1.5rem; }
+    }
+    @media (max-width: 480px) {
+      .filter-inner { gap: 0.4rem; }
+      .filter-btn { font-size: 12px; padding: 0.38rem 0.85rem; }
+    }
+  </style>
 </head>
 <body>
 
-  <!-- ── Navbar ── -->
-  <nav class="navbar scrolled" id="navbar" style="background:rgba(15,15,15,0.9);border-bottom:1px solid rgba(255,255,255,0.07);">
-    <a href="/" class="nav-logo">
-      <img src="../assets/logo.png" alt="Arend Gesin Investment — Home of Branding" style="height:44px;width:auto;display:block;">
-    </a>
-    <ul class="nav-links">
-      <li><a href="/">Home</a></li>
-      <li><a href="/pages/about.html">About</a></li>
-      <li><a href="/pages/services.html">Services</a></li>
-      <li><a href="/pages/portfolio.html">Portfolio</a></li>
-      <li><a href="/pages/blog.html" class="active">Blog</a></li>
-      <li><a href="/pages/csr.html">CSR</a></li>
-      <li><a href="/pages/contact.html" class="nav-cta">Get in Touch</a></li>
-    </ul>
-    <div class="hamburger" onclick="toggleMenu()">
-      <span></span><span></span><span></span>
+  <!-- ── Navbar (uses style.css .navbar + .nav-inner + .nav-links + .hamburger) ── -->
+  <nav class="navbar scrolled">
+    <div class="nav-inner">
+      <a href="/" class="nav-logo">
+        <img src="../assets/logo.png" alt="Arend Gesin Investment — Home of Branding" style="height:44px;width:auto;display:block;">
+      </a>
+      <ul class="nav-links">
+        <li><a href="/">Home</a></li>
+        <li><a href="/pages/about.html">About</a></li>
+        <li><a href="/pages/services.html">Services</a></li>
+        <li><a href="/pages/portfolio.html">Portfolio</a></li>
+        <li><a href="/pages/blog.html" style="color:#fff;">Blog</a></li>
+        <li><a href="/pages/csr.html">CSR</a></li>
+      </ul>
+      <div class="nav-right">
+        <a href="/pages/contact.html" class="btn-nav-cta">Get in Touch</a>
+        <button class="hamburger" onclick="toggleMenu()" aria-label="Toggle menu">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
     </div>
   </nav>
 
@@ -93,15 +517,15 @@
             <div class="meta-divider"></div>
             <span class="meta-read">6 min read</span>
           </div>
-          <a href="#" class="featured-btn">
-            Read Full Article <i class="fas fa-arrow-right"></i>
+          <a href="#" class="btn-primary">
+            Read Full Article <i class="fas fa-arrow-right btn-arrow"></i>
           </a>
         </div>
       </div>
 
       <!-- Grid Header -->
-      <div class="section-header reveal">
-        <div class="section-title">Latest Articles <span>— 6 posts</span></div>
+      <div class="blog-section-header reveal">
+        <div class="blog-section-title">Latest Articles <span>— 6 posts</span></div>
         <a href="#" class="view-all">View All <i class="fas fa-arrow-right"></i></a>
       </div>
 
@@ -263,7 +687,7 @@
         </div>
         <div class="newsletter-form">
           <input type="email" class="newsletter-input" placeholder="Your email address" />
-          <button class="newsletter-submit">Subscribe <i class="fas fa-arrow-right" style="margin-left:6px;font-size:0.78rem;"></i></button>
+          <button class="newsletter-submit">Subscribe <i class="fas fa-arrow-right" style="margin-left:6px;font-size:11px;"></i></button>
         </div>
       </div>
 
@@ -279,23 +703,25 @@
     </div>
   </section>
 
-  <!-- ── Footer ── -->
-  <footer class="blog-footer">
-    <div class="footer-inner" style="max-width:1200px;margin:0 auto;">
+  <!-- ── Footer (uses style.css .footer classes) ── -->
+  <footer class="footer">
+    <div class="container">
       <div class="footer-top">
-        <div>
-          <div class="footer-brand-name">AREND <span>GESIN</span></div>
-          <p class="footer-tagline-blog">Home of Branding — empowering businesses and youth across Kenya since 2020.</p>
-          <div class="footer-social">
-            <a href="#" class="social-icon"><i class="fab fa-facebook-f"></i></a>
-            <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
-            <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
-            <a href="#" class="social-icon"><i class="fab fa-linkedin-in"></i></a>
+        <div class="footer-logo">
+          <!-- Logo text fallback; swap for <img> if you have an SVG/PNG -->
+          <svg class="logo-svg" viewBox="0 0 120 44" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <text x="0" y="32" font-family="Georgia,serif" font-size="15" font-weight="700" fill="currentColor">AREND GESIN</text>
+          </svg>
+          <p class="footer-tagline">Home of Branding</p>
+          <p class="footer-desc">Empowering businesses and youth across Kenya since 2020.</p>
+          <div class="footer-contact-mini">
+            <a href="tel:+254735518090">+254 735 518 090</a>
+            <a href="mailto:info@arendgesin.co.ke">info@arendgesin.co.ke</a>
           </div>
         </div>
-        <div>
+        <div class="footer-col">
           <div class="footer-col-title">Quick Links</div>
-          <ul class="footer-links">
+          <ul>
             <li><a href="/">Home</a></li>
             <li><a href="/pages/about.html">About Us</a></li>
             <li><a href="/pages/services.html">Services</a></li>
@@ -303,9 +729,9 @@
             <li><a href="/pages/blog.html">Blog</a></li>
           </ul>
         </div>
-        <div>
+        <div class="footer-col">
           <div class="footer-col-title">Services</div>
-          <ul class="footer-links">
+          <ul>
             <li><a href="/pages/services.html">Printing & Branding</a></li>
             <li><a href="/pages/services.html">Stationery Supplies</a></li>
             <li><a href="/pages/services.html">IT Installations</a></li>
@@ -313,32 +739,20 @@
             <li><a href="/pages/csr.html">CSR & Mind Masters</a></li>
           </ul>
         </div>
-        <div>
-          <div class="footer-col-title">Contact Us</div>
-          <div class="footer-contact-item">
-            <i class="fas fa-map-marker-alt"></i>
-            <span>P.O. Box 20100–12236, Nakuru, Kenya</span>
-          </div>
-          <div class="footer-contact-item">
-            <i class="fas fa-phone"></i>
-            <span>+254 735 518 090<br>+254 718 260 115</span>
-          </div>
-          <div class="footer-contact-item">
-            <i class="fas fa-envelope"></i>
-            <span>info@arendgesin.co.ke</span>
-          </div>
-          <div class="footer-contact-item">
-            <i class="fas fa-globe"></i>
-            <span>www.arendgesin.co.ke</span>
-          </div>
+        <div class="footer-col">
+          <div class="footer-col-title">Contact</div>
+          <ul>
+            <li><span>P.O. Box 20100–12236, Nakuru</span></li>
+            <li><span>+254 735 518 090</span></li>
+            <li><span>+254 718 260 115</span></li>
+            <li><span>info@arendgesin.co.ke</span></li>
+            <li><span>www.arendgesin.co.ke</span></li>
+          </ul>
         </div>
       </div>
       <div class="footer-bottom">
-        <div class="footer-copy">© 2026 <span>Arend Gesin Investment</span>. All rights reserved.</div>
-        <div class="footer-bottom-links">
-          <a href="#">Privacy Policy</a>
-          <a href="#">Terms of Use</a>
-        </div>
+        <span class="footer-copy">© 2026 Arend Gesin Investment. All rights reserved.</span>
+        <a href="#" class="footer-web">Privacy Policy</a>
       </div>
     </div>
   </footer>
@@ -360,7 +774,6 @@
     function filterPosts(cat, btn) {
       document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
       btn.classList.add('active');
-
       const cards = document.querySelectorAll('.blog-card');
       cards.forEach(card => {
         const match = cat === 'all' || card.dataset.category === cat;
@@ -372,9 +785,7 @@
         } else {
           card.style.opacity = '0';
           card.style.transform = 'scale(0.96)';
-          setTimeout(() => {
-            if (card.style.opacity === '0') card.style.display = 'none';
-          }, 300);
+          setTimeout(() => { if (card.style.opacity === '0') card.style.display = 'none'; }, 300);
         }
       });
     }
@@ -382,17 +793,8 @@
     /* ── Mobile Menu ── */
     function toggleMenu() {
       const links = document.querySelector('.nav-links');
-      if (links.style.display === 'flex') {
-        links.style.display = 'none';
-      } else {
-        links.style.cssText = `
-          display:flex; flex-direction:column; position:fixed;
-          top:70px; left:0; right:0; background:rgba(247,245,241,0.97);
-          backdrop-filter:blur(16px); padding:2rem 5%;
-          border-bottom:1px solid rgba(26,25,23,0.1);
-          gap:1.5rem; z-index:99;
-        `;
-      }
+      links.classList.toggle('open');
+      document.querySelector('.hamburger').classList.toggle('active');
     }
 
     /* ── Pagination (visual only) ── */
