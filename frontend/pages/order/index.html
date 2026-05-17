@@ -1,0 +1,1369 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Place an Order — Arend Gesin Investment</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../css/style.css">
+
+<style>
+/* ══════════════════════════════════════════
+   DESIGN TOKENS
+══════════════════════════════════════════ */
+:root {
+  --ink:        #1A1A1A;
+  --ink-muted:  #555;
+  --surface:    #F8F7F4;
+  --off-white:  #F2F0EB;
+  --border:     rgba(0,0,0,0.10);
+  --red:        #A32D2D;
+  --red-light:  rgba(163,45,45,0.08);
+  --gold:       #BA7517;
+  --gold-light: rgba(186,117,23,0.08);
+  --white:      #fff;
+  --font-sans:  'DM Sans', sans-serif;
+  --font-head:  'Bebas Neue', sans-serif;
+  --font-display: 'DM Serif Display', serif;
+  --nav-h:      72px;
+  --max-w:      1200px;
+  --radius:     10px;
+  --radius-lg:  16px;
+  --shadow:     0 2px 24px rgba(0,0,0,0.08);
+  --shadow-md:  0 8px 40px rgba(0,0,0,0.12);
+}
+
+/* ══ Reset ══ */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: var(--font-sans);
+  background: var(--surface);
+  color: var(--ink);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+a { text-decoration: none; color: inherit; }
+ul { list-style: none; }
+img { display: block; max-width: 100%; }
+button { cursor: pointer; font-family: inherit; }
+
+/* ══ Container ══ */
+.container {
+  max-width: var(--max-w);
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+/* ══════════════════════════════════════════
+   NAVBAR
+══════════════════════════════════════════ */
+.navbar {
+  position: fixed; top: 0; left: 0; right: 0;
+  height: var(--nav-h);
+  z-index: 100;
+  background: rgba(26,26,26,0.97);
+  backdrop-filter: blur(12px);
+  border-bottom: 0.5px solid rgba(255,255,255,0.07);
+  transition: box-shadow 0.3s;
+}
+.navbar.scrolled { box-shadow: 0 4px 32px rgba(0,0,0,0.35); }
+.nav-inner {
+  max-width: var(--max-w);
+  margin: 0 auto;
+  height: 100%;
+  padding: 0 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 32px;
+}
+.nav-logo { display: flex; align-items: center; flex-shrink: 0; color: #fff; }
+.logo-svg { height: 36px; width: auto; }
+.nav-links {
+  display: flex;
+  gap: 32px;
+  align-items: center;
+}
+.nav-links a {
+  font-size: 13px;
+  font-weight: 400;
+  color: rgba(255,255,255,0.65);
+  letter-spacing: 0.02em;
+  transition: color 0.2s;
+}
+.nav-links a:hover { color: #fff; }
+.nav-links a.active { color: #fff; }
+.nav-right { display: flex; align-items: center; gap: 16px; }
+.btn-nav-cta {
+  display: inline-flex;
+  align-items: center;
+  padding: 9px 20px;
+  background: var(--red);
+  color: #fff;
+  font-size: 13px;
+  font-weight: 500;
+  border-radius: 99px;
+  transition: background 0.2s, transform 0.15s;
+  white-space: nowrap;
+}
+.btn-nav-cta:hover { background: #8a2424; transform: translateY(-1px); }
+.btn-nav-cta.active-link {
+  background: rgba(163,45,45,0.25);
+  border: 1px solid rgba(163,45,45,0.5);
+}
+.hamburger {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  background: none;
+  border: none;
+  padding: 6px;
+}
+.hamburger span {
+  display: block;
+  width: 22px; height: 2px;
+  background: #fff;
+  border-radius: 2px;
+  transition: transform 0.25s, opacity 0.25s;
+}
+.hamburger.active span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+.hamburger.active span:nth-child(2) { opacity: 0; }
+.hamburger.active span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+/* ══════════════════════════════════════════
+   PAGE HERO
+══════════════════════════════════════════ */
+.page-hero {
+  padding: calc(var(--nav-h) + 72px) 0 72px;
+  background: var(--ink);
+  position: relative;
+  overflow: hidden;
+}
+.page-hero::before {
+  content: '';
+  position: absolute; inset: 0;
+  background-image:
+    linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
+    linear-gradient(90deg,rgba(255,255,255,0.02) 1px, transparent 1px);
+  background-size: 60px 60px;
+}
+.page-hero::after {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 0; right: 0; height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(163,45,45,0.5), transparent);
+}
+.page-hero-inner { position: relative; z-index: 1; max-width: 720px; }
+.page-breadcrumb {
+  display: flex; align-items: center; gap: 8px;
+  font-size: 12px; color: rgba(255,255,255,0.35);
+  margin-bottom: 24px; letter-spacing: 0.04em;
+}
+.page-breadcrumb a { color: rgba(255,255,255,0.35); transition: color 0.2s; }
+.page-breadcrumb a:hover { color: rgba(255,255,255,0.7); }
+.page-breadcrumb span { color: rgba(255,255,255,0.55); }
+.page-hero-tag {
+  font-size: 11px; font-weight: 500;
+  letter-spacing: 0.18em; text-transform: uppercase;
+  color: var(--red); margin-bottom: 16px;
+}
+.page-hero-title {
+  font-family: var(--font-head);
+  font-size: clamp(52px, 8vw, 100px);
+  line-height: 0.92;
+  color: #fff; letter-spacing: 0.02em; margin-bottom: 24px;
+}
+.page-hero-title em {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: clamp(24px, 3.5vw, 44px);
+  display: block; color: rgba(255,255,255,0.50);
+  letter-spacing: 0; margin-top: 10px; line-height: 1.3;
+}
+.page-hero-body {
+  font-size: 15px; color: rgba(255,255,255,0.50);
+  max-width: 500px; line-height: 1.8;
+}
+
+/* ══════════════════════════════════════════
+   ORDER SECTION
+══════════════════════════════════════════ */
+.order-section {
+  padding: 80px 0 120px;
+  background: var(--surface);
+}
+.order-layout {
+  display: grid;
+  grid-template-columns: 1fr 380px;
+  gap: 48px;
+  align-items: start;
+}
+
+/* ── Stepper ── */
+.stepper {
+  display: flex;
+  gap: 0;
+  margin-bottom: 40px;
+}
+.step-item {
+  display: flex;
+  align-items: center;
+  flex: 1;
+}
+.step-item:last-child { flex: 0; }
+.step-circle {
+  width: 36px; height: 36px;
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 13px; font-weight: 500;
+  border: 2px solid var(--border);
+  background: var(--white);
+  color: var(--ink-muted);
+  flex-shrink: 0;
+  transition: all 0.3s;
+  position: relative;
+  z-index: 1;
+}
+.step-item.active .step-circle {
+  background: var(--red); border-color: var(--red); color: #fff;
+  box-shadow: 0 0 0 4px var(--red-light);
+}
+.step-item.done .step-circle {
+  background: var(--ink); border-color: var(--ink); color: #fff;
+}
+.step-line {
+  flex: 1; height: 2px;
+  background: var(--border);
+  margin: 0 4px;
+  transition: background 0.3s;
+}
+.step-item.done .step-line { background: var(--ink); }
+
+/* ── Form card ── */
+.form-card {
+  background: var(--white);
+  border-radius: var(--radius-lg);
+  border: 0.5px solid var(--border);
+  box-shadow: var(--shadow);
+  overflow: hidden;
+}
+.form-card-header {
+  padding: 28px 32px 24px;
+  border-bottom: 0.5px solid var(--border);
+  background: linear-gradient(135deg, var(--ink) 0%, #2a2a2a 100%);
+}
+.form-card-step {
+  font-size: 11px; font-weight: 500;
+  letter-spacing: 0.16em; text-transform: uppercase;
+  color: var(--red); margin-bottom: 8px;
+}
+.form-card-title {
+  font-family: var(--font-display);
+  font-size: 26px; font-weight: 400;
+  color: #fff; line-height: 1.2;
+}
+.form-card-body { padding: 32px; }
+
+/* Step panels */
+.step-panel { display: none; }
+.step-panel.active { display: block; }
+
+/* ── Form fields ── */
+.field-group { margin-bottom: 20px; }
+.field-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+label {
+  display: block;
+  font-size: 12px; font-weight: 500;
+  letter-spacing: 0.08em; text-transform: uppercase;
+  color: var(--ink-muted); margin-bottom: 7px;
+}
+.required-star { color: var(--red); margin-left: 2px; }
+input[type="text"],
+input[type="email"],
+input[type="tel"],
+input[type="number"],
+select,
+textarea {
+  width: 100%;
+  padding: 11px 14px;
+  font-family: var(--font-sans);
+  font-size: 14px;
+  color: var(--ink);
+  background: var(--surface);
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius);
+  outline: none;
+  transition: border-color 0.2s, box-shadow 0.2s;
+  appearance: none;
+  -webkit-appearance: none;
+}
+input:focus, select:focus, textarea:focus {
+  border-color: var(--red);
+  box-shadow: 0 0 0 3px var(--red-light);
+  background: #fff;
+}
+input.invalid, select.invalid, textarea.invalid {
+  border-color: var(--red);
+  background: #fff5f5;
+}
+select {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' fill='none'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23555' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 14px center;
+  padding-right: 36px;
+  cursor: pointer;
+}
+textarea { resize: vertical; min-height: 100px; line-height: 1.6; }
+.field-hint {
+  font-size: 11px; color: var(--ink-muted);
+  margin-top: 5px; opacity: 0.7;
+}
+.error-msg {
+  font-size: 11px; color: var(--red);
+  margin-top: 5px; display: none;
+}
+.field-group.has-error .error-msg { display: block; }
+
+/* ── Service grid selector ── */
+.service-selector {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin-bottom: 4px;
+}
+.service-option {
+  position: relative;
+  cursor: pointer;
+}
+.service-option input[type="radio"] {
+  position: absolute; opacity: 0; width: 0; height: 0;
+}
+.service-option-card {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 16px;
+  border-radius: var(--radius);
+  border: 1.5px solid var(--border);
+  background: var(--surface);
+  transition: border-color 0.2s, background 0.2s, box-shadow 0.2s;
+}
+.service-option input:checked + .service-option-card {
+  border-color: var(--red);
+  background: var(--red-light);
+  box-shadow: 0 0 0 3px var(--red-light);
+}
+.service-option-icon {
+  width: 36px; height: 36px;
+  border-radius: 8px;
+  background: rgba(0,0,0,0.05);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 18px;
+  transition: background 0.2s;
+}
+.service-option input:checked + .service-option-card .service-option-icon {
+  background: var(--red);
+}
+.service-option-name {
+  font-size: 13px; font-weight: 500; color: var(--ink); line-height: 1.3;
+}
+.service-option-desc {
+  font-size: 11px; color: var(--ink-muted); line-height: 1.4;
+}
+
+/* ── Divider ── */
+.form-divider {
+  border: none;
+  border-top: 0.5px solid var(--border);
+  margin: 28px 0;
+}
+
+/* ── Buttons ── */
+.form-nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-top: 32px;
+  padding-top: 24px;
+  border-top: 0.5px solid var(--border);
+}
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 28px;
+  background: var(--red);
+  color: #fff;
+  font-size: 14px;
+  font-weight: 500;
+  border-radius: 99px;
+  border: none;
+  transition: background 0.2s, transform 0.15s, box-shadow 0.2s;
+  white-space: nowrap;
+}
+.btn-primary:hover { background: #8a2424; transform: translateY(-1px); box-shadow: 0 4px 16px rgba(163,45,45,0.3); }
+.btn-back {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 12px 20px;
+  background: none;
+  color: var(--ink-muted);
+  font-size: 14px;
+  border: 1.5px solid var(--border);
+  border-radius: 99px;
+  transition: border-color 0.2s, color 0.2s;
+}
+.btn-back:hover { border-color: var(--ink); color: var(--ink); }
+
+/* ── Summary card (sidebar) ── */
+.order-sidebar { position: sticky; top: calc(var(--nav-h) + 32px); }
+.summary-card {
+  background: var(--white);
+  border-radius: var(--radius-lg);
+  border: 0.5px solid var(--border);
+  box-shadow: var(--shadow);
+  overflow: hidden;
+  margin-bottom: 20px;
+}
+.summary-header {
+  padding: 20px 24px 16px;
+  background: var(--ink);
+  border-bottom: 0.5px solid rgba(255,255,255,0.06);
+}
+.summary-header-label {
+  font-size: 11px; font-weight: 500;
+  letter-spacing: 0.16em; text-transform: uppercase;
+  color: rgba(255,255,255,0.4);
+  margin-bottom: 4px;
+}
+.summary-header-title {
+  font-family: var(--font-head);
+  font-size: 20px; color: #fff; letter-spacing: 0.04em;
+}
+.summary-body { padding: 20px 24px; }
+.summary-row {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 10px 0;
+  border-bottom: 0.5px solid var(--border);
+  font-size: 13px;
+}
+.summary-row:last-child { border-bottom: none; }
+.summary-row-label { color: var(--ink-muted); flex-shrink: 0; }
+.summary-row-val { color: var(--ink); font-weight: 500; text-align: right; }
+.summary-row-val.empty { color: rgba(0,0,0,0.18); font-weight: 400; font-style: italic; }
+
+/* Trust badges */
+.trust-card {
+  background: var(--white);
+  border-radius: var(--radius-lg);
+  border: 0.5px solid var(--border);
+  padding: 20px 24px;
+  margin-bottom: 20px;
+}
+.trust-title {
+  font-size: 12px; font-weight: 500;
+  letter-spacing: 0.1em; text-transform: uppercase;
+  color: var(--ink-muted); margin-bottom: 16px;
+}
+.trust-item {
+  display: flex; align-items: flex-start; gap: 12px;
+  font-size: 13px; color: var(--ink-muted);
+  line-height: 1.5; margin-bottom: 12px;
+}
+.trust-item:last-child { margin-bottom: 0; }
+.trust-icon {
+  width: 28px; height: 28px;
+  border-radius: 6px;
+  background: var(--red-light);
+  color: var(--red);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 14px; flex-shrink: 0;
+  margin-top: 1px;
+}
+
+/* Contact card */
+.contact-card {
+  background: var(--ink);
+  border-radius: var(--radius-lg);
+  padding: 20px 24px;
+}
+.contact-card-title {
+  font-size: 12px; font-weight: 500;
+  letter-spacing: 0.1em; text-transform: uppercase;
+  color: rgba(255,255,255,0.35); margin-bottom: 16px;
+}
+.contact-card-item {
+  display: flex; align-items: center; gap: 10px;
+  font-size: 13px; color: rgba(255,255,255,0.55);
+  margin-bottom: 10px; transition: color 0.2s;
+}
+.contact-card-item:last-child { margin-bottom: 0; }
+.contact-card-item:hover { color: rgba(255,255,255,0.85); }
+.contact-card-item a { color: inherit; }
+.contact-card-dot {
+  width: 6px; height: 6px; border-radius: 50%;
+  background: var(--gold); flex-shrink: 0;
+}
+
+/* ── Success state ── */
+.success-panel {
+  display: none;
+  text-align: center;
+  padding: 56px 32px;
+}
+.success-panel.active { display: block; }
+.success-icon {
+  width: 72px; height: 72px;
+  border-radius: 50%;
+  background: var(--red-light);
+  color: var(--red);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 32px;
+  margin: 0 auto 24px;
+}
+.success-title {
+  font-family: var(--font-display);
+  font-size: 30px; color: var(--ink); margin-bottom: 12px;
+}
+.success-body {
+  font-size: 15px; color: var(--ink-muted);
+  line-height: 1.8; max-width: 400px; margin: 0 auto 28px;
+}
+.success-ref {
+  display: inline-block;
+  font-size: 13px; font-weight: 500;
+  background: var(--surface);
+  border: 0.5px solid var(--border);
+  border-radius: 99px;
+  padding: 6px 18px;
+  color: var(--ink-muted);
+  margin-bottom: 32px;
+  letter-spacing: 0.05em;
+}
+.success-ref strong { color: var(--red); }
+.success-next {
+  display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; margin-top: 8px;
+}
+
+/* ══════════════════════════════════════════
+   PROCESS STRIP
+══════════════════════════════════════════ */
+.process-section {
+  background: var(--white);
+  border-top: 0.5px solid var(--border);
+  border-bottom: 0.5px solid var(--border);
+  padding: 64px 0;
+}
+.process-label {
+  font-size: 11px; font-weight: 500;
+  letter-spacing: 0.18em; text-transform: uppercase;
+  color: var(--red); margin-bottom: 8px;
+}
+.process-title {
+  font-family: var(--font-display);
+  font-size: clamp(22px, 3vw, 32px);
+  color: var(--ink); margin-bottom: 48px;
+}
+.process-steps {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0;
+  position: relative;
+}
+.process-steps::before {
+  content: '';
+  position: absolute;
+  top: 20px; left: 10%; right: 10%;
+  height: 1.5px;
+  background: linear-gradient(90deg, var(--border), var(--red), var(--border));
+  z-index: 0;
+}
+.process-step {
+  display: flex; flex-direction: column;
+  align-items: center; text-align: center;
+  padding: 0 16px;
+  position: relative; z-index: 1;
+}
+.process-num {
+  width: 40px; height: 40px;
+  border-radius: 50%;
+  background: var(--white);
+  border: 2px solid var(--border);
+  display: flex; align-items: center; justify-content: center;
+  font-family: var(--font-head);
+  font-size: 18px; color: var(--ink-muted);
+  margin-bottom: 18px;
+  transition: all 0.3s;
+  box-shadow: 0 0 0 6px var(--white);
+}
+.process-step.highlight .process-num {
+  background: var(--red); border-color: var(--red);
+  color: #fff; box-shadow: 0 0 0 6px var(--white), 0 4px 16px rgba(163,45,45,0.25);
+}
+.process-step-title {
+  font-size: 13px; font-weight: 500;
+  color: var(--ink); margin-bottom: 6px;
+}
+.process-step-desc {
+  font-size: 12px; color: var(--ink-muted);
+  line-height: 1.6;
+}
+
+/* ══════════════════════════════════════════
+   FOOTER
+══════════════════════════════════════════ */
+.footer {
+  background: var(--ink);
+  padding: 72px 0 0;
+  color: rgba(255,255,255,0.55);
+  font-size: 14px;
+}
+.footer-top {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1fr;
+  gap: 48px;
+  margin-bottom: 64px;
+}
+.footer-brand .nav-logo { color: #fff; margin-bottom: 16px; display: inline-flex; }
+.footer-tagline {
+  font-family: var(--font-display); font-style: italic;
+  font-size: 18px; color: #fff; margin-bottom: 12px;
+}
+.footer-desc {
+  font-size: 13px; line-height: 1.8;
+  color: rgba(255,255,255,0.4); margin-bottom: 20px;
+}
+.footer-contact-mini { display: flex; flex-direction: column; gap: 4px; }
+.footer-contact-mini a {
+  font-size: 13px; color: rgba(255,255,255,0.5); transition: color 0.2s;
+}
+.footer-contact-mini a:hover { color: #fff; }
+.footer-col-title {
+  font-size: 11px; font-weight: 500;
+  letter-spacing: 0.16em; text-transform: uppercase;
+  color: rgba(255,255,255,0.35); margin-bottom: 20px;
+}
+.footer-col ul { display: flex; flex-direction: column; gap: 10px; }
+.footer-col ul li a,
+.footer-col ul li span {
+  font-size: 13px; color: rgba(255,255,255,0.45); transition: color 0.2s;
+}
+.footer-col ul li a:hover { color: #fff; }
+.footer-bottom {
+  border-top: 0.5px solid rgba(255,255,255,0.06);
+  padding: 24px 0;
+  display: flex; align-items: center; justify-content: space-between; gap: 16px;
+}
+.footer-copy { font-size: 12px; color: rgba(255,255,255,0.25); }
+.footer-web { font-size: 12px; color: rgba(255,255,255,0.25); transition: color 0.2s; }
+.footer-web:hover { color: rgba(255,255,255,0.55); }
+
+/* ══════════════════════════════════════════
+   RESPONSIVE
+══════════════════════════════════════════ */
+@media (max-width: 900px) {
+  .order-layout { grid-template-columns: 1fr; }
+  .order-sidebar { position: static; }
+  .process-steps { grid-template-columns: 1fr 1fr; gap: 32px; }
+  .process-steps::before { display: none; }
+  .footer-top { grid-template-columns: 1fr 1fr; gap: 36px; }
+}
+@media (max-width: 640px) {
+  .nav-links { display: none; }
+  .nav-links.open {
+    display: flex;
+    flex-direction: column;
+    position: fixed;
+    top: var(--nav-h); left: 0; right: 0; bottom: 0;
+    background: var(--ink);
+    padding: 32px 24px;
+    gap: 24px; z-index: 90;
+  }
+  .nav-links.open a { font-size: 18px; color: rgba(255,255,255,0.8); }
+  .hamburger { display: flex; }
+  .field-row { grid-template-columns: 1fr; }
+  .service-selector { grid-template-columns: 1fr; }
+  .form-card-body { padding: 20px; }
+  .process-steps { grid-template-columns: 1fr; }
+  .footer-top { grid-template-columns: 1fr; }
+  .success-next { flex-direction: column; align-items: center; }
+}
+</style>
+</head>
+<body>
+
+<!-- ══════════════════ NAVBAR ══════════════════ -->
+<nav class="navbar scrolled" id="navbar">
+  <div class="nav-inner">
+    <a href="/" class="nav-logo" aria-label="AGI home">
+      <img src="../../assets/logo.png" alt="Arend Gesin Investment — Home of Branding" style="height:44px;width:auto;display:block;">
+    </a>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="/pages/services.html">Services</a></li>
+      <li><a href="/pages/about.html">About</a></li>
+      <li><a href="/pages/portfolio.html">Portfolio</a></li>
+      <li><a href="/pages/blog.html">Insights</a></li>
+      <li><a href="/pages/csr.html">THAT Child</a></li>
+      <li><a href="/pages/contact.html">Contact</a></li>
+    </ul>
+    <div class="nav-right">
+      <a href="/pages/order/index.html" class="btn-nav-cta" style="color:var(--red);font-weight:500;background:rgba(163,45,45,0.15);border:1px solid rgba(163,45,45,0.4);">Order now</a>
+      <button class="hamburger" id="hamburger" aria-label="Toggle menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</nav>
+
+<!-- ═══════════════════ PAGE HERO ═══════════════════ -->
+<section class="page-hero">
+  <div class="container">
+    <div class="page-hero-inner">
+      <nav class="page-breadcrumb" aria-label="breadcrumb">
+        <a href="/">Home</a>
+        <span>›</span>
+        <span>Place an Order</span>
+      </nav>
+      <p class="page-hero-tag">Start here</p>
+      <h1 class="page-hero-title">
+        Place an
+        <em>Order.</em>
+      </h1>
+      <p class="page-hero-body">
+        Tell us what you need and we'll get back to you with a quote within 24 hours.
+        Every order helps fund the <strong style="color:#BA7517">THAT Child</strong> initiative.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════ ORDER FORM ═══════════════════ -->
+<section class="order-section">
+  <div class="container">
+    <div class="order-layout">
+
+      <!-- ── Main form ── -->
+      <div class="order-main">
+
+        <!-- Stepper -->
+        <div class="stepper" id="stepper" aria-label="Order progress">
+          <div class="step-item active" id="step-item-1">
+            <div class="step-circle" id="step-circle-1">1</div>
+          </div>
+          <div class="step-line" id="step-line-1"></div>
+          <div class="step-item" id="step-item-2">
+            <div class="step-circle" id="step-circle-2">2</div>
+          </div>
+          <div class="step-line" id="step-line-2"></div>
+          <div class="step-item" id="step-item-3">
+            <div class="step-circle" id="step-circle-3">3</div>
+          </div>
+        </div>
+
+        <!-- Form card -->
+        <div class="form-card" id="formCard">
+          <div class="form-card-header">
+            <p class="form-card-step" id="stepLabel">Step 1 of 3</p>
+            <h2 class="form-card-title" id="stepTitle">Choose your service</h2>
+          </div>
+
+          <div class="form-card-body">
+
+            <!-- ══ STEP 1 — Service + Location ══ -->
+            <div class="step-panel active" id="panel-1">
+              <div class="field-group" id="fg-service">
+                <label>Select a service <span class="required-star">*</span></label>
+                <div class="service-selector">
+
+                  <label class="service-option">
+                    <input type="radio" name="service" value="Printing &amp; Branding">
+                    <div class="service-option-card">
+                      <div class="service-option-icon">🖨️</div>
+                      <div class="service-option-name">Printing &amp; Branding</div>
+                      <div class="service-option-desc">Banners, t-shirts, mugs, stickers &amp; more</div>
+                    </div>
+                  </label>
+
+                  <label class="service-option">
+                    <input type="radio" name="service" value="Stationery Supplies">
+                    <div class="service-option-card">
+                      <div class="service-option-icon">📦</div>
+                      <div class="service-option-name">Stationery Supplies</div>
+                      <div class="service-option-desc">Office supplies, pens, notebooks &amp; bulk stock</div>
+                    </div>
+                  </label>
+
+                  <label class="service-option">
+                    <input type="radio" name="service" value="IT Installations">
+                    <div class="service-option-card">
+                      <div class="service-option-icon">💻</div>
+                      <div class="service-option-name">IT Installations</div>
+                      <div class="service-option-desc">Hardware supply, software setup &amp; support</div>
+                    </div>
+                  </label>
+
+                  <label class="service-option">
+                    <input type="radio" name="service" value="Graphic Design">
+                    <div class="service-option-card">
+                      <div class="service-option-icon">🎨</div>
+                      <div class="service-option-name">Graphic Design</div>
+                      <div class="service-option-desc">Logos, brochures, social media &amp; ads</div>
+                    </div>
+                  </label>
+
+                  <label class="service-option">
+                    <input type="radio" name="service" value="Work Safety (PPEs)">
+                    <div class="service-option-card">
+                      <div class="service-option-icon">🦺</div>
+                      <div class="service-option-name">Work Safety (PPEs)</div>
+                      <div class="service-option-desc">Hard hats, reflective vests, boots &amp; gear</div>
+                    </div>
+                  </label>
+
+                  <label class="service-option">
+                    <input type="radio" name="service" value="Other / Not Sure">
+                    <div class="service-option-card">
+                      <div class="service-option-icon">💬</div>
+                      <div class="service-option-name">Other / Not Sure</div>
+                      <div class="service-option-desc">Tell us what you need — we'll guide you</div>
+                    </div>
+                  </label>
+
+                </div>
+                <p class="error-msg">Please select a service to continue.</p>
+              </div>
+
+              <hr class="form-divider">
+
+              <div class="field-group" id="fg-county">
+                <label for="county">Your county / location <span class="required-star">*</span></label>
+                <select id="county" name="county">
+                  <option value="" disabled selected>Select your county</option>
+                  <option>Nakuru</option>
+                  <option>Nairobi</option>
+                  <option>Uasin Gishu</option>
+                  <option>Trans Nzoia</option>
+                  <option>Bungoma</option>
+                  <option>Other</option>
+                </select>
+                <p class="error-msg">Please select your county.</p>
+              </div>
+
+              <div class="form-nav">
+                <span></span>
+                <button class="btn-primary" onclick="nextStep(1)">
+                  Next: Project details <span>→</span>
+                </button>
+              </div>
+            </div><!-- /panel-1 -->
+
+            <!-- ══ STEP 2 — Project details ══ -->
+            <div class="step-panel" id="panel-2">
+
+              <div class="field-group" id="fg-item">
+                <label for="item">Specific item / product <span class="required-star">*</span></label>
+                <input type="text" id="item" name="item" placeholder="e.g. Pull-up banners, business cards, branded mugs…">
+                <p class="error-msg">Please describe the item or product.</p>
+              </div>
+
+              <div class="field-row">
+                <div class="field-group" id="fg-qty">
+                  <label for="qty">Quantity <span class="required-star">*</span></label>
+                  <input type="number" id="qty" name="qty" min="1" placeholder="e.g. 50">
+                  <p class="error-msg">Please enter a quantity.</p>
+                </div>
+                <div class="field-group">
+                  <label for="deadline">Delivery deadline</label>
+                  <input type="text" id="deadline" name="deadline" placeholder="e.g. Within 2 weeks">
+                </div>
+              </div>
+
+              <div class="field-group">
+                <label for="details">Additional details / specifications</label>
+                <textarea id="details" name="details" rows="4" placeholder="Colours, sizes, file formats, branding instructions, any special requirements…"></textarea>
+                <p class="field-hint">The more detail you share, the more accurate your quote will be.</p>
+              </div>
+
+              <div class="field-group">
+                <label for="budget">Approximate budget (KES)</label>
+                <select id="budget" name="budget">
+                  <option value="" disabled selected>Select a range (optional)</option>
+                  <option>Under KES 5,000</option>
+                  <option>KES 5,000 – 15,000</option>
+                  <option>KES 15,000 – 50,000</option>
+                  <option>KES 50,000 – 150,000</option>
+                  <option>Over KES 150,000</option>
+                  <option>Discuss with team</option>
+                </select>
+              </div>
+
+              <div class="form-nav">
+                <button class="btn-back" onclick="prevStep(2)">
+                  <span>←</span> Back
+                </button>
+                <button class="btn-primary" onclick="nextStep(2)">
+                  Next: Your details <span>→</span>
+                </button>
+              </div>
+            </div><!-- /panel-2 -->
+
+            <!-- ══ STEP 3 — Contact info ══ -->
+            <div class="step-panel" id="panel-3">
+
+              <div class="field-row">
+                <div class="field-group" id="fg-fname">
+                  <label for="fname">First name <span class="required-star">*</span></label>
+                  <input type="text" id="fname" name="fname" placeholder="Your first name">
+                  <p class="error-msg">First name is required.</p>
+                </div>
+                <div class="field-group" id="fg-lname">
+                  <label for="lname">Last name <span class="required-star">*</span></label>
+                  <input type="text" id="lname" name="lname" placeholder="Your last name">
+                  <p class="error-msg">Last name is required.</p>
+                </div>
+              </div>
+
+              <div class="field-group">
+                <label for="org">Organisation / company</label>
+                <input type="text" id="org" name="org" placeholder="e.g. Beacon Contractors Ltd (optional)">
+              </div>
+
+              <div class="field-group" id="fg-email">
+                <label for="email">Email address <span class="required-star">*</span></label>
+                <input type="email" id="email" name="email" placeholder="you@example.com">
+                <p class="error-msg">A valid email address is required.</p>
+              </div>
+
+              <div class="field-group" id="fg-phone">
+                <label for="phone">Phone / WhatsApp <span class="required-star">*</span></label>
+                <input type="tel" id="phone" name="phone" placeholder="+254 7XX XXX XXX">
+                <p class="error-msg">A phone number is required.</p>
+              </div>
+
+              <div class="field-group">
+                <label for="how">How did you hear about us?</label>
+                <select id="how" name="how">
+                  <option value="" disabled selected>Choose one (optional)</option>
+                  <option>Referral / Word of mouth</option>
+                  <option>Social media</option>
+                  <option>Google search</option>
+                  <option>Existing client</option>
+                  <option>Other</option>
+                </select>
+              </div>
+
+              <div class="form-nav">
+                <button class="btn-back" onclick="prevStep(3)">
+                  <span>←</span> Back
+                </button>
+                <button class="btn-primary" id="submitBtn" onclick="submitOrder()">
+                  Submit order ✓
+                </button>
+              </div>
+            </div><!-- /panel-3 -->
+
+          </div><!-- /form-card-body -->
+
+          <!-- ══ SUCCESS ══ -->
+          <div class="success-panel" id="successPanel">
+            <div class="success-icon">✓</div>
+            <h2 class="success-title">Order received!</h2>
+            <p class="success-body">
+              Thank you for reaching out to Arend Gesin Investment. We'll review your request and
+              send a personalised quote to your email within <strong>24 hours</strong>.
+            </p>
+            <div class="success-ref">Reference: <strong id="orderRef">AGI-000000</strong></div>
+            <div class="success-next">
+              <a href="/" class="btn-primary" style="display:inline-flex;">← Back to home</a>
+              <a href="/pages/contact.html" class="btn-back" style="display:inline-flex;">Contact the team</a>
+            </div>
+          </div>
+
+        </div><!-- /form-card -->
+      </div><!-- /order-main -->
+
+      <!-- ── Sidebar ── -->
+      <aside class="order-sidebar">
+
+        <!-- Order summary -->
+        <div class="summary-card">
+          <div class="summary-header">
+            <p class="summary-header-label">Order summary</p>
+            <p class="summary-header-title">YOUR REQUEST</p>
+          </div>
+          <div class="summary-body">
+            <div class="summary-row">
+              <span class="summary-row-label">Service</span>
+              <span class="summary-row-val empty" id="sum-service">Not yet chosen</span>
+            </div>
+            <div class="summary-row">
+              <span class="summary-row-label">County</span>
+              <span class="summary-row-val empty" id="sum-county">—</span>
+            </div>
+            <div class="summary-row">
+              <span class="summary-row-label">Item</span>
+              <span class="summary-row-val empty" id="sum-item">—</span>
+            </div>
+            <div class="summary-row">
+              <span class="summary-row-label">Quantity</span>
+              <span class="summary-row-val empty" id="sum-qty">—</span>
+            </div>
+            <div class="summary-row">
+              <span class="summary-row-label">Budget</span>
+              <span class="summary-row-val empty" id="sum-budget">—</span>
+            </div>
+            <div class="summary-row">
+              <span class="summary-row-label">Contact</span>
+              <span class="summary-row-val empty" id="sum-contact">—</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Trust -->
+        <div class="trust-card">
+          <p class="trust-title">Why order with AGI</p>
+          <div class="trust-item">
+            <div class="trust-icon">⚡</div>
+            <span>Quote within <strong>24 hours</strong> — often same day</span>
+          </div>
+          <div class="trust-item">
+            <div class="trust-icon">🤝</div>
+            <span>Family values, personal service — not a faceless agency</span>
+          </div>
+          <div class="trust-item">
+            <div class="trust-icon">📦</div>
+            <span>Delivery across <strong>5+ counties</strong> in Kenya</span>
+          </div>
+          <div class="trust-item">
+            <div class="trust-icon">❤️</div>
+            <span>Every order contributes to the <strong>THAT Child</strong> programme</span>
+          </div>
+        </div>
+
+        <!-- Quick contact -->
+        <div class="contact-card">
+          <p class="contact-card-title">Need help?</p>
+          <div class="contact-card-item">
+            <div class="contact-card-dot"></div>
+            <a href="https://wa.me/254735518090" target="_blank">WhatsApp us directly</a>
+          </div>
+          <div class="contact-card-item">
+            <div class="contact-card-dot"></div>
+            <a href="tel:+254735518090">+254 735 518 090</a>
+          </div>
+          <div class="contact-card-item">
+            <div class="contact-card-dot"></div>
+            <a href="mailto:info@arendgesin.co.ke">info@arendgesin.co.ke</a>
+          </div>
+        </div>
+
+      </aside>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════ PROCESS STRIP ═══════════════════ -->
+<section class="process-section">
+  <div class="container">
+    <p class="process-label">How it works</p>
+    <h2 class="process-title">From request to delivery — four simple steps</h2>
+    <div class="process-steps">
+      <div class="process-step highlight">
+        <div class="process-num">1</div>
+        <div class="process-step-title">Submit your request</div>
+        <div class="process-step-desc">Fill in the order form with your service, product, and contact details.</div>
+      </div>
+      <div class="process-step">
+        <div class="process-num">2</div>
+        <div class="process-step-title">We review your order</div>
+        <div class="process-step-desc">Our team reads every submission carefully and prepares your quote.</div>
+      </div>
+      <div class="process-step">
+        <div class="process-num">3</div>
+        <div class="process-step-title">You receive a quote</div>
+        <div class="process-step-desc">A personalised quote lands in your inbox within 24 hours — often sooner.</div>
+      </div>
+      <div class="process-step">
+        <div class="process-num">4</div>
+        <div class="process-step-title">We deliver</div>
+        <div class="process-step-desc">Once confirmed, we get to work and deliver on time, every time.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════ FOOTER ═══════════════════ -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <a href="/" class="nav-logo" aria-label="AGI home">
+      <img src="../../assets/logo.png" alt="Arend Gesin Investment — Home of Branding" style="height:44px;width:auto;display:block;">
+    </a>
+        <p class="footer-tagline">Strength of Family.</p>
+        <p class="footer-desc">A family-based branding company empowering youth and giving THAT Child a chance — one brand at a time.</p>
+        <div class="footer-contact-mini">
+          <a href="tel:+254735518090">+254 735 518 090</a>
+          <a href="tel:+254718260115">+254 718 260 115</a>
+          <a href="mailto:info@arendgesin.co.ke">info@arendgesin.co.ke</a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h5 class="footer-col-title">Services</h5>
+        <ul>
+          <li><a href="/pages/services.html">Printing &amp; Branding</a></li>
+          <li><a href="/pages/services.html">Stationery Supplies</a></li>
+          <li><a href="/pages/services.html">IT Installations</a></li>
+          <li><a href="/pages/services.html">Graphic Design</a></li>
+          <li><a href="/pages/services.html">Work Safety (PPEs)</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h5 class="footer-col-title">Company</h5>
+        <ul>
+          <li><a href="/pages/about.html">About AGI</a></li>
+          <li><a href="/pages/csr.html">THAT Child / CSR</a></li>
+          <li><a href="/pages/portfolio.html">Portfolio</a></li>
+          <li><a href="/pages/blog.html">Insights</a></li>
+          <li><a href="/pages/contact.html">Contact</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h5 class="footer-col-title">We operate in</h5>
+        <ul>
+          <li><span>Nakuru County</span></li>
+          <li><span>Nairobi County</span></li>
+          <li><span>Uasin Gishu</span></li>
+          <li><span>Trans Nzoia</span></li>
+          <li><span>Bungoma County</span></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p class="footer-copy">© 2025 Arend Gesin Investment. All rights reserved.</p>
+      <a href="http://www.arendgesin.co.ke" class="footer-web" target="_blank" rel="noopener">www.arendgesin.co.ke</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+/* ══════════════════════════════════════════
+   STATE
+══════════════════════════════════════════ */
+let currentStep = 1;
+const totalSteps = 3;
+
+const stepMeta = {
+  1: { label: 'Step 1 of 3', title: 'Choose your service' },
+  2: { label: 'Step 2 of 3', title: 'Project details' },
+  3: { label: 'Step 3 of 3', title: 'Your contact info' },
+};
+
+/* ══ Validation ══ */
+function validateStep(step) {
+  let valid = true;
+
+  if (step === 1) {
+    const serviceChecked = document.querySelector('input[name="service"]:checked');
+    const fgService = document.getElementById('fg-service');
+    if (!serviceChecked) { fgService.classList.add('has-error'); valid = false; }
+    else { fgService.classList.remove('has-error'); }
+
+    const county = document.getElementById('county');
+    const fgCounty = document.getElementById('fg-county');
+    if (!county.value) {
+      fgCounty.classList.add('has-error'); county.classList.add('invalid'); valid = false;
+    } else { fgCounty.classList.remove('has-error'); county.classList.remove('invalid'); }
+  }
+
+  if (step === 2) {
+    const item = document.getElementById('item');
+    const fgItem = document.getElementById('fg-item');
+    if (!item.value.trim()) {
+      fgItem.classList.add('has-error'); item.classList.add('invalid'); valid = false;
+    } else { fgItem.classList.remove('has-error'); item.classList.remove('invalid'); }
+
+    const qty = document.getElementById('qty');
+    const fgQty = document.getElementById('fg-qty');
+    if (!qty.value || parseInt(qty.value) < 1) {
+      fgQty.classList.add('has-error'); qty.classList.add('invalid'); valid = false;
+    } else { fgQty.classList.remove('has-error'); qty.classList.remove('invalid'); }
+  }
+
+  if (step === 3) {
+    const fields = [
+      { id: 'fname', fg: 'fg-fname', check: v => v.trim().length > 0 },
+      { id: 'lname', fg: 'fg-lname', check: v => v.trim().length > 0 },
+      { id: 'email', fg: 'fg-email', check: v => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v) },
+      { id: 'phone', fg: 'fg-phone', check: v => v.trim().length >= 7 },
+    ];
+    fields.forEach(f => {
+      const el = document.getElementById(f.id);
+      const fg = document.getElementById(f.fg);
+      if (!f.check(el.value)) {
+        fg.classList.add('has-error'); el.classList.add('invalid'); valid = false;
+      } else { fg.classList.remove('has-error'); el.classList.remove('invalid'); }
+    });
+  }
+
+  return valid;
+}
+
+/* ══ Navigation ══ */
+function nextStep(from) {
+  if (!validateStep(from)) return;
+  goToStep(from + 1);
+  updateSummary();
+}
+
+function prevStep(from) {
+  goToStep(from - 1);
+}
+
+function goToStep(n) {
+  document.getElementById('panel-' + currentStep).classList.remove('active');
+  const prevItem = document.getElementById('step-item-' + currentStep);
+  if (n > currentStep) {
+    prevItem.classList.remove('active');
+    prevItem.classList.add('done');
+    prevItem.querySelector('.step-circle').textContent = '✓';
+  } else {
+    prevItem.classList.remove('done', 'active');
+    prevItem.querySelector('.step-circle').textContent = currentStep;
+    prevItem.classList.add('active');
+  }
+
+  currentStep = n;
+  document.getElementById('panel-' + currentStep).classList.add('active');
+  const newItem = document.getElementById('step-item-' + currentStep);
+  newItem.classList.remove('done');
+  newItem.classList.add('active');
+
+  document.getElementById('stepLabel').textContent = stepMeta[currentStep].label;
+  document.getElementById('stepTitle').textContent = stepMeta[currentStep].title;
+
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+/* ══ Live summary ══ */
+function setSummaryVal(id, val) {
+  const el = document.getElementById(id);
+  if (val) { el.textContent = val; el.classList.remove('empty'); }
+  else { el.textContent = '—'; el.classList.add('empty'); }
+}
+
+function updateSummary() {
+  const service = document.querySelector('input[name="service"]:checked');
+  setSummaryVal('sum-service', service ? service.value : '');
+  setSummaryVal('sum-county', document.getElementById('county').value || '');
+  setSummaryVal('sum-item', document.getElementById('item').value.trim() || '');
+  const qty = document.getElementById('qty').value;
+  setSummaryVal('sum-qty', qty ? qty + ' unit(s)' : '');
+  setSummaryVal('sum-budget', document.getElementById('budget').value || '');
+  const fname = document.getElementById('fname').value.trim();
+  const lname = document.getElementById('lname').value.trim();
+  const phone = document.getElementById('phone').value.trim();
+  if (fname || lname) {
+    setSummaryVal('sum-contact', [(fname + ' ' + lname).trim(), phone].filter(Boolean).join(' · '));
+  } else { setSummaryVal('sum-contact', ''); }
+}
+
+/* Live summary listeners for step 1 */
+document.querySelectorAll('input[name="service"]').forEach(r => r.addEventListener('change', updateSummary));
+document.getElementById('county').addEventListener('change', updateSummary);
+
+/* ══ Submit ══ */
+async function submitOrder() {
+  if (!validateStep(3)) return;
+  updateSummary();
+
+  const service  = document.querySelector('input[name="service"]:checked')?.value || '';
+  const county   = document.getElementById('county').value;
+  const item     = document.getElementById('item').value.trim();
+  const qty      = document.getElementById('qty').value;
+  const deadline = document.getElementById('deadline').value.trim();
+  const details  = document.getElementById('details').value.trim();
+  const budget   = document.getElementById('budget').value;
+  const fname    = document.getElementById('fname').value.trim();
+  const lname    = document.getElementById('lname').value.trim();
+  const org      = document.getElementById('org').value.trim();
+  const email    = document.getElementById('email').value.trim();
+  const phone    = document.getElementById('phone').value.trim();
+  const how      = document.getElementById('how').value;
+
+  /* Disable button & show loading state */
+  const submitBtn   = document.getElementById('submitBtn');
+  const originalTxt = submitBtn.textContent;
+  submitBtn.disabled = true;
+  submitBtn.textContent = 'Submitting…';
+
+  try {
+    const res = await fetch('https://agi-backend-8cdh.onrender.com/api/orders', {
+      method:  'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ service, county, item, qty, deadline, details,
+                             budget, fname, lname, org, email, phone, how }),
+    });
+
+    const data = await res.json();
+    if (!res.ok) throw new Error(data.error || 'Submission failed');
+
+    /* Update the visible ref then show success panel */
+    const refEl = document.getElementById('orderRef');
+    if (refEl) refEl.textContent = data.ref;
+
+    setTimeout(() => {
+      const formBody = document.getElementById('formCard')?.querySelector('.form-card-body');
+      if (formBody) formBody.style.display = 'none';
+      document.getElementById('successPanel')?.classList.add('active');
+      const stepLabel = document.getElementById('stepLabel');
+      const stepTitle = document.getElementById('stepTitle');
+      if (stepLabel) stepLabel.textContent = 'Complete';
+      if (stepTitle) stepTitle.textContent = 'Order submitted';
+      [1,2,3].forEach(i => {
+        const stepItem = document.getElementById('step-item-' + i);
+        if (!stepItem) return;
+        stepItem.classList.remove('active');
+        stepItem.classList.add('done');
+        const circle = stepItem.querySelector('.step-circle');
+        if (circle) circle.textContent = '✓';
+      });
+    }, 400);
+
+  } catch (err) {
+    alert('Sorry — ' + err.message + '.\nPlease try again or call us on +254 735 518 090.');
+    submitBtn.disabled = false;
+    submitBtn.textContent = originalTxt;
+  }
+}
+
+/* ══ Navbar + hamburger ══ */
+(function(){
+  const nav = document.getElementById('navbar');
+  window.addEventListener('scroll', () => {
+    nav.classList.toggle('scrolled', window.scrollY > 40);
+  }, { passive: true });
+
+  const ham = document.getElementById('hamburger');
+  const links = document.getElementById('navLinks');
+  ham.addEventListener('click', () => {
+    const open = links.classList.toggle('open');
+    ham.setAttribute('aria-expanded', String(open));
+    ham.classList.toggle('active', open);
+  });
+})();
+</script>
+</body>
+</html>
