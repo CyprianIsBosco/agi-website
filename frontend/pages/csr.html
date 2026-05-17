@@ -502,27 +502,28 @@
 <body>
 
   <!-- ── Navbar (uses style.css .navbar + .nav-inner + .nav-links + .hamburger) ── -->
-  <nav class="navbar" id="navbar">
-    <div class="nav-inner">
-      <a href="/" class="nav-logo">
-        <img src="../assets/logo.png" alt="Arend Gesin Investment — Home of Branding" style="height:44px;width:auto;display:block;">
-      </a>
-      <ul class="nav-links">
-        <li><a href="/">Home</a></li>
-        <li><a href="/pages/about.html">About</a></li>
-        <li><a href="/pages/services.html">Services</a></li>
-        <li><a href="/pages/portfolio.html">Portfolio</a></li>
-        <li><a href="/pages/csr.html" style="color:var(--red);">THAT Child</a></li>
-        <li><a href="/pages/blog.html">Blog</a></li>
-      </ul>
-      <div class="nav-right">
-        <a href="/pages/contact.html" class="btn-nav-cta">Contact Us</a>
-        <button class="hamburger" id="hamburger" onclick="toggleMenu()" aria-label="Menu">
-          <span></span><span></span><span></span>
-        </button>
-      </div>
+  <!-- ══════════════════ NAVBAR ══════════════════ -->
+<nav class="navbar scrolled" id="navbar">
+  <div class="nav-inner">
+    <a href="/" class="nav-logo" aria-label="AGI home">
+      <img src="../assets/logo.png" alt="Arend Gesin Investment — Home of Branding" style="height:44px;width:auto;display:block;">
+    </a>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="/pages/services.html">Services</a></li>
+      <li><a href="/pages/about.html">About</a></li>
+      <li><a href="/pages/portfolio.html">Portfolio</a></li>
+      <li><a href="/pages/blog.html">Insights</a></li>
+      <li><a href="/pages/csr.html" style="color:var(--red);font-weight:500;">THAT Child</a></li>
+      <li><a href="/pages/contact.html">Contact</a></li>
+    </ul>
+    <div class="nav-right">
+      <a href="/pages/order/index.html" class="btn-nav-cta">Order now</a>
+      <button class="hamburger" id="hamburger" aria-label="Toggle menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
     </div>
-  </nav>
+  </div>
+</nav>
 
   <!-- ══ HERO ══ -->
   <section class="hero">
@@ -849,10 +850,7 @@
     });
 
     /* ── Mobile menu ── */
-    function toggleMenu() {
-      document.querySelector('.nav-links').classList.toggle('open');
-      document.querySelector('.hamburger').classList.toggle('active');
-    }
+    
 
     /* ── Scroll reveal ── */
     const revealEls = document.querySelectorAll('.reveal, .reveal-left, .reveal-right');
@@ -885,6 +883,17 @@
       });
     }, { threshold: 0.5 });
     document.querySelectorAll('.stat-number[data-target]').forEach(el => counterObs.observe(el));
-  </script>
+  (function(){
+  const ham = document.getElementById('hamburger');
+  const links = document.getElementById('navLinks');
+  if (ham && links) {
+    ham.addEventListener('click', () => {
+      const open = links.classList.toggle('open');
+      ham.setAttribute('aria-expanded', String(open));
+      ham.classList.toggle('active', open);
+    });
+  }
+})();
+</script>
 </body>
 </html>

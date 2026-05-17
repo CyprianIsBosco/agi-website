@@ -12,23 +12,28 @@
 <body>
 
   <!-- ══ NAVBAR ══ -->
-  <nav class="navbar navbar-light" id="navbar">
-    <a href="/" class="nav-logo">
+  <!-- ══════════════════ NAVBAR ══════════════════ -->
+<nav class="navbar scrolled" id="navbar">
+  <div class="nav-inner">
+    <a href="/" class="nav-logo" aria-label="AGI home">
       <img src="../assets/logo.png" alt="Arend Gesin Investment — Home of Branding" style="height:44px;width:auto;display:block;">
     </a>
-    <ul class="nav-links">
-      <li><a href="/">Home</a></li>
-      <li><a href="/pages/about.html">About</a></li>
+    <ul class="nav-links" id="navLinks">
       <li><a href="/pages/services.html">Services</a></li>
+      <li><a href="/pages/about.html">About</a></li>
       <li><a href="/pages/portfolio.html">Portfolio</a></li>
-      <li><a href="/pages/csr.html">CSR</a></li>
-      <li><a href="/pages/blog.html">Blog</a></li>
-      <li><a href="/pages/contact.html" class="nav-cta active">Contact Us</a></li>
+      <li><a href="/pages/blog.html">Insights</a></li>
+      <li><a href="/pages/csr.html">THAT Child</a></li>
+      <li><a href="/pages/contact.html" style="color:var(--red);font-weight:500;">Contact</a></li>
     </ul>
-    <button class="nav-hamburger" id="hamburger" aria-label="Menu">
-      <span></span><span></span><span></span>
-    </button>
-  </nav>
+    <div class="nav-right">
+      <a href="/pages/order/index.html" class="btn-nav-cta">Order now</a>
+      <button class="hamburger" id="hamburger" aria-label="Toggle menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</nav>
 
   <div class="mobile-menu" id="mobileMenu">
     <ul>
