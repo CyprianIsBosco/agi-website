@@ -78,30 +78,32 @@
       min-height: 100vh;
       display: flex; align-items: center;
       padding: calc(var(--nav-h) + 80px) 0 100px;
-      background: linear-gradient(135deg, #0d0305 0%, #1f0507 35%, #1a0c02 70%, #0d0305 100%);
+      background:
+        linear-gradient(135deg, rgba(13,3,5,0.82) 0%, rgba(31,5,7,0.78) 35%, rgba(26,12,2,0.80) 70%, rgba(13,3,5,0.88) 100%),
+        url('https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?auto=format&fit=crop&w=1920&q=80') center/cover no-repeat;
       position: relative; overflow: hidden;
     }
     .hero-bg-pattern {
-      position: absolute; inset: 0; opacity: 0.04;
+      position: absolute; inset: 0; opacity: 0.03;
       background-image: radial-gradient(circle at 2px 2px, #fff 1px, transparent 0);
       background-size: 36px 36px;
     }
     .hero-glow-1 {
       position: absolute; top: -120px; right: -80px;
       width: 700px; height: 700px;
-      background: radial-gradient(circle, rgba(163,45,45,0.2) 0%, transparent 65%);
+      background: radial-gradient(circle, rgba(163,45,45,0.18) 0%, transparent 65%);
       pointer-events: none;
     }
     .hero-glow-2 {
       position: absolute; bottom: -120px; left: -80px;
       width: 600px; height: 600px;
-      background: radial-gradient(circle, rgba(186,117,23,0.12) 0%, transparent 65%);
+      background: radial-gradient(circle, rgba(186,117,23,0.10) 0%, transparent 65%);
       pointer-events: none;
     }
     .hero-glow-3 {
       position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%);
       width: 900px; height: 500px;
-      background: radial-gradient(ellipse, rgba(163,45,45,0.07) 0%, transparent 60%);
+      background: radial-gradient(ellipse, rgba(163,45,45,0.06) 0%, transparent 60%);
       pointer-events: none;
     }
     .hero-content {
