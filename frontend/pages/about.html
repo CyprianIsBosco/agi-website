@@ -330,9 +330,7 @@
 .story-img-wrap img {
   width: 100%; height: 100%;
   object-fit: cover;
-  transition: transform 0.6s ease;
 }
-.story-img-wrap:hover img { transform: scale(1.04); }
 .story-img-accent {
   position: absolute;
   bottom: -1px; left: -1px; right: -1px;
@@ -628,8 +626,7 @@
 }
 .about-hero-title.glow { animation: heroGlow 3.5s ease-in-out infinite; }
 
-/* ── Hero image parallax ── */
-.about-hero-img img { will-change: transform; }
+/* ── Hero image — no animation ── */
 
 /* ── Hero curtain ── */
 .hero-curtain {
@@ -794,18 +791,7 @@
 /* ── Marquee pause on hover ── */
 .est-band:hover .est-marquee { animation-play-state: paused; }
 
-/* ── Story image reveal overlay ── */
-.story-img-wrap::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: var(--red);
-  transform-origin: left;
-  transform: scaleX(1);
-  transition: transform 0.9s cubic-bezier(0.77,0,0.18,1);
-  z-index: 2;
-}
-.story-img-wrap.revealed::before { transform: scaleX(0); transform-origin: right; }
+/* ── Story image — no overlay animation ── */
 
 /* ── Particle canvas in hero ── */
 #about-particles {
@@ -1370,17 +1356,6 @@
       requestAnimationFrame(draw);
     })();
   }
-
-  /* ════════════════════════════════
-     PARALLAX ON SCROLL
-  ════════════════════════════════ */
-  const heroImg = document.querySelector('.about-hero-img img');
-  window.addEventListener('scroll', () => {
-    if(heroImg){
-      const y = window.scrollY;
-      heroImg.style.transform = `translateY(${y * 0.2}px) scale(1.08)`;
-    }
-  }, {passive:true});
 
   /* ════════════════════════════════
      INTERSECTION OBSERVER — everything
