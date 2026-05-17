@@ -282,6 +282,192 @@
   flex-wrap: wrap;
 }
 
+/* ══════════════════════════════════════════
+   ANIMATION LAYER
+══════════════════════════════════════════ */
+
+/* 1. Hero title staggered letter reveal */
+@keyframes letterRise {
+  from { opacity: 0; transform: translateY(40px) skewY(3deg); }
+  to   { opacity: 1; transform: translateY(0)   skewY(0deg); }
+}
+@keyframes subtitleFade {
+  from { opacity: 0; transform: translateX(-18px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+.page-hero-title .char {
+  display: inline-block;
+  opacity: 0;
+  animation: letterRise 0.55s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+.page-hero-title em {
+  opacity: 0;
+  animation: subtitleFade 0.7s ease forwards;
+  animation-delay: 0.65s;
+}
+.page-hero-tag {
+  opacity: 0;
+  animation: subtitleFade 0.5s ease forwards;
+  animation-delay: 0.1s;
+}
+.page-breadcrumb {
+  opacity: 0;
+  animation: subtitleFade 0.5s ease forwards;
+  animation-delay: 0s;
+}
+.page-hero-body {
+  opacity: 0;
+  animation: subtitleFade 0.6s ease forwards;
+  animation-delay: 0.8s;
+}
+
+/* 2. Neon glow pulse on "OUR SERVICES" */
+@keyframes neonGlow {
+  0%, 100% {
+    text-shadow:
+      0 0 10px rgba(163,45,45,0.4),
+      0 0 30px rgba(163,45,45,0.2),
+      0 0 60px rgba(163,45,45,0.1);
+    color: #fff;
+  }
+  50% {
+    text-shadow:
+      0 0 20px rgba(220,60,60,0.9),
+      0 0 50px rgba(200,50,50,0.6),
+      0 0 100px rgba(163,45,45,0.4),
+      0 0 160px rgba(163,45,45,0.2);
+    color: #fff8f8;
+  }
+}
+.page-hero-title-glow {
+  animation: neonGlow 3s ease-in-out infinite;
+  animation-delay: 1.2s;
+}
+
+/* 3. Floating particles canvas */
+#hero-particles {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* 4. Scroll reveal — spring slide */
+.reveal {
+  opacity: 0;
+  transform: translateY(48px);
+  transition:
+    opacity 0.7s cubic-bezier(0.22,1,0.36,1),
+    transform 0.7s cubic-bezier(0.22,1,0.36,1);
+}
+.reveal.from-left  { transform: translateX(-60px); }
+.reveal.from-right { transform: translateX(60px); }
+.reveal.revealed {
+  opacity: 1 !important;
+  transform: translate(0) !important;
+}
+
+/* 5. Photo card glow border trace on hover */
+@keyframes borderTrace {
+  0%   { background-position: 0% 50%; }
+  100% { background-position: 200% 50%; }
+}
+.service-photo-wrap::after {
+  content: '';
+  position: absolute;
+  inset: -2px;
+  border-radius: calc(var(--radius-lg) + 2px);
+  background: linear-gradient(
+    135deg,
+    transparent 0%,
+    rgba(163,45,45,0.0) 30%,
+    rgba(220,60,60,0.85) 50%,
+    rgba(163,45,45,0.0) 70%,
+    transparent 100%
+  );
+  background-size: 200% 200%;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  z-index: 2;
+  pointer-events: none;
+}
+.service-photo-wrap:hover::after {
+  opacity: 1;
+  animation: borderTrace 1.8s linear infinite;
+}
+/* Keep the image visible above the glow border */
+.service-photo-wrap img { position: relative; z-index: 1; }
+.service-photo-badge,
+.service-photo-num { z-index: 3; }
+
+/* 6. Number counter roll animation */
+@keyframes countUp {
+  from { transform: translateY(100%); opacity: 0; }
+  to   { transform: translateY(0);    opacity: 1; }
+}
+.service-photo-num {
+  overflow: hidden;
+  display: inline-block;
+}
+.service-photo-num .num-inner {
+  display: block;
+  transform: translateY(100%);
+  opacity: 0;
+  transition: transform 0.8s cubic-bezier(0.22,1,0.36,1), opacity 0.6s ease;
+}
+.service-photo-num.num-revealed .num-inner {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+/* 7. Active nav pill glowing dot */
+.service-pill-dot {
+  transition: box-shadow 0.3s ease, background 0.2s;
+}
+.service-pill.active .service-pill-dot,
+.service-pill:hover .service-pill-dot {
+  box-shadow: 0 0 0 3px rgba(163,45,45,0.2), 0 0 8px rgba(163,45,45,0.5);
+  background: var(--red);
+  opacity: 1;
+}
+
+/* Pill slider indicator */
+.service-nav-inner {
+  position: relative;
+}
+.pill-indicator {
+  position: absolute;
+  bottom: 0; left: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--red), transparent);
+  border-radius: 99px;
+  transition: left 0.35s cubic-bezier(0.22,1,0.36,1), width 0.35s cubic-bezier(0.22,1,0.36,1);
+  pointer-events: none;
+}
+
+/* 8. CTA radial heartbeat */
+@keyframes ctaPulse {
+  0%, 100% {
+    background: radial-gradient(ellipse 60% 50% at 50% 0%, rgba(163,45,45,0.18), transparent 70%);
+  }
+  50% {
+    background: radial-gradient(ellipse 85% 70% at 50% 0%, rgba(163,45,45,0.32), transparent 75%);
+  }
+}
+.services-cta::before {
+  animation: ctaPulse 3.5s ease-in-out infinite;
+}
+
+/* 9. Feature check bounce-in */
+@keyframes checkPop {
+  0%   { transform: scale(0) rotate(-20deg); opacity: 0; }
+  70%  { transform: scale(1.2) rotate(5deg);  opacity: 1; }
+  100% { transform: scale(1)   rotate(0deg);  opacity: 1; }
+}
+.feature-check.popped {
+  animation: checkPop 0.4s cubic-bezier(0.22,1,0.36,1) forwards;
+}
+
 /* Responsive */
 @media (max-width: 900px) {
   .service-block-inner,
@@ -326,6 +512,7 @@
 
 <!-- ═══════════════ PAGE HERO ═══════════════ -->
 <section class="page-hero">
+  <canvas id="hero-particles"></canvas>
   <div class="container">
     <div class="page-hero-inner">
       <nav class="page-breadcrumb" aria-label="Breadcrumb">
@@ -334,7 +521,7 @@
         <span>Services</span>
       </nav>
       <p class="page-hero-tag">What we offer</p>
-      <h1 class="page-hero-title">
+      <h1 class="page-hero-title page-hero-title-glow" id="hero-title">
         OUR SERVICES
         <em>Everything your brand needs, under one roof.</em>
       </h1>
@@ -364,17 +551,17 @@
   <div class="container">
     <div class="service-block-inner">
 
-      <div class="service-photo-wrap reveal">
+      <div class="service-photo-wrap reveal from-left">
         <img
           src="https://images.unsplash.com/photo-1626785774573-4b799315345d?w=800&auto=format&fit=crop&q=80"
           alt="Professional offset printing press in operation"
           loading="lazy"
         >
         <span class="service-photo-badge">Printing &amp; Branding</span>
-        <span class="service-photo-num">01</span>
+        <span class="service-photo-num"><span class="num-inner">01</span></span>
       </div>
 
-      <div class="service-text reveal">
+      <div class="service-text reveal from-right">
         <p class="service-block-tag">Service 01</p>
         <h2 class="service-block-title">Printing, Branding<br>&amp; <em>Imaging</em></h2>
         <p class="service-block-body">
@@ -404,17 +591,17 @@
   <div class="container">
     <div class="service-block-inner reverse">
 
-      <div class="service-photo-wrap reveal">
+      <div class="service-photo-wrap reveal from-right">
         <img
           src="https://images.unsplash.com/photo-1456735190827-d1262f71b8a3?w=800&auto=format&fit=crop&q=80"
           alt="Assorted office stationery supplies on a desk"
           loading="lazy"
         >
         <span class="service-photo-badge">Stationery Supplies</span>
-        <span class="service-photo-num">02</span>
+        <span class="service-photo-num"><span class="num-inner">02</span></span>
       </div>
 
-      <div class="service-text reveal">
+      <div class="service-text reveal from-left">
         <p class="service-block-tag">Service 02</p>
         <h2 class="service-block-title">Stationery<br><em>Supplies</em></h2>
         <p class="service-block-body">
@@ -444,17 +631,17 @@
   <div class="container">
     <div class="service-block-inner">
 
-      <div class="service-photo-wrap reveal">
+      <div class="service-photo-wrap reveal from-left">
         <img
           src="https://images.unsplash.com/photo-1593642632559-0c6d3fc62b89?w=800&auto=format&fit=crop&q=80"
           alt="Computer setup and IT installation workspace"
           loading="lazy"
         >
         <span class="service-photo-badge">IT &amp; Support</span>
-        <span class="service-photo-num">03</span>
+        <span class="service-photo-num"><span class="num-inner">03</span></span>
       </div>
 
-      <div class="service-text reveal">
+      <div class="service-text reveal from-right">
         <p class="service-block-tag">Service 03</p>
         <h2 class="service-block-title">IT Installations &amp;<br><em>Client Management</em></h2>
         <p class="service-block-body">
@@ -484,17 +671,17 @@
   <div class="container">
     <div class="service-block-inner reverse">
 
-      <div class="service-photo-wrap reveal">
+      <div class="service-photo-wrap reveal from-right">
         <img
           src="https://images.unsplash.com/photo-1561070791-2526d30994b5?w=800&auto=format&fit=crop&q=80"
           alt="Graphic designer working on branding and logo design"
           loading="lazy"
         >
         <span class="service-photo-badge">Design &amp; Ads</span>
-        <span class="service-photo-num">04</span>
+        <span class="service-photo-num"><span class="num-inner">04</span></span>
       </div>
 
-      <div class="service-text reveal">
+      <div class="service-text reveal from-left">
         <p class="service-block-tag">Service 04</p>
         <h2 class="service-block-title">Graphic Design &amp;<br><em>Advertising</em></h2>
         <p class="service-block-body">
@@ -524,17 +711,17 @@
   <div class="container">
     <div class="service-block-inner">
 
-      <div class="service-photo-wrap reveal">
+      <div class="service-photo-wrap reveal from-left">
         <img
           src="https://images.unsplash.com/photo-1504328345606-18bbc8c9d7d1?w=800&auto=format&fit=crop&q=80"
           alt="Personal protective equipment hard hat and safety gear"
           loading="lazy"
         >
         <span class="service-photo-badge">Work Safety</span>
-        <span class="service-photo-num">05</span>
+        <span class="service-photo-num"><span class="num-inner">05</span></span>
       </div>
 
-      <div class="service-text reveal">
+      <div class="service-text reveal from-right">
         <p class="service-block-tag">Service 05</p>
         <h2 class="service-block-title">Work Safety<br><em>Equipment (PPEs)</em></h2>
         <p class="service-block-body">
@@ -627,28 +814,141 @@
 <script src="../js/main.js"></script>
 <script>
 (function(){
-  // Highlight active pill on scroll
+
+  /* ─── 1. HERO TITLE — letter-by-letter stagger ─── */
+  const titleEl = document.getElementById('hero-title');
+  if (titleEl) {
+    const text = 'OUR SERVICES';
+    const em   = titleEl.querySelector('em');
+    titleEl.innerHTML = ''; // clear
+    [...text].forEach((ch, i) => {
+      const s = document.createElement('span');
+      s.className = 'char';
+      s.textContent = ch === ' ' ? '\u00A0' : ch;
+      s.style.animationDelay = (0.15 + i * 0.045) + 's';
+      titleEl.appendChild(s);
+    });
+    if (em) titleEl.appendChild(em);
+  }
+
+  /* ─── 2. PARTICLE CANVAS ─── */
+  const canvas = document.getElementById('hero-particles');
+  if (canvas) {
+    const ctx = canvas.getContext('2d');
+    let W, H, particles = [];
+
+    function resize() {
+      W = canvas.width  = canvas.offsetWidth;
+      H = canvas.height = canvas.offsetHeight;
+    }
+    resize();
+    window.addEventListener('resize', resize);
+
+    function rand(min, max) { return Math.random() * (max - min) + min; }
+
+    for (let i = 0; i < 55; i++) {
+      particles.push({
+        x: rand(0, 1), y: rand(0, 1),
+        r: rand(1, 2.8),
+        dx: rand(-0.08, 0.08), dy: rand(-0.06, 0.06),
+        a: rand(0.1, 0.55),
+        pulse: rand(0, Math.PI * 2),
+        pulseSpeed: rand(0.008, 0.022)
+      });
+    }
+
+    function drawParticles() {
+      ctx.clearRect(0, 0, W, H);
+      particles.forEach(p => {
+        p.x += p.dx / W * 0.5;
+        p.y += p.dy / H * 0.5;
+        if (p.x < 0) p.x = 1; if (p.x > 1) p.x = 0;
+        if (p.y < 0) p.y = 1; if (p.y > 1) p.y = 0;
+        p.pulse += p.pulseSpeed;
+        const alpha = p.a * (0.6 + 0.4 * Math.sin(p.pulse));
+        ctx.beginPath();
+        ctx.arc(p.x * W, p.y * H, p.r, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(220,80,80,${alpha})`;
+        ctx.fill();
+      });
+      requestAnimationFrame(drawParticles);
+    }
+    drawParticles();
+  }
+
+  /* ─── 3. SCROLL REVEAL (spring slide) ─── */
+  const io = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.style.transitionDelay = '80ms';
+        e.target.classList.add('revealed');
+
+        /* number counter roll */
+        const numEl = e.target.querySelector
+          ? e.target.querySelector('.service-photo-num')
+          : null;
+        if (numEl) {
+          setTimeout(() => numEl.classList.add('num-revealed'), 250);
+        }
+        if (e.target.classList.contains('service-photo-num')) {
+          setTimeout(() => e.target.classList.add('num-revealed'), 250);
+        }
+
+        /* feature check pop-in */
+        const checks = e.target.querySelectorAll ? e.target.querySelectorAll('.feature-check') : [];
+        checks.forEach((c, i) => {
+          setTimeout(() => c.classList.add('popped'), 300 + i * 70);
+        });
+
+        io.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.12 });
+
+  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+  /* ─── 4. SERVICE NAV PILLS + INDICATOR ─── */
   const sections = ['printing','stationery','it','design','ppe'];
-  const pills = document.querySelectorAll('.service-pill');
-  const navH = parseInt(getComputedStyle(document.documentElement).getPropertyValue('--nav-h')) + 70;
+  const pills    = document.querySelectorAll('.service-pill');
+  const navInner = document.querySelector('.service-nav-inner');
+  const navH     = () => parseInt(getComputedStyle(document.documentElement)
+                          .getPropertyValue('--nav-h')) + 70;
+
+  /* create sliding indicator bar */
+  const indicator = document.createElement('div');
+  indicator.className = 'pill-indicator';
+  if (navInner) navInner.appendChild(indicator);
+
+  function movePillIndicator(pill) {
+    if (!pill || !navInner) return;
+    const navRect  = navInner.getBoundingClientRect();
+    const pillRect = pill.getBoundingClientRect();
+    indicator.style.left  = (pillRect.left - navRect.left + navInner.scrollLeft) + 'px';
+    indicator.style.width = pillRect.width + 'px';
+  }
 
   function getActive() {
     for (let i = sections.length - 1; i >= 0; i--) {
       const el = document.getElementById(sections[i]);
-      if (el && el.getBoundingClientRect().top <= navH) return sections[i];
+      if (el && el.getBoundingClientRect().top <= navH()) return sections[i];
     }
     return sections[0];
   }
 
-  window.addEventListener('scroll', () => {
+  function updatePills() {
     const active = getActive();
     pills.forEach(p => {
-      p.classList.toggle('active', p.getAttribute('href') === '#' + active);
+      const isActive = p.getAttribute('href') === '#' + active;
+      p.classList.toggle('active', isActive);
+      if (isActive) movePillIndicator(p);
     });
-  }, { passive: true });
+  }
 
-  // Hamburger
-  const ham = document.getElementById('hamburger');
+  window.addEventListener('scroll', updatePills, { passive: true });
+  setTimeout(updatePills, 100); // initial position
+
+  /* ─── 5. HAMBURGER ─── */
+  const ham   = document.getElementById('hamburger');
   const links = document.getElementById('navLinks');
   if (ham && links) {
     ham.addEventListener('click', () => {
@@ -658,17 +958,6 @@
     });
   }
 
-  // Scroll reveal
-  const io = new IntersectionObserver(entries => {
-    entries.forEach((e, i) => {
-      if (e.isIntersecting) {
-        e.target.style.transitionDelay = '100ms';
-        e.target.classList.add('revealed');
-        io.unobserve(e.target);
-      }
-    });
-  }, { threshold: 0.12 });
-  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
 })();
 </script>
 </body>
