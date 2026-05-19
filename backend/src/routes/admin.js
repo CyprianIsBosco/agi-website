@@ -90,4 +90,41 @@ router.get('/stats', async (req, res) => {
   }
 });
 
+
+// ── GET /api/admin/users — list all registered users ─────────────────────────
+router.get('/users', async (req, res) => {
+  try {
+    const User  = require('../models/User');
+    const users = await User.find().select('-password -resetOTP -resetOTPExpires').sort({ createdAt: -1 }).lean();
+    return res.json(users);
+  } catch (err) {
+    return res.status(500).json({ error: 'Server error' });
+  }
+});
+
+// ── PATCH /api/admin/users/:id/toggle — enable/disable account ───────────────
+router.patch('/users/:id/toggle', async (req, res) => {
+  try {
+    const User = require('../models/User');
+    const user = await User.findById(req.params.id);
+    if (!user) return res.status(404).json({ error: 'User not found' });
+    user.active = !user.active;
+    await user.save();
+    return res.json({ ok: true, active: user.active });
+  } catch (err) {
+    return res.status(500).json({ error: 'Server error' });
+  }
+});
+
+// ── DELETE /api/admin/users/:id ───────────────────────────────────────────────
+router.delete('/users/:id', async (req, res) => {
+  try {
+    const User = require('../models/User');
+    await User.findByIdAndDelete(req.params.id);
+    return res.json({ ok: true });
+  } catch (err) {
+    return res.status(500).json({ error: 'Server error' });
+  }
+});
+
 module.exports = router;

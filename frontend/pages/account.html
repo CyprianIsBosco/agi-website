@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>My Account — Arend Gesin Investment</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
+<style>
+:root {
+  --ink:       #1A1A1A;
+  --ink-muted: #555;
+  --surface:   #F8F7F4;
+  --border:    rgba(0,0,0,0.10);
+  --red:       #A32D2D;
+  --red-light: rgba(163,45,45,0.08);
+  --gold:      #BA7517;
+  --white:     #fff;
+  --nav-h:     72px;
+  --radius:    10px;
+  --radius-lg: 16px;
+  --shadow:    0 2px 24px rgba(0,0,0,0.08);
+  --font-sans: 'DM Sans', sans-serif;
+  --font-head: 'Bebas Neue', sans-serif;
+  --max-w:     1100px;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: var(--font-sans); background: var(--surface); color: var(--ink); line-height: 1.6; -webkit-font-smoothing: antialiased; }
+a { text-decoration: none; color: inherit; }
+
+/* Navbar */
+.navbar { position: fixed; top: 0; left: 0; right: 0; height: var(--nav-h); z-index: 100; background: rgba(26,26,26,0.97); backdrop-filter: blur(12px); border-bottom: 0.5px solid rgba(255,255,255,0.07); }
+.nav-inner { max-width: var(--max-w); margin: 0 auto; height: 100%; padding: 0 24px; display: flex; align-items: center; justify-content: space-between; }
+.nav-logo { color: #fff; font-family: var(--font-head); font-size: 22px; letter-spacing: 2px; display: flex; align-items: center; gap: 10px; }
+.nav-logo img { height: 36px; }
+.nav-right { display: flex; align-items: center; gap: 20px; }
+.nav-right a { color: rgba(255,255,255,0.6); font-size: 13px; transition: color 0.2s; }
+.nav-right a:hover { color: #fff; }
+.nav-right .logout { color: var(--gold); cursor: pointer; }
+
+/* Page */
+.page { max-width: var(--max-w); margin: 0 auto; padding: calc(var(--nav-h) + 40px) 24px 80px; }
+
+/* Header */
+.account-header { margin-bottom: 36px; }
+.account-header h1 { font-family: var(--font-head); font-size: clamp(36px, 6vw, 60px); line-height: 1; margin-bottom: 6px; }
+.account-header h1 span { color: var(--red); }
+.account-header p { color: var(--ink-muted); font-size: 14px; }
+
+/* Tabs */
+.tabs { display: flex; gap: 4px; margin-bottom: 28px; border-bottom: 1.5px solid var(--border); }
+.tab-btn { padding: 10px 20px; border: none; background: none; font-family: var(--font-sans); font-size: 14px; font-weight: 500; color: var(--ink-muted); border-bottom: 2px solid transparent; margin-bottom: -1.5px; cursor: pointer; transition: color 0.2s, border-color 0.2s; }
+.tab-btn.active { color: var(--red); border-bottom-color: var(--red); font-weight: 600; }
+
+/* Panels */
+.tab-panel { display: none; }
+.tab-panel.active { display: block; }
+
+/* Orders table */
+.orders-empty { text-align: center; padding: 60px 20px; color: var(--ink-muted); }
+.orders-empty h3 { font-family: var(--font-head); font-size: 28px; margin-bottom: 8px; color: var(--ink); }
+.order-card { background: var(--white); border: 0.5px solid var(--border); border-radius: var(--radius-lg); margin-bottom: 16px; overflow: hidden; box-shadow: var(--shadow); }
+.order-card-head { padding: 14px 20px; background: var(--ink); display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 8px; }
+.order-ref { font-family: var(--font-head); font-size: 18px; color: #fff; letter-spacing: 1px; }
+.order-status { padding: 4px 12px; border-radius: 99px; font-size: 11px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; }
+.status-pending     { background: rgba(186,117,23,0.15); color: var(--gold); }
+.status-in_progress { background: rgba(59,130,246,0.12); color: #3b82f6; }
+.status-delivered   { background: rgba(34,197,94,0.12);  color: #16a34a; }
+.status-completed   { background: rgba(163,45,45,0.10);  color: var(--red); }
+.status-failed      { background: rgba(239,68,68,0.10);  color: #ef4444; }
+.order-card-body { padding: 16px 20px; display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 12px; }
+.order-field label { display: block; font-size: 10px; text-transform: uppercase; letter-spacing: 0.12em; color: var(--ink-muted); margin-bottom: 2px; }
+.order-field span  { font-size: 13.5px; font-weight: 500; color: var(--ink); }
+
+/* Profile form */
+.profile-card { background: var(--white); border: 0.5px solid var(--border); border-radius: var(--radius-lg); padding: 28px; box-shadow: var(--shadow); max-width: 540px; margin-bottom: 24px; }
+.profile-card h3 { font-family: var(--font-head); font-size: 22px; margin-bottom: 20px; }
+.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 12px; }
+.form-group { display: flex; flex-direction: column; gap: 6px; margin-bottom: 12px; }
+.form-group label { font-size: 12px; font-weight: 500; color: var(--ink-muted); text-transform: uppercase; letter-spacing: 0.1em; }
+.form-group input { padding: 11px 14px; border: 1.5px solid var(--border); border-radius: 8px; font-size: 14px; font-family: var(--font-sans); background: var(--surface); transition: border-color 0.2s; }
+.form-group input:focus { outline: none; border-color: var(--red); }
+.btn-save { padding: 11px 28px; background: var(--red); color: #fff; border: none; border-radius: 99px; font-size: 14px; font-weight: 500; cursor: pointer; font-family: var(--font-sans); transition: background 0.2s; }
+.btn-save:hover { background: #8a2424; }
+.success-msg { display: none; background: #f0fff4; color: #16a34a; border: 1px solid #b2dfdb; border-radius: 8px; padding: 10px 14px; font-size: 13px; margin-bottom: 14px; }
+.error-msg { display: none; background: #fff0f0; color: var(--red); border: 1px solid #f5c6c6; border-radius: 8px; padding: 10px 14px; font-size: 13px; margin-bottom: 14px; }
+
+/* Loading */
+.spinner { text-align: center; padding: 40px; color: var(--ink-muted); font-size: 14px; }
+
+@media (max-width: 600px) {
+  .form-row { grid-template-columns: 1fr; }
+  .order-card-body { grid-template-columns: 1fr 1fr; }
+}
+</style>
+</head>
+<body>
+
+<nav class="navbar">
+  <div class="nav-inner">
+    <a href="../index.html" class="nav-logo">
+      <img src="../assets/logo.png" alt="AGI" onerror="this.style.display='none'">
+      AGI
+    </a>
+    <div class="nav-right">
+      <a href="../index.html">Home</a>
+      <a href="services.html">Services</a>
+      <a class="logout" onclick="logout()">Logout</a>
+    </div>
+  </div>
+</nav>
+
+<div class="page">
+  <div class="account-header">
+    <h1>My <span>Account</span></h1>
+    <p id="accountSubtitle">Loading your profile…</p>
+  </div>
+
+  <div class="tabs">
+    <button class="tab-btn active" onclick="showTab('orders')">My Orders</button>
+    <button class="tab-btn" onclick="showTab('profile')">Profile</button>
+    <button class="tab-btn" onclick="showTab('password')">Change Password</button>
+  </div>
+
+  <!-- Orders -->
+  <div id="panelOrders" class="tab-panel active">
+    <div class="spinner" id="ordersSpinner">Loading your orders…</div>
+    <div id="ordersList"></div>
+  </div>
+
+  <!-- Profile -->
+  <div id="panelProfile" class="tab-panel">
+    <div class="profile-card">
+      <h3>Personal Info</h3>
+      <div id="profileSuccess" class="success-msg"></div>
+      <div id="profileError" class="error-msg"></div>
+      <div class="form-row">
+        <div class="form-group"><label>First Name</label><input id="pFname" type="text"></div>
+        <div class="form-group"><label>Last Name</label><input id="pLname" type="text"></div>
+      </div>
+      <div class="form-group"><label>Email</label><input id="pEmail" type="email" disabled style="opacity:0.5;cursor:not-allowed;"></div>
+      <div class="form-group"><label>Phone</label><input id="pPhone" type="tel"></div>
+      <button class="btn-save" onclick="saveProfile()">Save Changes</button>
+    </div>
+  </div>
+
+  <!-- Change Password -->
+  <div id="panelPassword" class="tab-panel">
+    <div class="profile-card">
+      <h3>Change Password</h3>
+      <div id="passSuccess" class="success-msg"></div>
+      <div id="passError" class="error-msg"></div>
+      <div class="form-group"><label>Current Password</label><input id="pCurrent" type="password"></div>
+      <div class="form-group"><label>New Password</label><input id="pNew" type="password"></div>
+      <div class="form-group"><label>Confirm New Password</label><input id="pConfirm" type="password"></div>
+      <button class="btn-save" onclick="changePassword()">Update Password</button>
+    </div>
+  </div>
+</div>
+
+<script>
+const API = 'https://agi-backend-8cdh.onrender.com';
+
+function getToken() { return localStorage.getItem('agi_token'); }
+function getUser()  { try { return JSON.parse(localStorage.getItem('agi_user')); } catch { return null; } }
+
+function logout() {
+  localStorage.removeItem('agi_token');
+  localStorage.removeItem('agi_user');
+  window.location.href = '../index.html';
+}
+
+function showTab(name) {
+  document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById('panel' + name.charAt(0).toUpperCase() + name.slice(1)).classList.add('active');
+  event.target.classList.add('active');
+}
+
+const STATUS_LABELS = {
+  pending:     'Pending',
+  in_progress: 'In Progress',
+  delivered:   'Delivered',
+  completed:   'Completed',
+  failed:      'Failed',
+};
+
+function renderOrders(orders) {
+  const el = document.getElementById('ordersList');
+  document.getElementById('ordersSpinner').style.display = 'none';
+
+  if (!orders.length) {
+    el.innerHTML = `<div class="orders-empty">
+      <h3>No orders yet</h3>
+      <p>Head back to the <a href="../index.html" style="color:var(--red);">homepage</a> to place your first order.</p>
+    </div>`;
+    return;
+  }
+
+  el.innerHTML = orders.map(o => `
+    <div class="order-card">
+      <div class="order-card-head">
+        <span class="order-ref">${o.ref || '—'}</span>
+        <span class="order-status status-${o.status || 'pending'}">${STATUS_LABELS[o.status] || o.status}</span>
+      </div>
+      <div class="order-card-body">
+        <div class="order-field"><label>Service</label><span>${o.service || '—'}</span></div>
+        <div class="order-field"><label>Item</label><span>${o.item || '—'}</span></div>
+        <div class="order-field"><label>Quantity</label><span>${o.qty ? o.qty + ' unit(s)' : '—'}</span></div>
+        <div class="order-field"><label>County</label><span>${o.county || '—'}</span></div>
+        <div class="order-field"><label>Budget</label><span>${o.budget || '—'}</span></div>
+        <div class="order-field"><label>Date</label><span>${new Date(o.createdAt).toLocaleDateString('en-KE',{day:'numeric',month:'short',year:'numeric'})}</span></div>
+      </div>
+    </div>
+  `).join('');
+}
+
+async function loadOrders() {
+  try {
+    const res    = await fetch(API + '/api/auth/my-orders', { headers: { Authorization: 'Bearer ' + getToken() } });
+    const orders = await res.json();
+    renderOrders(Array.isArray(orders) ? orders : []);
+  } catch {
+    document.getElementById('ordersSpinner').textContent = 'Failed to load orders.';
+  }
+}
+
+function populateProfile() {
+  const user = getUser();
+  if (!user) return;
+  document.getElementById('accountSubtitle').textContent = `Welcome back, ${user.fname}!`;
+  document.getElementById('pFname').value = user.fname || '';
+  document.getElementById('pLname').value = user.lname || '';
+  document.getElementById('pEmail').value = user.email || '';
+  document.getElementById('pPhone').value = user.phone || '';
+}
+
+async function saveProfile() {
+  const suc = document.getElementById('profileSuccess');
+  const err = document.getElementById('profileError');
+  suc.style.display = err.style.display = 'none';
+
+  try {
+    const res  = await fetch(API + '/api/auth/profile', {
+      method: 'PATCH',
+      headers: { 'Content-Type': 'application/json', Authorization: 'Bearer ' + getToken() },
+      body: JSON.stringify({
+        fname: document.getElementById('pFname').value.trim(),
+        lname: document.getElementById('pLname').value.trim(),
+        phone: document.getElementById('pPhone').value.trim(),
+      }),
+    });
+    const data = await res.json();
+    if (!res.ok) throw new Error(data.error);
+    localStorage.setItem('agi_user', JSON.stringify(data.user));
+    suc.textContent = 'Profile updated successfully!';
+    suc.style.display = 'block';
+  } catch (e) {
+    err.textContent = e.message;
+    err.style.display = 'block';
+  }
+}
+
+async function changePassword() {
+  const suc = document.getElementById('passSuccess');
+  const err = document.getElementById('passError');
+  suc.style.display = err.style.display = 'none';
+
+  const current = document.getElementById('pCurrent').value;
+  const newPass  = document.getElementById('pNew').value;
+  const confirm  = document.getElementById('pConfirm').value;
+
+  if (newPass !== confirm) { err.textContent = 'New passwords do not match'; err.style.display = 'block'; return; }
+
+  try {
+    const res  = await fetch(API + '/api/auth/change-password', {
+      method: 'PATCH',
+      headers: { 'Content-Type': 'application/json', Authorization: 'Bearer ' + getToken() },
+      body: JSON.stringify({ currentPassword: current, newPassword: newPass }),
+    });
+    const data = await res.json();
+    if (!res.ok) throw new Error(data.error);
+    suc.textContent = 'Password changed successfully!';
+    suc.style.display = 'block';
+    document.getElementById('pCurrent').value = document.getElementById('pNew').value = document.getElementById('pConfirm').value = '';
+  } catch (e) {
+    err.textContent = e.message;
+    err.style.display = 'block';
+  }
+}
+
+// Init
+if (!getToken()) {
+  window.location.href = '../index.html';
+} else {
+  populateProfile();
+  loadOrders();
+}
+</script>
+</body>
+</html>

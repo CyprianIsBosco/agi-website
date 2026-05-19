@@ -6,6 +6,7 @@ const mongoose = require('mongoose');
 const ordersRouter  = require('./routes/orders');
 const contactRouter = require('./routes/contact');
 const adminRouter   = require('./routes/admin');
+const authRouter    = require('./routes/auth');
 
 const app  = express();
 const PORT = process.env.PORT || 3001;
@@ -24,7 +25,7 @@ app.use(cors({
     cb(new Error(`CORS: origin ${origin} not allowed`));
   },
   methods: ['GET','POST','PATCH','DELETE','OPTIONS'],
-  allowedHeaders: ['Content-Type','x-admin-key'],
+  allowedHeaders: ['Content-Type','x-admin-key','Authorization'],
 }));
 
 // ── Body parsing ──────────────────────────────────────────────────────────────
@@ -44,6 +45,7 @@ app.get('/', (_req, res) => {
 app.get('/health', (_req, res) => res.json({ ok: true }));
 
 // ── Routes ────────────────────────────────────────────────────────────────────
+app.use('/api/auth',    authRouter);
 app.use('/api/orders',  ordersRouter);
 app.use('/api/contact', contactRouter);
 app.use('/api/admin',   adminRouter);
