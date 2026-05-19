@@ -1,163 +1,318 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8"/>
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>My Account — Arend Gesin Investment</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../css/style.css">
 <style>
-:root {
-  --ink:       #1A1A1A;
-  --ink-muted: #555;
-  --surface:   #F8F7F4;
-  --border:    rgba(0,0,0,0.10);
-  --red:       #A32D2D;
-  --red-light: rgba(163,45,45,0.08);
-  --gold:      #BA7517;
-  --white:     #fff;
-  --nav-h:     72px;
-  --radius:    10px;
-  --radius-lg: 16px;
-  --shadow:    0 2px 24px rgba(0,0,0,0.08);
-  --font-sans: 'DM Sans', sans-serif;
-  --font-head: 'Bebas Neue', sans-serif;
-  --max-w:     1100px;
+/* ── Account-specific styles (extends style.css) ── */
+.account-tabs {
+  display: flex;
+  gap: 0;
+  border-bottom: 1.5px solid var(--border, rgba(0,0,0,0.10));
+  margin-bottom: 32px;
 }
-*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-body { font-family: var(--font-sans); background: var(--surface); color: var(--ink); line-height: 1.6; -webkit-font-smoothing: antialiased; }
-a { text-decoration: none; color: inherit; }
+.account-tab {
+  padding: 12px 24px;
+  border: none;
+  background: none;
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--ink-muted, #555);
+  border-bottom: 2px solid transparent;
+  margin-bottom: -1.5px;
+  cursor: pointer;
+  transition: color 0.2s, border-color 0.2s;
+}
+.account-tab.active {
+  color: var(--red, #A32D2D);
+  border-bottom-color: var(--red, #A32D2D);
+  font-weight: 600;
+}
+.account-panel { display: none; }
+.account-panel.active { display: block; }
 
-/* Navbar */
-.navbar { position: fixed; top: 0; left: 0; right: 0; height: var(--nav-h); z-index: 100; background: rgba(26,26,26,0.97); backdrop-filter: blur(12px); border-bottom: 0.5px solid rgba(255,255,255,0.07); }
-.nav-inner { max-width: var(--max-w); margin: 0 auto; height: 100%; padding: 0 24px; display: flex; align-items: center; justify-content: space-between; }
-.nav-logo { color: #fff; font-family: var(--font-head); font-size: 22px; letter-spacing: 2px; display: flex; align-items: center; gap: 10px; }
-.nav-logo img { height: 36px; }
-.nav-right { display: flex; align-items: center; gap: 20px; }
-.nav-right a { color: rgba(255,255,255,0.6); font-size: 13px; transition: color 0.2s; }
-.nav-right a:hover { color: #fff; }
-.nav-right .logout { color: var(--gold); cursor: pointer; }
-
-/* Page */
-.page { max-width: var(--max-w); margin: 0 auto; padding: calc(var(--nav-h) + 40px) 24px 80px; }
-
-/* Header */
-.account-header { margin-bottom: 36px; }
-.account-header h1 { font-family: var(--font-head); font-size: clamp(36px, 6vw, 60px); line-height: 1; margin-bottom: 6px; }
-.account-header h1 span { color: var(--red); }
-.account-header p { color: var(--ink-muted); font-size: 14px; }
-
-/* Tabs */
-.tabs { display: flex; gap: 4px; margin-bottom: 28px; border-bottom: 1.5px solid var(--border); }
-.tab-btn { padding: 10px 20px; border: none; background: none; font-family: var(--font-sans); font-size: 14px; font-weight: 500; color: var(--ink-muted); border-bottom: 2px solid transparent; margin-bottom: -1.5px; cursor: pointer; transition: color 0.2s, border-color 0.2s; }
-.tab-btn.active { color: var(--red); border-bottom-color: var(--red); font-weight: 600; }
-
-/* Panels */
-.tab-panel { display: none; }
-.tab-panel.active { display: block; }
-
-/* Orders table */
-.orders-empty { text-align: center; padding: 60px 20px; color: var(--ink-muted); }
-.orders-empty h3 { font-family: var(--font-head); font-size: 28px; margin-bottom: 8px; color: var(--ink); }
-.order-card { background: var(--white); border: 0.5px solid var(--border); border-radius: var(--radius-lg); margin-bottom: 16px; overflow: hidden; box-shadow: var(--shadow); }
-.order-card-head { padding: 14px 20px; background: var(--ink); display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 8px; }
-.order-ref { font-family: var(--font-head); font-size: 18px; color: #fff; letter-spacing: 1px; }
-.order-status { padding: 4px 12px; border-radius: 99px; font-size: 11px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; }
-.status-pending     { background: rgba(186,117,23,0.15); color: var(--gold); }
+/* Order cards */
+.order-card {
+  background: var(--white, #fff);
+  border: 0.5px solid var(--border, rgba(0,0,0,0.10));
+  border-radius: var(--radius-lg, 16px);
+  overflow: hidden;
+  margin-bottom: 16px;
+  box-shadow: var(--shadow, 0 2px 24px rgba(0,0,0,0.08));
+}
+.order-card-head {
+  padding: 14px 22px;
+  background: var(--ink, #1A1A1A);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.order-ref-label {
+  font-family: var(--font-head, 'Bebas Neue', sans-serif);
+  font-size: 18px;
+  color: #fff;
+  letter-spacing: 1px;
+}
+.order-status-pill {
+  padding: 4px 14px;
+  border-radius: 99px;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+.status-pending     { background: rgba(186,117,23,0.15); color: #BA7517; }
 .status-in_progress { background: rgba(59,130,246,0.12); color: #3b82f6; }
 .status-delivered   { background: rgba(34,197,94,0.12);  color: #16a34a; }
-.status-completed   { background: rgba(163,45,45,0.10);  color: var(--red); }
+.status-completed   { background: rgba(163,45,45,0.10);  color: #A32D2D; }
 .status-failed      { background: rgba(239,68,68,0.10);  color: #ef4444; }
-.order-card-body { padding: 16px 20px; display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 12px; }
-.order-field label { display: block; font-size: 10px; text-transform: uppercase; letter-spacing: 0.12em; color: var(--ink-muted); margin-bottom: 2px; }
-.order-field span  { font-size: 13.5px; font-weight: 500; color: var(--ink); }
+
+.order-card-body {
+  padding: 18px 22px;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: 16px;
+}
+.order-field label {
+  display: block;
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: var(--ink-muted, #555);
+  margin-bottom: 3px;
+}
+.order-field span {
+  font-size: 13.5px;
+  font-weight: 500;
+  color: var(--ink, #1A1A1A);
+}
 
 /* Profile form */
-.profile-card { background: var(--white); border: 0.5px solid var(--border); border-radius: var(--radius-lg); padding: 28px; box-shadow: var(--shadow); max-width: 540px; margin-bottom: 24px; }
-.profile-card h3 { font-family: var(--font-head); font-size: 22px; margin-bottom: 20px; }
-.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 12px; }
-.form-group { display: flex; flex-direction: column; gap: 6px; margin-bottom: 12px; }
-.form-group label { font-size: 12px; font-weight: 500; color: var(--ink-muted); text-transform: uppercase; letter-spacing: 0.1em; }
-.form-group input { padding: 11px 14px; border: 1.5px solid var(--border); border-radius: 8px; font-size: 14px; font-family: var(--font-sans); background: var(--surface); transition: border-color 0.2s; }
-.form-group input:focus { outline: none; border-color: var(--red); }
-.btn-save { padding: 11px 28px; background: var(--red); color: #fff; border: none; border-radius: 99px; font-size: 14px; font-weight: 500; cursor: pointer; font-family: var(--font-sans); transition: background 0.2s; }
-.btn-save:hover { background: #8a2424; }
-.success-msg { display: none; background: #f0fff4; color: #16a34a; border: 1px solid #b2dfdb; border-radius: 8px; padding: 10px 14px; font-size: 13px; margin-bottom: 14px; }
-.error-msg { display: none; background: #fff0f0; color: var(--red); border: 1px solid #f5c6c6; border-radius: 8px; padding: 10px 14px; font-size: 13px; margin-bottom: 14px; }
+.profile-block {
+  max-width: 560px;
+}
+.profile-block + .profile-block {
+  margin-top: 32px;
+  padding-top: 32px;
+  border-top: 0.5px solid var(--border, rgba(0,0,0,0.10));
+}
+.profile-block-title {
+  font-family: var(--font-head, 'Bebas Neue', sans-serif);
+  font-size: 22px;
+  letter-spacing: 1px;
+  margin-bottom: 20px;
+  color: var(--ink, #1A1A1A);
+}
+.field-feedback {
+  display: none;
+  padding: 10px 14px;
+  border-radius: 8px;
+  font-size: 13px;
+  margin-bottom: 16px;
+}
+.field-feedback.success { display:block; background:#f0fff4; color:#16a34a; border:1px solid #b2dfdb; }
+.field-feedback.error   { display:block; background:#fff0f0; color:#A32D2D; border:1px solid #f5c6c6; }
 
-/* Loading */
-.spinner { text-align: center; padding: 40px; color: var(--ink-muted); font-size: 14px; }
+.orders-empty {
+  text-align: center;
+  padding: 64px 24px;
+  color: var(--ink-muted, #555);
+}
+.orders-empty .empty-icon { font-size: 40px; margin-bottom: 16px; }
+.orders-empty h3 {
+  font-family: var(--font-head, 'Bebas Neue', sans-serif);
+  font-size: 28px;
+  color: var(--ink, #1A1A1A);
+  margin-bottom: 8px;
+}
+.orders-empty p { font-size: 14px; line-height: 1.7; }
 
 @media (max-width: 600px) {
-  .form-row { grid-template-columns: 1fr; }
   .order-card-body { grid-template-columns: 1fr 1fr; }
+  .account-tab { padding: 10px 14px; font-size: 13px; }
 }
 </style>
 </head>
 <body>
 
-<nav class="navbar">
+<!-- ══════════════════ NAVBAR ══════════════════ -->
+<nav class="navbar scrolled" id="navbar">
   <div class="nav-inner">
-    <a href="../index.html" class="nav-logo">
-      <img src="../assets/logo.png" alt="AGI" onerror="this.style.display='none'">
-      AGI
+    <a href="/" class="nav-logo" aria-label="AGI home">
+      <img src="../../assets/logo.png" alt="Arend Gesin Investment — Home of Branding" style="height:44px;width:auto;display:block;">
     </a>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="/pages/services.html">Services</a></li>
+      <li><a href="/pages/about.html">About</a></li>
+      <li><a href="/pages/portfolio.html">Portfolio</a></li>
+      <li><a href="/pages/blog.html">Insights</a></li>
+      <li><a href="/pages/csr.html">THAT Child</a></li>
+      <li><a href="/pages/contact.html">Contact</a></li>
+    </ul>
     <div class="nav-right">
-      <a href="../index.html">Home</a>
-      <a href="services.html">Services</a>
-      <a class="logout" onclick="logout()">Logout</a>
+      <a href="/pages/order/index.html" class="btn-nav-cta">Order now</a>
+      <button class="hamburger" id="hamburger" aria-label="Toggle menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
     </div>
   </div>
 </nav>
 
-<div class="page">
-  <div class="account-header">
-    <h1>My <span>Account</span></h1>
-    <p id="accountSubtitle">Loading your profile…</p>
+<!-- ══════════════════ PAGE HERO ══════════════════ -->
+<section class="page-hero">
+  <div class="container">
+    <div class="page-hero-inner">
+      <nav class="page-breadcrumb" aria-label="breadcrumb">
+        <a href="/">Home</a>
+        <span>›</span>
+        <span>My Account</span>
+      </nav>
+      <p class="page-hero-tag">Your profile</p>
+      <h1 class="page-hero-title" id="heroTitle">
+        My <em>Account.</em>
+      </h1>
+      <p class="page-hero-body" id="heroSub">
+        View your orders, manage your profile, and track your deliveries.
+      </p>
+    </div>
   </div>
+</section>
 
-  <div class="tabs">
-    <button class="tab-btn active" onclick="showTab('orders')">My Orders</button>
-    <button class="tab-btn" onclick="showTab('profile')">Profile</button>
-    <button class="tab-btn" onclick="showTab('password')">Change Password</button>
-  </div>
+<!-- ══════════════════ ACCOUNT SECTION ══════════════════ -->
+<section class="order-section">
+  <div class="container">
 
-  <!-- Orders -->
-  <div id="panelOrders" class="tab-panel active">
-    <div class="spinner" id="ordersSpinner">Loading your orders…</div>
-    <div id="ordersList"></div>
-  </div>
+    <!-- Tabs -->
+    <div class="account-tabs">
+      <button class="account-tab active" onclick="showTab('orders', this)">My Orders</button>
+      <button class="account-tab" onclick="showTab('profile', this)">Profile</button>
+      <button class="account-tab" onclick="showTab('password', this)">Change Password</button>
+      <button class="account-tab" onclick="logout()" style="margin-left:auto;color:#A32D2D;">Log Out</button>
+    </div>
 
-  <!-- Profile -->
-  <div id="panelProfile" class="tab-panel">
-    <div class="profile-card">
-      <h3>Personal Info</h3>
-      <div id="profileSuccess" class="success-msg"></div>
-      <div id="profileError" class="error-msg"></div>
-      <div class="form-row">
-        <div class="form-group"><label>First Name</label><input id="pFname" type="text"></div>
-        <div class="form-group"><label>Last Name</label><input id="pLname" type="text"></div>
+    <!-- ── Orders Panel ── -->
+    <div id="panelOrders" class="account-panel active">
+      <div id="ordersSpinner" style="text-align:center;padding:48px;color:#555;font-size:14px;">
+        Loading your orders…
       </div>
-      <div class="form-group"><label>Email</label><input id="pEmail" type="email" disabled style="opacity:0.5;cursor:not-allowed;"></div>
-      <div class="form-group"><label>Phone</label><input id="pPhone" type="tel"></div>
-      <button class="btn-save" onclick="saveProfile()">Save Changes</button>
+      <div id="ordersList"></div>
     </div>
-  </div>
 
-  <!-- Change Password -->
-  <div id="panelPassword" class="tab-panel">
-    <div class="profile-card">
-      <h3>Change Password</h3>
-      <div id="passSuccess" class="success-msg"></div>
-      <div id="passError" class="error-msg"></div>
-      <div class="form-group"><label>Current Password</label><input id="pCurrent" type="password"></div>
-      <div class="form-group"><label>New Password</label><input id="pNew" type="password"></div>
-      <div class="form-group"><label>Confirm New Password</label><input id="pConfirm" type="password"></div>
-      <button class="btn-save" onclick="changePassword()">Update Password</button>
+    <!-- ── Profile Panel ── -->
+    <div id="panelProfile" class="account-panel">
+      <div class="profile-block">
+        <h3 class="profile-block-title">Personal Info</h3>
+        <div id="profileFeedback" class="field-feedback"></div>
+        <div class="field-row">
+          <div class="field-group">
+            <label for="pFname">First name</label>
+            <input type="text" id="pFname" name="pFname" placeholder="First name">
+          </div>
+          <div class="field-group">
+            <label for="pLname">Last name</label>
+            <input type="text" id="pLname" name="pLname" placeholder="Last name">
+          </div>
+        </div>
+        <div class="field-group">
+          <label for="pEmail">Email address</label>
+          <input type="email" id="pEmail" name="pEmail" disabled style="opacity:0.5;cursor:not-allowed;">
+        </div>
+        <div class="field-group">
+          <label for="pPhone">Phone / WhatsApp</label>
+          <input type="tel" id="pPhone" name="pPhone" placeholder="+254 7XX XXX XXX">
+        </div>
+        <div class="form-nav" style="margin-top:8px;">
+          <span></span>
+          <button class="btn-primary" onclick="saveProfile()">Save changes</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── Password Panel ── -->
+    <div id="panelPassword" class="account-panel">
+      <div class="profile-block">
+        <h3 class="profile-block-title">Change Password</h3>
+        <div id="passFeedback" class="field-feedback"></div>
+        <div class="field-group">
+          <label for="pCurrent">Current password</label>
+          <input type="password" id="pCurrent" placeholder="Your current password">
+        </div>
+        <div class="field-group">
+          <label for="pNew">New password</label>
+          <input type="password" id="pNew" placeholder="At least 6 characters">
+        </div>
+        <div class="field-group">
+          <label for="pConfirm">Confirm new password</label>
+          <input type="password" id="pConfirm" placeholder="Repeat new password">
+        </div>
+        <div class="form-nav" style="margin-top:8px;">
+          <span></span>
+          <button class="btn-primary" onclick="changePassword()">Update password</button>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ══════════════════ FOOTER ══════════════════ -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <a href="/" class="nav-logo" aria-label="AGI home">
+          <img src="../../assets/logo.png" alt="Arend Gesin Investment — Home of Branding" style="height:44px;width:auto;display:block;">
+        </a>
+        <p class="footer-tagline">Strength of Family.</p>
+        <p class="footer-desc">A family-based branding company empowering youth and giving THAT Child a chance — one brand at a time.</p>
+        <div class="footer-contact-mini">
+          <a href="tel:+254735518090">+254 735 518 090</a>
+          <a href="tel:+254718260115">+254 718 260 115</a>
+          <a href="mailto:info@arendgesin.co.ke">info@arendgesin.co.ke</a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h5 class="footer-col-title">Services</h5>
+        <ul>
+          <li><a href="/pages/services.html">Printing &amp; Branding</a></li>
+          <li><a href="/pages/services.html">Stationery Supplies</a></li>
+          <li><a href="/pages/services.html">IT Installations</a></li>
+          <li><a href="/pages/services.html">Graphic Design</a></li>
+          <li><a href="/pages/services.html">Work Safety (PPEs)</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h5 class="footer-col-title">Company</h5>
+        <ul>
+          <li><a href="/pages/about.html">About AGI</a></li>
+          <li><a href="/pages/csr.html">THAT Child / CSR</a></li>
+          <li><a href="/pages/portfolio.html">Portfolio</a></li>
+          <li><a href="/pages/blog.html">Insights</a></li>
+          <li><a href="/pages/contact.html">Contact</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h5 class="footer-col-title">We operate in</h5>
+        <ul>
+          <li><span>Nakuru County</span></li>
+          <li><span>Nairobi County</span></li>
+          <li><span>Uasin Gishu</span></li>
+          <li><span>Trans Nzoia</span></li>
+          <li><span>Bungoma County</span></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p class="footer-copy">© 2025 Arend Gesin Investment. All rights reserved.</p>
+      <a href="http://www.arendgesin.co.ke" class="footer-web" target="_blank" rel="noopener">www.arendgesin.co.ke</a>
     </div>
   </div>
-</div>
+</footer>
 
 <script>
 const API = 'https://agi-backend-8cdh.onrender.com';
@@ -168,41 +323,42 @@ function getUser()  { try { return JSON.parse(localStorage.getItem('agi_user'));
 function logout() {
   localStorage.removeItem('agi_token');
   localStorage.removeItem('agi_user');
-  window.location.href = '../index.html';
+  window.location.href = '/';
 }
 
-function showTab(name) {
-  document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
-  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+// ── Tabs ─────────────────────────────────────────────────────────────────────
+function showTab(name, btn) {
+  document.querySelectorAll('.account-panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.account-tab').forEach(b => b.classList.remove('active'));
   document.getElementById('panel' + name.charAt(0).toUpperCase() + name.slice(1)).classList.add('active');
-  event.target.classList.add('active');
+  if (btn) btn.classList.add('active');
 }
 
-const STATUS_LABELS = {
-  pending:     'Pending',
-  in_progress: 'In Progress',
-  delivered:   'Delivered',
-  completed:   'Completed',
-  failed:      'Failed',
-};
+// ── Status labels ─────────────────────────────────────────────────────────────
+const STATUS_LABELS = { pending:'Pending', in_progress:'In Progress', delivered:'Delivered', completed:'Completed', failed:'Failed' };
 
+// ── Render orders ─────────────────────────────────────────────────────────────
 function renderOrders(orders) {
-  const el = document.getElementById('ordersList');
   document.getElementById('ordersSpinner').style.display = 'none';
+  const el = document.getElementById('ordersList');
 
   if (!orders.length) {
-    el.innerHTML = `<div class="orders-empty">
-      <h3>No orders yet</h3>
-      <p>Head back to the <a href="../index.html" style="color:var(--red);">homepage</a> to place your first order.</p>
-    </div>`;
+    el.innerHTML = `
+      <div class="orders-empty">
+        <div class="empty-icon">📦</div>
+        <h3>No orders yet</h3>
+        <p>You haven't placed any orders yet.<br>
+          <a href="/pages/order/index.html" style="color:#A32D2D;font-weight:500;">Place your first order →</a>
+        </p>
+      </div>`;
     return;
   }
 
   el.innerHTML = orders.map(o => `
     <div class="order-card">
       <div class="order-card-head">
-        <span class="order-ref">${o.ref || '—'}</span>
-        <span class="order-status status-${o.status || 'pending'}">${STATUS_LABELS[o.status] || o.status}</span>
+        <span class="order-ref-label">${o.ref || '—'}</span>
+        <span class="order-status-pill status-${o.status || 'pending'}">${STATUS_LABELS[o.status] || o.status || 'Pending'}</span>
       </div>
       <div class="order-card-body">
         <div class="order-field"><label>Service</label><span>${o.service || '—'}</span></div>
@@ -216,34 +372,36 @@ function renderOrders(orders) {
   `).join('');
 }
 
+// ── Load orders ───────────────────────────────────────────────────────────────
 async function loadOrders() {
   try {
     const res    = await fetch(API + '/api/auth/my-orders', { headers: { Authorization: 'Bearer ' + getToken() } });
     const orders = await res.json();
     renderOrders(Array.isArray(orders) ? orders : []);
   } catch {
-    document.getElementById('ordersSpinner').textContent = 'Failed to load orders.';
+    document.getElementById('ordersSpinner').textContent = 'Could not load orders. Please refresh.';
   }
 }
 
+// ── Populate profile form ─────────────────────────────────────────────────────
 function populateProfile() {
   const user = getUser();
   if (!user) return;
-  document.getElementById('accountSubtitle').textContent = `Welcome back, ${user.fname}!`;
+  document.getElementById('heroTitle').innerHTML = `Hi, <em>${user.fname}.</em>`;
+  document.getElementById('heroSub').textContent = 'Welcome back to your Arend Gesin Investment account.';
   document.getElementById('pFname').value = user.fname || '';
   document.getElementById('pLname').value = user.lname || '';
   document.getElementById('pEmail').value = user.email || '';
   document.getElementById('pPhone').value = user.phone || '';
 }
 
+// ── Save profile ──────────────────────────────────────────────────────────────
 async function saveProfile() {
-  const suc = document.getElementById('profileSuccess');
-  const err = document.getElementById('profileError');
-  suc.style.display = err.style.display = 'none';
-
+  const fb = document.getElementById('profileFeedback');
+  fb.className = 'field-feedback';
   try {
     const res  = await fetch(API + '/api/auth/profile', {
-      method: 'PATCH',
+      method:  'PATCH',
       headers: { 'Content-Type': 'application/json', Authorization: 'Bearer ' + getToken() },
       body: JSON.stringify({
         fname: document.getElementById('pFname').value.trim(),
@@ -254,45 +412,57 @@ async function saveProfile() {
     const data = await res.json();
     if (!res.ok) throw new Error(data.error);
     localStorage.setItem('agi_user', JSON.stringify(data.user));
-    suc.textContent = 'Profile updated successfully!';
-    suc.style.display = 'block';
+    fb.textContent = 'Profile updated successfully!';
+    fb.className = 'field-feedback success';
   } catch (e) {
-    err.textContent = e.message;
-    err.style.display = 'block';
+    fb.textContent = e.message;
+    fb.className = 'field-feedback error';
   }
 }
 
+// ── Change password ───────────────────────────────────────────────────────────
 async function changePassword() {
-  const suc = document.getElementById('passSuccess');
-  const err = document.getElementById('passError');
-  suc.style.display = err.style.display = 'none';
-
-  const current = document.getElementById('pCurrent').value;
+  const fb = document.getElementById('passFeedback');
+  fb.className = 'field-feedback';
+  const current  = document.getElementById('pCurrent').value;
   const newPass  = document.getElementById('pNew').value;
   const confirm  = document.getElementById('pConfirm').value;
-
-  if (newPass !== confirm) { err.textContent = 'New passwords do not match'; err.style.display = 'block'; return; }
-
+  if (newPass !== confirm) { fb.textContent = 'New passwords do not match'; fb.className = 'field-feedback error'; return; }
   try {
     const res  = await fetch(API + '/api/auth/change-password', {
-      method: 'PATCH',
+      method:  'PATCH',
       headers: { 'Content-Type': 'application/json', Authorization: 'Bearer ' + getToken() },
       body: JSON.stringify({ currentPassword: current, newPassword: newPass }),
     });
     const data = await res.json();
     if (!res.ok) throw new Error(data.error);
-    suc.textContent = 'Password changed successfully!';
-    suc.style.display = 'block';
+    fb.textContent = 'Password changed successfully!';
+    fb.className = 'field-feedback success';
     document.getElementById('pCurrent').value = document.getElementById('pNew').value = document.getElementById('pConfirm').value = '';
   } catch (e) {
-    err.textContent = e.message;
-    err.style.display = 'block';
+    fb.textContent = e.message;
+    fb.className = 'field-feedback error';
   }
 }
 
-// Init
+// ── Navbar scroll + hamburger ─────────────────────────────────────────────────
+(function(){
+  const nav = document.getElementById('navbar');
+  window.addEventListener('scroll', () => {
+    nav.classList.toggle('scrolled', window.scrollY > 40);
+  }, { passive: true });
+  const ham = document.getElementById('hamburger');
+  const links = document.getElementById('navLinks');
+  ham.addEventListener('click', () => {
+    const open = links.classList.toggle('open');
+    ham.setAttribute('aria-expanded', String(open));
+    ham.classList.toggle('active', open);
+  });
+})();
+
+// ── Init ──────────────────────────────────────────────────────────────────────
 if (!getToken()) {
-  window.location.href = '../index.html';
+  window.location.href = '/pages/order/index.html';
 } else {
   populateProfile();
   loadOrders();

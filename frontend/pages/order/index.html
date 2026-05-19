@@ -4,21 +4,17 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Place an Order — Arend Gesin Investment</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../css/style.css">
+<link rel="stylesheet" href="../../css/style.css">
 
 </head>
 <body>
 
-<!-- ═══════════════════ NAVBAR ═══════════════════ -->
-<nav class="navbar" id="navbar">
+<!-- ══════════════════ NAVBAR ══════════════════ -->
+<nav class="navbar scrolled" id="navbar">
   <div class="nav-inner">
-    <a href="/" class="nav-logo" aria-label="Arend Gesin Investment home">
+    <a href="/" class="nav-logo" aria-label="AGI home">
       <img src="../../assets/logo.png" alt="Arend Gesin Investment — Home of Branding" style="height:44px;width:auto;display:block;">
     </a>
-
     <ul class="nav-links" id="navLinks">
       <li><a href="/pages/services.html">Services</a></li>
       <li><a href="/pages/about.html">About</a></li>
@@ -27,9 +23,8 @@
       <li><a href="/pages/csr.html">THAT Child</a></li>
       <li><a href="/pages/contact.html">Contact</a></li>
     </ul>
-
     <div class="nav-right">
-      <a href="/" class="btn-nav-cta active-link">Order now</a>
+      <a href="/pages/order/index.html" class="btn-nav-cta">Order now</a>
       <button class="hamburger" id="hamburger" aria-label="Toggle menu" aria-expanded="false">
         <span></span><span></span><span></span>
       </button>
@@ -596,7 +591,7 @@ document.getElementById('county').addEventListener('change', updateSummary);
 
 /* ══ Submit ══ */
 async function submitOrder() {
-  // Check login first
+  // Auth check — show modal if not logged in
   if (!isLoggedIn()) {
     window._pendingOrder = true;
     openAuthModal('login');
@@ -665,6 +660,18 @@ async function submitOrder() {
   }
 }
 
+/* ══ Auto-fill from logged-in user ══ */
+function prefillFromUser() {
+  const user = getUser();
+  if (!user) return;
+  const f = (id, val) => { const el = document.getElementById(id); if (el && !el.value) el.value = val || ''; };
+  f('fname', user.fname);
+  f('lname', user.lname);
+  f('email', user.email);
+  f('phone', user.phone);
+}
+document.getElementById('step-item-3')?.addEventListener('click', prefillFromUser);
+
 /* ══ Navbar + hamburger ══ */
 (function(){
   const nav = document.getElementById('navbar');
@@ -683,100 +690,88 @@ async function submitOrder() {
 </script>
 
 <!-- ══ AUTH MODAL ══════════════════════════════════════════════════════════ -->
-<div id="authOverlay" style="display:none;position:fixed;inset:0;z-index:999;background:rgba(0,0,0,0.6);backdrop-filter:blur(4px);align-items:center;justify-content:center;">
-  <div style="background:#fff;border-radius:16px;padding:36px 32px;width:100%;max-width:420px;margin:16px;position:relative;box-shadow:0 24px 60px rgba(0,0,0,0.2);">
-    <button onclick="closeAuthModal()" style="position:absolute;top:16px;right:16px;background:none;border:none;font-size:20px;cursor:pointer;color:#555;">✕</button>
+<div id="authOverlay" style="display:none;position:fixed;inset:0;z-index:9999;background:rgba(0,0,0,0.65);backdrop-filter:blur(6px);align-items:center;justify-content:center;">
+  <div style="background:#fff;border-radius:16px;padding:36px 32px;width:100%;max-width:420px;margin:16px;position:relative;box-shadow:0 24px 60px rgba(0,0,0,0.25);">
+    <button onclick="closeAuthModal()" style="position:absolute;top:14px;right:16px;background:none;border:none;font-size:20px;cursor:pointer;color:#999;line-height:1;">✕</button>
 
     <!-- Tabs -->
-    <div style="display:flex;gap:0;margin-bottom:28px;border-bottom:1.5px solid #eee;">
-      <button id="tabLogin" onclick="switchTab('login')" style="flex:1;padding:10px;border:none;background:none;font-weight:600;font-size:14px;color:#A32D2D;border-bottom:2px solid #A32D2D;cursor:pointer;">Log In</button>
-      <button id="tabRegister" onclick="switchTab('register')" style="flex:1;padding:10px;border:none;background:none;font-weight:500;font-size:14px;color:#888;border-bottom:2px solid transparent;cursor:pointer;">Create Account</button>
+    <div style="display:flex;margin-bottom:28px;border-bottom:1.5px solid #eee;">
+      <button id="tabLogin" onclick="switchTab('login')" style="flex:1;padding:10px;border:none;border-bottom:2px solid #A32D2D;background:none;font-weight:600;font-size:14px;color:#A32D2D;cursor:pointer;font-family:inherit;">Log In</button>
+      <button id="tabRegister" onclick="switchTab('register')" style="flex:1;padding:10px;border:none;border-bottom:2px solid transparent;background:none;font-weight:500;font-size:14px;color:#888;cursor:pointer;font-family:inherit;">Create Account</button>
     </div>
 
-    <!-- Login Form -->
+    <!-- LOGIN -->
     <div id="panelLogin">
-      <h2 style="font-family:'Bebas Neue',sans-serif;font-size:28px;margin-bottom:4px;">Welcome Back</h2>
+      <h2 style="font-family:'Bebas Neue',sans-serif;font-size:30px;letter-spacing:1px;margin-bottom:4px;color:#1A1A1A;">Welcome Back</h2>
       <p style="color:#777;font-size:13px;margin-bottom:20px;">Log in to submit your order</p>
       <div id="loginError" style="display:none;background:#fff0f0;color:#A32D2D;border:1px solid #f5c6c6;border-radius:8px;padding:10px 14px;font-size:13px;margin-bottom:14px;"></div>
-      <input id="loginEmail" type="email" placeholder="Email address" style="width:100%;padding:11px 14px;border:1.5px solid #ddd;border-radius:8px;font-size:14px;margin-bottom:10px;box-sizing:border-box;">
-      <input id="loginPassword" type="password" placeholder="Password" style="width:100%;padding:11px 14px;border:1.5px solid #ddd;border-radius:8px;font-size:14px;margin-bottom:6px;box-sizing:border-box;">
+      <input id="loginEmail" type="email" placeholder="Email address" style="width:100%;padding:11px 14px;border:1.5px solid #ddd;border-radius:8px;font-size:14px;margin-bottom:10px;box-sizing:border-box;font-family:inherit;">
+      <input id="loginPassword" type="password" placeholder="Password" style="width:100%;padding:11px 14px;border:1.5px solid #ddd;border-radius:8px;font-size:14px;margin-bottom:6px;box-sizing:border-box;font-family:inherit;">
       <div style="text-align:right;margin-bottom:18px;"><a onclick="switchTab('forgot')" style="font-size:12px;color:#A32D2D;cursor:pointer;">Forgot password?</a></div>
-      <button onclick="doLogin()" id="loginBtn" style="width:100%;padding:13px;background:#A32D2D;color:#fff;border:none;border-radius:99px;font-size:15px;font-weight:600;cursor:pointer;">Log In</button>
+      <button onclick="doLogin()" id="loginBtn" style="width:100%;padding:13px;background:#A32D2D;color:#fff;border:none;border-radius:99px;font-size:15px;font-weight:600;cursor:pointer;font-family:inherit;transition:background 0.2s;">Log In</button>
     </div>
 
-    <!-- Register Form -->
+    <!-- REGISTER -->
     <div id="panelRegister" style="display:none;">
-      <h2 style="font-family:'Bebas Neue',sans-serif;font-size:28px;margin-bottom:4px;">Create Account</h2>
+      <h2 style="font-family:'Bebas Neue',sans-serif;font-size:30px;letter-spacing:1px;margin-bottom:4px;color:#1A1A1A;">Create Account</h2>
       <p style="color:#777;font-size:13px;margin-bottom:20px;">Sign up to place your order</p>
       <div id="registerError" style="display:none;background:#fff0f0;color:#A32D2D;border:1px solid #f5c6c6;border-radius:8px;padding:10px 14px;font-size:13px;margin-bottom:14px;"></div>
       <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:10px;">
-        <input id="regFname" type="text" placeholder="First name" style="padding:11px 14px;border:1.5px solid #ddd;border-radius:8px;font-size:14px;box-sizing:border-box;">
-        <input id="regLname" type="text" placeholder="Last name" style="padding:11px 14px;border:1.5px solid #ddd;border-radius:8px;font-size:14px;box-sizing:border-box;">
+        <input id="regFname" type="text" placeholder="First name" style="padding:11px 14px;border:1.5px solid #ddd;border-radius:8px;font-size:14px;box-sizing:border-box;font-family:inherit;">
+        <input id="regLname" type="text" placeholder="Last name" style="padding:11px 14px;border:1.5px solid #ddd;border-radius:8px;font-size:14px;box-sizing:border-box;font-family:inherit;">
       </div>
-      <input id="regEmail" type="email" placeholder="Email address" style="width:100%;padding:11px 14px;border:1.5px solid #ddd;border-radius:8px;font-size:14px;margin-bottom:10px;box-sizing:border-box;">
-      <input id="regPhone" type="tel" placeholder="Phone number" style="width:100%;padding:11px 14px;border:1.5px solid #ddd;border-radius:8px;font-size:14px;margin-bottom:10px;box-sizing:border-box;">
-      <input id="regPassword" type="password" placeholder="Password (min 6 characters)" style="width:100%;padding:11px 14px;border:1.5px solid #ddd;border-radius:8px;font-size:14px;margin-bottom:18px;box-sizing:border-box;">
-      <button onclick="doRegister()" id="registerBtn" style="width:100%;padding:13px;background:#A32D2D;color:#fff;border:none;border-radius:99px;font-size:15px;font-weight:600;cursor:pointer;">Create Account</button>
+      <input id="regEmail" type="email" placeholder="Email address" style="width:100%;padding:11px 14px;border:1.5px solid #ddd;border-radius:8px;font-size:14px;margin-bottom:10px;box-sizing:border-box;font-family:inherit;">
+      <input id="regPhone" type="tel" placeholder="Phone number" style="width:100%;padding:11px 14px;border:1.5px solid #ddd;border-radius:8px;font-size:14px;margin-bottom:10px;box-sizing:border-box;font-family:inherit;">
+      <input id="regPassword" type="password" placeholder="Password (min 6 characters)" style="width:100%;padding:11px 14px;border:1.5px solid #ddd;border-radius:8px;font-size:14px;margin-bottom:18px;box-sizing:border-box;font-family:inherit;">
+      <button onclick="doRegister()" id="registerBtn" style="width:100%;padding:13px;background:#A32D2D;color:#fff;border:none;border-radius:99px;font-size:15px;font-weight:600;cursor:pointer;font-family:inherit;">Create Account</button>
     </div>
 
-    <!-- Forgot Password -->
+    <!-- FORGOT PASSWORD -->
     <div id="panelForgot" style="display:none;">
-      <h2 style="font-family:'Bebas Neue',sans-serif;font-size:28px;margin-bottom:4px;">Reset Password</h2>
-      <p style="color:#777;font-size:13px;margin-bottom:20px;">Enter your email and we'll send a 6-digit code</p>
+      <h2 style="font-family:'Bebas Neue',sans-serif;font-size:30px;letter-spacing:1px;margin-bottom:4px;color:#1A1A1A;">Reset Password</h2>
+      <p style="color:#777;font-size:13px;margin-bottom:20px;">We'll send a 6-digit code to your email</p>
       <div id="forgotError" style="display:none;background:#fff0f0;color:#A32D2D;border:1px solid #f5c6c6;border-radius:8px;padding:10px 14px;font-size:13px;margin-bottom:14px;"></div>
-      <div id="forgotSuccess" style="display:none;background:#f0fff4;color:#1a7a3c;border:1px solid #b2dfdb;border-radius:8px;padding:10px 14px;font-size:13px;margin-bottom:14px;"></div>
-      <input id="forgotEmail" type="email" placeholder="Email address" style="width:100%;padding:11px 14px;border:1.5px solid #ddd;border-radius:8px;font-size:14px;margin-bottom:10px;box-sizing:border-box;">
+      <div id="forgotSuccess" style="display:none;background:#f0fff4;color:#16a34a;border:1px solid #b2dfdb;border-radius:8px;padding:10px 14px;font-size:13px;margin-bottom:14px;"></div>
+      <input id="forgotEmail" type="email" placeholder="Email address" style="width:100%;padding:11px 14px;border:1.5px solid #ddd;border-radius:8px;font-size:14px;margin-bottom:10px;box-sizing:border-box;font-family:inherit;">
       <div id="otpSection" style="display:none;">
-        <input id="forgotOTP" type="text" placeholder="6-digit code" maxlength="6" style="width:100%;padding:11px 14px;border:1.5px solid #ddd;border-radius:8px;font-size:14px;margin-bottom:10px;box-sizing:border-box;letter-spacing:6px;text-align:center;">
-        <input id="forgotNewPass" type="password" placeholder="New password" style="width:100%;padding:11px 14px;border:1.5px solid #ddd;border-radius:8px;font-size:14px;margin-bottom:10px;box-sizing:border-box;">
+        <input id="forgotOTP" type="text" placeholder="6-digit code" maxlength="6" style="width:100%;padding:11px 14px;border:1.5px solid #ddd;border-radius:8px;font-size:18px;letter-spacing:8px;text-align:center;margin-bottom:10px;box-sizing:border-box;font-family:inherit;">
+        <input id="forgotNewPass" type="password" placeholder="New password" style="width:100%;padding:11px 14px;border:1.5px solid #ddd;border-radius:8px;font-size:14px;margin-bottom:10px;box-sizing:border-box;font-family:inherit;">
       </div>
-      <button onclick="doForgot()" id="forgotBtn" style="width:100%;padding:13px;background:#A32D2D;color:#fff;border:none;border-radius:99px;font-size:15px;font-weight:600;cursor:pointer;">Send Code</button>
+      <button onclick="doForgot()" id="forgotBtn" style="width:100%;padding:13px;background:#A32D2D;color:#fff;border:none;border-radius:99px;font-size:15px;font-weight:600;cursor:pointer;font-family:inherit;">Send Code</button>
       <div style="text-align:center;margin-top:14px;"><a onclick="switchTab('login')" style="font-size:12px;color:#A32D2D;cursor:pointer;">← Back to Login</a></div>
     </div>
-
   </div>
 </div>
 
 <script>
-// ── Auth helpers ──────────────────────────────────────────────────────────────
 const API = 'https://agi-backend-8cdh.onrender.com';
 
-function getToken()       { return localStorage.getItem('agi_token'); }
-function getUser()        { try { return JSON.parse(localStorage.getItem('agi_user')); } catch { return null; } }
-function saveAuth(t, u)   { localStorage.setItem('agi_token', t); localStorage.setItem('agi_user', JSON.stringify(u)); }
-function clearAuth()      { localStorage.removeItem('agi_token'); localStorage.removeItem('agi_user'); }
-function isLoggedIn()     { return !!getToken(); }
+function getToken() { return localStorage.getItem('agi_token'); }
+function getUser()  { try { return JSON.parse(localStorage.getItem('agi_user')); } catch { return null; } }
+function saveAuth(t, u) { localStorage.setItem('agi_token', t); localStorage.setItem('agi_user', JSON.stringify(u)); }
+function clearAuth() { localStorage.removeItem('agi_token'); localStorage.removeItem('agi_user'); }
+function isLoggedIn() { return !!getToken(); }
 
-// Update nav to show user name or login link
 function updateNav() {
   const user = getUser();
-  // look for a nav slot we can inject into
-  const nav = document.getElementById('navLinks') || document.querySelector('.nav-links');
-  if (!nav) return;
   let authEl = document.getElementById('navAuthItem');
   if (!authEl) {
     authEl = document.createElement('li');
     authEl.id = 'navAuthItem';
-    authEl.style.cssText = 'list-style:none;';
-    nav.appendChild(authEl);
+    const nav = document.getElementById('navLinks');
+    if (nav) nav.appendChild(authEl);
   }
   if (user) {
-    authEl.innerHTML = `<a href="pages/account.html" style="color:#BA7517;font-weight:600;">👤 ${user.fname}</a>
-      <a onclick="logout()" style="cursor:pointer;margin-left:12px;color:#aaa;font-size:12px;">Logout</a>`;
+    authEl.innerHTML = `<a href="/pages/account.html" style="color:#BA7517;font-weight:600;">👤 ${user.fname}</a>`;
   } else {
-    authEl.innerHTML = `<a onclick="openAuthModal()" style="cursor:pointer;color:#BA7517;font-weight:600;">Log In</a>`;
+    authEl.innerHTML = `<a onclick="openAuthModal('login')" style="cursor:pointer;">Log In</a>`;
   }
-}
-
-function logout() {
-  clearAuth();
-  updateNav();
 }
 
 function openAuthModal(tab) {
   switchTab(tab || 'login');
-  const overlay = document.getElementById('authOverlay');
-  overlay.style.display = 'flex';
+  const ov = document.getElementById('authOverlay');
+  ov.style.display = 'flex';
   document.body.style.overflow = 'hidden';
 }
 
@@ -786,140 +781,112 @@ function closeAuthModal() {
 }
 
 function switchTab(tab) {
-  ['login','register','forgot'].forEach(t => {
-    document.getElementById('panel' + t.charAt(0).toUpperCase() + t.slice(1)).style.display = t === tab ? 'block' : 'none';
+  ['Login','Register','Forgot'].forEach(t => {
+    const panel = document.getElementById('panel' + t);
+    if (panel) panel.style.display = t.toLowerCase() === tab ? 'block' : 'none';
   });
-  const tabLogin    = document.getElementById('tabLogin');
-  const tabRegister = document.getElementById('tabRegister');
-  if (tabLogin && tabRegister) {
-    tabLogin.style.cssText    = `flex:1;padding:10px;border:none;background:none;font-weight:${tab==='login'?'600':'500'};font-size:14px;color:${tab==='login'?'#A32D2D':'#888'};border-bottom:2px solid ${tab==='login'?'#A32D2D':'transparent'};cursor:pointer;`;
-    tabRegister.style.cssText = `flex:1;padding:10px;border:none;background:none;font-weight:${tab==='register'?'600':'500'};font-size:14px;color:${tab==='register'?'#A32D2D':'#888'};border-bottom:2px solid ${tab==='register'?'#A32D2D':'transparent'};cursor:pointer;`;
-  }
+  const tl = document.getElementById('tabLogin');
+  const tr = document.getElementById('tabRegister');
+  if (tl) { tl.style.color = tab==='login'?'#A32D2D':'#888'; tl.style.borderBottomColor = tab==='login'?'#A32D2D':'transparent'; tl.style.fontWeight = tab==='login'?'600':'500'; }
+  if (tr) { tr.style.color = tab==='register'?'#A32D2D':'#888'; tr.style.borderBottomColor = tab==='register'?'#A32D2D':'transparent'; tr.style.fontWeight = tab==='register'?'600':'500'; }
 }
 
-function showError(id, msg) {
-  const el = document.getElementById(id);
-  el.textContent = msg;
-  el.style.display = 'block';
-}
-function hideError(id) { document.getElementById(id).style.display = 'none'; }
+function showErr(id, msg) { const e = document.getElementById(id); e.textContent = msg; e.style.display = 'block'; }
+function hideErr(id) { document.getElementById(id).style.display = 'none'; }
 
 async function doLogin() {
-  hideError('loginError');
-  const email    = document.getElementById('loginEmail').value.trim();
+  hideErr('loginError');
+  const email = document.getElementById('loginEmail').value.trim();
   const password = document.getElementById('loginPassword').value;
-  if (!email || !password) return showError('loginError', 'Please fill in all fields');
-
+  if (!email || !password) return showErr('loginError', 'Please fill in all fields');
   const btn = document.getElementById('loginBtn');
   btn.textContent = 'Logging in…'; btn.disabled = true;
-
   try {
-    const res  = await fetch(API + '/api/auth/login', {
-      method: 'POST', headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ email, password }),
-    });
+    const res = await fetch(API + '/api/auth/login', { method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify({email, password}) });
     const data = await res.json();
     if (!res.ok) throw new Error(data.error);
     saveAuth(data.token, data.user);
     updateNav();
     closeAuthModal();
-    // Retry the order submission that triggered the modal
     if (window._pendingOrder) { window._pendingOrder = false; submitOrder(); }
-  } catch (err) {
-    showError('loginError', err.message);
-  } finally {
-    btn.textContent = 'Log In'; btn.disabled = false;
-  }
+  } catch(err) { showErr('loginError', err.message); }
+  finally { btn.textContent = 'Log In'; btn.disabled = false; }
 }
 
 async function doRegister() {
-  hideError('registerError');
-  const fname    = document.getElementById('regFname').value.trim();
-  const lname    = document.getElementById('regLname').value.trim();
-  const email    = document.getElementById('regEmail').value.trim();
-  const phone    = document.getElementById('regPhone').value.trim();
+  hideErr('registerError');
+  const fname = document.getElementById('regFname').value.trim();
+  const lname = document.getElementById('regLname').value.trim();
+  const email = document.getElementById('regEmail').value.trim();
+  const phone = document.getElementById('regPhone').value.trim();
   const password = document.getElementById('regPassword').value;
-  if (!fname || !email || !password) return showError('registerError', 'First name, email and password are required');
-
+  if (!fname || !email || !password) return showErr('registerError', 'First name, email and password are required');
   const btn = document.getElementById('registerBtn');
   btn.textContent = 'Creating account…'; btn.disabled = true;
-
   try {
-    const res  = await fetch(API + '/api/auth/register', {
-      method: 'POST', headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ fname, lname, email, phone, password }),
-    });
+    const res = await fetch(API + '/api/auth/register', { method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify({fname, lname, email, phone, password}) });
     const data = await res.json();
     if (!res.ok) throw new Error(data.error);
     saveAuth(data.token, data.user);
     updateNav();
     closeAuthModal();
     if (window._pendingOrder) { window._pendingOrder = false; submitOrder(); }
-  } catch (err) {
-    showError('registerError', err.message);
-  } finally {
-    btn.textContent = 'Create Account'; btn.disabled = false;
-  }
+  } catch(err) { showErr('registerError', err.message); }
+  finally { btn.textContent = 'Create Account'; btn.disabled = false; }
 }
 
 let _otpSent = false;
 async function doForgot() {
-  hideError('forgotError');
+  hideErr('forgotError');
   const email = document.getElementById('forgotEmail').value.trim();
-  if (!email) return showError('forgotError', 'Please enter your email');
-
+  if (!email) return showErr('forgotError', 'Please enter your email');
+  const btn = document.getElementById('forgotBtn');
   if (!_otpSent) {
-    const btn = document.getElementById('forgotBtn');
     btn.textContent = 'Sending…'; btn.disabled = true;
     try {
-      const res  = await fetch(API + '/api/auth/forgot-password', {
-        method: 'POST', headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email }),
-      });
+      const res = await fetch(API + '/api/auth/forgot-password', { method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify({email}) });
       const data = await res.json();
-      document.getElementById('forgotSuccess').textContent = data.message;
-      document.getElementById('forgotSuccess').style.display = 'block';
+      const suc = document.getElementById('forgotSuccess');
+      suc.textContent = data.message; suc.style.display = 'block';
       document.getElementById('otpSection').style.display = 'block';
-      btn.textContent = 'Reset Password';
-      _otpSent = true;
-    } catch {
-      showError('forgotError', 'Something went wrong. Please try again.');
-      btn.textContent = 'Send Code';
-    }
+      btn.textContent = 'Reset Password'; _otpSent = true;
+    } catch { showErr('forgotError', 'Something went wrong.'); btn.textContent = 'Send Code'; }
     btn.disabled = false;
     return;
   }
-
-  // Second click — verify OTP and reset
-  const otp         = document.getElementById('forgotOTP').value.trim();
+  const otp = document.getElementById('forgotOTP').value.trim();
   const newPassword = document.getElementById('forgotNewPass').value;
-  if (!otp || !newPassword) return showError('forgotError', 'Please enter the code and a new password');
-
-  const btn = document.getElementById('forgotBtn');
+  if (!otp || !newPassword) return showErr('forgotError', 'Please enter the code and new password');
   btn.textContent = 'Resetting…'; btn.disabled = true;
   try {
-    const res  = await fetch(API + '/api/auth/reset-password', {
-      method: 'POST', headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ email, otp, newPassword }),
-    });
+    const res = await fetch(API + '/api/auth/reset-password', { method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify({email, otp, newPassword}) });
     const data = await res.json();
     if (!res.ok) throw new Error(data.error);
-    document.getElementById('forgotSuccess').textContent = data.message + ' You can now log in.';
+    const suc = document.getElementById('forgotSuccess');
+    suc.textContent = 'Password reset! You can now log in.'; suc.style.display = 'block';
     _otpSent = false;
     setTimeout(() => switchTab('login'), 2000);
-  } catch (err) {
-    showError('forgotError', err.message);
-  } finally {
-    btn.textContent = 'Reset Password'; btn.disabled = false;
-  }
+  } catch(err) { showErr('forgotError', err.message); }
+  finally { btn.textContent = 'Reset Password'; btn.disabled = false; }
 }
 
-// Close on overlay click
-document.getElementById('authOverlay').addEventListener('click', function(e) {
-  if (e.target === this) closeAuthModal();
-});
+document.getElementById('authOverlay').addEventListener('click', function(e) { if (e.target === this) closeAuthModal(); });
 
-// Init nav on load
+// Prefill step 3 from user profile when they arrive at that step
+const nextBtn2 = document.querySelector('#panel-2 .btn-primary');
+if (nextBtn2) {
+  const orig = nextBtn2.getAttribute('onclick');
+  nextBtn2.setAttribute('onclick', orig);
+  nextBtn2.addEventListener('click', () => {
+    setTimeout(() => {
+      const user = getUser();
+      if (!user) return;
+      const f = (id, v) => { const el = document.getElementById(id); if (el && !el.value) el.value = v || ''; };
+      f('fname', user.fname); f('lname', user.lname); f('email', user.email); f('phone', user.phone);
+    }, 50);
+  });
+}
+
 updateNav();
 </script>
 
